@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component("RestaurantDao")
 public class RestaurantDao {
-
+	private final String namespace = "restaurant.Restaurant";
+	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 }

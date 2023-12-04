@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component("spotDao")
 public class SpotDao {
-
+	private final String namespace = "spot.Spot";
+	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 }

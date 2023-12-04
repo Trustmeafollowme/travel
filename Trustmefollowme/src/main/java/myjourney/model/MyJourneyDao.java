@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component("myJourneyDao")
 public class MyJourneyDao {
-
+	private final String namespace = "myjourney.Myjourney";
+	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
