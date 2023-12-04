@@ -1,11 +1,11 @@
-package board.model;
+package myjourney.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("boardDao")
-public class BoardDao {
+@Component("myJourneyDao")
+public class MyJourneyDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
