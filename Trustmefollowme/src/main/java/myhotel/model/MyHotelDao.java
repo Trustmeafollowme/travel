@@ -1,11 +1,11 @@
-package board.model;
+package myhotel.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BoardDao {
+public class MyHotelDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
