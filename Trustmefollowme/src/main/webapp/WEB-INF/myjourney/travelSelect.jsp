@@ -6,7 +6,7 @@
 <tr>
 <td width="500">여정들</td>
 
-<td width="500">지도</td>
+<td width="500">지도<img></td>
 </tr>
 </table>
 
