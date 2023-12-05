@@ -3,5 +3,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="restaurant.Restaurant">
-
+	<select id="resList" resultType="restaurant.model.RestaurantBean">
+		select * from rest
+		<if test="WhatColumn == 'rname'">
+			where rname like #{keyword}
+		</if>
+		<if test="WhatColumn == 'rlocation'">
+			where rlocation like #{keyword}
+		</if>
+	</select>
 </mapper>		
