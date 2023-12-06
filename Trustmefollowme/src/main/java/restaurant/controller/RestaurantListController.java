@@ -34,7 +34,6 @@ public class RestaurantListController {
 						@RequestParam(value = "pageNumber", required = false) String pageNumber) {
 		
 		
-		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("keyword", "%"+keyword+"%");
 		map.put("WhatColumn", WhatColumn);

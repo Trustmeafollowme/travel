@@ -13,7 +13,6 @@ import restaurant.model.RestaurantDao;
 @Controller
 public class RestaurantDetailController {
 
-
 	private final String command = "/restDetail.re";
 	private final String viewPage = "restaurantDetailForm";
 	

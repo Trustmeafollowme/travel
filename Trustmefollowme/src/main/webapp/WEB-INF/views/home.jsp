@@ -79,9 +79,8 @@ body {
 <!-- responsive style -->
 <link href="<%=request.getContextPath()%>/resources/css/responsive.css"
 	rel="stylesheet" />
-
+	
 </head>
-
 <body>
 	<div class="hero_area">
 		<div class="bg-box">
@@ -101,7 +100,6 @@ body {
 						aria-label="Toggle navigation">
 						<span class=""> </span>
 					</button>
-
 				</nav>
 			</div>
 		</header>

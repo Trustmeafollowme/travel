@@ -43,6 +43,6 @@ public class RestaurantDao {
 	public void restInsert(RestaurantBean rb) {
 		
 		sqlSessionTemplate.insert(namespace+".restInsert",rb);
-		
+
 	}
 }

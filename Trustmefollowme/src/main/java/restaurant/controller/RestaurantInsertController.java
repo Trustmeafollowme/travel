@@ -18,7 +18,6 @@ import restaurant.model.RestaurantDao;
 @Controller
 public class RestaurantInsertController {
 
-
 	private final String command = "/restInsert.re";
 	private final String viewPage = "restaurantInsertForm";
 	private final String gotoPage = "restaurantListForm";
