@@ -11,10 +11,10 @@ public class RestaurantBean {
 	private String name;	// 음식점 이름
 
 	@NotBlank(message = "위도를 입력하세요.")
-	private String r_xpos;	// 위도
+	private String xpos;	// 위도
 
 	@NotBlank(message = "경도를 입력하세요.")
-	private String r_ypos;	// 경도
+	private String ypos;	// 경도
 
 	@NotBlank(message = "장소를 입력하세요.")
 	private String address;// 장소(경기도 ㅇㅇ시)
@@ -58,17 +58,17 @@ public class RestaurantBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getR_xpos() {
-		return r_xpos;
+	public String getXpos() {
+		return xpos;
 	}
-	public void setR_xpos(String r_xpos) {
-		this.r_xpos = r_xpos;
+	public void setXpos(String xpos) {
+		this.xpos = xpos;
 	}
-	public String getR_ypos() {
-		return r_ypos;
+	public String getYpos() {
+		return ypos;
 	}
-	public void setR_ypos(String r_ypos) {
-		this.r_ypos = r_ypos;
+	public void setYpos(String ypos) {
+		this.ypos = ypos;
 	}
 	public String getAddress() {
 		return address;

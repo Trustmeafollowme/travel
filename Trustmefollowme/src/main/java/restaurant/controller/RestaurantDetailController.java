@@ -25,6 +25,7 @@ public class RestaurantDetailController {
 		
 		RestaurantBean rb = restaurantDao.restDetail(rnum);
 		
+		
 		model.addAttribute("rb", rb);
 		
 		return viewPage;

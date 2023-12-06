@@ -32,6 +32,7 @@ public class RestaurantInsertController {
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String restInsertForm() {
 		
+		
 		return viewPage;
 	}
 	@RequestMapping(value = command, method = RequestMethod.POST)

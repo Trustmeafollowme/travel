@@ -29,7 +29,7 @@
 	
 	<insert id="restInsert">
 		insert into rest(rnum,name,r_xpos,r_ypos,address,image,rtel1,rtel2,rtel3,rtime1,rtime2,rdate)
-		values(resseq.nextval,#{name},#{r_xpos},#{r_ypos},
+		values(resseq.nextval,#{name},#{xpos},#{ypos},
 		#{address},#{image},#{rtel1},
 		#{rtel2},#{rtel3},#{rtime1},#{rtime2},#{rdate})
 	</insert>

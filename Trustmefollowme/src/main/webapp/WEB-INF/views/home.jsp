@@ -37,6 +37,7 @@ body {
 	background-color: #e0e0e0;
 	float: left;
 }
+
 .page{
 	padding-top: 30px;
 	padding-left: 450px;
