@@ -22,7 +22,7 @@ import utility.Paging;
 public class RestaurantListController {
 
 	private final String command = "/mainRestaurantList.re";
-	private final String viewPage = "../views/home";
+	private final String viewPage = "restaurantListForm";
 	
 	@Autowired
 	private RestaurantDao restaurantDao;
@@ -32,6 +32,7 @@ public class RestaurantListController {
 						@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
 						@RequestParam(value = "keyword", required = false) String keyword,
 						@RequestParam(value = "pageNumber", required = false) String pageNumber) {
+		
 		
 		
 		Map<String, String> map = new HashMap<String, String>();

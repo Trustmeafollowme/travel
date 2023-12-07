@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class RestaurantBean {
 	private int rnum;		// 음식점 고유번호
-	
+
 	@NotBlank(message = "이름을 입력하세요.")
 	private String name;	// 음식점 이름
 
@@ -21,11 +21,15 @@ public class RestaurantBean {
 
 	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image;	// 상품 이미지
+	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image2;
+	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image3;
+	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image4;
+	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image5;
-	
+
 	@NotBlank(message = "연락처를 선택하세요.")
 	private String rtel1;	// 연락처 시작
 
@@ -43,9 +47,13 @@ public class RestaurantBean {
 
 	@NotBlank(message = "개업일자를 선택하세요.")
 	private String rdate;	// 음식점 개업일자
-	
+
 	private MultipartFile imgUpload;
-	
+	private MultipartFile imgUpload2;
+	private MultipartFile imgUpload3;
+	private MultipartFile imgUpload4;
+	private MultipartFile imgUpload5;
+
 	public int getRnum() {
 		return rnum;
 	}
@@ -149,6 +157,43 @@ public class RestaurantBean {
 		this.imgUpload = imgUpload;
 		if(this.imgUpload != null) {
 			image = imgUpload.getOriginalFilename();
+		}
+	}
+	public MultipartFile getImgUpload2() {
+		return imgUpload2;
+	}
+	public void setImgUpload2(MultipartFile imgUpload2) {
+		this.imgUpload2 = imgUpload2;
+		if(this.imgUpload2 != null) {
+			image2 = imgUpload2.getOriginalFilename();
+		}
+	}
+	public MultipartFile getImgUpload3() {
+		return imgUpload3;
+	}
+	public void setImgUpload3(MultipartFile imgUpload3) {
+		this.imgUpload3 = imgUpload3;
+		if(this.imgUpload3 != null) {
+			image3 = imgUpload3.getOriginalFilename();
+		}
+	}
+	public MultipartFile getImgUpload4() {
+		return imgUpload4;
+	}
+	public void setImgUpload4(MultipartFile imgUpload4) {
+		this.imgUpload4 = imgUpload4;
+		if(this.imgUpload4 != null) {
+			image4 = imgUpload4.getOriginalFilename();
+		}
+	}
+	public MultipartFile getImgUpload5() {
+		return imgUpload5;
+	}
+
+	public void setImgUpload5(MultipartFile imgUpload5) {
+		this.imgUpload5 = imgUpload5;
+		if(this.imgUpload5 != null) {
+			image5 = imgUpload5.getOriginalFilename();
 		}
 	}
 }

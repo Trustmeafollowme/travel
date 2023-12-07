@@ -63,15 +63,15 @@ body {
 								</div>
 
 								<div class="form-group">
-									<input type="text" class="form-control" name="r_xpos"
-										placeholder="위도" value="${restaurantBean.r_xpos}">
-									<form:errors cssClass="err" path="r_xpos" />
+									<input type="text" class="form-control" name="xpos"
+										placeholder="위도" value="${restaurantBean.xpos}">
+									<form:errors cssClass="err" path="xpos" />
 								</div>
 
 								<div class="form-group">
-									<input type="" text"" class="form-control" name="r_ypos"
-										placeholder="경도" value="${restaurantBean.r_ypos}">
-									<form:errors cssClass="err" path="r_ypos" />
+									<input type="text" class="form-control" name="ypos"
+										placeholder="경도" value="${restaurantBean.ypos}">
+									<form:errors cssClass="err" path="ypos" />
 								</div>
 
 								<div class="form-group">
@@ -81,8 +81,33 @@ body {
 								</div>
 
 								<div class="form-group">
-									<b>이미지</b> <input type="file" name="imgUpload">
+									<b>이미지</b> 
+									<input type="file" name="imgUpload">
 									<form:errors cssClass="err" path="image" />
+								</div>
+								
+								<div class="form-group">
+									<b>이미지</b> 
+									<input type="file" name="imgUpload2">
+									<form:errors cssClass="err" path="image2" />
+								</div>
+								
+								<div class="form-group">
+									<b>이미지</b> 
+									<input type="file" name="imgUpload3">
+									<form:errors cssClass="err" path="image3" />
+								</div>
+								
+								<div class="form-group">
+									<b>이미지</b> 
+									<input type="file" name="imgUpload4">
+									<form:errors cssClass="err" path="image4" />
+								</div>
+								
+								<div class="form-group">
+									<b>이미지</b> 
+									<input type="file" name="imgUpload5">
+									<form:errors cssClass="err" path="image5" />
 								</div>
 
 								<div class="form-group">
@@ -95,29 +120,26 @@ body {
 									</select> -
 									<form:errors cssClass="err" path="rtel1" />
 
-									<input type="text" " name="rtel2" size="20" placeholder="1234"
+									<input type="text" " name="rtel2" size="12" placeholder="1234"
 										maxlength="4" value="${restaurantBean.rtel2}"> -
 									<form:errors cssClass="err" path="rtel2" />
-									<input type="tel" name="rtel3" size="20" placeholder="5678"
+									<input type="tel" name="rtel3" size="12" placeholder="5678"
 										maxlength="4" value="${restaurantBean.rtel3}">
 									<form:errors cssClass="err" path="rtel3" />
 								</div>
 
 								<div class="form-group">
-									<b>영업 시작 시간</b> <input type="time" class="form-control"
-										name="rtime1">
+									<b>영업 시작 시간</b> <input type="time" class="form-control" name="rtime1" value="${restaurantBean.rtime1}">
 									<form:errors cssClass="err" path="rtime1" />
 								</div>
 
 								<div class="form-group">
-									<b>영업 종료 시간</b> <input type="time" class="form-control"
-										name="rtime2">
+									<b>영업 종료 시간</b> <input type="time" class="form-control" name="rtime2" value="${restaurantBean.rtime2}">
 									<form:errors cssClass="err" path="rtime2" />
 								</div>
 
 								<div class="form-group">
-									<b>개업일자</b> <input type="date" class="form-control"
-										name="rdate">
+									<b>개업일자</b> <input type="date" class="form-control" name="rdate" value="${restaurantBean.rdate}">
 									<form:errors cssClass="err" path="rdate" />
 								</div>
 

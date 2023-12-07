@@ -18,6 +18,7 @@ import restaurant.model.RestaurantDao;
 @Controller
 public class RestaurantInsertController {
 
+
 	private final String command = "/restInsert.re";
 	private final String viewPage = "restaurantInsertForm";
 	private final String gotoPage = "restaurantListForm";
@@ -49,9 +50,24 @@ public class RestaurantInsertController {
 		restaurantDao.restInsert(rb);
 		
 		File file = new File(upload+File.separator+rb.getImage());
+		File file2 = new File(upload+File.separator+rb.getImage2());
+		File file3 = new File(upload+File.separator+rb.getImage3());
+		File file4 = new File(upload+File.separator+rb.getImage4());
+		File file5 = new File(upload+File.separator+rb.getImage5());
+		
 		MultipartFile multi = rb.getImgUpload();
+		MultipartFile multi2 = rb.getImgUpload2();
+		MultipartFile multi3 = rb.getImgUpload3();
+		MultipartFile multi4 = rb.getImgUpload4();
+		MultipartFile multi5 = rb.getImgUpload5();
+		
 		try {
 			multi.transferTo(file);
+			multi.transferTo(file2);
+			multi.transferTo(file3);
+			multi.transferTo(file4);
+			multi.transferTo(file5);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
