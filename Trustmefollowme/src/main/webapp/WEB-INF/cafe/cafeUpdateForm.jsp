@@ -3,7 +3,7 @@
 <%@include file="../common/common.jsp" %>
 cafeUpdateForm.jsp<br>
 
-<h1>카페 추가</h1> 
+<h1>카페 수정</h1> 
 
 <form:form action="cafeUpdate.cf" commandName="cafeBean" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="cnum" value="${cafeBean.cnum }">

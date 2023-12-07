@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +44,12 @@ public class CafeUpdateController {
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public String cafeUpdate(@Valid CafeBean cb, BindingResult cResult,  
 							@RequestParam("pageNumber") String pageNumber, 
-							Model model) throws IllegalStateException, IOException {
+							Model model, HttpServletRequest request) throws IllegalStateException, IOException {
 		if(cResult.hasErrors()) {
 			model.addAttribute("pageNumber", pageNumber);
 			return viewPage;
 		}
-		String uploadPath = servletContext.getRealPath("/resources/images/");
+		String uploadPath = request.getContextPath()+"/resources/images/";
 		cafeDao.updateCafe(cb);
 		
 		File newImage = new File(uploadPath+File.separator+cb.getImage());
@@ -62,7 +63,7 @@ public class CafeUpdateController {
 			File newImage2 = new File(uploadPath+File.separator+cb.getImage2());
 			File delImage2 = new File(uploadPath+File.separator+cb.getD_image2());
 			
-			MultipartFile multi2 = cb.getUpload();
+			MultipartFile multi2 = cb.getUpload2();
 			multi2.transferTo(newImage2);
 			delImage2.delete();
 		}
@@ -71,7 +72,7 @@ public class CafeUpdateController {
 			File newImage3 = new File(uploadPath+File.separator+cb.getImage3());
 			File delImage3 = new File(uploadPath+File.separator+cb.getD_image3());
 			
-			MultipartFile multi3 = cb.getUpload();
+			MultipartFile multi3 = cb.getUpload3();
 			multi3.transferTo(newImage3);
 			delImage3.delete();
 		}
@@ -80,7 +81,7 @@ public class CafeUpdateController {
 			File newImage4 = new File(uploadPath+File.separator+cb.getImage4());
 			File delImage4 = new File(uploadPath+File.separator+cb.getD_image4());
 			
-			MultipartFile multi4 = cb.getUpload();
+			MultipartFile multi4 = cb.getUpload4();
 			multi4.transferTo(newImage4);
 			delImage4.delete();
 		}
@@ -89,10 +90,10 @@ public class CafeUpdateController {
 			File newImage5 = new File(uploadPath+File.separator+cb.getImage5());
 			File delImage5 = new File(uploadPath+File.separator+cb.getD_image5());
 			
-			MultipartFile multi5 = cb.getUpload();
+			MultipartFile multi5 = cb.getUpload5();
 			multi5.transferTo(newImage5);
 			delImage5.delete();
 		}
-		return viewPage;
+		return gotoPage+"?pageNumber="+pageNumber;
 	}
 }

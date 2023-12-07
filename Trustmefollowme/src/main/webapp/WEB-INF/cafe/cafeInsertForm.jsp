@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common/common.jsp" %>
+<style type="text/css">
+	.err{
+		color: red;
+		font-size: 9pt;
+		font-weight: bold;
+	}
+</style>
 cafeInsertForm.jsp<br>
 
 <h1>카페 추가</h1>
@@ -25,10 +32,11 @@ cafeInsertForm.jsp<br>
 
 	<p>
 		전화번호 : <input type="text" name="ctel1" value="${cafeBean.ctel1 }" maxlength="4">-
-		<input type="text" name="ctel2" value="${cafeBean.ctel2 }" maxlength="4">- <input
-			type="text" name="ctel3" value="${cafeBean.ctel3 }" maxlength="4">
-		<form:errors cssClass="err" path="ctel1" />
-		<form:errors cssClass="err" path="ctel3" />
+		<input type="text" name="ctel2" value="${cafeBean.ctel2 }" maxlength="4">- 
+		<input type="text" name="ctel3" value="${cafeBean.ctel3 }" maxlength="4">
+		<form:errors cssClass="err" path="ctel1" /> 
+		<form:errors cssClass="err" path="ctel2" /> 
+		<form:errors cssClass="err" path="ctel3" /> 
 	</p>
 
 	<p>
@@ -49,24 +57,25 @@ cafeInsertForm.jsp<br>
 	</p>
 
 	<p>
-		사진2 : <input type="file" name="upload2" value="${cafeBean.image2 }">
+		사진2 : <input type="file" name="upload2" value="${cafeBean.image2 }"> 
 		<form:errors cssClass="err" path="image2" />
 	</p>
-
+ 
 	<p>
-		사진3 : <input type="file" name="upload3" value="${cafeBean.image3 }">
+		사진3 : <input type="file" name="upload3" value="${cafeBean.image3 }"> 
 		<form:errors cssClass="err" path="image3" />
 	</p>
 
 	<p>
-		사진4 : <input type="file" name="upload4" value="${cafeBean.image4 }">
+		사진4 : <input type="file" name="upload4" value="${cafeBean.image4 }"> 
 		<form:errors cssClass="err" path="image4" />
 	</p>
 
 	<p>
-		사진5 : <input type="file" name="upload5" value="${cafeBean.image5 }">
+		사진5 : <input type="file" name="upload5" value="${cafeBean.image5 }"> 
 		<form:errors cssClass="err" path="image5" />
 	</p>
 
 	<input type="submit" value="추가하기">
 </form:form>
+

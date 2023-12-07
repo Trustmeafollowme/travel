@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,12 @@ public class CafeInsertController {
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String cafeInsert(@Valid CafeBean cb, BindingResult cResult) throws IllegalStateException, IOException {
+	public String cafeInsert(@Valid CafeBean cb, BindingResult cResult, HttpServletRequest request) throws IllegalStateException, IOException {
 		if(cResult.hasErrors()) {
 			return viewPage;
 		}
 		System.out.println("cb.getImage():"+cb.getImage());
-		String uploadPath = servletContext.getRealPath("/resources/images/");
+		String uploadPath = request.getContextPath()+"/resources/images/";
 		System.out.println("uploadPath:"+uploadPath);
 		cafeDao.insertCafe(cb);
 		
