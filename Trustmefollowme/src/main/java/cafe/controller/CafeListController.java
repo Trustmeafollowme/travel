@@ -44,7 +44,7 @@ public class CafeListController {
 		Paging pageInfo = new Paging(pageNumber, null, totalCount, url, whatColumn, keyword);
 		
 		List<CafeBean> lists = cafeDao.getAllCafe(map, pageInfo);
-		mav.addObject("list", lists);
+		mav.addObject("lists", lists);
 		mav.addObject("pageInfo", pageInfo);
 		mav.setViewName(viewPage);
 		return mav;
