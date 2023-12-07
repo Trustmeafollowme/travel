@@ -45,7 +45,7 @@ public class CafeDao {
 	
 	public void updateCafe(CafeBean cb) {
 		int cnt = sqlSessionTemplate.update(namespace+".updateCafe", cb);
-		System.out.println("deleteCafe cnt:"+cnt);
+		System.out.println("updateCafe cnt:"+cnt);
 	}
 	
 }
