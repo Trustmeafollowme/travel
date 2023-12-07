@@ -20,7 +20,7 @@
 	<c:forEach var="sb" items="${list }">
 		<c:set var="count" value="${count+1 }"/>
 		<td>
-			<a href="cafeDetail.cf?snum=${sb.snum }&pageNumber=${paging.pageNumber }">
+			<a href="spotDetail.sp?snum=${sb.snum }&pageNumber=${paging.pageNumber }">
 				<img src="${path }/resources/images/${sb.image }" width="80" height="80" align="top">
 			</a><br>
 			<h3>${sb.name }</h3><br>
