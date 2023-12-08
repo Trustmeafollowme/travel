@@ -15,7 +15,7 @@ import spot.model.SpotDao;
 public class SpotDetailController {
 
 	private final String command = "/spotDetail.sp";
-	private final String viewPage = "spDetailForm";
+	private final String viewPage = "spotDetailForm";
 	
 	@Autowired
 	private SpotDao spotDao;
