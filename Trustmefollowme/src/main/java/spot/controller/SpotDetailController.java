@@ -21,9 +21,10 @@ public class SpotDetailController {
 	private SpotDao spotDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String restDetail(@RequestParam("snum") String snum,HttpServletRequest request) {
+	public String restDetail(@RequestParam("snum") int snum,HttpServletRequest request) {
 		
 		SpotBean sb = spotDao.spotDetail(snum);
+		request.setAttribute("cate", "관광지");
 		request.setAttribute("sb", sb);
 		return viewPage;
 		

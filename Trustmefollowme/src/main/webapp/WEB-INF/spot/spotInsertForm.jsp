@@ -33,6 +33,13 @@ spotInsertForm.jsp<br>
 	<p>
 		사진3 : <input type="file" name="upload3" value="${sb.image3 }">
 	</p>
+	<p>
+		사진4 : <input type="file" name="upload4" value="${sb.image4 }">
+	</p>
+
+	<p>
+		사진5 : <input type="file" name="upload5" value="${sb.image5 }">
+	</p>
 
 	
 

@@ -5,6 +5,15 @@
 <%@ page session="false"%>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script>
+
+$(function detail() {
+	$("#modal").modal("show");
+});
+</script>
 <script type="text/javascript">
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -125,7 +134,7 @@ body {
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?cnum=${list.cnum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
@@ -148,7 +157,7 @@ body {
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?rnum=${list.rnum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
@@ -171,7 +180,7 @@ body {
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?snum=${list.snum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
@@ -194,7 +203,7 @@ body {
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?snum=${list.snum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+											<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
@@ -239,7 +248,6 @@ body {
 
 	</section>
 
-	</section>
 	<!-- footer section -->
 	<footer class="footer_section" id=>
 		<div class="container">
@@ -299,9 +307,7 @@ body {
 		src="<%=request.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
 	<!-- popper js -->
 	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous">
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 		
 	</script>
 	<!-- bootstrap js -->
@@ -327,5 +333,18 @@ body {
 	<!-- End Google Map -->
 
 </body>
-
+<div class="modal" id="modal"  role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true" >
+	<div class="modal-dialog" style="width:850px;">
+		<div class="modal-content" >
+			<%@ include file="mainCal.jsp" %>
+			<form>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="submit" class="btn btn-primary" id="btn_save">확인</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
 </html>

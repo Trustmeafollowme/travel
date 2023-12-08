@@ -32,7 +32,7 @@ public class SpotDao {
 		sqlSessionTemplate.insert(namespace+".spotInsert",sb);
 	}
 
-	public SpotBean spotDetail(String snum) {
+	public SpotBean spotDetail(int snum) {
 		SpotBean sb = sqlSessionTemplate.selectOne(namespace+".spotDetail",snum);
 		return sb;
 	}

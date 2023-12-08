@@ -135,9 +135,24 @@
 				}
 				// console.log(selected);
 				selectDates(selected);
+				updateSelectedDatesInput(selected);
 			});			
-
+		
 		}
+function updateSelectedDatesInput(selected) {
+    var dateInput = $("#date");
+    dateInput.val(""); // 선택된 날짜를 초기화
+
+    for (var year in selected) {
+        for (var month in selected[year]) {
+            var days = selected[year][month];
+            days.forEach(function (day) {
+                dateInput.val(dateInput.val() + year + "-" + (month) + "-" + day + " ");
+            });
+        }
+    }
+}
+		
 		function selectDates(selected) {
 			if (!$.isEmptyObject(selected)) {
 				var dateElements1 = datesBody1.find('div');
@@ -389,6 +404,7 @@
 					selected[added_year][added_month].push(i);
 				}
 			}
+		
 			return selected;
 		}
 });

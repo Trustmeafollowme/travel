@@ -4,6 +4,15 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script>
+
+$(function detail() {
+	$("#modal").modal("show");
+});
+</script>
 <center>
 <h1>spotListForm.jsp</h1>
 </center>
@@ -37,3 +46,14 @@
 <center>
 	${paging.pagingHtml }
 </center>
+<div class="modal" id="modal"  role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true" >
+	<div class="modal-dialog" style="width:850px;">
+		<div class="modal-content" >
+			<%@ include file="spotInsertForm.jsp" %>			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary" id="btn_save">저장</button>
+			</div>
+		</div>
+	</div>
+</div>
