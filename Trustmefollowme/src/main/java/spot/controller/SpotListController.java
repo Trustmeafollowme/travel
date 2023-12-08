@@ -51,5 +51,33 @@ public class SpotListController {
 		
 		return viewPage;
 	}
+	
+
+	@RequestMapping(value = "mainSpotList.sp", method = RequestMethod.GET)
+	public String mainspotList(Model model, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "pageNumber", required = false) String pageNumber) {
+		
+			
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("keyword", "%"+keyword+"%");
+			map.put("WhatColumn", WhatColumn);
+
+			int totalCount = spotdao.totalCount(map);
+			String pageSize = "6";
+			String url = request.getContextPath()+command;
+			
+			Paging paging = new Paging(pageNumber, pageSize, totalCount, url, WhatColumn, keyword);
+			List<SpotBean> lists = spotdao.spotList(map, paging);
+			
+			model.addAttribute("cate", "spot");
+			model.addAttribute("detail", "spotDetail.sp");
+			model.addAttribute("list", lists);
+			model.addAttribute("paging", paging);
+			
+		
+		return "../views/home";
+	}
 
 }
