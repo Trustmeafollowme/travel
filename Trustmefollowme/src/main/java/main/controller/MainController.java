@@ -52,27 +52,27 @@ public class MainController {
 		
 		String url = request.getContextPath()+command;
 		
-		//카페		
+		//cafe		
 		int cafeTotal= cafeDao.getTotalCount(map);
 		
 		Paging cafePage = new Paging(pageNumber, pageSize, cafeTotal, url, whatColumn, keyword);
 		
 		List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
 		
-		//음식
+		//restaurant
 		int restaurantTotal = restaurantDao.totalCount(map);
 		
 		Paging restaurantPage = new Paging(pageNumber, null, restaurantTotal, url, whatColumn, keyword);
 		List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
 		
-		//호텔
+		//hotel
 	      int hoteltotal = hotelDao.totalCount(map);
 	      
 	      Paging hotelPage = new Paging(pageNumber, pageSize, hoteltotal, url, whatColumn, keyword);
 	      
 	      List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
 		
-		//관광지
+		//spot
 	  	int sptTotal= spotDao.totalCount(map);
 		
 		Paging spotPaging = new Paging(pageNumber, pageSize, sptTotal, url, whatColumn, keyword);
