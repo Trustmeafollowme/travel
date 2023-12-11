@@ -8,9 +8,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
-
-$(function detail() {
-	$("#modal").modal("show");
+$(function() {
+	  $("#btn_open_modal").click(function() {
+	        $("#modal").modal("show");
+	    });
 });
 </script>
 <center>
@@ -20,7 +21,7 @@ $(function detail() {
 <table align="center" border="1">
 	<tr>
 		<td align="right" colspan="3">
-			<a href="spotInsert.sp">추가</a>
+			<button id="btn_open_modal" onclick="spotInsert.sp">추가</button>
 		</td>
 	</tr>
 	<tr align="center">
@@ -29,14 +30,15 @@ $(function detail() {
 	<c:forEach var="sb" items="${list }">
 		<c:set var="count" value="${count+1 }"/>
 		<td>
-			<a href="spotDetail.sp?snum=${sb.snum }&pageNumber=${paging.pageNumber }">
+			<a id="btn_open_modal" href="spotDetail.sp?snum=${sb.snum }&pageNumber=${paging.pageNumber }">
 				<img src="${path }/resources/images/${sb.image }" width="80" height="80" align="top">
 			</a><br>
 			<h3>${sb.name }</h3><br>
 			${sb.address }<br>
-			
-		
+			<input type="button" onclick="spotDelete.sp?snum=${sb.snum }" value="수정">
+			<input type="button" onclick="spotUpdate.sp?snum=${sb.snum }" value="삭제">
 			<input type="checkbox" name="rowcheck" value="${sb.snum }">
+			
 		</td>
 
 	</c:forEach>

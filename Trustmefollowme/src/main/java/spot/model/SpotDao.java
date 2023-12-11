@@ -37,5 +37,9 @@ public class SpotDao {
 		return sb;
 	}
 
+	public void deleteSpot(int snum) {
+		sqlSessionTemplate.delete(namespace+".spotDelete",snum);
+	}
+
 
 }

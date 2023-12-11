@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/common.jsp" %>
 spotInsertForm.jsp<br>
-
+<center>
 <h1>관광지 추가</h1>
 
 <form action="spotInsert.sp" method="post" enctype="multipart/form-data">
@@ -45,3 +45,4 @@ spotInsertForm.jsp<br>
 
 	<input type="submit" value="추가하기">
 </form>
+</center>

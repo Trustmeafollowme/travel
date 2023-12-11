@@ -5,6 +5,18 @@
 <%@ page session="false"%>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- <script>
+
+$(function() {
+	  $("#btn_open_modal").click(function() {
+	        $("#modal").modal("show");
+	    });
+	    $("#modal").modal("show");
+});
+</script> -->
 <script type="text/javascript">
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -89,7 +101,7 @@ body {
 		<header class="header_section">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="index.html"> <span> Feane
+					<a class="navbar-brand" href="index.html"> <span> Feane${date}
 					</span>
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -106,26 +118,24 @@ body {
 	<section class="food_section layout_padding-bottom" id="left-container">
 		<div class="container">
 			<ul class="filters_menu">
-				<li data-filter=".all">all</li>
-				<li data-filter=".hotel" onclick="location.href='mainHotelList.ht'">호텔</li>
-				<li data-filter=".pizza"
-					onclick="location.href='mainRestaurantList.re'">음식점</li>
-				<li data-filter=".cafe" onclick="location.href='mainCafeList.cf'">카페</li>
-				<li data-filter=".fries" onclick="location.href='mainSpotList.sp'">관광지</li>
+				<li data-filter=".hotel" >호텔</li>
+				<li data-filter=".pizza">음식점</li>
+				<li data-filter=".cafe" >카페</li>
+				<li data-filter=".fries" >관광지</li>
 			</ul>
 
 			<div class="filters-content">
 				<div class="row grid">
 	<!-- 카테고리 페이지틀  -->
-		<!-- 카테고리 페이지틀  -->		
-		<c:if test="${cate=='cafe'}">
+		<!-- 카테고리 페이지틀  -->	
+		<!-- 카페리스트 -->	
 					<c:forEach var="list" items="${list}">
 						<div class="col-sm-6 col-lg-4">
 							<div class="box">
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?cnum=${list.cnum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
@@ -138,21 +148,22 @@ body {
 								</div>
 							</div>
 						</div>
-
+<!-- 음식점 리스트 -->
 					</c:forEach>
-				</c:if>
-		<c:if test="${cate=='restaurant'}">
 					<c:forEach var="list" items="${list}">
 						<div class="col-sm-6 col-lg-4">
 							<div class="box">
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?rnum=${list.rnum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5>이름(${list.name})</h5>
+										<h5><button id="btn_open_modal">
+										${list.name}
+										</button>
+										</h5>
 										<div class="options">
 											<h6>주소(${list.address})</h6>
 
@@ -163,15 +174,13 @@ body {
 						</div>
 
 					</c:forEach>
-				</c:if>
-		<c:if test="${cate=='spot'}">
 					<c:forEach var="list" items="${list}">
 						<div class="col-sm-6 col-lg-4">
 							<div class="box">
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?snum=${list.snum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
@@ -186,33 +195,29 @@ body {
 						</div>
 
 					</c:forEach>
-				</c:if>
-		<c:if test="${cate=='spot'}">
 					<c:forEach var="list" items="${list}">
 						<div class="col-sm-6 col-lg-4">
 							<div class="box">
 								<div>
 									<div class="img-box">
               								 <a href="${detail}?snum=${list.snum}">
-												${list.image}<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+											<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5>이름(${list.name})</h5>
+										<h5>${list.name}</h5>
 										<div class="options">
-											<h6>주소(${list.address})</h6>
-
+											<h6>${list.address}</h6>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-					</c:forEach>
-				</c:if>
 					<div class="page">
 					${paging.pagingHtml}
 					</div>
+					</c:forEach>
 
 				</div>
 				<!-- 카테고리 페이지틀  -->
@@ -239,7 +244,6 @@ body {
 
 	</section>
 
-	</section>
 	<!-- footer section -->
 	<footer class="footer_section" id=>
 		<div class="container">
@@ -299,9 +303,7 @@ body {
 		src="<%=request.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
 	<!-- popper js -->
 	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous">
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 		
 	</script>
 	<!-- bootstrap js -->
@@ -327,5 +329,18 @@ body {
 	<!-- End Google Map -->
 
 </body>
-
+<%-- <div class="modal" id="modal"  role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true" >
+	<div class="modal-dialog" style="width:850px;">
+		<div class="modal-content" >
+			<%@ include file="mainCalender.jsp" %>
+			<form>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="submit" class="btn btn-primary" id="btn_save">확인</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div> --%>
 </html>

@@ -16,6 +16,8 @@
 <select id="spotDetail" resultType="spot.model.SpotBean">
 	select * from spot where snum = #{snum} 
 </select>
-
+<delete id="spotDelete">
+	delete from spot where snum = #{snum}
+</delete>
 
 </mapper>		

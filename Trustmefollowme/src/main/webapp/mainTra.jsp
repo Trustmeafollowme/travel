@@ -10,8 +10,11 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
 
-$(function detail() {
-	$("#modal").modal("show");
+$(function() {
+	  $("#btn_open_modal").click(function() {
+	        $("#modal").modal("show");
+	    });
+	    $("#modal").modal("show");
 });
 </script>
 <script type="text/javascript">
@@ -115,7 +118,6 @@ body {
 	<section class="food_section layout_padding-bottom" id="left-container">
 		<div class="container">
 			<ul class="filters_menu">
-				<li data-filter=".all">all</li>
 				<li data-filter=".hotel" onclick="location.href='mainHotelList.ht'">호텔</li>
 				<li data-filter=".pizza"
 					onclick="location.href='mainRestaurantList.re'">음식점</li>
@@ -161,7 +163,10 @@ body {
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5>이름(${list.name})</h5>
+										<h5><button id="btn_open_modal">
+										${list.name}
+										</button>
+										</h5>
 										<div class="options">
 											<h6>주소(${list.address})</h6>
 
@@ -207,9 +212,9 @@ body {
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5>이름(${list.name})</h5>
+										<h5>${list.name}</h5>
 										<div class="options">
-											<h6>주소(${list.address})</h6>
+											<h6>${list.address}</h6>
 
 										</div>
 									</div>

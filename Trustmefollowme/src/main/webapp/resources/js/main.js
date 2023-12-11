@@ -147,7 +147,7 @@ function updateSelectedDatesInput(selected) {
         for (var month in selected[year]) {
             var days = selected[year][month];
             days.forEach(function (day) {
-                dateInput.val(dateInput.val() + year + "-" + (month) + "-" + day + " ");
+                dateInput.val(dateInput.val() + year + "-" + (month) + "-" + day + "  ");
             });
         }
     }

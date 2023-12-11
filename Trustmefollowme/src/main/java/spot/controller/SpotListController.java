@@ -54,7 +54,7 @@ public class SpotListController {
 	
 
 	@RequestMapping(value = "mainSpotList.sp", method = RequestMethod.GET)
-	public String mainspotList(Model model, HttpServletRequest request, HttpServletResponse response,
+	public String mainspotList(HttpServletRequest request, 
 			@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value = "pageNumber", required = false) String pageNumber) {
@@ -71,13 +71,13 @@ public class SpotListController {
 			Paging paging = new Paging(pageNumber, pageSize, totalCount, url, WhatColumn, keyword);
 			List<SpotBean> lists = spotdao.spotList(map, paging);
 			
-			model.addAttribute("cate", "spot");
-			model.addAttribute("detail", "spotDetail.sp");
-			model.addAttribute("list", lists);
-			model.addAttribute("paging", paging);
+			request.setAttribute("cate", "spot");
+			request.setAttribute("detail", "spotDetail.sp");
+			request.setAttribute("list", lists);
+			request.setAttribute("paging", paging);
 			
 		
-		return "../views/home";
+		return "redirect:mainTravel.m";
 	}
 
 }
