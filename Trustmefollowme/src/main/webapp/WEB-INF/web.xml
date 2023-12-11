@@ -162,7 +162,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>main</servlet-name>
-		<url-pattern>*.m</url-pattern>
+		<url-pattern>*.m </url-pattern>
 	</servlet-mapping>
 	
 	<filter>
