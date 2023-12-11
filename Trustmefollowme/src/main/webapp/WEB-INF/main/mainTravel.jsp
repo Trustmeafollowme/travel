@@ -118,7 +118,7 @@ body {
 	<section class="food_section layout_padding-bottom" id="left-container">
 		<div class="container">
 			<ul class="filters_menu">
-				<li data-filter=".buger" >호텔</li>
+				<li data-filter=".buger" class="active">호텔</li>
 				<li data-filter=".pasta">음식점</li>
 				<li data-filter=".fries" >카페</li>
 				<li data-filter=".pizza" >관광지</li>
@@ -142,7 +142,7 @@ body {
 										<h5>${list.name}</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-						<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+						<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -161,13 +161,12 @@ body {
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5><button id="btn_open_modal">
+										<h5>
 										${list.name}
-										</button>
 										</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+					<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -190,7 +189,7 @@ body {
 										<h5>${list.name}</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -212,7 +211,7 @@ body {
 										<h5>${list.name}</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-											<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+											<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -341,7 +340,7 @@ body {
 	    var map = new kakao.maps.Map(mapContainer, mapOption);
 	
 	    // Event listener for checkboxes with the name "spotcheck"
-	    $('input[name="spotcheck"]').change(function () {
+	    $('input[id="spotcheck"]').change(function () {
 	        var xpos = $(this).data('xpos');
 	        var ypos = $(this).data('ypos');
 	
