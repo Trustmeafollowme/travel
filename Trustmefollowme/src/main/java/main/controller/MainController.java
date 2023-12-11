@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cafe.model.CafeBean;
 import cafe.model.CafeDao;
+import hotel.model.HotelBean;
 import hotel.model.HotelDao;
 import restaurant.model.RestaurantBean;
 import restaurant.model.RestaurantDao;
@@ -25,17 +26,21 @@ import utility.Paging;
 public class MainController {
 	@Autowired
 	CafeDao cafeDao;
+	
 	@Autowired
 	HotelDao hotelDao;
+	
 	@Autowired
 	RestaurantDao restaurantDao;
+	
 	@Autowired
 	SpotDao spotDao;
+	
 	String command = "/mainTravel.m";
 	@RequestMapping(value = "mainTravel.m")
 	public String hotelList(HttpServletRequest request, HttpSession session,
-			@RequestParam("whatColumn")String whatColumn,
-			@RequestParam("keyword")String keyword,
+			@RequestParam(value ="whatColumn", required = false)String whatColumn,
+			@RequestParam(value ="keyword", required = false)String keyword,
 			@RequestParam(value = "pageNumber", required = false) String pageNumber
 			) {
 		request.setAttribute("date", request.getParameter("date"));
@@ -61,17 +66,22 @@ public class MainController {
 		List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
 		
 		//호텔
-	      int totalCount = hotelDao.totalCount(map);
+	      int hoteltotal = hotelDao.totalCount(map);
 	      
-	      Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, whatColumn, keyword);
+	      Paging hotelPage = new Paging(pageNumber, pageSize, hoteltotal, url, whatColumn, keyword);
 	      
-	      List<HotelBean> hotelList = hotelDao.getAllHotel(map, pageInfo);
+	      List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
 		
 		//관광지
-	  	int sptTotalC = spotDao.totalCount(map);
+	  	int sptTotal= spotDao.totalCount(map);
 		
-		Paging paging = new Paging(pageNumber, pageSize, totalCount, url, whatColumn, keyword);
-		List<SpotBean> spotList = spotDao.spotList(map, paging);
+		Paging spotPaging = new Paging(pageNumber, pageSize, sptTotal, url, whatColumn, keyword);
+		List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
+		
+		request.setAttribute("spotPage", spotPaging);
+		request.setAttribute("restaurantPage", restaurantPage);
+		request.setAttribute("cafePage", cafePage);
+		request.setAttribute("hotelPage", hotelPage);
 		
 		request.setAttribute("spotList", spotList);
 		request.setAttribute("hotelList", hotelList);

@@ -101,7 +101,7 @@ body {
 		<header class="header_section">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="index.html"> <span> Feane${date}
+					<a class="navbar-brand" href="index.html"> <span> Feane ${date}
 					</span>
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -118,10 +118,10 @@ body {
 	<section class="food_section layout_padding-bottom" id="left-container">
 		<div class="container">
 			<ul class="filters_menu">
-				<li data-filter=".hotel" >호텔</li>
-				<li data-filter=".pizza">음식점</li>
-				<li data-filter=".cafe" >카페</li>
-				<li data-filter=".fries" >관광지</li>
+				<li data-filter=".buger" >호텔</li>
+				<li data-filter=".pasta">음식점</li>
+				<li data-filter=".fries" >카페</li>
+				<li data-filter=".pizza" >관광지</li>
 			</ul>
 
 			<div class="filters-content">
@@ -129,20 +129,21 @@ body {
 	<!-- 카테고리 페이지틀  -->
 		<!-- 카테고리 페이지틀  -->	
 		<!-- 카페리스트 -->	
-					<c:forEach var="list" items="${list}">
-						<div class="col-sm-6 col-lg-4">
+					<c:forEach var="list" items="${cafeList}">
+						<div class="col-sm-6 col-lg-4 all fries">
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="${detail}?cnum=${list.cnum}">
+              								 <a href="cafeDetail.cf?cnum=${list.cnum}">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5>이름(${list.name})</h5>
+										<h5>${list.name}</h5>
 										<div class="options">
-											<h6>주소(${list.address})</h6>
-
+											<h6>${list.address}</h6>
+						<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+										
 										</div>
 									</div>
 								</div>
@@ -150,12 +151,12 @@ body {
 						</div>
 <!-- 음식점 리스트 -->
 					</c:forEach>
-					<c:forEach var="list" items="${list}">
-						<div class="col-sm-6 col-lg-4">
+					<c:forEach var="list" items="${restaurantList}">
+						<div class="col-sm-6 col-lg-4 all pasta">
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="${detail}?rnum=${list.rnum}">
+              								 <a href="restDetail.re?rnum=${list.rnum}">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
@@ -165,42 +166,45 @@ body {
 										</button>
 										</h5>
 										<div class="options">
-											<h6>주소(${list.address})</h6>
-
+											<h6>${list.address}</h6>
+<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+										
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
+						
+<!-- 관광지 리스트 -->
 					</c:forEach>
-					<c:forEach var="list" items="${list}">
-						<div class="col-sm-6 col-lg-4">
+					<c:forEach var="list" items="${spotList}">
+						<div class="col-sm-6 col-lg-4 all pizza">
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="${detail}?snum=${list.snum}">
+              								 <a href="spotDetail.sp?snum=${list.snum}">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5>이름(${list.name})</h5>
+										<h5>${list.name}</h5>
 										<div class="options">
-											<h6>주소(${list.address})</h6>
-
+											<h6>${list.address}</h6>
+<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+										
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</c:forEach>
-					<c:forEach var="list" items="${list}">
-						<div class="col-sm-6 col-lg-4">
+					${spotPage.pagingHtml}
+					<c:forEach var="list" items="${hotelList}">
+						<div class="col-sm-6 col-lg-4 all buger">
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="${detail}?snum=${list.snum}">
+              								 <a href="hotelDetail.ht?hnum=${list.hnum}">
 											<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
@@ -208,17 +212,15 @@ body {
 										<h5>${list.name}</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
+											<input type="checkbox" name="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+										
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-					<div class="page">
-					${paging.pagingHtml}
-					</div>
 					</c:forEach>
-
 				</div>
 				<!-- 카테고리 페이지틀  -->
 			</div>
@@ -327,20 +329,73 @@ body {
 		
 	</script>
 	<!-- End Google Map -->
+<script type="text/javascript">
+	var markers = []; // Add a global variable to store markers
+	
+	$(document).ready(function () {
+	    var mapContainer = document.getElementById('map');
+	    var mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667),
+	        level: 10
+	    };
+	    var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+	    // Event listener for checkboxes with the name "spotcheck"
+	    $('input[name="spotcheck"]').change(function () {
+	        var xpos = $(this).data('xpos');
+	        var ypos = $(this).data('ypos');
+	
+	        if (this.checked) {
+	            // 위치 배열에 위치 추가합니다.
+	            var positions = [
+	                {
+	                    title: '카페',
+	                    latlng: new kakao.maps.LatLng(xpos, ypos)
+	                }
+	            ];
+	
+	            // 마커 이미지의 이미지 주소입니다
+	            var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	
+	            for (var i = 0; i < positions.length; i++) {
+	
+	                // 마커 이미지의 이미지 크기 입니다
+	                var imageSize = new kakao.maps.Size(24, 35);
+	
+	                // 마커 이미지를 생성합니다    
+	                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+	
+	                // 마커를 생성합니다
+	                var marker = new kakao.maps.Marker({
+	                    map: map,
+	                    position: positions[i].latlng,
+	                    title: positions[i].title,
+	                    image: markerImage
+	                });
+	
+	                // 마커 배열에 마커를 추가합니다
+	                markers.push(marker);
+	            }
+	        } else {
+	            // 선택하지 않은 경우 마커 제거합니다
+	            for (var i = 0; i < markers.length; i++) {
+	                var marker = markers[i];
+	                var markerPosition = marker.getPosition();
+	            	// 비교를 위해 작은 임계값 사용합니다
+	                var threshold = 0.000001;
 
+	                if (Math.abs(markerPosition.getLat() - xpos) < threshold &&
+	                    Math.abs(markerPosition.getLng() - ypos) < threshold) {
+	                    marker.setMap(null);
+	                    // 마커 배열에서 마커 제거합니다
+	                    markers.splice(i, 1); 
+	                    break; // 마커를 찾아 제거한 후 루프를 종료합니다
+	                }
+	            }
+	        }
+	    });
+	});
+	
+	</script>
 </body>
-<%-- <div class="modal" id="modal"  role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true" >
-	<div class="modal-dialog" style="width:850px;">
-		<div class="modal-content" >
-			<%@ include file="mainCalender.jsp" %>
-			<form>
-			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-				<button type="submit" class="btn btn-primary" id="btn_save">확인</button>
-			</div>
-			</form>
-		</div>
-	</div>
-</div> --%>
 </html>
