@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SpotBean {
-	private String snum;
+	private int snum;
 	private String name;
 	private String xpos;
 	private String ypos;
@@ -14,12 +14,53 @@ public class SpotBean {
 	private String image;
 	private String image2;
 	private String image3;
+	private String image4;
+	public String getImage4() {
+		return image4;
+	}
+
+	public void setImage4(String image4) {
+		this.image4 = image4;
+	}
+
+	public String getImage5() {
+		return image5;
+	}
+
+	public void setImage5(String image5) {
+		this.image5 = image5;
+	}
+	private String image5;
 
 	private MultipartFile upload; 
 	private MultipartFile upload2; 
 	private MultipartFile upload3; 
+	private MultipartFile upload4; 
+	private MultipartFile upload5; 
 
 	
+	public MultipartFile getUpload4() {
+		return upload4;
+	}
+
+	public void setUpload4(MultipartFile upload4) {
+		this.upload4 = upload4;
+		if(this.upload4 != null) {
+			image4 = upload4.getOriginalFilename();
+		}
+	}
+
+	public MultipartFile getUpload5() {
+		return upload5;
+	}
+
+	public void setUpload5(MultipartFile upload5) {
+		this.upload5 = upload5;
+		if(this.upload5 != null) {
+			image5 = upload5.getOriginalFilename();
+		}
+	}
+
 	public MultipartFile getUpload() {
 		return upload;
 	}
@@ -50,10 +91,10 @@ public class SpotBean {
 			image3 = upload3.getOriginalFilename();
 		}
 	}
-	public String getSnum() {
+	public int getSnum() {
 		return snum;
 	}
-	public void setSnum(String snum) {
+	public void setSnum(int snum) {
 		this.snum = snum;
 	}
 	public String getName() {

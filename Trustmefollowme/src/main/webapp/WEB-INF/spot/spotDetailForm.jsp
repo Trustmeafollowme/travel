@@ -6,7 +6,7 @@
 		
 		<div class="container">
 	        <div class="heading-section">
-	            <h2>Product Details</h2>
+	            <h2>${cate }</h2>
 	        </div>
 	        <div class="row">
 	        	<div class="col-md-6">
@@ -20,6 +20,12 @@
 						<div class="item">
                  <img src="<%=request.getContextPath()%>/resources/images/${sb.image3}" width="200px" height="300px">
 						</div>
+						<div class="item">
+                 <img src="<%=request.getContextPath()%>/resources/images/${sb.image4}" width="200px" height="300px">
+						</div>
+						<div class="item">
+                 <img src="<%=request.getContextPath()%>/resources/images/${sb.image5}" width="200px" height="300px">
+						</div>
 					</div>
 					<div>　</div>
 					<div id="thumb" class="owl-carousel product-thumb">
@@ -32,12 +38,18 @@
 						<div class="item">
                  <img src="<%=request.getContextPath()%>/resources/images/${sb.image3}" width="200px" height="300px">
 						</div>
+						<div class="item">
+                 <img src="<%=request.getContextPath()%>/resources/images/${sb.image4}" width="200px" height="300px">
+						</div>
+						<div class="item">
+                 <img src="<%=request.getContextPath()%>/resources/images/${sb.image5}" width="200px" height="300px">
+						</div>
 					</div>
 	        	</div>
 	        	<div class="col-md-6">
 	        		<div class="product-dtl">
         				<div class="product-info">
-		        			<div class="product-name">Variable Product</div>
+		        			<div class="product-name">${sb.name}</div>
 		        			<div class="reviews-counter">
 								<div class="rate">
 								    <input type="radio" id="star5" name="rate" value="5"/>

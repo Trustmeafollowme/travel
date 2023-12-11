@@ -23,7 +23,7 @@ public class SpotInsertController {
 
 	private final String command = "/spotInsert.sp";
 	private final String viewPage = "spotInsertForm";
-	private final String gotoPage = "r";
+	private final String gotoPage = "redirect:spotList.sp";
 	
 	@Autowired
 	private SpotDao  spotdao;

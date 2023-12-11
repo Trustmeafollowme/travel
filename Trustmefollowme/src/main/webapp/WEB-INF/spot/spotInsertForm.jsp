@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/common.jsp" %>
 spotInsertForm.jsp<br>
-
+<center>
 <h1>관광지 추가</h1>
 
 <form action="spotInsert.sp" method="post" enctype="multipart/form-data">
@@ -33,8 +33,16 @@ spotInsertForm.jsp<br>
 	<p>
 		사진3 : <input type="file" name="upload3" value="${sb.image3 }">
 	</p>
+	<p>
+		사진4 : <input type="file" name="upload4" value="${sb.image4 }">
+	</p>
+
+	<p>
+		사진5 : <input type="file" name="upload5" value="${sb.image5 }">
+	</p>
 
 	
 
 	<input type="submit" value="추가하기">
 </form>
+</center>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <head>
   	<title>Calendar 03</title>
@@ -28,7 +28,10 @@
 		              <div class="calendar_weekdays"></div>
 		              <div class="calendar_content"></div>
 		            </div>
-
+<form action="mainTravel.m">
   <script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
-<input type="text" id="date">	
+<input type="text" name="date" id="date">
+<input type="submit" value="확인">
+</form>
+	
 </body>
