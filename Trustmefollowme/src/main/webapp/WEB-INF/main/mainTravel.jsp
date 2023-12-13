@@ -90,7 +90,19 @@ body {
 <!-- responsive style -->
 <link href="<%=request.getContextPath()%>/resources/css/responsive.css"
 	rel="stylesheet" />
-	
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentActive = document.querySelector('.filters_menu li.active');
+        if (currentActive) {
+            currentActive.classList.remove('active');
+        }
+
+        var newActive = document.querySelector('.filters_menu li[data-filter=".buger"]');
+        if (newActive) {
+            newActive.classList.add('active');
+        }
+    });
+</script>	
 </head>
 <body>
 	<div class="hero_area" >
@@ -101,7 +113,7 @@ body {
 		<header class="header_section">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="index.html"> <span> Feane ${date}
+					<a class="navbar-brand" href="mainScreen.m"> <span> Feane ${date}
 					</span>
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -118,12 +130,12 @@ body {
 	<section class="food_section layout_padding-bottom" id="left-container">
 		<div class="container">
 			<ul class="filters_menu">
-				<li data-filter=".buger" class="active">호텔</li>
+				<li data-filter=".buger" class="data-filter active">호텔</li>
 				<li data-filter=".pasta">음식점</li>
 				<li data-filter=".fries" >카페</li>
 				<li data-filter=".pizza" >관광지</li>
 			</ul>
-
+	<form action="mainJourney.mj">
 			<div class="filters-content">
 				<div class="row grid">
 	<!-- 카테고리 페이지틀  -->
@@ -142,7 +154,7 @@ body {
 										<h5>${list.name}</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-						<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+						<input type="checkbox" id="spotcheck" name='cafe' value = "${list.cnum}/${list.xpos}/${list.ypos}" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -165,8 +177,8 @@ body {
 										${list.name}
 										</h5>
 										<div class="options">
-											<h6>${list.address}</h6>
-					<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+											<h6>${list.address} ${list.xpos}/${list.ypos}</h6>
+					<input type="checkbox" id="spotcheck"name='restaurant' value = "${list.rnum}/${list.xpos}/${list.ypos}" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -189,7 +201,7 @@ body {
 										<h5>${list.name}</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+								<input type="checkbox" id="spotcheck" name='spot' value = "${list.snum}/${list.xpos}/${list.ypos}"data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -211,7 +223,7 @@ body {
 										<h5>${list.name}</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-											<input type="checkbox" id="spotcheck" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+											<input type="checkbox" id="spotcheck" name='hotel' value = "${list.hnum}/${list.xpos}/${list.ypos}" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
@@ -224,6 +236,9 @@ body {
 				<!-- 카테고리 페이지틀  -->
 			</div>
 			<!-- 카테고리 페이지틀  -->
+			<input type="hidden" name="date" value="${date }">
+			<input type="submit" value="다음"> 
+			</form>
 		</div>
 		<!-- 카테고리 페이지틀  -->
 	</section>

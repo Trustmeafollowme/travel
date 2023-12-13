@@ -73,7 +73,7 @@ $(function() {
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#about" class="get-started-btn scrollto">로그인</a>
+      <a href="login.mb" class="get-started-btn scrollto">로그인</a>
 
     </div>
   </header><!-- End Header -->
