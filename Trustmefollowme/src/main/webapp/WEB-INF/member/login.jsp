@@ -228,7 +228,7 @@
             <input type="checkbox"> Remember me.
           </label>
         </div> -->
-        <a class="outer-link pull-left" href="findpassword.mb"><font size="2px">비밀번호를 잊으셨나요?</font></a>
+        <a class="outer-link pull-left" href="findPassword.mb"><font size="2px">비밀번호를 잊으셨나요?</font></a>
         <button type="submit" class="btn btn-submit btn-default pull-right">로그인</button>
       </form>
     </div>

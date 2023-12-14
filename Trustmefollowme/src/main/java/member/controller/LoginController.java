@@ -36,26 +36,26 @@ public class LoginController {
 		MemberBean member = memberDao.getMemberInfo(mb);
 		
 		if(member!=null) {
-			String _email = member.getEmail();
-			if(_email.equals("admin@gmail.com")) {
+			String _name = member.getName();
+			if(_name.equals("어드민")) {
 			
-				out.print("<script>alert('어드민님 환영합니다');</script>");
+				out.print("<script>alert('어드민님 환영합니다. 관리지 페이지로 이동합니다.');</script>");
 				out.flush();
 				 session.setAttribute("myemail", member.getEmail());
 			     session.setAttribute("mynum", member.getNum());
-				return "mainScreen";
+				return "admini.mb";
 			}else {
-				out.print("<script>alert('나믿따에 오신걸 환영합니다');</script>");
-				out.flush();
+//				out.print("<script>alert("+_name+"'님 나믿따에 오신걸 환영합니다');</script>");
+//				out.flush();
 				 session.setAttribute("myemail", member.getEmail());
 			     session.setAttribute("mynum", member.getNum());
-				return "mainScreen";
+				return "redirect:mainScreen.m";
 			}
 			 
 		}else {
-		out.print("<script>alert('가입하지 않은 회원입니다. 가입페이지로 이동하겠습니다');</script>");
+		out.print("<script>alert('가입하지 않은 회원입니다.');</script>");
 			out.flush();
-			return "join";
+			return "login";
 		}
 		
 	}

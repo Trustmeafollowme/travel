@@ -21,4 +21,8 @@
 	where email=#{email} and password=#{password}
 	
 	</select>
+	<select id="findPassword" resultType="member.model.MemberBean">
+	select * from member
+	where email = #{email} and name=#{name} and mtel=#{mtel}
+	</select>
 </mapper>			
