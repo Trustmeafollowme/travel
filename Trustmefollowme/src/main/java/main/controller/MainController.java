@@ -38,12 +38,18 @@ public class MainController {
 	
 	String command = "/mainTravel.m";
 	@RequestMapping(value = "mainTravel.m")
-	public String hotelList(HttpServletRequest request, HttpSession session,
+	public String hotelList(HttpServletRequest request,HttpSession session,
 			@RequestParam(value ="whatColumn", required = false)String whatColumn,
 			@RequestParam(value ="keyword", required = false)String keyword,
 			@RequestParam(value = "pageNumber", required = false) String pageNumber
 			) {
+		if(request.getParameter("date")==null) {
+		String date = (String)session.getAttribute("date");
+		request.setAttribute("date", date);
+		}
+		else {
 		request.setAttribute("date", request.getParameter("date"));
+		}
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("whatColumn", whatColumn);
 		map.put("keyword", "%"+keyword+"%");
@@ -89,8 +95,63 @@ public class MainController {
 		request.setAttribute("cafeList", cafeList);
 		return "mainTravel";
 	}
+	
 	@RequestMapping(value = "mainScreen.m")
-	public String mainScreen() {
+	public String mainScreen(HttpServletRequest request,HttpSession session,
+			@RequestParam(value ="whatColumn", required = false)String whatColumn,
+			@RequestParam(value ="keyword", required = false)String keyword,
+			@RequestParam(value = "pageNumber", required = false) String pageNumber
+			) {
+		if(request.getParameter("date")==null) {
+		String date = (String)session.getAttribute("date");
+		request.setAttribute("date", date);
+		}
+		else {
+		request.setAttribute("date", request.getParameter("date"));
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("whatColumn", whatColumn);
+		map.put("keyword", "%"+keyword+"%");
+		
+		String pageSize = "6";
+		
+		String url = request.getContextPath()+command;
+		
+		//cafe		
+		int cafeTotal= cafeDao.getTotalCount(map);
+		
+		Paging cafePage = new Paging(pageNumber, pageSize, cafeTotal, url, whatColumn, keyword);
+		
+		List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
+		
+		//restaurant
+		int restaurantTotal = restaurantDao.totalCount(map);
+		
+		Paging restaurantPage = new Paging(pageNumber, null, restaurantTotal, url, whatColumn, keyword);
+		List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
+		
+		//hotel
+	      int hoteltotal = hotelDao.totalCount(map);
+	      
+	      Paging hotelPage = new Paging(pageNumber, pageSize, hoteltotal, url, whatColumn, keyword);
+	      
+	      List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
+		
+		//spot
+	  	int sptTotal= spotDao.totalCount(map);
+		
+		Paging spotPaging = new Paging(pageNumber, pageSize, sptTotal, url, whatColumn, keyword);
+		List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
+		
+		request.setAttribute("spotPage", spotPaging);
+		request.setAttribute("restaurantPage", restaurantPage);
+		request.setAttribute("cafePage", cafePage);
+		request.setAttribute("hotelPage", hotelPage);
+		
+		request.setAttribute("spotList", spotList);
+		request.setAttribute("hotelList", hotelList);
+		request.setAttribute("restaurantList", restaurantList);
+		request.setAttribute("cafeList", cafeList);
 		
 		return "mainScreen";
 	}
@@ -99,4 +160,6 @@ public class MainController {
 		
 		return "mainCalender";
 	}
+	
+
 }

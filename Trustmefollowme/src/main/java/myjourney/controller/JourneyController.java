@@ -1,0 +1,266 @@
+package myjourney.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import main.controller.CartBean;
+import main.controller.MainBean;
+import main.controller.StartBean;
+import myjourney.model.MyJourneyBean;
+import myjourney.model.MyJourneyDao;
+
+
+@Controller
+public class JourneyController {
+	@Autowired
+	MyJourneyDao myjDao;
+
+	@RequestMapping("mainJourney.mj")
+	public String journey(HttpServletRequest request,MainBean mb, HttpSession session) {
+		int first =1;
+		String id = "admin";
+		if(mb.getHotel()==null) {
+			session.setAttribute("date",request.getParameter("date"));
+			System.out.println("호텔 등록하시오");
+			return "redirect:mainTravel.m";
+		}
+
+		String date[]=request.getParameter("date").split(" ");
+
+		List<CartBean> cartlist=new ArrayList<CartBean>();
+		List<StartBean> startlist=new ArrayList<StartBean>();
+		
+			System.out.println("mb.getHotel()" + mb.getHotel());
+			String hotels[] = mb.getHotel().split(",");
+			
+			if(hotels.length>date.length) {
+				session.setAttribute("date",request.getParameter("date"));
+				System.out.println("호텔 너무 많이 등록"+hotels.length+"/"+date.length);
+				return "redirect:mainTravel.m";
+			}
+
+			String[][]  hotel = new String[hotels.length][];
+
+			for (int i = 0; i < hotels.length; i++) {
+				hotel[i] = hotels[i].split("/");
+				System.out.println("hotel["+i+"][0]"+hotel[i][0]);
+				System.out.println("hotel["+i+"][1]"+hotel[i][1]);
+				System.out.println("hotel["+i+"][2]"+hotel[i][2]);
+			}
+
+
+			if(mb.getCafe()!=null) {
+				System.out.println("mb.getCafe()" + mb.getCafe());
+				String cafes[] = mb.getCafe().split(",");
+				String[][] cafe = new String[cafes.length][];
+
+				for (int i = 0; i < cafes.length; i++) {
+					cafe[i] = cafes[i].split("/");
+					System.out.println("hotel["+i+"][0]"+cafe[i][0]);
+					System.out.println("hotel["+i+"][1]"+cafe[i][1]);
+					System.out.println("hotel["+i+"][2]"+cafe[i][2]);
+				}
+
+				for (int i = 0; i < cafe.length; i++) {
+
+					CartBean cb = new CartBean();
+					cb.setCate("cafe");
+					cb.setNum(cafe[i][0]); 
+					cb.setXpos(cafe[i][1]); 
+					cb.setYpos(cafe[i][2]); 
+					cartlist.add(cb);
+					System.out.println("cart :"+cartlist.size());
+				}
+			}
+			if(mb.getRestaurant()!=null) {
+
+				String restaurants[] = mb.getRestaurant().split(",");
+				String[][] restaurant = new String[restaurants.length][];
+				if(restaurants.length!=0) {
+					for (int i = 0; i < restaurants.length; i++) {
+						restaurant[i] = restaurants[i].split("/");
+						System.out.println("restaurant["+i+"][0]"+restaurant[i][0]);
+						System.out.println("restaurant["+i+"][1]"+restaurant[i][1]);
+						System.out.println("restaurant["+i+"][2]"+restaurant[i][2]);
+					}
+
+					for (int i = 0; i < restaurant.length; i++) {
+
+						CartBean cb = new CartBean();
+						cb.setCate("restaurant");
+						cb.setNum(restaurant[i][0]); 
+						cb.setXpos(restaurant[i][1]); 
+						cb.setYpos(restaurant[i][2]); 
+						cartlist.add(cb);
+					}}
+			}
+
+			if (mb.getSpot()!=null) {
+				System.out.println("mb.getSpot()" + mb.getSpot());
+				String spots[] = mb.getSpot().split(",");
+				String[][] spot = new String[spots.length][];
+
+				for (int i = 0; i < spots.length; i++) {
+					spot[i] = spots[i].split("/");
+					System.out.println("spot["+i+"][0]"+spot[i][0]);
+					System.out.println("spot["+i+"][1]"+spot[i][1]);
+					System.out.println("spot["+i+"][2]"+spot[i][2]);
+				}
+
+				for (int i = 0; i < spot.length; i++) {
+					System.out.println();
+					CartBean cb = new CartBean();
+					cb.setCate("spot");
+					cb.setNum(spot[i][0]); 
+					cb.setXpos(spot[i][1]); 
+					cb.setYpos(spot[i][2]); 
+					cartlist.add(cb);
+
+					System.out.println("spot"+cartlist.size());
+				}
+			}
+
+			System.out.println("cartlist.size()"+cartlist.size());
+
+			int turnSize = cartlist.size()/date.length;
+			int last =hotel.length-1;
+			
+			int h=0;
+			for(int d =0;d<date.length-1;d++) {
+					int turn=1;
+					StartBean cb = new StartBean();
+					if(h>=hotel.length) {
+					cb.setDate(date[d]); 
+					cb.setNumber(hotel[last][0]);
+					cb.setXpos(hotel[last][1]); 
+					cb.setYpos(hotel[last][2]); 
+					startlist.add(cb);
+					}else {
+						cb.setDate(date[d]); 
+						cb.setNumber(hotel[h][0]);
+						cb.setXpos(hotel[h][1]); 
+						cb.setYpos(hotel[h][2]); 
+						startlist.add(cb);
+					}
+					System.out.println("======================="+d+" "+turn+" "+ (startlist.get(startlist.size()-1).getXpos()+","+startlist.get(startlist.size()-1).getYpos())+"======================");
+					
+					MyJourneyBean mjb = new MyJourneyBean();
+					if(h>=hotel.length) {
+						mjb.setId(id);
+						mjb.setCate("hotel");
+						mjb.setRef(hotel[last][0]);
+						mjb.setTurn(turn);
+						turn ++;
+						mjb.setXpos(hotel[last][1]);
+						mjb.setYpos(hotel[last][2]);
+						mjb.setJdate(date[d]);	
+					}else {
+					mjb.setId(id);
+					mjb.setCate("hotel");
+					mjb.setRef(hotel[h][0]);
+					mjb.setTurn(turn);
+					turn ++;
+					mjb.setXpos(hotel[h][1]);
+					mjb.setYpos(hotel[h][2]);
+					mjb.setJdate(date[d]);
+					}
+					myjDao.insertTravel(mjb);
+					
+				
+			
+			
+		
+		System.out.println("startlist.size()"+startlist.size());
+		System.out.println("turnSize"+turnSize);
+				for(int t=0;t<turnSize;t++) {
+					if(cartlist.size()==0) {
+						break;
+					}
+					
+					double[] result =new double[cartlist.size()];
+					double minDistance=Double.MAX_VALUE;;
+					int minIndex =0;
+					for(int i =0 ; i<cartlist.size();i++) {
+						result[i] = Distance(Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getXpos()), cartlist.get(i).getXpos(), cartlist.get(i).getYpos());
+						if (result[i] < minDistance) {
+							minDistance = result[i];
+							minIndex = i;
+						}
+					}
+
+
+					for(int i1=0; i1<result.length;i1++) {
+						System.out.println(cartlist.get(i1).getCate()+cartlist.get(i1).getNum()+" result"+i1+":"+result[i1]);
+
+					}
+
+					System.out.println("minDistance"+minDistance);
+					System.out.println("minIndex"+minIndex);
+					
+					System.out.println("======================="+d+" "+turn+" "+ (startlist.get(startlist.size()-1).getXpos()+","+startlist.get(startlist.size()-1).getYpos())+"======================");
+					
+					MyJourneyBean s = new MyJourneyBean();
+					
+					s.setId(id);
+					s.setCate(cartlist.get(minIndex).getCate());
+					s.setRef(cartlist.get(minIndex).getNum());
+					s.setTurn(turn);
+					turn ++;
+					s.setXpos(String.valueOf(cartlist.get(minIndex).getXpos()));
+					s.setYpos(String.valueOf(cartlist.get(minIndex).getYpos()));
+					s.setJdate(date[d]);
+
+					myjDao.insertTravel(s);
+
+					StartBean sb = new StartBean();
+					
+					sb.setDate(date[d]);
+					sb.setNumber(cartlist.get(minIndex).getNum());
+					sb.setXpos(Double.toString(cartlist.get(minIndex).getXpos()));
+					sb.setYpos(Double.toString(cartlist.get(minIndex).getYpos()));
+					startlist.add(sb);
+					cartlist.remove(minIndex);
+					if((d+1)==date.length&&cartlist.size()!=0) {
+						continue;
+					}
+					
+				}
+				h++;
+			}
+		
+		return "redirect:mainJourney.m";
+
+	}
+
+
+	public static double Distance(double lat1, double lon1, double lat2, double lon2) {
+		// 지구 반경 (단위: km)
+		final double R = 6371.0;
+
+		// 위도 및 경도를 라디안으로 변환
+		double lat1Rad = Math.toRadians(lat1);
+		double lon1Rad = Math.toRadians(lon1);
+		double lat2Rad = Math.toRadians(lat2);
+		double lon2Rad = Math.toRadians(lon2);
+
+		// Haversine 공식 계산
+		double dlat = lat2Rad - lat1Rad;
+		double dlon = lon2Rad - lon1Rad;
+
+		double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(dlon / 2), 2);
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+		// 최단 거리 계산
+		double distance = R * c;
+
+		return distance;
+	}
+
+}
