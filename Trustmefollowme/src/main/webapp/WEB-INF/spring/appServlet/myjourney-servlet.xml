@@ -15,5 +15,5 @@
 	</bean>
 	
 	<context:component-scan base-package="myjourney" />
-
+	<context:component-scan base-package="member" />
 </beans>

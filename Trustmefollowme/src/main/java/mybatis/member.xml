@@ -4,25 +4,29 @@
 
 <mapper namespace="member.Member">
 	<select id="findEmail" resultType="int">
-
-		select count(*) from member
-		where email = #{email}
-
+		select count(*) from member where email = #{email}
 	</select>
 
 	<insert id="insertMember">
-		insert into member
+		insert into member(num,email,password,name,birth,address1,address2,mtel)
 		values(member_seq.nextval,#{email},#{password},#{name},#{birth},#{address1},#{address2},#{mtel})
-
 	</insert>
 	
 	<select id="getMemberInfo" resultType="member.model.MemberBean">
 	select * from member
 	where email=#{email} and password=#{password}
-	
 	</select>
+
 	<select id="findPassword" resultType="member.model.MemberBean">
 	select * from member
 	where email = #{email} and name=#{name} and mtel=#{mtel}
 	</select>
+
+	<select id="getMyjNum" resultType="int">
+	select myjNum from member where email = #{email}
+	</select>
+	
+	<update id="updateMyjNum">
+		update member set myjNum=myjNum+1 where email = #{myemail}
+	</update>	
 </mapper>			

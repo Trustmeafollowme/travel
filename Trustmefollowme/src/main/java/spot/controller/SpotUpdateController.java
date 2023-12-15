@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import cafe.model.CafeBean;
-import cafe.model.CafeDao;
+import spot.model.SpotBean;
+
 
 @Controller
 public class SpotUpdateController {
@@ -31,27 +31,27 @@ public class SpotUpdateController {
 	@Autowired
 	ServletContext servletContext;
 	
-//	@RequestMapping(value = command, method = RequestMethod.GET)
-//	public String cafeUpdate(@RequestParam("cnum") String cnum, 
-//							@RequestParam("pageNumber") String pageNumber, 
-//							Model model) {
-//		CafeBean cb = cafeDao.getCafeDetailByCnum(cnum);
-//		model.addAttribute("cafeBean", cb);
-//		model.addAttribute("pageNumber", pageNumber);
-//		return viewPage;
-//	}
-//	
-//	@RequestMapping(value = command, method = RequestMethod.POST)
-//	public String cafeUpdate(@Valid CafeBean cb, BindingResult cResult,  
-//							@RequestParam("pageNumber") String pageNumber, 
-//							Model model, HttpServletRequest request) throws IllegalStateException, IOException {
-//		if(cResult.hasErrors()) {
-//			model.addAttribute("pageNumber", pageNumber);
-//			return viewPage;
-//		}
-//		String uploadPath = request.getContextPath()+"/resources/images/";
-//		cafeDao.updateCafe(cb);
-//
-//		return gotoPage+"?pageNumber="+pageNumber;
-//	}
+	@RequestMapping(value = command, method = RequestMethod.GET)
+	public String cafeUpdate(@RequestParam("snum") int snum, 
+							@RequestParam("pageNumber") String pageNumber, 
+							Model model) {
+		spot.model.SpotBean cb = SpotDao.spotDetail(snum);
+		model.addAttribute("SpotBean", cb);
+		model.addAttribute("pageNumber", pageNumber);
+		return viewPage;
+	}
+	
+	@RequestMapping(value = command, method = RequestMethod.POST)
+	public String cafeUpdate(@Valid SpotBean sb, BindingResult cResult,  
+							@RequestParam("pageNumber") String pageNumber, 
+							Model model, HttpServletRequest request) throws IllegalStateException, IOException {
+		if(cResult.hasErrors()) {
+			model.addAttribute("pageNumber", pageNumber);
+			return viewPage;
+		}
+		String uploadPath = request.getContextPath()+"/resources/images/";
+		SpotDao.updateSpot(sb);
+
+		return gotoPage+"?pageNumber="+pageNumber;
+	}
 }

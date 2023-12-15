@@ -6,7 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import main.controller.StartBean;
+import main.model.StartBean;
+import member.model.MemberBean;
 
 @Component("myJourneyDao")
 public class MyJourneyDao {
@@ -29,8 +30,8 @@ public class MyJourneyDao {
 		
 	}
 
-	public List<MyJourneyBean> myjSelect(String id) {
-		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjSelect",id);
+	public List<MyJourneyBean> myjSelect(MemberBean mb) {
+		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjSelect",mb);
 		return list;
 	}
 	

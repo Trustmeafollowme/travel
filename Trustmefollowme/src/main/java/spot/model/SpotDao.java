@@ -41,5 +41,10 @@ public class SpotDao {
 		sqlSessionTemplate.delete(namespace+".spotDelete",snum);
 	}
 
+	public void updateSpot(SpotBean sb) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

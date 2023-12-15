@@ -33,20 +33,20 @@ body {
 	padding: 0;
 	box-sizing: border-box;
 }
-/* 왼쪽 영역 스타일 */
 #left-container {
-	width: 50%;
-	height: 100vh; /* 화면 전체 높이로 설정 */
-	background-color: #f0f0f0;
-	float: left; /* 왼쪽으로 플로팅 */
+  width: 50%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  float: left;
+  overflow: auto; /* 세로 스크롤이 필요한 경우 스크롤 표시 */
 }
 
-/* 오른쪽 영역 스타일 */
 #right-container {
-	width: 50%;
-	height: 100vh;
-	background-color: #e0e0e0;
-	float: left;
+  width: 50%;
+  height: 100vh;
+  background-color: #e0e0e0;
+  float: left;
+  overflow: auto; /* 세로 스크롤이 필요한 경우 스크롤 표시 */
 }
 
 .page{
@@ -177,7 +177,7 @@ body {
 										${list.name}
 										</h5>
 										<div class="options">
-											<h6>${list.address} ${list.xpos}/${list.ypos}</h6>
+											<h6>${list.address}</h6>
 					<input type="checkbox" id="spotcheck"name='restaurant' value = "${list.rnum}/${list.xpos}/${list.ypos}" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
@@ -245,7 +245,7 @@ body {
 	<!-- 카테고리 페이지틀  -->
 	<section id="right-container">
 
-		<div id="map" style="width: 900px; height: 800px;"></div>
+		<div id="map" style="width: 100%; height: 100%;"></div>
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6406498ef47269fb1b4e04089576fe5"></script>
 		<script>

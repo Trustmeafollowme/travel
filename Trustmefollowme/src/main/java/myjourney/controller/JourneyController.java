@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import main.controller.CartBean;
-import main.controller.MainBean;
-import main.controller.StartBean;
+import main.model.CartBean;
+import main.model.MainBean;
+import main.model.StartBean;
+import member.model.MemberDao;
 import myjourney.model.MyJourneyBean;
 import myjourney.model.MyJourneyDao;
 
@@ -21,16 +22,22 @@ import myjourney.model.MyJourneyDao;
 public class JourneyController {
 	@Autowired
 	MyJourneyDao myjDao;
-
+	@Autowired
+	MemberDao mDao;
+	
 	@RequestMapping("mainJourney.mj")
 	public String journey(HttpServletRequest request,MainBean mb, HttpSession session) {
-		int first =1;
-		String id = "admin";
+		
+		
 		if(mb.getHotel()==null) {
 			session.setAttribute("date",request.getParameter("date"));
 			System.out.println("호텔 등록하시오");
 			return "redirect:mainTravel.m";
 		}
+		
+		String myemail = (String)session.getAttribute("myemail");
+		String id = myemail;
+		int myjNum = mDao.getMyjNum(myemail);
 
 		String date[]=request.getParameter("date").split(" ");
 
@@ -128,12 +135,17 @@ public class JourneyController {
 			}
 
 			System.out.println("cartlist.size()"+cartlist.size());
-
-			int turnSize = cartlist.size()/date.length;
+			if(cartlist.size()<date.length) {
+				session.setAttribute("date",request.getParameter("date"));
+				return "redirect:mainTravel.m";
+			}
+			
+			int turnSize = (int) Math.ceil((double) cartlist.size() / date.length);
+		System.out.println("turnSize"+turnSize);
 			int last =hotel.length-1;
 			
 			int h=0;
-			for(int d =0;d<date.length-1;d++) {
+			for(int d =0;d<date.length;d++) {
 					int turn=1;
 					StartBean cb = new StartBean();
 					if(h>=hotel.length) {
@@ -153,6 +165,7 @@ public class JourneyController {
 					
 					MyJourneyBean mjb = new MyJourneyBean();
 					if(h>=hotel.length) {
+						mjb.setJnum(myjNum);
 						mjb.setId(id);
 						mjb.setCate("hotel");
 						mjb.setRef(hotel[last][0]);
@@ -162,6 +175,7 @@ public class JourneyController {
 						mjb.setYpos(hotel[last][2]);
 						mjb.setJdate(date[d]);	
 					}else {
+						mjb.setJnum(myjNum);
 					mjb.setId(id);
 					mjb.setCate("hotel");
 					mjb.setRef(hotel[h][0]);
@@ -207,7 +221,7 @@ public class JourneyController {
 					System.out.println("======================="+d+" "+turn+" "+ (startlist.get(startlist.size()-1).getXpos()+","+startlist.get(startlist.size()-1).getYpos())+"======================");
 					
 					MyJourneyBean s = new MyJourneyBean();
-					
+					s.setJnum(myjNum);
 					s.setId(id);
 					s.setCate(cartlist.get(minIndex).getCate());
 					s.setRef(cartlist.get(minIndex).getNum());
@@ -227,14 +241,66 @@ public class JourneyController {
 					sb.setYpos(Double.toString(cartlist.get(minIndex).getYpos()));
 					startlist.add(sb);
 					cartlist.remove(minIndex);
-					if((d+1)==date.length&&cartlist.size()!=0) {
-						continue;
+					
+					System.out.println("d"+d+"date.length"+date.length+"cartlist.size"+cartlist.size());
+					System.out.println((d+1)+" "+date.length+"&&"+cartlist.size());
+					
+					if(d+1==date.length&&cartlist.size()!=0) {
+						System.out.println("cartlist.size()"+cartlist.size());
+						while(cartlist.size()!=0) {
+							double[] result1 =new double[cartlist.size()];
+							double minDistance1=Double.MAX_VALUE;;
+							int minIndex1 =0;
+							for(int i =0 ; i<cartlist.size();i++) {
+								result1[i] = Distance(Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getXpos()), cartlist.get(i).getXpos(), cartlist.get(i).getYpos());
+								if (result1[i] < minDistance1) {
+									minDistance1 = result1[i];
+									minIndex1 = i;
+								}
+							}
+
+
+							for(int i1=0; i1<result1.length;i1++) {
+								System.out.println(cartlist.get(i1).getCate()+cartlist.get(i1).getNum()+" result"+i1+":"+result1[i1]);
+
+							}
+
+							System.out.println("minDistance"+minDistance1);
+							System.out.println("minIndex"+minIndex1);
+							
+							System.out.println("======================="+d+" "+turn+" "+ (startlist.get(startlist.size()-1).getXpos()+","+startlist.get(startlist.size()-1).getYpos())+"======================");
+							
+							MyJourneyBean s1 = new MyJourneyBean();
+							s1.setJnum(myjNum);
+							s1.setId(id);
+							s1.setCate(cartlist.get(minIndex1).getCate());
+							s1.setRef(cartlist.get(minIndex1).getNum());
+							s1.setTurn(turn);
+							turn ++;
+							s1.setXpos(String.valueOf(cartlist.get(minIndex1).getXpos()));
+							s1.setYpos(String.valueOf(cartlist.get(minIndex1).getYpos()));
+							s1.setJdate(date[d]);
+
+							myjDao.insertTravel(s1);
+
+							StartBean sb1 = new StartBean();
+							
+							sb1.setDate(date[d]);
+							sb1.setNumber(cartlist.get(minIndex1).getNum());
+							sb1.setXpos(Double.toString(cartlist.get(minIndex1).getXpos()));
+							sb1.setYpos(Double.toString(cartlist.get(minIndex1).getYpos()));
+							startlist.add(sb1);
+							cartlist.remove(minIndex1);
+							
+							
+						}
 					}
 					
 				}
 				h++;
 			}
-		
+			mDao.updateMyjNum(myemail);
+			session.setAttribute("myjNum", myjNum);
 		return "redirect:mainJourney.m";
 
 	}

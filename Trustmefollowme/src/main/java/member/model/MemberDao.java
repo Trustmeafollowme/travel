@@ -35,6 +35,16 @@ public class MemberDao {
 		lists = sqlSessionTemplate.selectList(namespace+".findPassword",mb);
 		return lists;
 	}
+
+	public int getMyjNum(String myemail) {
+		int myjNum = sqlSessionTemplate.selectOne(namespace+".getMyjNum",myemail);
+		return myjNum;
+	}
+
+	public void updateMyjNum(String myemail) {
+		sqlSessionTemplate.selectOne(namespace+".updateMyjNum",myemail);
+		
+	}
 	
 	
 }
