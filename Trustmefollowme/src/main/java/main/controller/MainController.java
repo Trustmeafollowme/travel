@@ -74,7 +74,7 @@ public class MainController {
 		
 		Paging restaurantPage = new Paging(pageNumber, null, restaurantTotal, url, whatColumn, keyword);
 		List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
-		
+		System.out.println(restaurantList.get(0).getXpos()+restaurantList.get(0).getYpos());
 		//hotel
 	      int hoteltotal = hotelDao.totalCount(map);
 	      

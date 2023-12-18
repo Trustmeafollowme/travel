@@ -19,5 +19,9 @@
 <delete id="spotDelete">
 	delete from spot where snum = #{snum}
 </delete>
-
+<update id="spotUpdate">
+	update spot set name=#{name} ,xpos=#{xpos},ypos=#{ypos},address=#{address},content=#{content},
+	image= #{image}, image2=#{image2},image3= #{image3}, image4 = #{image4}, image5=#{image5}
+	where snum = #{snum}
+</update>
 </mapper>		

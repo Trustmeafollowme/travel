@@ -1,6 +1,5 @@
 package spot.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SpotBean {
@@ -9,29 +8,17 @@ public class SpotBean {
 	private String xpos;
 	private String ypos;
 	private String address;
-	@NotEmpty(message = "내용을 적으시오")
 	private String content;
 	private String image;
 	private String image2;
 	private String image3;
 	private String image4;
-	public String getImage4() {
-		return image4;
-	}
-
-	public void setImage4(String image4) {
-		this.image4 = image4;
-	}
-
-	public String getImage5() {
-		return image5;
-	}
-
-	public void setImage5(String image5) {
-		this.image5 = image5;
-	}
 	private String image5;
-
+	private String Oimage;
+	private String Oimage2;
+	private String Oimage3;
+	private String Oimage4;
+	private String Oimage5;
 	private MultipartFile upload; 
 	private MultipartFile upload2; 
 	private MultipartFile upload3; 
@@ -91,12 +78,15 @@ public class SpotBean {
 			image3 = upload3.getOriginalFilename();
 		}
 	}
+
 	public int getSnum() {
 		return snum;
 	}
+
 	public void setSnum(int snum) {
 		this.snum = snum;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -145,4 +135,61 @@ public class SpotBean {
 	public void setImage3(String image3) {
 		this.image3 = image3;
 	}
+	public String getOimage() {
+		return Oimage;
+	}
+
+	public void setOimage(String oimage) {
+		Oimage = oimage;
+	}
+
+	public String getOimage2() {
+		return Oimage2;
+	}
+
+	public void setOimage2(String oimage2) {
+		Oimage2 = oimage2;
+	}
+
+	public String getOimage3() {
+		return Oimage3;
+	}
+
+	public void setOimage3(String oimage3) {
+		Oimage3 = oimage3;
+	}
+
+	public String getOimage4() {
+		return Oimage4;
+	}
+
+	public void setOimage4(String oimage4) {
+		Oimage4 = oimage4;
+	}
+
+	public String getImage4() {
+		return image4;
+	}
+
+	public void setImage4(String image4) {
+		this.image4 = image4;
+	}
+
+	public String getImage5() {
+		return image5;
+	}
+
+	public void setImage5(String image5) {
+		this.image5 = image5;
+	}
+
+	public String getOimage5() {
+		return Oimage5;
+	}
+
+	public void setOimage5(String oimage5) {
+		Oimage5 = oimage5;
+	}
+
+	
 }

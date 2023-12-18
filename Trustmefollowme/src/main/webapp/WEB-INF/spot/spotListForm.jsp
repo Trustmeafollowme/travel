@@ -35,9 +35,8 @@ $(function() {
 			</a><br>
 			<h3>${sb.name }</h3><br>
 			${sb.address }<br>
-			<input type="button" onclick="spotDelete.sp?snum=${sb.snum }" value="수정">
-			<input type="button" onclick="spotUpdate.sp?snum=${sb.snum }" value="삭제">
-			<input type="checkbox" name="rowcheck" value="${sb.snum }">
+			<input type="button" onclick="location.href='spotUpdate.sp?snum=${sb.snum }'" value="수정">
+			<input type="button" onclick="location.href='spotDelete.sp?snum=${sb.snum }'" value="삭제">
 			
 		</td>
 

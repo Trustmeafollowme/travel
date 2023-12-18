@@ -30,8 +30,13 @@ public class MyJourneyDao {
 		
 	}
 
-	public List<MyJourneyBean> myjSelect(MemberBean mb) {
+	public List<MyJourneyBean> myjSelect(MyJourneyBean mb) {
 		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjSelect",mb);
+		return list;
+	}
+
+	public List<MyJourneyBean> myjDateSelect(MyJourneyBean mb) {
+		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjDaySelect",mb);
 		return list;
 	}
 	

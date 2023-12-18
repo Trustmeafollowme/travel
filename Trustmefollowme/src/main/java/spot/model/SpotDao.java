@@ -42,8 +42,8 @@ public class SpotDao {
 	}
 
 	public void updateSpot(SpotBean sb) {
-		// TODO Auto-generated method stub
-		
+		sqlSessionTemplate.update(namespace+".spotUpdate",sb);
+
 	}
 
 

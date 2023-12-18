@@ -31,7 +31,6 @@ public class JourneyController {
 		
 		if(mb.getHotel()==null) {
 			session.setAttribute("date",request.getParameter("date"));
-			System.out.println("호텔 등록하시오");
 			return "redirect:mainTravel.m";
 		}
 		
@@ -49,7 +48,7 @@ public class JourneyController {
 			
 			if(hotels.length>date.length) {
 				session.setAttribute("date",request.getParameter("date"));
-				System.out.println("호텔 너무 많이 등록"+hotels.length+"/"+date.length);
+				System.out.println(""+hotels.length+"/"+date.length);
 				return "redirect:mainTravel.m";
 			}
 
@@ -307,23 +306,19 @@ public class JourneyController {
 
 
 	public static double Distance(double lat1, double lon1, double lat2, double lon2) {
-		// 지구 반경 (단위: km)
 		final double R = 6371.0;
 
-		// 위도 및 경도를 라디안으로 변환
 		double lat1Rad = Math.toRadians(lat1);
 		double lon1Rad = Math.toRadians(lon1);
 		double lat2Rad = Math.toRadians(lat2);
 		double lon2Rad = Math.toRadians(lon2);
 
-		// Haversine 공식 계산
 		double dlat = lat2Rad - lat1Rad;
 		double dlon = lon2Rad - lon1Rad;
 
 		double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(dlon / 2), 2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-		// 최단 거리 계산
 		double distance = R * c;
 
 		return distance;
