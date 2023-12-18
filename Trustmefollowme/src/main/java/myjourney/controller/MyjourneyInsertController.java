@@ -19,7 +19,7 @@ import restaurant.model.RestaurantBean;
 import restaurant.model.RestaurantDao;
 import spot.model.SpotBean;
 import spot.model.SpotDao;
-
+ 
 @Controller
 public class MyjourneyInsertController {
 	private final String command = "myjourneyInsert.mj";

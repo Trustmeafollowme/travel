@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import myjourney.model.MyJourneyDao;
-
+ 
 @Controller
 public class MyjourneyDeleteController {
 	private final String command = "myJourneyDelete.mj";

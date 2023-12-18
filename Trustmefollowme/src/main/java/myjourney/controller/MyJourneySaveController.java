@@ -25,7 +25,7 @@ public class MyJourneySaveController {
 		response.setContentType("text/html;charset=UTF-8");
 		String id = (String) session.getAttribute("myemail");
 		System.out.println("saveMJ id:"+id);
-		
+ 		
 		int tCheck = myJourneyDao.searchTurnMore(id);
 		System.out.println("saveMJ tCheck:"+tCheck);
 		if(tCheck > 0) {

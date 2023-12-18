@@ -45,7 +45,7 @@ public class MyjourneyListController {
 				date = (String) flashMap.get("date");
 			}
 		}
-		
+	 	
 		System.out.println("flashMap date:"+date);
 		if(day == null || jdate == null) {
 			String[] days = date.split("  ");

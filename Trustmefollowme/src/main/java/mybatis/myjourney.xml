@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="myjourney.Myjourney">
+<mapper namespace="myjourney.Myjourney"> 
 	<!-- AutoList Query Start -->
 	<insert id="Startinsertjourney">
 		insert into myjourney (jnum,id,xpos,ypos,cate,ref,turn,jdate)
@@ -13,7 +13,7 @@
 		values(#{jnum},#{id},#{xpos},#{ypos},#{cate},#{ref},#{turn},#{jdate})
 	</insert>
 
-	<select id="myjSelect"
+	<select id="myjSelect" 
 		resultType="myjourney.model.MyJourneyBean">
 		SELECT
 		m.jnum, m.id, m.xpos, m.ypos, m.cate, m.ref, m.turn, m.jdate,
