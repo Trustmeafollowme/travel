@@ -5,32 +5,44 @@
 <mapper namespace="restaurant.Restaurant">
 	<select id="restList" resultType="restaurant.model.RestaurantBean">
 		select * from rest
-		<if test="WhatColumn == 'rname'">
-			where rname like #{keyword}
+		<if test="WhatColumn == 'name'">
+			where name like #{keyword}
 		</if>
-		<if test="WhatColumn == 'rlocation'">
-			where rlocation like #{keyword}
+		<if test="WhatColumn == 'address'">
+			where address like #{keyword}
 		</if>
 	</select>
 	
 	<select id="totalCount" resultType="int">
 		select count(*) from rest
-		<if test="WhatColumn == 'rname'">
-			where rname like #{keyword}
+		<if test="WhatColumn == 'name'">
+			where name like #{keyword}
 		</if>
-		<if test="WhatColumn == 'rlocation'">
-			where rlocation like #{keyword}
+		<if test="WhatColumn == 'address'">
+			where address like #{keyword}
 		</if>
-	</select>
-	
-	<select id="restDetail" resultType="myRestaurant">
-		select * from rest where rnum = #{rnum}
 	</select>
 	
 	<insert id="restInsert">
-		insert into rest(rnum,name,r_xpos,r_ypos,address,image,rtel1,rtel2,rtel3,rtime1,rtime2,rdate)
-		values(resseq.nextval,#{name},#{xpos},#{ypos},
-		#{address},#{image},#{rtel1},
-		#{rtel2},#{rtel3},#{rtime1},#{rtime2},#{rdate})
+		insert into rest
+		values(resseq.nextval,#{name},#{xpos},#{ypos},#{address},
+		#{image},#{image2},#{image3},#{image4},#{image5},
+		#{rtel1},#{rtel2},#{rtel3},
+		#{rtime1},#{rtime2},
+		#{rdate})
 	</insert>
+	
+	<select id="restOneInfo" resultType="myRestaurant">
+		select * from rest where rnum = #{rnum}
+	</select>
+	
+	<update id="restUpdate">
+		update rest set name=#{name}, xpos=#{xpos}, ypos=#{ypos}, address=#{address}, image=#{image}, image2=#{image2},
+		image3=#{image3}, image4=#{image4}, image5=#{image5}, rtel1=#{rtel1}, rtel2=#{rtel2}, rtel3=#{rtel3},
+		rtime1=#{rtime1}, rtime2=#{rtime2}, rdate=#{rdate} where rnum = #{rnum}
+	</update>
+	
+	<delete id="restDelete">
+		delete from rest where rnum = #{rnum}
+	</delete>
 </mapper>

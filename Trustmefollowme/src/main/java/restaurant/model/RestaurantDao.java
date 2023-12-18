@@ -33,16 +33,29 @@ public class RestaurantDao {
 		return cnt;
 	}
 
-	public RestaurantBean restDetail(int rnum) {
-		
-		RestaurantBean rb = sqlSessionTemplate.selectOne(namespace+".restDetail",rnum);
-		
-		return rb;
-	}
 
 	public void restInsert(RestaurantBean rb) {
 		
 		sqlSessionTemplate.insert(namespace+".restInsert",rb);
+		
+	}
 
+	public RestaurantBean restOneInfo(int rnum) {
+		
+		RestaurantBean rb = sqlSessionTemplate.selectOne(namespace+".restOneInfo",rnum);
+		
+		return rb;
+	}
+	
+	public void restUpdate(RestaurantBean rb) {
+		
+		sqlSessionTemplate.update(namespace+".restUpdate",rb);
+		
+	}
+
+	public void restDelete(int rnum) {
+		
+		sqlSessionTemplate.delete(namespace+".restDelete",rnum);
+		
 	}
 }

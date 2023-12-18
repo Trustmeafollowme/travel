@@ -4,4 +4,95 @@
 	
 <mapper namespace="board.Board">
 
+	<select id="boardList" resultType="myBoard">
+		select * from board
+		<if test="WhatColumn == 'title'">
+			where title like #{keyword}
+		</if>
+		<if test="WhatColumn == 'content'">
+			where content like #{keyword}
+		</if>
+	</select>
+	
+	<insert id="boardInsert">
+		insert into board(num,writer,title,reg_date,ref,re_level,re_step,content,image,ip)
+		 values(boardseq.nextval,#{writer},#{title},#{reg_date},#{ref},#{re_level},#{re_step},#{content},#{image},#{ip})
+	</insert>
+		
+	<select id="boardDetail" resultType="myBoard">
+		select * from board where num = #{num}
+	</select>
+	
+	<update id="readCount">
+		update board set readCount = readCount+1 where num = #{num}
+	</update>
+	
+	<select id="oneData" resultType="myBoard">
+		select * from board where num = #{num}
+	</select>
+	
+	<update id="boardUpdate">
+		update board set title = #{title}, image = #{image} where num = #{num}
+	</update>
+	
+	<delete id="boardDelete">
+		delete from board where num = #{num}
+	</delete>
+	
+	<select id="findLike" resultType="board.model.LikeBean">
+		select * from likes where b_num = #{b_num} and m_num = #{m_num}
+	</select>
+	
+	<insert id="likeInsert">
+		insert into likes values(likeseq.nextval,#{b_num},#{m_num},0)
+	</insert>
+	
+	<update id="likeDown">
+		update likes set likes = likes-1 where b_num = #{b_num} and m_num = #{m_num}
+	</update>
+	
+	<update id="likeUp">
+		update likes set likes = likes+1 where b_num = #{b_num} and m_num = #{m_num}
+	</update>
+	
+	<select id="likeCount" resultType="int">
+		select count(likes) from likes where b_num = #{b_num} and likes = 1
+	</select>
+	
+	<insert id="chatInsert">
+		insert into chat values(chatseq.nextval,#{b_num},#{writer},#{content},chatseq.currval,#{re_level},#{re_step},
+		#{ip},#{reg_date})
+	</insert>
+	
+	<select id="chatList" resultType="board.model.ChatBean">
+		select * from chat where b_num = #{b_num}
+		order by ref desc, re_step
+	</select>
+	
+	<insert id="replyInsert">
+		insert into chat 
+		values(chatseq.nextval,#{b_num},#{writer},#{content},
+		#{ref},#{re_level}+1,#{re_step}+1,#{ip},#{reg_date})
+	</insert>
+	
+	<update id="replyUpdate">
+		update chat set re_step = re_step+1 where ref = #{ref} and
+		re_level > #{re_level}
+	</update>
+	
+	<delete id="replyDelete">
+		delete from chat where ref = #{ref} and re_level = #{re_level} and re_step = #{re_step} and b_num = #{b_num}
+	</delete>
+	
+	<select id="getData" resultType="board.model.ChatBean">
+		select * from chat where chatnum = #{chatnum}
+	</select>
+	
+	<update id="chatUpdate">
+		update chat set content = #{content} where  ref = #{ref} and re_level = #{re_level} and re_step = #{re_step} and b_num = #{b_num}
+	</update>
+	
+	<select id="getContext" resultType="board.model.ChatBean">
+		select content from chat where ref = #{ref} and re_level = #{re_level} and re_step = #{re_step} and b_num = #{b_num}
+	</select>
 </mapper>
