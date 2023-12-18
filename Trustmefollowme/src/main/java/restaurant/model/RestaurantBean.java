@@ -53,6 +53,12 @@ public class RestaurantBean {
 	private MultipartFile imgUpload3;
 	private MultipartFile imgUpload4;
 	private MultipartFile imgUpload5;
+	
+	private String imgdel;
+	private String imgdel2;
+	private String imgdel3;
+	private String imgdel4;
+	private String imgdel5;
 
 	public int getRnum() {
 		return rnum;
@@ -196,4 +202,35 @@ public class RestaurantBean {
 			image5 = imgUpload5.getOriginalFilename();
 		}
 	}
+	public String getImgdel() {
+		return imgdel;
+	}
+	public void setImgdel(String imgdel) {
+		this.imgdel = imgdel;
+	}
+	public String getImgdel2() {
+		return imgdel2;
+	}
+	public void setImgdel2(String imgdel2) {
+		this.imgdel2 = imgdel2;
+	}
+	public String getImgdel3() {
+		return imgdel3;
+	}
+	public void setImgdel3(String imgdel3) {
+		this.imgdel3 = imgdel3;
+	}
+	public String getImgdel4() {
+		return imgdel4;
+	}
+	public void setImgdel4(String imgdel4) {
+		this.imgdel4 = imgdel4;
+	}
+	public String getImgdel5() {
+		return imgdel5;
+	}
+	public void setImgdel5(String imgdel5) {
+		this.imgdel5 = imgdel5;
+	}
+	
 }

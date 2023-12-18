@@ -46,6 +46,8 @@ public class RestaurantListController {
 		Paging pageInfo = new Paging(pageNumber, null, totalCount, url, WhatColumn, keyword);
 		List<RestaurantBean> lists = restaurantDao.restList(map, pageInfo);
 		
+		model.addAttribute("cate", "rest");
+		model.addAttribute("detail", "mainRestaurantList.re");
 		model.addAttribute("lists", lists);
 		model.addAttribute("pageInfo", pageInfo);
 		

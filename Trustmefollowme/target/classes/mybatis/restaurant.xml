@@ -37,7 +37,7 @@
 	</select>
 	
 	<update id="restUpdate">
-		update rest set name=#{name}, xpos=#{xpos}, ypos=#{ypos}, address=${address}, image=#{image}, image2=#{image2},
+		update rest set name=#{name}, xpos=#{xpos}, ypos=#{ypos}, address=#{address}, image=#{image}, image2=#{image2},
 		image3=#{image3}, image4=#{image4}, image5=#{image5}, rtel1=#{rtel1}, rtel2=#{rtel2}, rtel3=#{rtel3},
 		rtime1=#{rtime1}, rtime2=#{rtime2}, rdate=#{rdate} where rnum = #{rnum}
 	</update>

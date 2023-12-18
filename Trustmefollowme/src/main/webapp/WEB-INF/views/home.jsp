@@ -42,6 +42,9 @@ body {
 	padding-top: 30px;
 	padding-left: 450px;
 }
+.bg-box{
+	background: url("<%=request.getContextPath()%>/resources/images/hero-bg.jpg");
+}
 </style>
 <html>
 
@@ -79,19 +82,20 @@ body {
 <!-- responsive style -->
 <link href="<%=request.getContextPath()%>/resources/css/responsive.css"
 	rel="stylesheet" />
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/style.css">
 </head>
 <body>
 	<div class="hero_area">
 		<div class="bg-box">
-			<img src="<%=request.getContextPath()%>/resources/images/hero-bg.jpg"
-				alt="">
 		</div>
 		<!-- header section strats -->
 		<header class="header_section">
 			<div class="container">
 				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="index.html"> <span> Feane
+					<a class="navbar-brand" href="index.html"> <span> 나믿따
 					</span>
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -170,8 +174,9 @@ body {
 		</script>
 
 	</section>
-
-	</section>
+	<div id="board-container" align="center">
+			<button class="btn btn-secondary" onclick="location.href='boardList.bd'">게시판 보기</button>
+	</div>
 	<!-- footer section -->
 	<footer class="footer_section" id=>
 		<div class="container">
@@ -257,6 +262,10 @@ body {
 		
 	</script>
 	<!-- End Google Map -->
+	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/js/popper.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 
 </body>
 

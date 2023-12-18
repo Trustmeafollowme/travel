@@ -6,6 +6,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="restaurant.model.RestaurantBean" alias="myRestaurant"/>
+		<typeAlias type="board.model.BoardBean" alias="myBoard"/>
 	</typeAliases>
 	
 	<mappers>

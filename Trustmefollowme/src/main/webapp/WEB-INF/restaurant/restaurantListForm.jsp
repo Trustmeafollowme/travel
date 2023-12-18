@@ -41,18 +41,24 @@
 	padding-top: 50px;
 	text-align: center;
 }
+.column {
+  width: 80px;
+  height: 30px;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+.keyword{
+	border-color: #EDEDED;
+}
+.container{
+	padding-top: 50px;
+}
 </style>
-
 <body>
 	<section class="food_section layout_padding-bottom">
 		<div class="container">
 			<div class="heading_container heading_center">
-				<h2><a href="#"><font color="black">나믿따</font></a></h2>
-			</div>
-		</div>
-
-		<div class="container">
-			<ul class="filters_menu">
+				<h2><a href="#"><font color="black">나믿따</font></a></h2>	<ul class="filters_menu">
 				<li onclick="location.href='restInsert.re'">추가</li>
 				<li data-filter=".all">all</li>
 				<li data-filter=".hotel" onclick="location.href='mainHotelList.ht'">호텔</li>
@@ -61,12 +67,16 @@
 				<li data-filter=".cafe" onclick="location.href='mainCafeList.cf'">카페</li>
 				<li data-filter=".fries" onclick="location.href='mainSpotList.sp'">관광지</li>
 			</ul>
+			</div>
+		</div>
+		<div class="container">
+		
 			<form action="mainRestaurantList.re" method="get" align="center">
-				<select name="WhatColumn">
+				<select name="WhatColumn" class="column">
 						<option value="all">전체 
 						<option value="name">이름
 						<option value="address">주소
-					<input type="text" name="keyword">
+					<input type="text" name="keyword" class="keyword" placeholder="검색">
 					<input type="submit" value="검색">
 					</select>
 			</form>
