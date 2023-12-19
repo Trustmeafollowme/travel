@@ -29,9 +29,12 @@
 		              <div class="calendar_content"></div>
 		            </div>
 <form action="mainTravel.m">
-  <script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
-<input type="text" name="date" id="date">
-<input type="submit" value="확인">
-</form>
+                    <script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
+                  <input type="text" name="date" id="date">
+                  <input type="radio" name="sTravel" value="auto" checked> 자동
+                  <input type="radio" name="sTravel" value="manual"> 수동
+                  <input type="submit" value="확인">
+               </form> 
+
 	
 </body>

@@ -30,10 +30,6 @@ public class MyJourneyDao {
 		
 	}
 
-	public List<MyJourneyBean> myjSelect(MemberBean mb) {
-		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjSelect",mb);
-		return list;
-	}
 
 	public int insertMyJourney(Map<String, Object> map) {
 		int cnt = sqlSessionTemplate.insert(namespace+".insertMyJourney", map);
@@ -73,6 +69,17 @@ public class MyJourneyDao {
 	public void updateMJList(String id) {
 		int cnt = sqlSessionTemplate.update(namespace+".updateMJList", id);
 		System.out.println("saveMyJourney cnt:"+cnt);
+	}
+
+	public List<MyJourneyBean> myjDateSelect(MyJourneyBean mb) {
+		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjDateSelect",mb);
+		return list;
+	}
+
+
+	public List<MyJourneyBean> myjSelect(MyJourneyBean mb) {
+		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjSelect",mb);
+		return list;
 	}
 	
 }

@@ -37,6 +37,7 @@ public class MainJourneyController {
 		List<MyJourneyBean> myjList=memberDao.myjSelect(mb);
 		List<String> myjXpos = new ArrayList<String>();
 		List<String> myjYpos=new ArrayList<String>() ;
+		
 	for(int i=0 ;i<myjList.size();i++) {
 		myjXpos.add(myjList.get(i).getXpos());
 		myjYpos.add(myjList.get(i).getYpos());
