@@ -58,4 +58,9 @@ public class RestaurantDao {
 		sqlSessionTemplate.delete(namespace+".restDelete",rnum);
 		
 	}
+
+	public RestaurantBean restDetail(int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

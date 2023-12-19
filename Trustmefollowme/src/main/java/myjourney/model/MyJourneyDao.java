@@ -72,7 +72,7 @@ public class MyJourneyDao {
 	}
 
 	public List<MyJourneyBean> myjDateSelect(MyJourneyBean mb) {
-		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjDateSelect",mb);
+		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjDaySelect",mb);
 		return list;
 	}
 
