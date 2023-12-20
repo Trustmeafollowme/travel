@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import hotel.model.HotelBean;
+
 @Component("memberDao")
 public class MemberDao {
 
@@ -36,6 +38,17 @@ public class MemberDao {
 		return lists;
 	}
 
+	public MemberBean getMemberByEmail(String kakaoEmail) {
+		MemberBean member = sqlSessionTemplate.selectOne(namespace + ".getMemberByEmail", kakaoEmail);
+		return member;
+	}
+
+	public List<MemberBean> getAllMember() {
+		List<MemberBean> list = sqlSessionTemplate.selectList(namespace+".getAllMember");
+		System.out.println("lists.size()"+list.size());
+		return list;
+	}
+
 	public int getMyjNum(String myemail) {
 		int myjNum = sqlSessionTemplate.selectOne(namespace+".getMyjNum",myemail);
 		return myjNum;
@@ -45,6 +58,7 @@ public class MemberDao {
 		sqlSessionTemplate.selectOne(namespace+".updateMyjNum",myemail);
 		
 	}
+
 	
 	
 }

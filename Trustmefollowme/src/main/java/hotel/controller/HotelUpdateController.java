@@ -32,7 +32,7 @@ private HotelDao hotelDao;
 @Autowired
 ServletContext servletContext;
 
-@RequestMapping(value = "hotelUpdate.ht")
+@RequestMapping(value=command,method=RequestMethod.GET)
 public String updateForm( @RequestParam("hnum")int hnum,@RequestParam("pageNumber")String pageNumber,Model model) {
 
 
@@ -40,7 +40,7 @@ public String updateForm( @RequestParam("hnum")int hnum,@RequestParam("pageNumbe
 //		System.out.println(hotel.getFacility());
 		model.addAttribute("hotel",hotel);
 		model.addAttribute("pageNumber",pageNumber);
-		return "hotelUpdateForm2";
+		return gotoPage;
 	}
 
 

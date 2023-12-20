@@ -3,7 +3,6 @@ package member.model;
 
 public class MemberBean {
 	private int num;
-	private int myjNum;
 	private String email;
 	private String password;
 	private String name;
@@ -11,12 +10,7 @@ public class MemberBean {
 	private String address1;
 	private String address2;
 	private String mtel;
-	public int getMyjNum() {
-		return myjNum;
-	}
-	public void setMyjNum(int myjNum) {
-		this.myjNum = myjNum;
-	}
+	private String kakaoId;
 	public int getNum() {
 		return num;
 	}
@@ -65,6 +59,7 @@ public class MemberBean {
 	public void setMtel(String mtel) {
 		this.mtel = mtel;
 	}
+
 	
 	
 	

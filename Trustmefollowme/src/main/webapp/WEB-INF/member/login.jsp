@@ -2,6 +2,155 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+  integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('b146ce21a952f8b1ece8198d794201a4'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+<!-- <script>
+
+  function loginWithKakao() {
+    Kakao.Auth.authorize({
+      redirectUri: 'http://localhost:8080/ex/login.mb',
+    });
+  }
+
+   function requestUserInfo() {
+    Kakao.API.request({
+      url: '/v2/user/me',
+    })
+      .then(function(res) {
+        alert(JSON.stringify(res));
+      })
+      .catch(function(err) {
+        alert(
+          'failed to request user information: ' + JSON.stringify(err)
+        );
+      });
+  }
+  
+  // 아래는 데모를 위한 UI 코드입니다.
+  displayToken()
+  function displayToken() {
+    var token = getCookie('authorize-access-token');
+
+    if(token) {
+      Kakao.Auth.setAccessToken(token);
+      Kakao.Auth.getStatusInfo()
+        .then(function(res) {
+          if (res.status === 'connected') {
+            document.getElementById('token-result').innerText
+              = 'login success, token: ' + Kakao.Auth.getAccessToken();
+          }
+        })
+        .catch(function(err) {
+          Kakao.Auth.setAccessToken(null);
+        });
+    }
+  }
+ 
+  function getCookie(name) {
+    var parts = document.cookie.split(name + '=');
+    if (parts.length === 2) { return parts[1].split(';')[0]; }
+  }
+  
+  $.ajax({
+	    type : "POST"
+	    , url : 'https://kauth.kakao.com/oauth/token'
+	    , data : {
+	        grant_type : 'authorization_code',
+	        client_id : 'a7312a72eb52e0ad91f1fba159ec4eaa',
+	        redirect_uri : 'http://localhost:8080/ex/login.mb',
+	        code : kakaoCode
+	    }
+	    , contentType:'application/x-www-form-urlencoded;charset=utf-8'
+	    , dataType: null
+	    , success : function(response) {
+	        Kakao.Auth.setAccessToken(response.access_token);
+	        document.querySelector('button.api-btn').style.visibility = 'visible';
+	    }
+	    ,error : function(jqXHR, error) {
+
+	    }
+	});
+  
+ function requestUserInfo() {
+	    Kakao.API.request({
+	      url: '/v2/user/me',
+	    })
+	      .then(function(res) {
+	        alert(JSON.stringify(res));
+	      })
+	      .catch(function(err) {
+	        alert(
+	          'failed to request user information: ' + JSON.stringify(err)
+	        );
+	      });
+	  }
+ function kakaoLogin() {
+	    Kakao.Auth.login({
+	      success: function (response) {
+	        Kakao.API.request({
+	          url: '/v2/user/me',
+	          success: function (response) {
+	        	  console.log(response);
+	        	  const id = response.id;
+	        	  const nickname = response.properties.nickname;
+	        	  const email = response.kakao_account.email;
+	        	  $.ajax({
+	        		  type : 'post',
+	        		  url : 'user/kakaoLogin',
+	        		  data : {"id" : id, "nickname" : nickname, "email" : email},
+	        		  dataType : 'text',
+	        		  success: function(result){
+	        			  if(result=="ok"){
+	        				  var newNickname = prompt('사용하실 닉네임을 입력해주세요');
+	        				  if(newNickname != null){
+	        					  $.ajax({
+	        						  type : 'post',
+	        						  url : 'kakaoSignUp',
+	        						  data : {"id" : id, "nickname" : newNickname, "email": email}
+	        					  });
+	        					  alert(newNickname + "님 환영합니다.");
+	        					  location.href = "/video/list";
+	        				  }
+	        				  else{
+	        					  location.href = "/user/signin";
+	        				  }
+	        			  }
+	        			  else{
+	        				  $.ajax({
+	        					  url : '/user/kakaoLogins',
+	        					  data : {"id" : id},
+	        					  dataType : 'text',
+	        					  type : 'post',
+	        					  success : function(data){
+	        						  console.log(data);
+	                				  alert(data + "님 반갑습니다.")
+	                				  location.href = "/hotelList.mb";
+	        					  }
+	        				  })
+
+	        			  }
+	        		  }
+	        		  
+	        	  })
+	          },
+	          fail: function (error) {
+	            console.log(error)
+	          },
+	        })
+	      },
+	      fail: function (error) {
+	        console.log(error)
+	      },
+	    })
+	  }
+
+ 
+</script> -->
+    
 <head>
 <meta charset="UTF-8">
 <style>
@@ -229,7 +378,15 @@
           </label>
         </div> -->
         <a class="outer-link pull-left" href="findPassword.mb"><font size="2px">비밀번호를 잊으셨나요?</font></a>
-        <button type="submit" class="btn btn-submit btn-default pull-right">로그인</button>
+        <button type="submit" class="btn btn-submit btn-default pull-right" style="width: 400px; height: 40px;">로그인</button>
+        <br>
+        <br>
+    <%-- <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=20543122589b138f374315f3bbd94eb6&redirect_uri=http://localhost:8080/auth/kakaoLogin" id="kakao--button"><img alt="" src=" <%=request.getContextPath()%>/resources/images/카카오로그인.png" width="350px;"></a> --%>
+        <a id="kakao-login-btn" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3ebf8bbbb7b91d2e8e34c1ae7d68f0db&redirect_uri=http://localhost:8080/ex/kakao-login.mb"> <%--id=rest api 키 넣 --%>
+ 		 <img src="<%=request.getContextPath() %>/resources/images/kakao_login_large_wide.png" width="400" height="50"
+   			 alt="카카오 로그인 버튼" />
+		</a>
+			<p id="token-result"></p>
       </form>
     </div>
   </div>

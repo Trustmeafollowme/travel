@@ -26,7 +26,7 @@ public class HotelDao {
 		
 		List<HotelBean> list=sqlSessionTemplate.selectList(namespace+".getAllHotel",map,rowBounds);
 		
-		System.out.println("lists.size()"+list.size());
+		
 		
 		return list;
 	}

@@ -28,7 +28,6 @@ public class HotelListController {
 private HotelDao hotelDao;
 
 
-
 	@RequestMapping(value = command)
 	public String hotelList(Model model, HttpServletRequest request,
 			@RequestParam(value = "WhatColumn", required = false) String WhatColumn,

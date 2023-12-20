@@ -73,12 +73,23 @@ $(function() {
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-	<c:if test="${myemail==null}">
+	<%-- <c:if test="${myemail==null}">
       <a href="login.mb" class="get-started-btn scrollto">로그인</a>
 	</c:if>
 	<c:if test="${myemail!=null}">
       <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
-	</c:if>
+	</c:if> --%>
+	
+	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
+      <c:if test="${empty myemail}">
+         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
+      </c:if>
+      
+      <c:if test="${not empty myemail}">
+         <div>${myemail}</div>
+         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
+      </c:if>
+     <!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
 
     </div>
   </header><!-- End Header -->

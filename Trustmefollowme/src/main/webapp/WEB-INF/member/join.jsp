@@ -85,12 +85,12 @@
 		        $('#emailMessage').show();
 		        return; 
 		    }
-		     else if (inputEmail.includes('.com') == false) {
+		 /*     else if (inputEmail.includes('.com') == false) {
 		        // 이메일에 .com가 포함되어 있지 않은 경우
 		          $('#emailMessage').html("<font style='font-size: 14px; color: #000081;'>* 이메일에는 .com로 끝나야합니다</font>");
 		        $('#emailMessage').show();
 		        return; 
-		    }
+		    } */
 		     
 		       
 

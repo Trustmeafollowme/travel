@@ -40,9 +40,7 @@ public class MainController {
 	
 	@Autowired
 	SpotDao spotDao;
-	
-	@Autowired
-	MyJourneyDao memberDao;
+
 	
 	String sTravel2;
 	
