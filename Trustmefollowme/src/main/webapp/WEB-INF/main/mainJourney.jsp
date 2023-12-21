@@ -18,443 +18,9 @@
 </style>
 
 <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey="></script>
-		<script type="text/javascript">
-			var map;
-			var markerInfo;
-			//출발지,도착지 마커
-			var marker_s, marker_e, marker_p;
-			//경로그림정보
-			var drawInfoArr = [];
-			var drawInfoArr2 = [];
-		
-			var chktraffic = [];
-			var resultdrawArr = [];
-			var resultMarkerArr = [];
-		
-			function initTmap() {
-				// 1. 지도 띄우기
-				map = new Tmapv2.Map("map_div", {
-					center : new Tmapv2.LatLng(33.450701, 126.570667),
-					width : "100%",
-					height : "100%",
-					zoom : 11,
-					zoomControl : true,
-					scrollwheel : true
-				});
-				// 2. 시작, 도착 심볼찍기
-				// 시작
-				marker_s = new Tmapv2.Marker(
-						{
-							position : new Tmapv2.LatLng(${myjXpos.get(0)}, ${myjYpos.get(0)}),
-							icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
-							iconSize : new Tmapv2.Size(24, 38),
-							map : map
-						});
-		
-				//도착
-				marker_e = new Tmapv2.Marker(
-						{
-							position : new Tmapv2.LatLng(${myjXpos.get(fn:length(myjXpos)-1)}, ${myjXpos.get(fn:length(myjXpos)-1)}),
-							icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
-							iconSize : new Tmapv2.Size(24, 38),
-							map : map
-						});
-				 // 3. 경유지 심볼 찍기
-			/* 	for (var i = 0; i < array.length; i++) {
-				 marker = new Tmapv2.Marker({
-					position : new Tmapv2.LatLng(33.5158700504, 126.5120821042),
-					icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_1.png",
-					iconSize : new Tmapv2.Size(24, 38),
-					map:map
-				});
-				resultMarkerArr.push(marker);
-				} */
-				
-				<c:if test="${not empty myjXpos}">
-				<c:forEach var="index" begin="1" end="${fn:length(myjXpos)-1}">
-	            var xpos = "${myjXpos.get(index)}";
-	            var ypos = "${myjYpos.get(index)}";
 
-	            var marker = new Tmapv2.Marker({
-	                position: new Tmapv2.LatLng(xpos, ypos),
-	                icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_${index}.png",
-	                iconSize: new Tmapv2.Size(24, 38),
-	                map: map
-	            });
-	            resultMarkerArr.push(marker);
-	        </c:forEach>
-	        </c:if>
-				// 3. 경로탐색 API 사용요청
-				$("#btn_select")
-						.click(
-								function() {
-									//기존 맵에 있던 정보들 초기화
-									resettingMap();
-		
-									var searchOption = "2";
-		
-									var trafficInfochk = "N";
-									var headers = {}; 
-										headers["appKey"]="";
-									//JSON TYPE EDIT [S]
-									$.ajax({
-										type : "POST",
-										headers : headers,
-										url : "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=",
-										async : false,
-										data : {
-											"startX" : "${myjYpos.get(0)}",
-											"startY" : "${myjXpos.get(0)}",
-											"endX" : "${myjYpos.get(1)}",
-											"endY" : "${myjXpos.get(1)}",
-											"reqCoordType" : "WGS84GEO",
-											"resCoordType" : "EPSG3857",
-											"searchOption" : searchOption,
-											"trafficInfo" : trafficInfochk,
-											
-										},
-										success : function(response) {
 
-											var resultData = response.features;
-
-											var tDistance = "거리 : "
-													+ (resultData[0].properties.totalDistance / 1000)
-															.toFixed(1) + "km ";
-											var tTime = " 시간 : "
-													+ (resultData[0].properties.totalTime / 60)
-															.toFixed(0) + "분";
-											
-											$("#result").text(
-													tDistance + tTime);
-
-											//교통정보 표출 옵션값을 체크
-											if (trafficInfochk == "Y") {
-												for ( var i in resultData) { //for문 [S]
-													var geometry = resultData[i].geometry;
-													var properties = resultData[i].properties;
-
-													if (geometry.type == "LineString") {
-														//교통 정보도 담음
-														chktraffic
-																.push(geometry.traffic);
-														var sectionInfos = [];
-														var trafficArr = geometry.traffic;
-
-														for ( var j in geometry.coordinates) {
-															// 경로들의 결과값들을 포인트 객체로 변환 
-															var latlng = new Tmapv2.Point(
-																	geometry.coordinates[j][0],
-																	geometry.coordinates[j][1]);
-															// 포인트 객체를 받아 좌표값으로 변환
-															var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
-																	latlng);
-
-															sectionInfos
-																	.push(convertPoint);
-														}
-
-														drawLine(sectionInfos,
-																trafficArr);
-													} else {
-
-														var markerImg = "";
-														var pType = "";
-
-														if (properties.pointType == "S") { //출발지 마커
-															markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";
-															pType = "S";
-														} else if (properties.pointType == "E") { //도착지 마커
-															markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
-															pType = "E";
-														} else { //각 포인트 마커
-															markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
-															pType = "P"
-														}
-
-														// 경로들의 결과값들을 포인트 객체로 변환 
-														var latlon = new Tmapv2.Point(
-																geometry.coordinates[0],
-																geometry.coordinates[1]);
-														// 포인트 객체를 받아 좌표값으로 다시 변환
-														var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
-																latlon);
-
-														var routeInfoObj = {
-															markerImage : markerImg,
-															lng : convertPoint._lng,
-															lat : convertPoint._lat,
-															pointType : pType
-														};
-														// 마커 추가
-														addMarkers(routeInfoObj);
-													}
-												}//for문 [E]
-
-											} else {
-
-												for ( var i in resultData) { //for문 [S]
-													var geometry = resultData[i].geometry;
-													var properties = resultData[i].properties;
-
-													if (geometry.type == "LineString") {
-														for ( var j in geometry.coordinates) {
-															// 경로들의 결과값들을 포인트 객체로 변환 
-															var latlng = new Tmapv2.Point(
-																	geometry.coordinates[j][0],
-																	geometry.coordinates[j][1]);
-															// 포인트 객체를 받아 좌표값으로 변환
-															var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
-																	latlng);
-															// 포인트객체의 정보로 좌표값 변환 객체로 저장
-															var convertChange = new Tmapv2.LatLng(
-																	convertPoint._lat,
-																	convertPoint._lng);
-															// 배열에 담기
-															drawInfoArr
-																	.push(convertChange);
-														}
-														drawLine(drawInfoArr,
-																"0");
-													} else {
-
-														var markerImg = "";
-														var pType = "";
-
-														if (properties.pointType == "S") { //출발지 마커
-															markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";
-															pType = "S";
-														} else if (properties.pointType == "E") { //도착지 마커
-															markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
-															pType = "E";
-														} else { //각 포인트 마커
-															markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
-															pType = "P"
-														}
-
-														// 경로들의 결과값들을 포인트 객체로 변환 
-														var latlon = new Tmapv2.Point(
-																geometry.coordinates[0],
-																geometry.coordinates[1]);
-														// 포인트 객체를 받아 좌표값으로 다시 변환
-														var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
-																latlon);
-
-														var routeInfoObj = {
-															markerImage : markerImg,
-															lng : convertPoint._lng,
-															lat : convertPoint._lat,
-															pointType : pType
-														};
-
-														// Marker 추가
-														addMarkers(routeInfoObj);
-													}
-												}//for문 [E]
-											}
-										},
-										error : function(request, status, error) {
-											console.log("code:"
-													+ request.status + "\n"
-													+ "message:"
-													+ request.responseText
-													+ "\n" + "error:" + error);
-										}
-									});
-							//JSON TYPE EDIT [E]
-						});
-			}
-		
-			function addComma(num) {
-				var regexp = /\B(?=(\d{3})+(?!\d))/g;
-				return num.toString().replace(regexp, ',');
-			}
-		
-			//마커 생성하기
-			function addMarkers(infoObj) {
-				var size = new Tmapv2.Size(24, 38);//아이콘 크기 설정합니다.
-		
-				if (infoObj.pointType == "P") { //포인트점일때는 아이콘 크기를 줄입니다.
-					size = new Tmapv2.Size(8, 8);
-				}
-		
-				marker_p = new Tmapv2.Marker({
-					position : new Tmapv2.LatLng(infoObj.lat, infoObj.lng),
-					icon : infoObj.markerImage,
-					iconSize : size,
-					map : map
-				});
-		
-				resultMarkerArr.push(marker_p);
-			}
-		
-			//라인그리기
-			function drawLine(arrPoint, traffic) {
-				var polyline_;
-		
-				if (chktraffic.length != 0) {
-			
-					var lineColor = "";
-		
-					if (traffic != "0") {
-						if (traffic.length == 0) { //length가 0인것은 교통정보가 없으므로 검은색으로 표시
-		
-							lineColor = "#06050D";
-							//라인그리기[S]
-							polyline_ = new Tmapv2.Polyline({
-								path : arrPoint,
-								strokeColor : lineColor,
-								strokeWeight : 6,
-								map : map
-							});
-							resultdrawArr.push(polyline_);
-							//라인그리기[E]
-						} else { //교통정보가 있음
-		
-							if (traffic[0][0] != 0) { //교통정보 시작인덱스가 0이 아닌경우
-								var trafficObject = "";
-								var tInfo = [];
-		
-								for (var z = 0; z < traffic.length; z++) {
-									trafficObject = {
-										"startIndex" : traffic[z][0],
-										"endIndex" : traffic[z][1],
-										"trafficIndex" : traffic[z][2],
-									};
-									tInfo.push(trafficObject)
-								}
-		
-								var noInfomationPoint = [];
-		
-								for (var p = 0; p < tInfo[0].startIndex; p++) {
-									noInfomationPoint.push(arrPoint[p]);
-								}
-		
-								//라인그리기[S]
-								polyline_ = new Tmapv2.Polyline({
-									path : noInfomationPoint,
-									strokeColor : "#06050D",
-									strokeWeight : 6,
-									map : map
-								});
-								//라인그리기[E]
-								resultdrawArr.push(polyline_);
-		
-								for (var x = 0; x < tInfo.length; x++) {
-									var sectionPoint = []; //구간선언
-		
-									for (var y = tInfo[x].startIndex; y <= tInfo[x].endIndex; y++) {
-										sectionPoint.push(arrPoint[y]);
-									}
-		
-									if (tInfo[x].trafficIndex == 0) {
-										lineColor = "#06050D";
-									} else if (tInfo[x].trafficIndex == 1) {
-										lineColor = "#61AB25";
-									} else if (tInfo[x].trafficIndex == 2) {
-										lineColor = "#FFFF00";
-									} else if (tInfo[x].trafficIndex == 3) {
-										lineColor = "#E87506";
-									} else if (tInfo[x].trafficIndex == 4) {
-										lineColor = "#D61125";
-									}
-		
-									//라인그리기[S]
-									polyline_ = new Tmapv2.Polyline({
-										path : sectionPoint,
-										strokeColor : lineColor,
-										strokeWeight : 6,
-										map : map
-									});
-									//라인그리기[E]
-									resultdrawArr.push(polyline_);
-								}
-							} else { //0부터 시작하는 경우
-		
-								var trafficObject = "";
-								var tInfo = [];
-		
-								for (var z = 0; z < traffic.length; z++) {
-									trafficObject = {
-										"startIndex" : traffic[z][0],
-										"endIndex" : traffic[z][1],
-										"trafficIndex" : traffic[z][2],
-									};
-									tInfo.push(trafficObject)
-								}
-		
-								for (var x = 0; x < tInfo.length; x++) {
-									var sectionPoint = []; //구간선언
-		
-									for (var y = tInfo[x].startIndex; y <= tInfo[x].endIndex; y++) {
-										sectionPoint.push(arrPoint[y]);
-									}
-		
-									if (tInfo[x].trafficIndex == 0) {
-										lineColor = "#06050D";
-									} else if (tInfo[x].trafficIndex == 1) {
-										lineColor = "#61AB25";
-									} else if (tInfo[x].trafficIndex == 2) {
-										lineColor = "#FFFF00";
-									} else if (tInfo[x].trafficIndex == 3) {
-										lineColor = "#E87506";
-									} else if (tInfo[x].trafficIndex == 4) {
-										lineColor = "#D61125";
-									}
-		
-									//라인그리기[S]
-									polyline_ = new Tmapv2.Polyline({
-										path : sectionPoint,
-										strokeColor : lineColor,
-										strokeWeight : 6,
-										map : map
-									});
-									//라인그리기[E]
-									resultdrawArr.push(polyline_);
-								}
-							}
-						}
-					} else {
-		
-					}
-				} else {
-					polyline_ = new Tmapv2.Polyline({
-						path : arrPoint,
-						strokeColor : "#DD0000",
-						strokeWeight : 6,
-						map : map
-					});
-					resultdrawArr.push(polyline_);
-				}
-		
-			}
-		
-			//초기화 기능
-			function resettingMap() {
-				//기존마커는 삭제
-				marker_s.setMap(null);
-				marker_e.setMap(null);
-		
-				if (resultMarkerArr.length > 0) {
-					for (var i = 0; i < resultMarkerArr.length; i++) {
-						resultMarkerArr[i].setMap(null);
-					}
-				}
-		
-				if (resultdrawArr.length > 0) {
-					for (var i = 0; i < resultdrawArr.length; i++) {
-						resultdrawArr[i].setMap(null);
-					}
-				}
-		
-				chktraffic = [];
-				drawInfoArr = [];
-				resultMarkerArr = [];
-				resultdrawArr = [];
-			}
-		</script>
-
-<head>
+ <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -463,7 +29,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<%=request.getContextPath()%>/resources/assets/img/favicon.png" rel="icon">
+  <link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
   <link href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -486,7 +52,7 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m">Gp<span>.</span></a></h1>
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -526,7 +92,7 @@
         <div class="section-title">
           <h2>여정</h2>
           <p>나의여정</p>
-          <button id="btn_select">경로보기</button>
+          <!-- <button id="btn_select">경로보기</button> -->
           <div class="map_act_btn_wrap clear_box"></div>
 			<div class="clear"></div>
           	<!-- <p id="result"></p> -->
@@ -538,29 +104,98 @@
         <a href="mainJourney.m?jdate=${day.jdate}">${day.jdate} |  </a>
         </c:forEach>
         </h3></div>
-       <c:forEach var="myj" items="${list}">
-               <div> 
-               <img alt="" src="<%=request.getContextPath()%>/resources/images/${myj.image}" width="150px">
-               <h4><a href="">${myj.name}</a></h4>
-            <p id="result"> </p>
-            </div>
+        
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+        <div class="row justify-content-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-10">
+            <div class="accordion accordion-flush" id="faqlist">
+ 		
+ 		<c:set var="i" value="0"/>
+       <c:forEach var="myj"  items="${list}">
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" >
+                    <i class="bi bi-question-circle "></i>
+                    <img alt="" src="<%=request.getContextPath()%>/resources/images/${myj.image}" width="150px">
+               		<h4><a href="">${myj.name}</a></h4>
+               		<br>
+               		<h5>${myj.address}</h5>
+                  </button>
+                </h3>
+<%--                 <div id="faq-content-${i}" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                  </div>
+                </div> --%>
+        <p id="result${i}"></p>
+              </div><!-- # Faq item-->
+            <c:set var="i" value="${i+1}"/>
 	</c:forEach> 
-	
-	<!-- <script type="text/javascript">
+            </div>
+          </div>
+        </div>
+
+      </div>
+		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=<!-- 77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G -->"></script>
+	 	<script type="text/javascript">
 				
 			var map;
+			
 			var marker_s, marekr_e, waypoint;
 			var resultMarkerArr = [];
 			//경로그림정보
 			var drawInfoArr = [];
 			var resultInfoArr = [];
 			
-			function initTmap(startXpos,startYpos,lastXpos,lastYpos){
+			var markerInfo;
+
+			var chktraffic = [];
+			var resultdrawArr = [];
+			var resultMarkerArr = []
+			var searchOption = "2";
+
+			var trafficInfochk = "N";
+			var headers = {};
+			
+			headers["appKey"] = "77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
+
+			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
+				$.ajax({
+					type: "POST",
+					headers: headers,
+					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G",
+					async: false,
+					data: {
+						"startX": "${myjYpos.get(i)}",
+						"startY": "${myjXpos.get(i)}",
+						"endX": "${myjYpos.get(i+1)}",
+						"endY": "${myjXpos.get(i+1)}",
+						"reqCoordType": "WGS84GEO",
+						"resCoordType": "EPSG3857",
+						"searchOption": searchOption,
+						"trafficInfo": trafficInfochk,
+					},
+					success: function (response) {
+						var resultData = response.features;
+
+						var tDistance = "거리 : " + (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km ";
+						var tTime = " 시간 : " + (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
+
+						$("#result${i}").text(tDistance + tTime);
+
+						// You can also access other information such as route points, etc., if needed.
+						// var routePoints = resultData[0].geometry.coordinates;
+					},
+					error: function (request, status, error) {
+						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+				});
+			</c:forEach>
+			
+			function initTmap(){
 				resultMarkerArr = [];
-				var startX = startYpos;
-				var startY = startXpos;
-				var lastX = lastYpos;
-				var lastY = lastXpos;
+				
 			 	// 1. 지도 띄우기
 				map = new Tmapv2.Map("map_div", {
 					center: new Tmapv2.LatLng(33.450701, 126.570667),
@@ -572,68 +207,68 @@
 					
 				});
 				
-			/* 	// 2. 시작, 도착 심볼찍기
-				// 시작 
+				// 2. 시작, 도착 심볼찍기
+				// 시작
 				marker_s = new Tmapv2.Marker({
-					position : new Tmapv2.LatLng(startXpos, startYpos),
-					icon : "/upload/tmap/marker/pin_r_m_s.png",
+					position : new Tmapv2.LatLng(${myjXpos.get(0)}, ${myjYpos.get(0)}),
+					icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
 					iconSize : new Tmapv2.Size(24, 38),
 					map:map
 				});
 				resultMarkerArr.push(marker_s);
 				// 도착
 				marker_e = new Tmapv2.Marker({
-					position : new Tmapv2.LatLng(lastXpos, lastYpos),
-					icon : "/upload/tmap/marker/pin_r_m_e.png",
+					position : new Tmapv2.LatLng(${lastXpos}, ${lastYpos}),
+					icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
 					iconSize : new Tmapv2.Size(24, 38),
 					map:map
 				});
 				resultMarkerArr.push(marker_e);
 				
-				 // 3. 경유지 심볼 찍기
-				marker = new Tmapv2.Marker({
-					position : new Tmapv2.LatLng(33.5158700504, 126.5120821042),
-					icon : "/upload/tmap/marker/pin_b_m_1.png",
-					iconSize : new Tmapv2.Size(24, 38),
-					map:map
-				});
-				resultMarkerArr.push(marker);
-					
-				// 4. 경로탐색 API 사용요청
+				    <c:forEach var="i" begin="1" end="${fn:length(myjXpos)-1}">
+				    marker = new Tmapv2.Marker({
+						position : new Tmapv2.LatLng(${myjXpos.get(i)}, ${myjYpos.get(i)}),
+						icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_${i+1}.png",
+						iconSize : new Tmapv2.Size(24, 38),
+						map:map
+					});
+					resultMarkerArr.push(marker);
+					</c:forEach> 
+				
+					// 4. 경로탐색 API 사용요청
 				var routeLayer; 
-				$("#btn_select").click(function(){
+				/* 	$("#btn_select").click(function(){ */
 			
 					var searchOption = $("#selectLevel").val();
-					var startX = ${startYpos};
-					var startY = ${startXpos};
-					var lastX = ${lastYpos};
-					var lastY = ${lastXpos};
+					
 					var headers = {}; 
-					headers["appKey"]="";
+					headers["appKey"]="77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
 					headers["Content-Type"]="application/json";
 					
 					var param = JSON.stringify({
 						"startName" : "출발지",
-						"startX" : "${startYpos}",
-						"startY" : "${startXpos}",
-						"startTime" : "201708081103",
+						"startX" : "${myjYpos.get(0)}",
+						"startY" : "${myjXpos.get(0)}",
+						"startTime" : "202312240624",
 						"endName" : "도착지",
 						"endX" : "${lastYpos}",
 						"endY" : "${lastXpos}",
 						"viaPoints" : 
 							[
+							 <c:forEach var="i" begin="1" end="${fn:length(myjXpos)-2}">
 							 {
 								 "viaPointId" : "test01",
 								 "viaPointName" : "name01",
-								 "viaX" : "126.5120821042" ,
-								 "viaY" : "33.5158700504" 
-							 }
-					],
+								 "viaX" : "${myjYpos.get(i)}" ,
+								 "viaY" : "${myjXpos.get(i)}" 
+							 } <c:if test="${i ne fn:length(myjXpos)-1}">,</c:if>
+							 </c:forEach> 
+					
+							],
 						"reqCoordType" : "WGS84GEO",
 						"resCoordType" : "EPSG3857",
 						"searchOption": searchOption
 					});
-					
 					
 					
 					$.ajax({
@@ -694,10 +329,10 @@
 										var size = "";			//아이콘 크기 설정합니다.
 										
 										if(properties.pointType == "S"){	//출발지 마커
-											markerImg = "/upload/tmap/marker/pin_r_m_s.png";	
+											markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";	
 											size = new Tmapv2.Size(24, 38);
 										}else if(properties.pointType == "E"){	//도착지 마커
-											markerImg = "/upload/tmap/marker/pin_r_m_e.png";
+											markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
 											size = new Tmapv2.Size(24, 38);
 										}else{	//각 포인트 마커
 											markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
@@ -724,15 +359,91 @@
 								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 							}
 						});
-				}); 
+				/* }); */
 			}
 			
 			function addComma(num) {
 				  var regexp = /\B(?=(\d{3})+(?!\d))/g;
 				   return num.toString().replace(regexp, ',');
 			}
-		</script>	
-     -->  </div>
+		</script> 
+<!-- <script type="text/javascript">
+	var map;
+	var markerInfo;
+	// 출발지, 도착지 마커
+	var marker_s, marker_e, marker_p;
+	// 경로그림정보
+	var drawInfoArr = [];
+	var drawInfoArr2 = [];
+
+	var chktraffic = [];
+	var resultdrawArr = [];
+	var resultMarkerArr = [];
+
+	function initTmap() {
+		// 1. 지도 띄우기
+		map = new Tmapv2.Map("map_div", {
+			center: new Tmapv2.LatLng(33.450701, 126.570667),
+			width: "100%",
+			height: "100%",
+			zoom: 11,
+			zoomControl: true,
+			scrollwheel: true
+		});
+
+	/* 	// 3. 경로탐색 API 사용요청
+		$("#btn_select").click(function () {
+			// 기존 맵에 있던 정보들 초기화
+			resettingMap(); */
+
+			var searchOption = "2";
+
+			var trafficInfochk = "N";
+			var headers = {};
+			headers["appKey"] = "77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
+
+			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
+				$.ajax({
+					type: "POST",
+					headers: headers,
+					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G",
+					async: false,
+					data: {
+						"startX": "${myjYpos.get(i)}",
+						"startY": "${myjXpos.get(i)}",
+						"endX": "${myjYpos.get(i+1)}",
+						"endY": "${myjXpos.get(i+1)}",
+						"reqCoordType": "WGS84GEO",
+						"resCoordType": "EPSG3857",
+						"searchOption": searchOption,
+						"trafficInfo": trafficInfochk,
+					},
+					success: function (response) {
+						var resultData = response.features;
+
+						var tDistance = "거리 : " + (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km ";
+						var tTime = " 시간 : " + (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
+
+						$("#result${i}").text(tDistance + tTime);
+
+						// You can also access other information such as route points, etc., if needed.
+						// var routePoints = resultData[0].geometry.coordinates;
+					},
+					error: function (request, status, error) {
+						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+				});
+			</c:forEach>
+		/* }); */
+	}
+
+	function addComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
+
+</script> -->
+       </div>
         </div>
         </div> 
 	 <div id="right-container">
