@@ -18,7 +18,7 @@ $(function() {
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<%=request.getContextPath()%>/resources/assets/img/favicon.png" rel="icon">
+  <link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
   <link href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -43,7 +43,7 @@ $(function() {
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m">Gp<span>.</span></a></h1>
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -86,7 +86,8 @@ $(function() {
       </c:if>
       
       <c:if test="${not empty myemail}">
-         <div>${myemail}</div>
+         <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
+	
          <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
       </c:if>
      <!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
@@ -101,32 +102,17 @@ $(function() {
       <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
         <div class="col-xl-6 col-lg-8">
           <h1>나믿따</h1>
-          <h2>나만 믿고 따라와</h2>
+          
         </div>
       </div>
 
       <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-store-line"></i>
-            <h3><a href="">Lorem Ipsum</a></h3>
-          </div>
-        </div>
-        
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="">Dolor Sitema</a></h3>
-          </div>
-        </div>
-        
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-calendar-todo-line"></i>
-            <h3>
-             <a href="mainCalender.m" id="" >여정 만들기</a>
-            </h3>
+            <h1>
+             <a href="mainCalender.m" id="" >나만 믿고 따라와</a>
+            </h1>
           </div>
         </div>
       </div>
