@@ -67,5 +67,6 @@ public class BoardDetailController {
         model.addAttribute("list", lists2);
         
         return viewPage;
+        
     }
 }

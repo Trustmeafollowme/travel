@@ -29,7 +29,7 @@ public class LikeCountController {
 		
 		int count = boardDao.likeCount(b_num);
 		map.put("count", count);
-		
+
 		return map;
 	}
 }

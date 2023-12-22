@@ -419,6 +419,7 @@ $(function(){
 				</c:forEach> --%>
 						</ul>
 					</nav>
+					
 <div id="main">
 	<c:set var="i" value="0"/>
        <c:forEach var="myj"  items="${list}">

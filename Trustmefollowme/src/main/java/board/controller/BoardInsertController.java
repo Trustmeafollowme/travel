@@ -72,7 +72,6 @@ public class BoardInsertController {
 			e.printStackTrace();
 		}
 		
-		
 		model.addAttribute("jnum", jnum);
 
 		return viewPage;

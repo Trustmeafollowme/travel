@@ -84,13 +84,13 @@ public class MyJourneyDao {
 	}
 
 
-	public List<MyJourneyBean> boardList(String mEmail, String jnum) {
+	public List<MyJourneyBean> boardList(String mEmail, String jnum) {		// board Ãß°¡
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("mEmail", mEmail);
 		map.put("jnum", jnum);
 		
 		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".boardList",map);
 		return list;
+		
 	}
-
 }

@@ -25,7 +25,6 @@ public class LikesListController {
 		List<BoardBean> lists = boardDao.likesList();
 		model.addAttribute("lists", lists);
 		
-		
 		return viewPage;
 	}
 

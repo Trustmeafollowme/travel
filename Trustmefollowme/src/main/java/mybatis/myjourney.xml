@@ -111,5 +111,6 @@
 		WHERE
 	    m.id = #{mEmail} AND m.jnum = #{jnum} and b.jnum = m.jnum
 	</select>
+	
 	<!-- ManualList Query End -->
 </mapper>

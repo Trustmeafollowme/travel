@@ -123,6 +123,7 @@ img {
 						</c:otherwise>
 					</c:choose>
 			</form>
+			
 	<div id="allarr">
 	<button id="btn">
 		<a href="boardList.bd" id="arr">등록순</a>
