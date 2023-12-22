@@ -28,5 +28,27 @@
 	
 	<update id="updateMyjNum">
 		update member set myjNum=myjNum+1 where email = #{myemail}
+	</update>
+	
+	<select id="getMemberInfoByMyEmail" resultType="member.model.MemberBean">
+		select * from member where email = #{myemail}
+	</select>
+	
+	<update id="changePw">
+		update member set password=#{password}
+		where email=#{email}
+	</update>
+	
+	<update id="updateProfile">
+		update member set
+		name=#{name},
+		birth=#{birth},
+		address1=#{address1},
+		<if test="address2 != null">
+		    address2=#{address2},
+		</if>
+		mtel=#{mtel},
+		email=#{email}
+		where num=#{num} 
 	</update>	
 </mapper>			

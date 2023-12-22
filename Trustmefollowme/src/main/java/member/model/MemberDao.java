@@ -2,6 +2,7 @@ package member.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,21 @@ public class MemberDao {
 	public void updateMyjNum(String myemail) {
 		sqlSessionTemplate.selectOne(namespace+".updateMyjNum",myemail);
 		
+	}
+
+	public MemberBean getMemberInfoByMyEmail(String myemail) {
+		MemberBean mb = sqlSessionTemplate.selectOne(namespace+".getMemberInfoByMyEmail", myemail);
+		return mb;
+	}
+
+	public int changePw(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.update(namespace+".changePw", map);
+		return cnt;
+	}
+
+	public int updateProfile(MemberBean mb) {
+		int cnt = sqlSessionTemplate.update(namespace+".updateProfile", mb);
+		return cnt;
 	}
 	
 	

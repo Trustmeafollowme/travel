@@ -11,7 +11,7 @@ import cafe.model.CafeDao;
 
 @Controller
 public class CafeDetailController {
-	private final String command = "/cafeDetail.cf";
+	private final String command = "cafeDetail.cf";
 	private final String viewPage = "CafeDetail";
 	
 	@Autowired
@@ -19,7 +19,6 @@ public class CafeDetailController {
 	
 	@RequestMapping(command)
 	public String cafeDetail(@RequestParam("cnum") String cnum, 
-							@RequestParam("pageNumber") String pageNumber, 
 							Model model) {
 		CafeBean cb = cafeDao.getCafeDetailByCnum(cnum);
 		model.addAttribute("cb", cb);

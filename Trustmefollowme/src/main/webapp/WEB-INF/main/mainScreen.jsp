@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
  <%@ include file="../common/common.jsp" %>
 <script>
 
@@ -77,7 +77,8 @@ $(function() {
       <a href="login.mb" class="get-started-btn scrollto">로그인</a>
 	</c:if>
 	<c:if test="${myemail!=null}">
-      <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
+     <%--  <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a> --%>
+      <a href="myPage.mb" class="get-started-btn scrollto">${myemail}</a>
 	</c:if>
 
     </div>
@@ -133,7 +134,7 @@ $(function() {
           <p>여정 게시판</p>
         </div>
 
-        <div class="row">
+       <div class="row">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
@@ -183,8 +184,33 @@ $(function() {
           </div>
 
         </div>
+				<%-- <c:if test="${!empty myemail }">
+					<div class="section-title">
+						<h2>여정 둘러보기</h2>
+						<p>여정 게시판</p>
+					</div>
+					
+					<div class="row">
+					<c:forEach var="i" begin="0" end="${fn:length(turn)-1 }">
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch"
+							data-aos="zoom-in" data-aos-delay="${i+1 }00">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="bx bxl-dribbble"></i>
+								</div>
+								<h4>
+									<a href="">Lorem Ipsum</a>
+								</h4>
+								<p>Voluptatum deleniti atque corrupti quos dolores et quas
+									molestias excepturi</p>
+							</div>
+						</div>
+					</c:forEach>
 
-      </div>
+				</div>
+				</c:if> --%>
+
+			</div>
     </section><!-- End Services Section -->
 
     <!-- ======= Cta Section ======= -->

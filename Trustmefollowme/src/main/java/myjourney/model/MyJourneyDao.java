@@ -58,8 +58,8 @@ public class MyJourneyDao {
 		return lists;
 	}
 
-	public int saveMyJourney(String id) {
-		int cnt = sqlSessionTemplate.update(namespace+".saveMyJourney", id);
+	public int saveMyJourney(Map<String, Object> map) {
+		int cnt = sqlSessionTemplate.update(namespace+".saveMyJourney", map);
 		System.out.println("saveMyJourney cnt:"+cnt);
 		return cnt;
 	}
@@ -70,9 +70,27 @@ public class MyJourneyDao {
 		return tCheck;
 	}
 
-	public void updateMJList(String id) {
-		int cnt = sqlSessionTemplate.update(namespace+".updateMJList", id);
+	public void updateMJList(Map<String, Object> map) {
+		int cnt = sqlSessionTemplate.update(namespace+".updateMJList", map);
 		System.out.println("saveMyJourney cnt:"+cnt);
+	}
+
+	public int searchJnumZero(String id) {
+		System.out.println("id:"+id);
+		int check = sqlSessionTemplate.selectOne(namespace+".searchJnumZero", id);
+		System.out.println("check:"+check);
+		return check;
+	}
+
+	public List<MyJourneyBean> getMJDetailByIdAndMyjnum(Map<String, Object> map) {
+		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".getMJDetail", map);
+		System.out.println("list.size():"+list.size());
+		return list;
+	}
+
+	public List<MyJourneyBean> getDayListByJnum(int jnum) {
+		List<MyJourneyBean> daylist = sqlSessionTemplate.selectList(namespace+".getDayListByJnum", jnum);
+		return daylist;
 	}
 	
 }
