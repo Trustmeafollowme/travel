@@ -38,19 +38,28 @@ public class MainJourneyController {
 		List<String> myjXpos = new ArrayList<String>();
 		List<String> myjYpos=new ArrayList<String>() ;
 		
-	for(int i=0 ;i<myjList.size();i++) {
+	for(int i=0 ;i<=myjList.size()-1;i++) {
 		myjXpos.add(myjList.get(i).getXpos());
 		myjYpos.add(myjList.get(i).getYpos());
+		System.out.println(myjList.get(i).getXpos()+"/"+
+		myjList.get(i).getYpos()+" /");
 	}
 		for(int i=0;i<myjXpos.size();i++) {
 			System.out.println("myjXpos.get"+myjXpos.get(i));
 		}
+		request.setAttribute("startXpos", myjXpos.get(0));
+		request.setAttribute("startYpos", myjYpos.get(0));
+
+		request.setAttribute("lastXpos", myjXpos.get(myjList.size()-1));
+		request.setAttribute("lastYpos", myjYpos.get(myjList.size()-1));
+
 		request.setAttribute("myjXpos", myjXpos);
 		request.setAttribute("myjYpos", myjYpos);
 	
 		request.setAttribute("myemail", id);
 		request.setAttribute("list", myjList);
 		request.setAttribute("daylist", myjDayList);
+		
 	return "mainJourney";	
 	}
 }

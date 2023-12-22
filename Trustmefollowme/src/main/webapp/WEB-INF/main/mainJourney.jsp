@@ -115,7 +115,7 @@
               <div class="accordion-item">
                 <h3 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" >
-                    <i class="bi bi-question-circle "></i>
+                    <i class="bi"></i>
                     <img alt="" src="<%=request.getContextPath()%>/resources/images/${myj.image}" width="150px">
                		<h4><a href="">${myj.name}</a></h4>
                		<br>
@@ -137,7 +137,7 @@
 
       </div>
 		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=<!-- 77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G -->"></script>
+		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G"></script>
 	 	<script type="text/javascript">
 				
 			var map;
@@ -191,7 +191,7 @@
 						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
 				});
-			</c:forEach>
+			</c:forEach> 
 			
 			function initTmap(){
 				resultMarkerArr = [];
@@ -237,7 +237,6 @@
 				
 					// 4. 경로탐색 API 사용요청
 				var routeLayer; 
-				/* 	$("#btn_select").click(function(){ */
 			
 					var searchOption = $("#selectLevel").val();
 					
@@ -359,7 +358,6 @@
 								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 							}
 						});
-				/* }); */
 			}
 			
 			function addComma(num) {

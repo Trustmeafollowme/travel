@@ -111,8 +111,9 @@ body {
          <header class="header_section">
             <div class="container">
                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                  <a class="navbar-brand" href="mainScreen.m"> <span> Feane
-                        <%-- ${date} --%> <c:forEach var="i" begin="0"
+                  <a class="navbar-brand" href="mainScreen.m"> <span>
+             <%--      <img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> --%>
+					<c:forEach var="i" begin="0"
                            end="${fn:length(days)-1 }">
                            <a class="navbar-brand" href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
                               <span>Day${i+1 }</span>

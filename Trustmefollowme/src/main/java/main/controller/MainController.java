@@ -56,105 +56,152 @@ public class MainController {
 			@RequestParam(value = "jdate", required = false) String jdate,
 			Model model, RedirectAttributes rttr
 			) {
-		System.out.println("RP sTravel:"+sTravel);
-		
-		if(sTravel == null) {
-			System.out.println("sTravel is null");
-			sTravel = (String) session.getAttribute("sTravel");
-			System.out.println("session sTravel:"+sTravel);
-		}else {
-			session.setAttribute("sTravel", sTravel);
-		}
-		
-		if(request.getParameter("date")==null) {
-			date = (String)session.getAttribute("date");
-			request.setAttribute("date", date);
-		}
-		else {
-			request.setAttribute("date", request.getParameter("date"));
-		}
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("whatColumn", whatColumn);
-		map.put("keyword", "%"+keyword+"%");
 
-		String pageSize = "6";
-
-		String url = request.getContextPath()+command;
-
-		//cafe		
-		int cafeTotal= cafeDao.getTotalCount(map);
-
-		Paging cafePage = new Paging(pageNumber, pageSize, cafeTotal, url, whatColumn, keyword);
-
-		List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
-
-		//restaurant
-		int restaurantTotal = restaurantDao.totalCount(map);
-
-		Paging restaurantPage = new Paging(pageNumber, null, restaurantTotal, url, whatColumn, keyword);
-		List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
-
-		//hotel
-		int hoteltotal = hotelDao.totalCount(map);
-
-		Paging hotelPage = new Paging(pageNumber, pageSize, hoteltotal, url, whatColumn, keyword);
-
-		List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
-
-		//spot
-		int sptTotal= spotDao.totalCount(map);
-
-		Paging spotPaging = new Paging(pageNumber, pageSize, sptTotal, url, whatColumn, keyword);
-		List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
-
-		request.setAttribute("spotPage", spotPaging);
-		request.setAttribute("restaurantPage", restaurantPage);
-		request.setAttribute("cafePage", cafePage);
-		request.setAttribute("hotelPage", hotelPage);
-
-		request.setAttribute("spotList", spotList);
-		request.setAttribute("hotelList", hotelList);
-		request.setAttribute("restaurantList", restaurantList);
-		request.setAttribute("cafeList", cafeList);
-		
-		
-		System.out.println("sTravel:"+sTravel);
-		System.out.println("sTravel2:"+sTravel2);
-		
-		//sTravel2 = (String) session.getAttribute("sTravel");
-		
-		
 		if(sTravel.equals("auto")) {
-			return "mainTravel";
+			if(request.getParameter("date")==null) {
+				String date1 = (String)session.getAttribute("date");
+				request.setAttribute("date", date1);
+				}
+				else {
+				request.setAttribute("date", request.getParameter("date"));
+				}
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("whatColumn", whatColumn);
+				map.put("keyword", "%"+keyword+"%");
+				
+				String pageSize = "30";
+				
+				String url = request.getContextPath()+command;
+				
+				//cafe		
+				int cafeTotal= cafeDao.getTotalCount(map);
+				
+				Paging cafePage = new Paging(pageNumber, pageSize, cafeTotal, url, whatColumn, keyword);
+				
+				List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
+				
+				//restaurant
+				int restaurantTotal = restaurantDao.totalCount(map);
+				
+				Paging restaurantPage = new Paging(pageNumber, null, restaurantTotal, url, whatColumn, keyword);
+				List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
+				System.out.println(restaurantList.get(0).getXpos()+restaurantList.get(0).getYpos());
+				//hotel
+			      int hoteltotal = hotelDao.totalCount(map);
+			      
+			      Paging hotelPage = new Paging(pageNumber, pageSize, hoteltotal, url, whatColumn, keyword);
+			      
+			      List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
+				
+				//spot
+			  	int sptTotal= spotDao.totalCount(map);
+				
+				Paging spotPaging = new Paging(pageNumber, pageSize, sptTotal, url, whatColumn, keyword);
+				List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
+				
+				request.setAttribute("spotPage", spotPaging);
+				request.setAttribute("restaurantPage", restaurantPage);
+				request.setAttribute("cafePage", cafePage);
+				request.setAttribute("hotelPage", hotelPage);
+				
+				request.setAttribute("spotList", spotList);
+				request.setAttribute("hotelList", hotelList);
+				request.setAttribute("restaurantList", restaurantList);
+				request.setAttribute("cafeList", cafeList);
+				
+				return "mainTravel";
 		}else {
-			Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-			if(flashMap != null) {
-				List<MyJourneyBean> mlists = (List<MyJourneyBean>) flashMap.get("mlists");
-				model.addAttribute("mlists", mlists);
-			}
-			
-			
-			//date = (String)session.getAttribute("date");
-			System.out.println("date:"+date);
-			
-			String[] days = date.split("  ");
-			model.addAttribute("days", days);
-			
-			if(jdate == null) {
-				day = "1";
-				jdate = days[0];
-			}
-			
-			model.addAttribute("day", day);
-			model.addAttribute("date", date);
-			model.addAttribute("jdate", jdate);
-			model.addAttribute("sTravel", sTravel);
-			
-			//rttr.addFlashAttribute("date", date);
-			
-			//return "redirect:myjourneyList.mj";
-			return "mainTravel2";
+		
+			  if(sTravel == null) {
+			         System.out.println("sTravel is null");
+			         sTravel = (String) session.getAttribute("sTravel");
+			         System.out.println("session sTravel:"+sTravel);
+			      }else {
+			         session.setAttribute("sTravel", sTravel);
+			      }
+			      
+			      if(request.getParameter("date")==null) {
+			         date = (String)session.getAttribute("date");
+			         request.setAttribute("date", date);
+			      }
+			      else {
+			         request.setAttribute("date", request.getParameter("date"));
+			      }
+			      Map<String, String> map = new HashMap<String, String>();
+			      map.put("whatColumn", whatColumn);
+			      map.put("keyword", "%"+keyword+"%");
+
+			      String pageSize = "6";
+
+			      String url = request.getContextPath()+command;
+
+			      //cafe      
+			      int cafeTotal= cafeDao.getTotalCount(map);
+
+			      Paging cafePage = new Paging(pageNumber, pageSize, cafeTotal, url, whatColumn, keyword);
+
+			      List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
+
+			      //restaurant
+			      int restaurantTotal = restaurantDao.totalCount(map);
+
+			      Paging restaurantPage = new Paging(pageNumber, null, restaurantTotal, url, whatColumn, keyword);
+			      List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
+
+			      //hotel
+			      int hoteltotal = hotelDao.totalCount(map);
+
+			      Paging hotelPage = new Paging(pageNumber, pageSize, hoteltotal, url, whatColumn, keyword);
+
+			      List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
+
+			      //spot
+			      int sptTotal= spotDao.totalCount(map);
+
+			      Paging spotPaging = new Paging(pageNumber, pageSize, sptTotal, url, whatColumn, keyword);
+			      List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
+
+			      request.setAttribute("spotPage", spotPaging);
+			      request.setAttribute("restaurantPage", restaurantPage);
+			      request.setAttribute("cafePage", cafePage);
+			      request.setAttribute("hotelPage", hotelPage);
+
+			      request.setAttribute("spotList", spotList);
+			      request.setAttribute("hotelList", hotelList);
+			      request.setAttribute("restaurantList", restaurantList);
+			      request.setAttribute("cafeList", cafeList);
+			      
+			      
+			      System.out.println("sTravel:"+sTravel);
+			      
+			      if(sTravel.equals("auto")) {
+			         return "mainTravel";
+			      }else {
+			         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+			         if(flashMap != null) {
+			            List<MyJourneyBean> mlists = (List<MyJourneyBean>) flashMap.get("mlists");
+			            model.addAttribute("mlists", mlists);
+			         }
+			         
+			         System.out.println("date:"+date);
+			         
+			         String[] days = date.split(" ");
+			         model.addAttribute("days", days);
+			         
+			         if(jdate == null) {
+			            day = "1";
+			            jdate = days[0];
+			         }
+			         
+			         model.addAttribute("day", day);
+			         model.addAttribute("date", date);
+			         model.addAttribute("jdate", jdate);
+			         model.addAttribute("sTravel", sTravel);
+			         
+			         
+			         return "mainTravel2";
 		}
+			      }
 	}
 	
 	@RequestMapping(value = "mainScreen.m")

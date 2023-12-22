@@ -8184,14 +8184,17 @@ h1, h2, h3, h4, h5,
 
 .calendar, .calendar_weekdays,
 .calendar_content {
-  max-width: 585px; }
+  max-width: 885px; 
+  max-height: 750px; 
+ }
 
 .calendar {
   /*float: left;*/
   margin: auto;
-  min-width: 320px;
+  min-width: 800px;
+  min-height: 700px;	
   font-weight: 400;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.5);;
   padding: 10px;
   -webkit-box-shadow: 0px 4px 26px -22px rgba(0, 0, 0, 0.14);
   -moz-box-shadow: 0px 4px 26px -22px rgba(0, 0, 0, 0.14);
@@ -8218,7 +8221,7 @@ h1, h2, h3, h4, h5,
 .calendar_weekdays div, .calendar_content div {
   /*border: 1px dotted #999;*/
   width: 14.28571%;
-  height: 68px;
+  height: 90px;
   line-height: 69px;
   overflow: hidden;
   text-align: center;
