@@ -1,5 +1,6 @@
 package myjourney.model;
  
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,5 +82,15 @@ public class MyJourneyDao {
 		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".myjSelect",mb);
 		return list;
 	}
-	
+
+
+	public List<MyJourneyBean> boardList(String mEmail, String jnum) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mEmail", mEmail);
+		map.put("jnum", jnum);
+		
+		List<MyJourneyBean> list = sqlSessionTemplate.selectList(namespace+".boardList",map);
+		return list;
+	}
+
 }

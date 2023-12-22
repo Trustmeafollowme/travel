@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import board.model.BoardBean;
 import board.model.BoardDao;
 import board.model.ChatBean;
 import board.model.LikeBean;
+import myjourney.model.MyJourneyBean;
+import myjourney.model.MyJourneyDao;
 
 @Controller
 public class BoardDetailController {
@@ -24,16 +28,22 @@ public class BoardDetailController {
 
     @Autowired
     private BoardDao boardDao;
+    
+    @Autowired
+    MyJourneyDao myJourneyDao;
 
     @RequestMapping(value = command, method = RequestMethod.GET)
-    public String boardDetailForm(Model model, @RequestParam("num") int num, LikeBean lb) {
+    public String boardDetailForm(HttpSession session, Model model, @RequestParam("num") int num
+    		,@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum, LikeBean lb) {
 
         BoardBean bb = boardDao.boardDetail(num);
         model.addAttribute("bb", bb);
-
+        
+        int memberNum = (Integer)session.getAttribute("mynum");
+        
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("b_num", num);
-        map.put("m_num", 1);
+        map.put("m_num", memberNum);
         
         
         int likecount = boardDao.likeCount(num); // 좋아요 갯수
@@ -51,9 +61,10 @@ public class BoardDetailController {
         
         model.addAttribute("likecount", likecount); // 좋아요 갯수 속성
         
-        
+        List<MyJourneyBean> lists2 = myJourneyDao.boardList(mEmail, jnum);
         List<ChatBean> lists = boardDao.chatList(num);
         model.addAttribute("lists", lists);
+        model.addAttribute("list", lists2);
         
         return viewPage;
     }

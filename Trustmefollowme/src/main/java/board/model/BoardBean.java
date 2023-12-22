@@ -3,6 +3,8 @@ package board.model;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
+import myjourney.model.MyJourneyBean;
+
 public class BoardBean {
 	private int num;
 	private String writer;
@@ -16,16 +18,13 @@ public class BoardBean {
 	@NotBlank(message = "내용을 입력하세요.")
 	private String content;
 	private String ip;
-	private int likebtn;
-	@NotBlank(message = "이미지가 없습니다.")
 	private String image;
-	private String image2;
-	private String image3;
-	private String image4;
-	private String image5;
-	private String reply;
-	
+	private String mEmail;
+	private String jnum;
+
 	private MultipartFile imgUpload;
+	
+	private String imgdel;
 	
 	public int getNum() {
 		return num;
@@ -87,56 +86,37 @@ public class BoardBean {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public int getLikebtn() {
-		return likebtn;
-	}
-	public void setLikebtn(int likebtn) {
-		this.likebtn = likebtn;
-	}
 	public String getImage() {
 		return image;
 	}
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getImage2() {
-		return image2;
-	}
-	public void setImage2(String image2) {
-		this.image2 = image2;
-	}
-	public String getImage3() {
-		return image3;
-	}
-	public void setImage3(String image3) {
-		this.image3 = image3;
-	}
-	public String getImage4() {
-		return image4;
-	}
-	public void setImage4(String image4) {
-		this.image4 = image4;
-	}
-	public String getImage5() {
-		return image5;
-	}
-	public void setImage5(String image5) {
-		this.image5 = image5;
-	}
 	public MultipartFile getImgUpload() {
 		return imgUpload;
 	}
 	public void setImgUpload(MultipartFile imgUpload) {
 		this.imgUpload = imgUpload;
-		if(imgUpload != null) {
+		if(this.imgUpload != null) {
 			image = imgUpload.getOriginalFilename();
 		}
 	}
-	public String getReply() {
-		return reply;
+	public String getImgdel() {
+		return imgdel;
 	}
-	public void setReply(String reply) {
-		this.reply = reply;
+	public void setImgdel(String imgdel) {
+		this.imgdel = imgdel;
 	}
-	
+	public String getmEmail() {
+		return mEmail;
+	}
+	public void setmEmail(String mEmail) {
+		this.mEmail = mEmail;
+	}
+	public String getJnum() {
+		return jnum;
+	}
+	public void setJnum(String jnum) {
+		this.jnum = jnum;
+	}
 }

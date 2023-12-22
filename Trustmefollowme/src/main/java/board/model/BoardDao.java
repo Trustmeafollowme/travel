@@ -125,6 +125,13 @@ public class BoardDao {
 		return cnt;
 	}
 
+	public int replyAllDelete(Map<String, Integer> map) {
+		
+		int cnt = sqlSessionTemplate.delete(namespace+".replyAllDelete",map);
+		
+		return cnt;
+	}
+	
 	public ChatBean getData(int chatnum) {
 		
 		ChatBean cb = sqlSessionTemplate.selectOne(namespace+".getData",chatnum);
@@ -145,4 +152,19 @@ public class BoardDao {
 		
 		return cb;
 	}
+
+	public List<BoardBean> likesList() {
+		
+		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".likesList");
+		
+		return lists;
+	}
+
+	public List<BoardBean> readcountList() {
+		
+		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".readcountList");
+		
+		return lists;
+	}
+
 }

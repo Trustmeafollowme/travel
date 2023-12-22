@@ -15,8 +15,8 @@
 	</select>
 	
 	<insert id="boardInsert">
-		insert into board(num,writer,title,reg_date,ref,re_level,re_step,content,image,ip)
-		 values(boardseq.nextval,#{writer},#{title},#{reg_date},#{ref},#{re_level},#{re_step},#{content},#{image},#{ip})
+		insert into board(num,writer,title,reg_date,ref,re_level,re_step,content,image,ip,mEmail,jnum)
+		 values(boardseq.nextval,#{writer},#{title},#{reg_date},#{ref},#{re_level},#{re_step},#{content},#{image},#{ip},#{mEmail},#{jnum})
 	</insert>
 		
 	<select id="boardDetail" resultType="myBoard">
@@ -84,6 +84,10 @@
 		delete from chat where ref = #{ref} and re_level = #{re_level} and re_step = #{re_step} and b_num = #{b_num}
 	</delete>
 	
+	<delete id="replyAllDelete">
+		delete from chat where ref = #{ref} and b_num = #{b_num}
+	</delete>
+	
 	<select id="getData" resultType="board.model.ChatBean">
 		select * from chat where chatnum = #{chatnum}
 	</select>
@@ -94,5 +98,15 @@
 	
 	<select id="getContext" resultType="board.model.ChatBean">
 		select content from chat where ref = #{ref} and re_level = #{re_level} and re_step = #{re_step} and b_num = #{b_num}
+	</select>
+	
+	<select id="likesList" resultType="myBoard">
+		select b.num, l.likes, b.content, b.title, b.image, b.reg_date, b.writer
+		from board b inner join likes l
+		on b.num = l.b_num order by likes desc
+	</select>
+
+	<select id="readcountList" resultType="myBoard">
+		select * from board order by readcount desc
 	</select>
 </mapper>
