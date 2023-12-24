@@ -279,7 +279,7 @@ textarea::-webkit-scrollbar-track {
 	<div
 		style="display: inline-block; vertical-align: top;">
 		<h4 style="color: black; padding-top: 15px;">
-			${sessionScope.myname}님의 여행일지<br> ${bb.title}<br> 3일 |
+			${sessionScope.myname}님의 여정을 선택해주세요. <br> ${bb.title}<br> 3일 |
 			<fmt:parseDate var="startDate" value="${bb.reg_date}"
 				pattern="yyyy-MM-dd" />
 			<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd" />
@@ -297,10 +297,9 @@ textarea::-webkit-scrollbar-track {
 <nav id="nav" style="width: 100%">
 						<ul>
 							<br>
-					<c:forEach var="bd" begin="0" end="${jnum-1}">
-							<input type="hidden" name="jnum" value="${jnum}">
+					<c:forEach var="bd" items="${fn:split(getJnum,',')}">
 							<li><a href="#${bd}" class="active">${bd+1}번째 여정</a></li>
-				</c:forEach>
+					</c:forEach>
 						</ul>
 					</nav>
 					

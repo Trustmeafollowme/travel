@@ -61,6 +61,12 @@ body {
 										placeholder="이름" value="${restaurantBean.name}">
 									<form:errors cssClass="err" path="name" />
 								</div>
+								
+								<div class="form-group">
+									<input type="text" class="form-control" name="rcontent"
+										placeholder="내용" value="${restaurantBean.rcontent}">
+									<form:errors cssClass="err" path="rcontent" />
+								</div>
 
 								<div class="form-group">
 									<input type="text" class="form-control" name="xpos"
@@ -82,31 +88,36 @@ body {
 
 								<div class="form-group">
 									<b>이미지</b> 
-									<input type="file" name="imgUpload">
+									<input type="file" name="imgUpload" value="${restaurantBean.image}">
+									<input type="hidden" name="imgdel" value="${restaurantBean.image}">
 									<form:errors cssClass="err" path="image" />
 								</div>
 								
 								<div class="form-group">
 									<b>이미지</b> 
-									<input type="file" name="imgUpload2">
+									<input type="file" name="imgUpload2" value="${restaurantBean.image2}">
+									<input type="hidden" name="imgdel2" value="${restaurantBean.image2}">
 									<form:errors cssClass="err" path="image2" />
 								</div>
 								
 								<div class="form-group">
 									<b>이미지</b> 
-									<input type="file" name="imgUpload3">
+									<input type="file" name="imgUpload3" value="${restaurantBean.image3}">
+									<input type="hidden" name="imgdel3" value="${restaurantBean.image3}">
 									<form:errors cssClass="err" path="image3" />
 								</div>
 								
 								<div class="form-group">
 									<b>이미지</b> 
-									<input type="file" name="imgUpload4">
+									<input type="file" name="imgUpload4" value="${restaurantBean.image4}">
+									<input type="hidden" name="imgdel4" value="${restaurantBean.image4}">
 									<form:errors cssClass="err" path="image4" />
 								</div>
 								
 								<div class="form-group">
 									<b>이미지</b> 
-									<input type="file" name="imgUpload5">
+									<input type="file" name="imgUpload5" value="${restaurantBean.image5}">
+									<input type="hidden" name="imgdel5" value="${restaurantBean.image5}">
 									<form:errors cssClass="err" path="image5" />
 								</div>
 
@@ -146,10 +157,7 @@ body {
 
 								<button type="submit" class="btn btn-default btn-lg">등록</button>
 								<button class=" pull-right btn-link">
-									<a href="https://www.google.com">비밀번호 찾기</a>
-								</button>
-								<button class=" pull-right btn-link">
-									<a href="https://www.naver.com">아이디 찾기</a>
+									<a href="restList.re">리스트 이동</a>
 								</button>
 							</form:form>
 						</div>

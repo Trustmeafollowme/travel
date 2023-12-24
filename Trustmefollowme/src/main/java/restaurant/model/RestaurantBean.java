@@ -21,12 +21,16 @@ public class RestaurantBean {
 
 	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image;	// 상품 이미지
+	
 	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image2;
+	
 	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image3;
-	@NotEmpty(message = "이미지를 선택하세요.")
+	
+	@NotEmpty(message = "이미지를 선택하세요.")	
 	private String image4;
+	
 	@NotEmpty(message = "이미지를 선택하세요.")
 	private String image5;
 
@@ -47,6 +51,9 @@ public class RestaurantBean {
 
 	@NotBlank(message = "개업일자를 선택하세요.")
 	private String rdate;	// 음식점 개업일자
+
+	@NotBlank(message = "내용을 입력하세요.")
+	private String rcontent;	// 음식점 이름
 
 	private MultipartFile imgUpload;
 	private MultipartFile imgUpload2;
@@ -155,6 +162,12 @@ public class RestaurantBean {
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
+	}
+	public String getRcontent() {
+		return rcontent;
+	}
+	public void setRcontent(String rcontent) {
+		this.rcontent = rcontent;
 	}
 	public MultipartFile getImgUpload() {
 		return imgUpload;

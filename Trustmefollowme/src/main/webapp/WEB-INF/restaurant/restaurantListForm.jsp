@@ -76,9 +76,9 @@
 						<option value="all">전체 
 						<option value="name">이름
 						<option value="address">주소
+					</select>
 					<input type="text" name="keyword" class="keyword" placeholder="검색">
 					<input type="submit" value="검색">
-					</select>
 			</form>
 			<br>
 			<div class="filters-content">
@@ -96,7 +96,7 @@
 										<div>
 											<div class="img-box">
 												<a href="restDetail.re?rnum=${list.rnum}"> 
-												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+												<img src="<%=request.getContextPath()%>/resources/restImg/${list.image}" alt="이미지">
 												</a>
 											</div>
 											<div class="detail-box">

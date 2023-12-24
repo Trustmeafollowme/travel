@@ -356,37 +356,37 @@
 	        	<div class="col-md-6">
 	        		<div id="slider" class="owl-carousel product-slider">
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image2}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image2}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image3}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image3}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image4}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image4}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image5}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image5}" width="200px" height="300px">
 						</div>
 					</div>
 					<div>　</div>
 					<div id="thumb" class="owl-carousel product-thumb">
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image2}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image2}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image3}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image3}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image4}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image4}" width="200px" height="300px">
 						</div>
 						<div class="item">
-                 <img src="<%=request.getContextPath()%>/resources/images/${rb.image5}" width="200px" height="300px">
+                 <img src="<%=request.getContextPath()%>/resources/restImg/${rb.image5}" width="200px" height="300px">
 						</div>
 					</div>
 	        	</div>
@@ -396,6 +396,7 @@
 	        			<p>위치 : ${rb.address}</p>
 	        			<p>영업시간 : ${rb.rtime1} ~ ${rb.rtime2}</p>
 	        			<p>개업 일자 : ${rb.rdate}</p>
+	        			<p>소개 : ${rb.rcontent}</p>
 	        		</div>
 	        	</div>
 	        </div>

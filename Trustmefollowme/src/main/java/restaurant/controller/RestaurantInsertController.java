@@ -1,6 +1,7 @@
 package restaurant.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
@@ -35,15 +36,13 @@ public class RestaurantInsertController {
 		
 		return viewPage;
 	}
+	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String restInsert(@Valid RestaurantBean rb, BindingResult result) {
-		
+	public String restInsert(@Valid RestaurantBean rb, BindingResult result) throws IllegalStateException, IOException {
 		
 		if(result.hasErrors()) {
-			
 			return viewPage;
 		}
-		
 		
 		String upload = servletContext.getRealPath("/resources/images/");
 		
@@ -61,17 +60,13 @@ public class RestaurantInsertController {
 		MultipartFile multi4 = rb.getImgUpload4();
 		MultipartFile multi5 = rb.getImgUpload5();
 		
-		try {
 			multi.transferTo(file);
-			multi.transferTo(file2);
-			multi.transferTo(file3);
-			multi.transferTo(file4);
-			multi.transferTo(file5);
+			multi2.transferTo(file2);
+			multi3.transferTo(file3);
+			multi4.transferTo(file4);
+			multi5.transferTo(file5);
 			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		
-		return viewPage;
+		return gotoPage;
 	}
 }
