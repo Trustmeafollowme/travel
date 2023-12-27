@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class BoardListController {
 	private BoardDao boardDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String boardList(Model model,
+	public String boardList(Model model,HttpSession session,
 							@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
 							@RequestParam(value = "keyword", required = false) String keyword,
 								BoardBean bb, ChatBean cb) {

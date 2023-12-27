@@ -15,8 +15,9 @@
 	</select>
 	
 	<insert id="boardInsert">
-		insert into board(num,writer,title,reg_date,ref,re_level,re_step,content,image,ip)
-		 values(boardseq.nextval,#{writer},#{title},#{reg_date},#{ref},#{re_level},#{re_step},#{content},#{image},#{ip})
+		insert into board(num,writer,title,reg_date,content,image,ip,mEmail,jnum,minDate)
+		 values(boardseq.nextval,#{writer},#{title},#{reg_date},#{content},
+		 #{image},#{ip},#{mEmail},#{jnum},#{minDate})
 	</insert>
 		
 	<select id="boardDetail" resultType="myBoard">
@@ -32,11 +33,19 @@
 	</select>
 	
 	<update id="boardUpdate">
-		update board set title = #{title}, image = #{image} where num = #{num}
+		update board set title = #{title}, image = #{image}, content = #{content}, ip = #{ip} where num = #{num}
 	</update>
 	
 	<delete id="boardDelete">
 		delete from board where num = #{num}
+	</delete>
+	
+	<delete id="chatDelete">
+		delete from chat where b_num = #{num}
+	</delete>
+	
+	<delete id="likesDelete">
+		delete from likes where b_num = #{num}
 	</delete>
 	
 	<select id="findLike" resultType="board.model.LikeBean">
@@ -46,6 +55,7 @@
 	<insert id="likeInsert">
 		insert into likes values(likeseq.nextval,#{b_num},#{m_num},0)
 	</insert>
+	
 	
 	<update id="likeDown">
 		update likes set likes = likes-1 where b_num = #{b_num} and m_num = #{m_num}
@@ -84,6 +94,10 @@
 		delete from chat where ref = #{ref} and re_level = #{re_level} and re_step = #{re_step} and b_num = #{b_num}
 	</delete>
 	
+	<delete id="replyAllDelete">
+		delete from chat where ref = #{ref} and b_num = #{b_num}
+	</delete>
+	
 	<select id="getData" resultType="board.model.ChatBean">
 		select * from chat where chatnum = #{chatnum}
 	</select>
@@ -94,5 +108,15 @@
 	
 	<select id="getContext" resultType="board.model.ChatBean">
 		select content from chat where ref = #{ref} and re_level = #{re_level} and re_step = #{re_step} and b_num = #{b_num}
+	</select>
+	
+	<select id="likesList" resultType="myBoard">
+		select distinct(b.num), l.likes, b.content, b.title, b.image, b.reg_date, b.writer
+		from board b inner join likes l
+		on b.num = l.b_num where likes = 1 order by likes desc
+	</select>
+
+	<select id="readcountList" resultType="myBoard">
+		select * from board order by readcount desc
 	</select>
 </mapper>

@@ -1,23 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../common/common.jsp" %>
 <%@ page session="false"%>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<!-- <script>
-
-$(function() {
-	  $("#btn_open_modal").click(function() {
-	        $("#modal").modal("show");
-	    });
-	    $("#modal").modal("show");
-});
-</script> -->
-<script type="text/javascript">
+\<script type="text/javascript">
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center : new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
@@ -26,6 +16,7 @@ $(function() {
 	};
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
 </script>
 <style>
 body {
@@ -48,7 +39,16 @@ body {
   float: left;
   overflow: auto; /* 세로 스크롤이 필요한 경우 스크롤 표시 */
 }
-
+.search{
+	width:250px ; 
+	height: 40px;
+	font-size: 20px;
+}
+.search2{
+	width:100px ; 
+	height: 40px;
+	font-size: 20px;
+}
 .page{
 	padding-top: 30px;
 	padding-left: 450px;
@@ -72,7 +72,24 @@ body {
 	type="">
 
 <title>나믿따</title>
+  <!-- Favicons -->
+  <link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
+  <link href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
 
@@ -90,19 +107,7 @@ body {
 <!-- responsive style -->
 <link href="<%=request.getContextPath()%>/resources/css/responsive.css"
 	rel="stylesheet" />
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var currentActive = document.querySelector('.filters_menu li.active');
-        if (currentActive) {
-            currentActive.classList.remove('active');
-        }
-
-        var newActive = document.querySelector('.filters_menu li[data-filter=".buger"]');
-        if (newActive) {
-            newActive.classList.add('active');
-        }
-    });
-</script>	
+	
 </head>
 <body>
 	<div class="hero_area" >
@@ -110,32 +115,43 @@ body {
 			<img src="<%=request.getContextPath()%>/resources/images/travel2.jpg" id="mainimg">
 		</div>
 		<!-- header section strats -->
-		<header class="header_section">
-			<div class="container">
-				<nav class="navbar navbar-expand-lg custom_nav-container ">
-					<a class="navbar-brand" href="mainScreen.m"> <span> Feane ${date}
-					</span>
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class=""> </span>
-					</button>
-				</nav>
-			</div>
-		</header>
+<header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> </a>	
+      <c:set var="day" value="1"></c:set>
+      <c:forEach var="i" items="${date}">
+                              <span>Day${i}</span>
+      <c:set var="day" value="${day+1}"></c:set>
+                           <br>
+                        </c:forEach></h1>
+
+	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
+      <c:if test="${empty myemail}">
+         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
+      </c:if>
+      
+      <c:if test="${not empty myemail}">
+         <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
+	
+         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
+      </c:if>
+     <!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
+
+    </div>
+  </header><!-- End Header -->
 		<!-- end header section -->
 	</div>
 	<section class="food_section layout_padding-bottom" id="left-container">
 		<div class="container">
 			<ul class="filters_menu">
-				<li data-filter=".buger" class="data-filter active">호텔</li>
+				<li class="active" data-filter="*">All</li>
+				<li data-filter=".buger" >호텔</li>
 				<li data-filter=".pasta">음식점</li>
 				<li data-filter=".fries" >카페</li>
 				<li data-filter=".pizza" >관광지</li>
 			</ul>
-	<form action="mainJourney.mj">
+	<form action="mainJourney.m">
 			<div class="filters-content">
 				<div class="row grid">
 	<!-- 카테고리 페이지틀  -->
@@ -146,7 +162,7 @@ body {
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="cafeDetail.cf?cnum=${list.cnum}">
+              								 <a href="">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
@@ -209,7 +225,7 @@ body {
 							</div>
 						</div>
 					</c:forEach>
-					${spotPage.pagingHtml}
+			
 					<c:forEach var="list" items="${hotelList}">
 						<div class="col-sm-6 col-lg-4 all buger">
 							<div class="box">

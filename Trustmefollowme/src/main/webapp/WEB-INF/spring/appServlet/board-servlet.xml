@@ -15,6 +15,12 @@
 	</bean>
 	
 	<context:component-scan base-package="board" />
+	<context:component-scan base-package="myjourney" />
+	<context:component-scan base-package="cafe" />
+	<context:component-scan base-package="hotel" />
+	<context:component-scan base-package="spot" />
+	<context:component-scan base-package="restaurant" />
+	<context:component-scan base-package="member" />
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10485760"/>

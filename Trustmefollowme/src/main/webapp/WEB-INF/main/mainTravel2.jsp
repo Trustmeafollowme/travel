@@ -81,7 +81,42 @@ body {
    type="">
 
 <title>나믿따</title>
+  <!-- Favicons -->
+  <link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
+  <link href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+	integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+	crossorigin="anonymous" />
+<link
+	href="<%=request.getContextPath()%>/resources/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/css/style.css"
+	rel="stylesheet" />
+<!-- responsive style -->
+<link href="<%=request.getContextPath()%>/resources/css/responsive.css"
+	rel="stylesheet" />
+	
 <link rel="stylesheet" type="text/css"
    href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
 
@@ -108,11 +143,36 @@ body {
             id="mainimg">
       </div>
       <!-- header section strats -->
-         <header class="header_section">
+      <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> </a>
+					<c:forEach var="i" begin="0"
+                           end="${fn:length(days)-1 }">
+                           <a class="navbar-brand" href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
+                              <span>Day${i+1 }</span>
+                           </a><br>
+                        </c:forEach>
+                        </h1>
+	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
+      <c:if test="${empty myemail}">
+         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
+      </c:if>
+      
+      <c:if test="${not empty myemail}">
+         <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
+	
+         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
+      </c:if>
+     <!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
+
+    </div>
+  </header><!-- End Header -->
+<%--          <header class="header_section">
             <div class="container">
                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                  <a class="navbar-brand" href="mainScreen.m"> <span> Feane
-                        <%-- ${date} --%> <c:forEach var="i" begin="0"
+                  <a class="navbar-brand" href="mainScreen.m"> <span>
+                  <img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png">
+					<c:forEach var="i" begin="0"
                            end="${fn:length(days)-1 }">
                            <a class="navbar-brand" href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
                               <span>Day${i+1 }</span>
@@ -130,7 +190,7 @@ body {
 
                </nav>
             </div>
-         </header>
+         </header> --%>
          <!-- end header section -->
    </div>
    <section class="food_section layout_padding-bottom" id="left-container">
@@ -294,7 +354,7 @@ body {
                         ${mj.address }
                      </td>
                      <td><a class="btn btn-sm btn-danger" 
-                        href="myJourneyDelete.mj?jnum=${mj.jnum }&day=${param.day }&date=${param.date }&jdate=${param.jdate }">삭제</a>
+                        href="myJourneyDelete.mj?turn=${mj.turn }&day=${param.day }&date=${param.date }&jdate=${param.jdate }">삭제</a>
                      </td>
                   </tr>
                </tbody>

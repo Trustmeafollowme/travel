@@ -23,13 +23,13 @@ public class LikeCountController {
 
 	@ResponseBody
 	@RequestMapping(command)
-	public Map<String, Integer> likeCheck(@RequestParam("b_num") int b_num) {
+	public Map<String, Integer> likeCheck(@RequestParam("b_num") String b_num) {
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		
 		int count = boardDao.likeCount(b_num);
 		map.put("count", count);
-		
+
 		return map;
 	}
 }

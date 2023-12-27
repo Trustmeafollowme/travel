@@ -36,8 +36,9 @@ public class JourneyController {
 		
 		String myemail = (String)session.getAttribute("myemail");
 		String id = myemail;
-		int myjNum = mDao.getMyjNum(myemail);
-
+		int myjNum = 1;
+		myjDao.updateMJList(id);
+		
 		String date[]=request.getParameter("date").split(" ");
 
 		List<CartBean> cartlist=new ArrayList<CartBean>();
@@ -139,6 +140,8 @@ public class JourneyController {
 				return "redirect:mainTravel.m";
 			}
 			
+			System.out.println("====================================================");
+			
 			int turnSize = (int) Math.ceil((double) cartlist.size() / date.length);
 		System.out.println("turnSize"+turnSize);
 			int last =hotel.length-1;
@@ -200,6 +203,7 @@ public class JourneyController {
 					double[] result =new double[cartlist.size()];
 					double minDistance=Double.MAX_VALUE;;
 					int minIndex =0;
+					System.out.println("Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getXpos())"+Double.parseDouble(startlist.get(startlist.size()-1).getXpos())+"/"+Double.parseDouble(startlist.get(startlist.size()-1).getXpos()));
 					for(int i =0 ; i<cartlist.size();i++) {
 						result[i] = Distance(Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getXpos()), cartlist.get(i).getXpos(), cartlist.get(i).getYpos());
 						if (result[i] < minDistance) {
@@ -300,26 +304,15 @@ public class JourneyController {
 			}
 			mDao.updateMyjNum(myemail);
 			session.setAttribute("myjNum", myjNum);
-		return "redirect:mainJourney.m";
+			
+		return "redirect:mainScreen.m";
 
 	}
 
 
 	public static double Distance(double lat1, double lon1, double lat2, double lon2) {
-		final double R = 6371.0;
 
-		double lat1Rad = Math.toRadians(lat1);
-		double lon1Rad = Math.toRadians(lon1);
-		double lat2Rad = Math.toRadians(lat2);
-		double lon2Rad = Math.toRadians(lon2);
-
-		double dlat = lat2Rad - lat1Rad;
-		double dlon = lon2Rad - lon1Rad;
-
-		double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(dlon / 2), 2);
-		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-		double distance = R * c;
+		double distance = (lat1-lat2)+(lon1-lon2);
 
 		return distance;
 	}

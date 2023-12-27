@@ -69,7 +69,7 @@ public class MyjourneyInsertController {
 		}
 		
 		if(cate.equals("restaurant")) {
-			RestaurantBean rb = restaurantDao.restDetail(num);
+			RestaurantBean rb = restaurantDao.restOneInfo(num);
 			map.put("rb", rb);
 		}
 		
@@ -78,7 +78,7 @@ public class MyjourneyInsertController {
 			map.put("sb", sb);
 		}
 		
-		int cnt = myJourneyDao.insertMyJourney(map);
+		int cnt = myJourneyDao.MinsertMyJourney(map);
 		System.out.println("insert cnt:"+cnt);
 		
 		String sTravel = (String) session.getAttribute("sTravel");

@@ -54,7 +54,7 @@ public class MyjourneyListController {
 			jdate = days[0];
 		}
 		
-		List<MyJourneyBean> lists = myJourneyDao.getAllMyJourneyByJdate(jdate);
+		List<MyJourneyBean> lists = myJourneyDao.MgetAllMyJourneyByJdate(jdate);
 		System.out.println("MJL lists.size():"+lists.size());
 		
 		//model.addAttribute("mlists", lists);

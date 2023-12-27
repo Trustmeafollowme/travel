@@ -2,7 +2,7 @@ package board.model;
 
 public class ChatBean {
 	private int chatnum;
-	private int b_num;
+	private String b_num;
 	private String writer;
 	private String content;
 	private int ref;
@@ -17,10 +17,10 @@ public class ChatBean {
 	public void setChatnum(int chatnum) {
 		this.chatnum = chatnum;
 	}
-	public int getB_num() {
+	public String getB_num() {
 		return b_num;
 	}
-	public void setB_num(int b_num) {
+	public void setB_num(String b_num) {
 		this.b_num = b_num;
 	}
 	public String getWriter() {

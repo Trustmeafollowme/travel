@@ -101,7 +101,7 @@
         <div class="column left-container" align="center" >
         <div><h3>
         <c:forEach var="day" items="${daylist}">
-        <a href="mainJourney.m?jdate=${day.jdate}">${day.jdate} |  </a>
+        <a href="mainJourney.m?myjNum=${myjNum}&jdate=${day.jdate}">${day.jdate} |  </a>
         </c:forEach>
         </h3></div>
         
@@ -115,7 +115,7 @@
               <div class="accordion-item">
                 <h3 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" >
-                    <i class="bi bi-question-circle "></i>
+                    <i class="bi"></i>
                     <img alt="" src="<%=request.getContextPath()%>/resources/images/${myj.image}" width="150px">
                		<h4><a href="">${myj.name}</a></h4>
                		<br>
@@ -158,7 +158,7 @@
 			var trafficInfochk = "N";
 			var headers = {};
 			
-			headers["appKey"] = "77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
+			headers["appKey"] = "/* 77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G */";
 
 			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
 				$.ajax({
@@ -191,7 +191,7 @@
 						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
 				});
-			</c:forEach>
+			</c:forEach> 
 			
 			function initTmap(){
 				resultMarkerArr = [];
@@ -237,7 +237,6 @@
 				
 					// 4. 경로탐색 API 사용요청
 				var routeLayer; 
-				/* 	$("#btn_select").click(function(){ */
 			
 					var searchOption = $("#selectLevel").val();
 					
@@ -359,7 +358,6 @@
 								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 							}
 						});
-				/* }); */
 			}
 			
 			function addComma(num) {

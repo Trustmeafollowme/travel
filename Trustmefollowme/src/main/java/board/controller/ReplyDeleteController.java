@@ -34,11 +34,19 @@ public class ReplyDeleteController {
     	map.put("re_step", reStep2);
     	map.put("re_level", reLevel2);
     	map.put("b_num", bNum2);
-    	
-    	int cnt = boardDao.replyDelete(map);
-    	if(cnt != -1) {
-    		return "YES";
+    	if(reStep2 == 0 && reLevel2 == 0) {
+    		int cnt = boardDao.replyAllDelete(map);
+    		if(cnt != -1) {
+    			return "YES";
+    		}
+    		return "NO";
+    	}else {
+    		int cnt = boardDao.replyDelete(map);
+    		if(cnt != -1) {
+    			return "YES";
+    		}
+    		return "NO";
     	}
-    	return "NO";
-    }
+    	}
+    	
 }

@@ -14,7 +14,6 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/style2.css">
 
 	</head>
-	<body>
 	    <div class="calendar calendar-first" id="calendar_first">
 		              <div class="calendar_header">
 		                <button class="switch-month switch-left">
@@ -24,17 +23,23 @@
 		                <button class="switch-month switch-right">
 		                  <i class="fa fa-chevron-right"></i>
 		                </button>
+		                
 		              </div>
+				<form action="mainTravel.m">
+                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+  				<input type="radio" class="btn-check" name="sTravel" value="auto" id="btnradio1" autocomplete="off" checked>
+  				<label class="btn btn-outline-primary" for="btnradio1" >자동</label>
+  				<input type="radio" class="btn-check"  name="sTravel" value="manual"id="btnradio2" autocomplete="off">
+ 				 <label class="btn btn-outline-primary" for="btnradio2">수동</label>
+				</div>
 		              <div class="calendar_weekdays"></div>
 		              <div class="calendar_content"></div>
-		            </div>
-<form action="mainTravel.m">
                     <script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
-                  <input type="text" name="date" id="date">
-                  <input type="radio" name="sTravel" value="auto" checked> 자동
-                  <input type="radio" name="sTravel" value="manual"> 수동
-                  <input type="submit" value="확인">
-               </form> 
+                 <input type="hidden" name="date" id="date">
+                   <button class="custom-btn btn-12" type="submit"><span>나만 믿고 따라와</span><span>여정만들기</span></button>
+				</form>
+		            </div>
+           
+          
 
 	
-</body>

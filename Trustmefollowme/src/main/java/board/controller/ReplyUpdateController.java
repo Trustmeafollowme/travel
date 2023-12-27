@@ -29,14 +29,22 @@ public class ReplyUpdateController {
 	private BoardDao boardDao;
 
 	@RequestMapping(command)
-	public String replyUpdate(HttpServletRequest request,ChatBean cb){
+	public String replyUpdate(Model model, HttpServletRequest request,ChatBean cb,
+			@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum,
+    		@RequestParam("minDate") String minDate){
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     	String date = sdf.format(new Date());
     	cb.setReg_date(date);
     	cb.setIp(request.getRemoteAddr());
 
+		
 		int cnt = boardDao.chatUpdate(cb);
+		
+		model.addAttribute("num", cb.getB_num());
+		model.addAttribute("jnum", jnum);
+		model.addAttribute("mEmail", mEmail);
+		model.addAttribute("minDate", minDate);
 
-    	return gotoPage+"?num="+cb.getB_num();
+    	return gotoPage;
 	}
 }

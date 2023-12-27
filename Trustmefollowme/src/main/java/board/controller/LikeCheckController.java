@@ -24,11 +24,11 @@ public class LikeCheckController {
 
 	@ResponseBody
 	@RequestMapping(command)
-	public String likeCheck(@RequestParam("m_num") int m_num,
-			@RequestParam("b_num") int b_num) {
+	public String likeCheck(@RequestParam("m_num") String m_num,
+			@RequestParam("b_num") String b_num) {
 		
 	    
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("m_num", m_num);
 		map.put("b_num", b_num);
 
