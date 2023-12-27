@@ -2,14 +2,12 @@ package member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -30,208 +28,209 @@ import member.model.KakaoProfile;
 import member.model.MemberBean;
 import member.model.MemberDao;
 import member.model.OAuthToken;
+
 @Controller
 public class UserController {
-	@Autowired
-	private MemberDao memberDao;
+   @Autowired
+   private MemberDao memberDao;
 
-	@Autowired
-	private KakaoAPI kakaoAPI;
-	@Autowired
-	private OAuthToken oauthToken;
-	
-	@RequestMapping(value="/login.mb",method=RequestMethod.GET)
-	public String loginForm(){
-	
-		return "login";
-	}	
-	
-	@RequestMapping(value="/login.mb",method=RequestMethod.POST)
-	public String login(MemberBean mb,
-						HttpServletResponse response,HttpServletRequest request,HttpSession session) throws IOException {
-		
-		
-		
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = null;
-		out = response.getWriter();
-		MemberBean member = memberDao.getMemberInfo(mb);
-		
-		if(member!=null) {
-			String _name = member.getName();
-			if(_name.equals("¾îµå¹Î")) {
-			
-				/*
-				 * out.print("<script>alert('¾îµå¹Î´Ô È¯¿µÇÕ´Ï´Ù. °ü¸®Áö ÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù.');</script>");
-				 * out.flush();
-				 */
-				 session.setAttribute("myemail", member.getEmail());
-//			     session.setAttribute("mynum", member.getNum());
-				return "adminMainForm";
-			}else {
-//				out.print("<script>alert("+_name+"'´Ô ³ª¹Ïµû¿¡ ¿À½Å°É È¯¿µÇÕ´Ï´Ù');</script>");
-//				out.flush();
-				 session.setAttribute("myemail", member.getEmail());
-//			     session.setAttribute("mynum", member.getNum());
-				return "redirect:mainScreen.m";
-			}
-			 
-		}else {
-		out.print("<script>alert('°¡ÀÔÇÏÁö ¾ÊÀº È¸¿øÀÔ´Ï´Ù.');</script>");
-			out.flush();
-			return "login";
-		}
+   @Autowired
+   private KakaoAPI kakaoAPI;
 
-	    }
-	
+   
+   @RequestMapping(value="/login.mb",method=RequestMethod.GET)
+   public String loginForm(){
+   
+      return "login";
+   }   
+   
+   @RequestMapping(value="/login.mb",method=RequestMethod.POST)
+   public String login(MemberBean mb,
+                  HttpServletResponse response,HttpServletRequest request,HttpSession session) throws IOException {
+      
+      
+      
+      response.setContentType("text/html;charset=UTF-8");
+      PrintWriter out = null;
+      out = response.getWriter();
+      MemberBean member = memberDao.getMemberInfo(mb);
+      
+      if(member!=null) {
+         String _name = member.getName();
+         if(_name.equals("ì–´ë“œë¯¼")) {
+         
+            /*
+             * out.print("<script>alert('ì–´ë“œë¯¼ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤. ê´€ë¦¬ì§€ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.');</script>");
+             * out.flush();
+             */
+             session.setAttribute("myemail", member.getEmail());
+             //session.setAttribute("mynum", member.getNum());
+            return "adminMainForm";
+         }else {
+//            out.print("<script>alert("+_name+"'ë‹˜ ë‚˜ë¯¿ë”°ì— ì˜¤ì‹ ê±¸ í™˜ì˜í•©ë‹ˆë‹¤');</script>");
+//            out.flush();
+        	 session.setAttribute("myname", member.getName());
+             session.setAttribute("myemail", member.getEmail());
+             session.setAttribute("myjNum", member.getNum());
+            return "redirect:mainScreen.m";
+         }
+          
+      }else {
+      out.print("<script>alert('ê°€ì…í•˜ì§€ ì•Šì€ íšŒì›ì…ë‹ˆë‹¤.');</script>");
+         out.flush();
+         return "login";
+      }
 
-	@RequestMapping("/kakao-login.mb")
-	public String kakaoCallback(String code,MemberBean mb, Model model,HttpSession session) {//Data¸¦ ¸®ÅÏÇØÁÖ´Â ÄÁÆ®·Ñ·¯ ÇÔ¼ö
-		
-		//Post¹æ½ÄÀ¸·Î key=value µ¥ÀÌÅÍ¸¦ ¿äÃ»(Ä«Ä«¿ÀÂÊÀ¸·Î)
-		RestTemplate rt = new RestTemplate();
-		
-		//HttpHeaders ¿ÀºêÁ§Æ®»ı¼º
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Context-type","application/x-www-form-urlencoded;charset=utf-8");
-		
-		//HttpBody ¿ÀºêÁ§Æ® »ı¼º
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.add("grant_type","authorization_code");
-		params.add("client_id","3ebf8bbbb7b91d2e8e34c1ae7d68f0db");
-		params.add("redirect_uri","http://localhost:8080/ex/kakao-login.mb");
-		params.add("code",code);
-		
-		//HttpHeaders,HttpBody¸¦ ÇÏ³ªÀÇ ¿ÀºêÁ§Æ®¿¡ ´ã±â
-		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = 
-		        new HttpEntity<MultiValueMap<String, String>>(params, headers);
-		
-		//http¿äÃ»ÇÏ±â - Post¹æ½ÄÀ¸·Î- response º¯¼öÀÇ ÀÀ´äÀ» ¹ŞÀ½
-		ResponseEntity<String> response = rt.exchange(
-			   "https://kauth.kakao.com/oauth/token",
-				HttpMethod.POST,
-				kakaoTokenRequest,
-				String.class
-				);
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		OAuthToken oauthToken = null;
-		try {
-			oauthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println("Ä«Ä«¿À ¿¢¼¼½º ÅäÅ«: "+oauthToken.getAccess_token());
-		
-		
-		
-		RestTemplate rt2 = new RestTemplate();
-		
-		//HttpHeaders ¿ÀºêÁ§Æ®»ı¼º
-		HttpHeaders headers2 = new HttpHeaders();
-		headers2.add("Authorization", "Bearer "+oauthToken.getAccess_token());
-		headers2.add("Context-type","application/x-www-form-urlencoded;charset=utf-8");
-		
-		
-		//HttpHeaders,HttpBody¸¦ ÇÏ³ªÀÇ ¿ÀºêÁ§Æ®¿¡ ´ã±â
-		HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest2 = 
-			    new HttpEntity<MultiValueMap<String, String>>(new LinkedMultiValueMap<String, String>(), headers2);
-		
-		//http¿äÃ»ÇÏ±â - Post¹æ½ÄÀ¸·Î- response º¯¼öÀÇ ÀÀ´äÀ» ¹ŞÀ½
-		ResponseEntity<String> response2 = rt2.exchange(
-			   "https://kapi.kakao.com/v2/user/me",
-				HttpMethod.POST,
-				kakaoProfileRequest2,
-				String.class
-				);
-		
-		
-		ObjectMapper objectMapper2 = new ObjectMapper();
-		KakaoProfile kakaoProfile= null;
-		try {
-			kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		//name.password,email
-		System.out.println("Ä«Ä«¿À ¾ÆÀÌµğ(¹øÈ£): "+kakaoProfile.getId());
-		System.out.println("Ä«Ä«¿À ÀÌ¸ŞÀÏ: "+kakaoProfile.getKakao_account().getEmail());
-		
-		System.out.println("À¥ÆäÀÌÁö À¯Àú³×ÀÓ: "+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		System.out.println("À¥ÆäÀÌÁö ÀÌ¸ŞÀÏ: "+kakaoProfile.getKakao_account().getEmail());
-//		UUID garbagePassword = UUID.randomUUID();
-//		System.out.println("À¥ÆäÀÌÁö ¼­¹ö ÆĞ½º¿öµå: "+garbagePassword);
-		
-		String kakaoEmail = kakaoProfile.getKakao_account().getEmail();
-		
-		// È¸¿ø Å×ÀÌºí¿¡¼­ ÇØ´ç ÀÌ¸ŞÀÏ·Î °Ë»ö
-		MemberBean existingMember = memberDao.getMemberByEmail(kakaoEmail);
-		
-	     if (existingMember != null) {
-	            // ÀÌ¹Ì °¡ÀÔµÈ È¸¿øÀÎ °æ¿ì, ·Î±×ÀÎ Ã³¸® µîÀ» ¼öÇàÇÏ°í ¼º°ø ¸Ş½ÃÁö¸¦ ¹İÈ¯
-	            model.addAttribute("message", "Ä«Ä«¿À ·Î±×ÀÎÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
-	            session.setAttribute("myemail", kakaoEmail);
-	            return "redirect:mainScreen.m";
-	        } else {
-	            // °¡ÀÔµÇÁö ¾ÊÀº È¸¿øÀÎ °æ¿ì, È¸¿ø°¡ÀÔ ÆûÀ¸·Î ÀÌµ¿
-	            model.addAttribute("myemail", kakaoEmail);
-	            
-	            return "join2";
-	        }
+       }
+   
+
+   @RequestMapping("/kakao-login.mb")
+   public String kakaoCallback(String code,MemberBean mb, Model model,HttpSession session) {//Dataë¥¼ ë¦¬í„´í•´ì£¼ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬ í•¨ìˆ˜
+      
+      //Postë°©ì‹ìœ¼ë¡œ key=value ë°ì´í„°ë¥¼ ìš”ì²­(ì¹´ì¹´ì˜¤ìª½ìœ¼ë¡œ)
+      RestTemplate rt = new RestTemplate();
+      
+      //HttpHeaders ì˜¤ë¸Œì íŠ¸ìƒì„±
+      HttpHeaders headers = new HttpHeaders();
+      headers.add("Context-type","application/x-www-form-urlencoded;charset=utf-8");
+      
+      //HttpBody ì˜¤ë¸Œì íŠ¸ ìƒì„±
+      MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+      params.add("grant_type","authorization_code");
+      params.add("client_id","3ebf8bbbb7b91d2e8e34c1ae7d68f0db");
+      params.add("redirect_uri","http://localhost:8080/ex/kakao-login.mb");
+      params.add("code",code);
+      
+      //HttpHeaders,HttpBodyë¥¼ í•˜ë‚˜ì˜ ì˜¤ë¸Œì íŠ¸ì— ë‹´ê¸°
+      HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = 
+              new HttpEntity<MultiValueMap<String, String>>(params, headers);
+      
+      //httpìš”ì²­í•˜ê¸° - Postë°©ì‹ìœ¼ë¡œ- response ë³€ìˆ˜ì˜ ì‘ë‹µì„ ë°›ìŒ
+      ResponseEntity<String> response = rt.exchange(
+            "https://kauth.kakao.com/oauth/token",
+            HttpMethod.POST,
+            kakaoTokenRequest,
+            String.class
+            );
+      
+      ObjectMapper objectMapper = new ObjectMapper();
+      OAuthToken oauthToken = null;
+      try {
+         oauthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
+      } catch (JsonMappingException e) {
+         e.printStackTrace();
+      } catch (JsonProcessingException e) {
+         e.printStackTrace();
+      }
+      
+      System.out.println("ì¹´ì¹´ì˜¤ ì—‘ì„¸ìŠ¤ í† í°: "+oauthToken.getAccess_token());
+      
+      
+      
+      RestTemplate rt2 = new RestTemplate();
+      
+      //HttpHeaders ì˜¤ë¸Œì íŠ¸ìƒì„±
+      HttpHeaders headers2 = new HttpHeaders();
+      headers2.add("Authorization", "Bearer "+oauthToken.getAccess_token());
+      headers2.add("Context-type","application/x-www-form-urlencoded;charset=utf-8");
+      
+      
+      //HttpHeaders,HttpBodyë¥¼ í•˜ë‚˜ì˜ ì˜¤ë¸Œì íŠ¸ì— ë‹´ê¸°
+      HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest2 = 
+             new HttpEntity<MultiValueMap<String, String>>(new LinkedMultiValueMap<String, String>(), headers2);
+      
+      //httpìš”ì²­í•˜ê¸° - Postë°©ì‹ìœ¼ë¡œ- response ë³€ìˆ˜ì˜ ì‘ë‹µì„ ë°›ìŒ
+      ResponseEntity<String> response2 = rt2.exchange(
+            "https://kapi.kakao.com/v2/user/me",
+            HttpMethod.POST,
+            kakaoProfileRequest2,
+            String.class
+            );
+      
+      
+      ObjectMapper objectMapper2 = new ObjectMapper();
+      KakaoProfile kakaoProfile= null;
+      try {
+         kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
+      } catch (JsonMappingException e) {
+         e.printStackTrace();
+      } catch (JsonProcessingException e) {
+         e.printStackTrace();
+      }
+      //name.password,email
+      System.out.println("ì¹´ì¹´ì˜¤ ì•„ì´ë””(ë²ˆí˜¸): "+kakaoProfile.getId());
+      System.out.println("ì¹´ì¹´ì˜¤ ì´ë©”ì¼: "+kakaoProfile.getKakao_account().getEmail());
+      
+      System.out.println("ì›¹í˜ì´ì§€ ìœ ì €ë„¤ì„: "+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+      System.out.println("ì›¹í˜ì´ì§€ ì´ë©”ì¼: "+kakaoProfile.getKakao_account().getEmail());
+//      UUID garbagePassword = UUID.randomUUID();
+//      System.out.println("ì›¹í˜ì´ì§€ ì„œë²„ íŒ¨ìŠ¤ì›Œë“œ: "+garbagePassword);
+      
+      String kakaoEmail = kakaoProfile.getKakao_account().getEmail();
+      
+      // íšŒì› í…Œì´ë¸”ì—ì„œ í•´ë‹¹ ì´ë©”ì¼ë¡œ ê²€ìƒ‰
+      MemberBean existingMember = memberDao.getMemberByEmail(kakaoEmail);
+      
+        if (existingMember != null) {
+               // ì´ë¯¸ ê°€ì…ëœ íšŒì›ì¸ ê²½ìš°, ë¡œê·¸ì¸ ì²˜ë¦¬ ë“±ì„ ìˆ˜í–‰í•˜ê³  ì„±ê³µ ë©”ì‹œì§€ë¥¼ ë°˜í™˜
+               model.addAttribute("message", "ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+               session.setAttribute("myemail", kakaoEmail);
+               return "redirect:mainScreen.m";
+           } else {
+               // ê°€ì…ë˜ì§€ ì•Šì€ íšŒì›ì¸ ê²½ìš°, íšŒì›ê°€ì… í¼ìœ¼ë¡œ ì´ë™
+               model.addAttribute("myemail", kakaoEmail);
+               model.addAttribute("kakaoid",kakaoProfile.getId());
+               model.addAttribute("kakaoemail",kakaoProfile.getKakao_account().getEmail());
+               return "redirect:join2.mb";
+           }
 }
-	
-	
-//	 @RequestMapping(value = "/logout.mb", method = RequestMethod.GET)
-//	    public String logout(HttpSession session, Model model) throws IOException {
-//	        // ¼¼¼Ç¿¡¼­ ¾×¼¼½º ÅäÅ«À» °¡Á®¿È
-//		  System.out.println("Logout request received."); // ·Î±× Ãß°¡
-//	      
-//		  String accessToken = (String) session.getAttribute("access_token");
-//	        session.invalidate();
-//	        // ¾×¼¼½º ÅäÅ«ÀÌ ÀÖ´ÂÁö È®ÀÎ
-//	        if (accessToken != null) {
-//	            // KakaoAPI¿¡¼­ ·Î±×¾Æ¿ôÀ» ¼öÇàÇÕ´Ï´Ù.
-//	            kakaoAPI.kakaoLogout(accessToken);
+   
+   
+//    @RequestMapping(value = "/logout.mb", method = RequestMethod.GET)
+//       public String logout(HttpSession session, Model model) throws IOException {
+//           // ì„¸ì…˜ì—ì„œ ì•¡ì„¸ìŠ¤ í† í°ì„ ê°€ì ¸ì˜´
+//        System.out.println("Logout request received."); // ë¡œê·¸ ì¶”ê°€
+//         
+//        String accessToken = (String) session.getAttribute("access_token");
+//           session.invalidate();
+//           // ì•¡ì„¸ìŠ¤ í† í°ì´ ìˆëŠ”ì§€ í™•ì¸
+//           if (accessToken != null) {
+//               // KakaoAPIì—ì„œ ë¡œê·¸ì•„ì›ƒì„ ìˆ˜í–‰í•©ë‹ˆë‹¤.
+//               kakaoAPI.kakaoLogout(accessToken);
 //
-//	            model.addAttribute("message", "·Î±×¾Æ¿ôÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
-//	           
-//	            // ¸ŞÀÎ È­¸éÀ¸·Î ¸®´ÙÀÌ·ºÆ®
-//	            return "redirect:mainScreen.m";
-//	        } else {
-//	            
-//	            model.addAttribute("message", "ÀÌ¹Ì ·Î±×¾Æ¿ôµÇ¾ú°Å³ª ·Î±×ÀÎÇÏÁö ¾Ê¾Ò½À´Ï´Ù.");
-//	            return "redirect:mainScreen.m"; // ¸ŞÀÎ È­¸éÀÌ³ª ·Î±×ÀÎ È­¸éÀ¸·Î ¸®´ÙÀÌ·ºÆ®ÇÕ´Ï´Ù.
-//	        }
-//	    }
-//	
-	 @RequestMapping(value = "/logout.mb", method = RequestMethod.GET)
-	  public String logout(HttpSession session, Model model) throws IOException {
-		 
-		 String access_Token = (String)session.getAttribute("access_Token");
-		 session.invalidate();
-		 System.out.println("¼¼¼Ç¸¸·áµÊ");
-		   if(access_Token != null && !"".equals(access_Token)){
-	            kakaoAPI.kakaoLogout(access_Token);
-	            session.removeAttribute("access_Token");
-	            session.removeAttribute("myemail");
-	            session.invalidate();
-	            
-	        }else{
-	            System.out.println("access_Token is null");
-	            
-	        }
-		   return "redirect:mainScreen.m";
-	 }
-	 
-	
-	
+//               model.addAttribute("message", "ë¡œê·¸ì•„ì›ƒì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+//              
+//               // ë©”ì¸ í™”ë©´ìœ¼ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸
+//               return "redirect:mainScreen.m";
+//           } else {
+//               
+//               model.addAttribute("message", "ì´ë¯¸ ë¡œê·¸ì•„ì›ƒë˜ì—ˆê±°ë‚˜ ë¡œê·¸ì¸í•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+//               return "redirect:mainScreen.m"; // ë©”ì¸ í™”ë©´ì´ë‚˜ ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸í•©ë‹ˆë‹¤.
+//           }
+//       }
+//   
+    @RequestMapping(value = "/logout.mb", method = RequestMethod.GET)
+     public String logout(HttpSession session, Model model) throws IOException {
+       
+       String access_Token = (String)session.getAttribute("access_Token");
+       session.invalidate();
+       System.out.println("ì„¸ì…˜ë§Œë£Œë¨");
+         if(access_Token != null && !"".equals(access_Token)){
+               kakaoAPI.kakaoLogout(access_Token);
+               session.removeAttribute("access_Token");
+               session.removeAttribute("myemail");
+               session.invalidate();
+               
+           }else{
+               System.out.println("access_Token is null");
+               
+           }
+         return "redirect:mainScreen.m";
+    }
+    
+   
+   
 }
-
 
 
 

@@ -27,7 +27,7 @@ public class BoardDao {
 		
 	}
 
-	public BoardBean boardDetail(int num) {
+	public BoardBean boardDetail(String num) {
 		
 		sqlSessionTemplate.update(namespace+".readCount",num);
 		
@@ -55,14 +55,14 @@ public class BoardDao {
 		
 	}
 
-	public LikeBean findLike(Map<String, Integer> map) {
+	public LikeBean findLike(Map<String, String> map) {
 		
 		LikeBean lb = sqlSessionTemplate.selectOne(namespace+".findLike",map);
 		
 		return lb;
 	}
 
-	public int likeInsert(Map<String, Integer> map) {
+	public int likeInsert(Map<String, String> map) {
 		
 		int cnt = -1;
 		
@@ -83,7 +83,7 @@ public class BoardDao {
 		
 	}
 
-	public int likeCount(int num) {
+	public int likeCount(String num) {
 		
 		int cnt = sqlSessionTemplate.selectOne(namespace+".likeCount",num);
 		
@@ -104,7 +104,7 @@ public class BoardDao {
 		
 	}
 
-	public List<ChatBean> chatList(int num) {
+	public List<ChatBean> chatList(String num) {
 		
 		List<ChatBean> lists = sqlSessionTemplate.selectList(namespace+".chatList",num);
 		
@@ -125,6 +125,13 @@ public class BoardDao {
 		return cnt;
 	}
 
+	public int replyAllDelete(Map<String, Integer> map) {
+		
+		int cnt = sqlSessionTemplate.delete(namespace+".replyAllDelete",map);
+		
+		return cnt;
+	}
+	
 	public ChatBean getData(int chatnum) {
 		
 		ChatBean cb = sqlSessionTemplate.selectOne(namespace+".getData",chatnum);
@@ -145,4 +152,19 @@ public class BoardDao {
 		
 		return cb;
 	}
+
+	public List<BoardBean> likesList() {
+		
+		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".likesList");
+		
+		return lists;
+	}
+
+	public List<BoardBean> readcountList() {
+		
+		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".readcountList");
+		
+		return lists;
+	}
+
 }

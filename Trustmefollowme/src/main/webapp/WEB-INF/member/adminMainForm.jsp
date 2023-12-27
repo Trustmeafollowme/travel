@@ -128,12 +128,12 @@ a:hover {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url("http://localhost:8080/images/mainImage.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	opacity: 0.4;
 	z-index: -1;
 }
+
 .fc-title{
 	color: #4A4B4B;
 }
@@ -143,18 +143,18 @@ a:hover {
 </style>
 <div class="main--container">
 	<div id="date"></div>
-	<div class="content--container">
+	<div class="content--container" align="center">
 		<div class="left--content">
 			<div class="content--box" id="reserve">
-				<b class="title--box">예약</b>
+				<b class="title--box"><!-- 예약 --></b>
 				<div id="calendar"></div>
 			</div>
 			<div class="content--box" id="revenue">
-				<b class="title--box">매출</b>
+				<b class="title--box"><!-- 매출 --></b>
 				<div id="revenue--chart"></div>
 			</div>
 		</div>
-		<div class="center--content">
+<%-- 		<div class="center--content">
 			<div class="content--box" id="event--box" onclick="location.href='/event/notice'">
 				<b class="title--box">이벤트</b>
 				<div class="event--box">
@@ -205,10 +205,10 @@ a:hover {
 									불가</span> ${notAvailableRoom}개
 							</div>
 						</c:otherwise>
-					</c:choose>
+					</c:choose> --%>
 				</div>
 
-				<div class="dining">
+				<%-- <div class="dining">
 					<a href="" class="check--box">레스토랑</a>
 					<c:choose>
 						<c:when test="${restaurant == 0}">
@@ -269,8 +269,8 @@ a:hover {
 				</div>
 			</div>
 		</div>
-	</div>
-</div> 
+	</div> --%>
+</div>
 </main>
 
 

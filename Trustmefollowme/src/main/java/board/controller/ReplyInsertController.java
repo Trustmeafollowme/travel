@@ -26,7 +26,10 @@ public class ReplyInsertController {
     private BoardDao boardDao;
 
     @RequestMapping(value = command, method = RequestMethod.GET)
-    public String replyInsert(HttpServletRequest request,ChatBean cb){
+    public String replyInsert(HttpServletRequest request,ChatBean cb,
+    		@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum,
+    		@RequestParam("minDate") String minDate){
+
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     	String date = sdf.format(new Date());
     	cb.setReg_date(date);
@@ -34,6 +37,6 @@ public class ReplyInsertController {
     	boardDao.replyInsert(cb);
     	
     	
-    	return gotoPage+"?num="+cb.getB_num();
+    	return gotoPage+"?num="+cb.getB_num()+"&mEmail="+mEmail+"&jnum="+jnum+"&minDate="+minDate;
     }
 }

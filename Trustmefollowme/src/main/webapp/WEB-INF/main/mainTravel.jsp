@@ -7,16 +7,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<!-- <script>
-
-$(function() {
-	  $("#btn_open_modal").click(function() {
-	        $("#modal").modal("show");
-	    });
-	    $("#modal").modal("show");
-});
-</script> -->
-<script type="text/javascript">
+\<script type="text/javascript">
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center : new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
@@ -25,6 +16,7 @@ $(function() {
 	};
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
 </script>
 <style>
 body {
@@ -47,7 +39,16 @@ body {
   float: left;
   overflow: auto; /* 세로 스크롤이 필요한 경우 스크롤 표시 */
 }
-
+.search{
+	width:250px ; 
+	height: 40px;
+	font-size: 20px;
+}
+.search2{
+	width:100px ; 
+	height: 40px;
+	font-size: 20px;
+}
 .page{
 	padding-top: 30px;
 	padding-left: 450px;
@@ -106,19 +107,7 @@ body {
 <!-- responsive style -->
 <link href="<%=request.getContextPath()%>/resources/css/responsive.css"
 	rel="stylesheet" />
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var currentActive = document.querySelector('.filters_menu li.active');
-        if (currentActive) {
-            currentActive.classList.remove('active');
-        }
-
-        var newActive = document.querySelector('.filters_menu li[data-filter=".buger"]');
-        if (newActive) {
-            newActive.classList.add('active');
-        }
-    });
-</script>	
+	
 </head>
 <body>
 	<div class="hero_area" >
@@ -129,39 +118,14 @@ body {
 <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> </a>	<c:forEach var="i" items="${date}">
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> </a>	
+      <c:set var="day" value="1"></c:set>
+      <c:forEach var="i" items="${date}">
                               <span>Day${i}</span>
+      <c:set var="day" value="${day+1}"></c:set>
                            <br>
                         </c:forEach></h1>
-<!-- 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>.navbar -->
+
 	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
       <c:if test="${empty myemail}">
          <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
@@ -181,12 +145,13 @@ body {
 	<section class="food_section layout_padding-bottom" id="left-container">
 		<div class="container">
 			<ul class="filters_menu">
-				<li data-filter=".buger" class="data-filter active">호텔</li>
+				<li class="active" data-filter="*">All</li>
+				<li data-filter=".buger" >호텔</li>
 				<li data-filter=".pasta">음식점</li>
 				<li data-filter=".fries" >카페</li>
 				<li data-filter=".pizza" >관광지</li>
 			</ul>
-	<form action="mainJourney.mj">
+	<form action="mainJourney.m">
 			<div class="filters-content">
 				<div class="row grid">
 	<!-- 카테고리 페이지틀  -->
@@ -197,7 +162,7 @@ body {
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="cafeDetail.cf?cnum=${list.cnum}">
+              								 <a href="">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
@@ -260,7 +225,7 @@ body {
 							</div>
 						</div>
 					</c:forEach>
-					${spotPage.pagingHtml}
+			
 					<c:forEach var="list" items="${hotelList}">
 						<div class="col-sm-6 col-lg-4 all buger">
 							<div class="box">

@@ -17,24 +17,32 @@ import myjourney.model.MyJourneyDao;
 @Controller
 public class MainJourneyController {
 	@Autowired
-	MyJourneyDao memberDao;
+	MyJourneyDao myJourneyDao;
 	
 	@RequestMapping("mainJourney.m")
 	public String mainJourney(HttpServletRequest request,HttpSession session,
-			@RequestParam(value = "jdate",required = false)String jdate) {
+			@RequestParam(value = "jdate",required = false)String jdate,
+			@RequestParam(value = "myjNum",required = false)int myjNum
+			) {
 		
 		String id=(String)session.getAttribute("myemail");
-		//int myjNum=(Integer)session.getAttribute("myjNum");
 		MyJourneyBean mb= new MyJourneyBean();
-		//mb.setMyjNum(myjNum);
+		
+		if(myjNum==0) {
+			myjNum=(Integer)session.getAttribute("myjNum");
+		}
+		
+		mb.setJnum(myjNum);
 		mb.setId(id);
-		List<MyJourneyBean> myjDayList=memberDao.myjDateSelect(mb);
+		List<MyJourneyBean> myjDayList=myJourneyDao.myjDateSelect(mb);
 		
 		mb.setJdate(myjDayList.get(0).getJdate());
+		
 		if(jdate!=null) {
 			mb.setJdate(jdate);
 		}
-		List<MyJourneyBean> myjList=memberDao.myjSelect(mb);
+		
+		List<MyJourneyBean> myjList=myJourneyDao.myjSelect(mb);
 		List<String> myjXpos = new ArrayList<String>();
 		List<String> myjYpos=new ArrayList<String>() ;
 		
@@ -56,6 +64,7 @@ public class MainJourneyController {
 		request.setAttribute("myjXpos", myjXpos);
 		request.setAttribute("myjYpos", myjYpos);
 	
+		request.setAttribute("myjNum", myjNum);
 		request.setAttribute("myemail", id);
 		request.setAttribute("list", myjList);
 		request.setAttribute("daylist", myjDayList);

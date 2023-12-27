@@ -1,232 +1,417 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <%@include file="../common/common.jsp"%>
 <%@include file="adminHeader.jsp"%>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <title>FAT roomDetailPage</title>
-<link
-	href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/global-header.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/global-footer.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/rooms-and-suites.css">
-<link rel="shortcut icon"
-	href="<%=request.getContextPath()%>/resources/images/favicon.webp"
-	type="image/x-icon">
-<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/rooms-and-suites.css">
+<link href="https://cdn.jsdelivr.net/npm/hover.css@2.3.1/css/hover-min.css" rel="stylesheet">
+<style>
+th{
+ background-color : #FAED7D;
+font-size: 20px;
+}
+
+tr{
+	text-align: center;
+}
+td{
+font-size: 17px;
+}
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #a4e271;
+	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+	background-color:#89c403;
+	border-radius:6px;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528009;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+	background-color:#77a809;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+p{
+	text-align: center;
+}
+</style>
 </head>
-<body>
-	${fn:length(lists)}
 
-	<c:if test="${cate == 'hotel'}">
-		<c:forEach var="hotel" items="${lists}">
+<!--  호텔 리스트 -->
 
-			<div class="col col-4">
-				<a
-					href="hotelDetail.ht?hnum=${hotel.hnum}&pageNumber=${pageInfo.pageNumber}">
-					<img
-					src="<%=request.getContextPath()%>/resources/images/${hotel.image}"
-					alt="" class="rooms-img" width="400" height="350">
-				</a>
-				<h3 class="room-title">${hotel.name }</h3>
-
+		<c:if test="${cate == 'hotel'}">
+			&emsp;&nbsp;
+	
+		<table class="outline" width="80%" height="70%" style="table-layout: fixed;">
+			<colgroup>
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+            <col style="width: 30%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
+        
+			<tr>
+				<td colspan="8" align="left">
 				<div>
-					<div class="details-container">
-						<p class="list-text">${hotel.address }</p>
-					</div>
-					<br> <br>
-					<div class="details-container">
-						<img
-							src="<%=request.getContextPath()%>/resources/images/check-square.svg"
-							alt="tick" class="list-icon">
-						<p class="list-text">${hotel.facility}</p>
-					</div>
-				</div>
-
-				<p class="amount-text">￦${hotel.hprice} ~</p>
-
-				<div class="buttons-container">
-					<a
-						href="hotelUpdate.ht?hnum=${hotel.hnum}&pageNumber=${pageInfo.pageNumber}"
-						class="btn btn-ghost">수정</a> <a
-						href="hotelDelete.ht?hnum=${hotel.hnum}&pageNumber=${pageInfo.pageNumber}"
-						class="btn btn-fill">삭제</a>
-				</div>
-
 				<br>
+				</div>
+						<a href="hotelInsert.ht?hnum=${hotel.hnum}&cate=hotel&pageNumber=${paging.pageNumber}" class="myButton">호텔 추가하기</a>
+			<!-- 	<div>
 				<br>
-			</div>
-			<br>
-		</c:forEach>
+				</div> -->
+			<br><br>
+				<form action="hotelList.ht" method="get">
+	
+				<select name="whatColumn">
+					<option value="all">전체검색
+					<option value="name">호텔이름
+					<option value="facility">부대시설
+				</select>	
+				<input type="text" name="keyword">
+				<input type="submit" name="검색">
+				
+				</form>
+				</td>	
+			</tr>
+			<tr>
+				<th>번호</th>
+				<th>호텔사진</th>
+				<th>호텔명</th>
+				<th>주소</th>
+				<th>부대시설</th>
+				<th>가격</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			<c:forEach var="hotel" items="${lists}">
+				<tr>
+					<td>${hotel.hnum }</td>
+					<td><a href="hotelDetail.ht?hnum=${hotel.hnum}&pageNumber=${paging.pageNumber}">
+							<img
+							src="<%=request.getContextPath()%>/resources/images/${hotel.image}"
+							width="50" height="50">
+					</a></td>
+					<td>${hotel.name }</td>
+					<td>${hotel.address }</td>
+					<td>${hotel.facility}</td>
+					<td>￦${hotel.hprice}</td>
 
-	</c:if>
+					<td>
+						<div class="buttons-container">
+							<a
+								href="hotelUpdate.ht?hnum=${hotel.hnum}&cate=hotel&pageNumber=${paging.pageNumber}"
+								class="btn btn-ghost">수정</a>
+						</div>
+					</td>
 
-	<c:if test="${cate == 'spot'}">
-		<table align="center" border="1">
-	<tr>
-		<td align="right" colspan="3">
-			<button id="btn_open_modal" onclick="spotInsert.sp">추가</button>
-		</td>
-	</tr>
-	<tr align="center">
-	<c:set var="count" value="0"/>
-	<c:set var="path" value="<%=request.getContextPath() %>"/>
-	<c:forEach var="spot" items="${lists }">
-		<c:set var="count" value="${count+1 }"/>
-		<td>
-			<a id="btn_open_modal" href="spotDetail.sp?snum=${spot.snum }&pageNumber=${paging.pageNumber }">
-				<img src="${path }/resources/images/${spot.image }" width="80" height="80" align="top">
-			</a><br>
-			<h3>${spot.name }</h3><br>
-			${spot.address }<br>
-			<input type="button" onclick="spotDelete.sp?snum=${spot.snum }" value="수정">
-			<input type="button" onclick="spotUpdate.sp?snum=${spot.snum }" value="삭제">
-			<input type="checkbox" name="rowcheck" value="${spot.snum }">
+					<td><div class="buttons-container">
+							<a
+								href="hotelDelete.ht?hnum=${hotel.hnum}&pageNumber=${paging.pageNumber}&cate=hotel"
+								class="btn btn-fill">삭제</a>
+						</div></td>
+				</tr>
+			</c:forEach>
 			
+			
+			
+	<tr class="page">
+		<td colspan="8" align="center">
+		${paging.pagingHtml}
 		</td>
+		</tr>
+		</table>
+	</c:if>
 
-	</c:forEach>
-	</tr>
-</table>
-</c:if>
+<!-- 관광지 리스트 -->
 
-<c:if test="${cate == 'restaurant'}">
-<c:forEach var="rest" items="${lists}">
-								<div class="col-sm-6 col-lg-4">
-									<div class="box">
-										<div>
-											<div class="img-box">
-												<a href="restDetail.re?rnum=${rest.rnum}"> 
-												<img src="<%=request.getContextPath()%>/resources/images/${rest.image}" alt="이미지" width="30" height="30">
-												</a>
-											</div>
-											<div class="detail-box">
-												<h5>이름: ${rest.name}</h5>
-												<div class="options">
-													<h6>주소: ${rest.address}</h6>
-												</div>
-												<div class="options">
-													<h6>연락처: ${rest.rtel1} - ${rest.rtel2} - ${rest.rtel3}</h6>
-												</div>
-												<div class="options">
-													<h6>${rest.rtime1}시~${rest.rtime2}시</h6>
-												</div>
-												<div align="right">
-													<a href="restUpdate.re?rnum=${rest.rnum}"><font
-														color="white">수정</font></a>&nbsp;&nbsp; 
-														<a href="restDelete.re?rnum=${rest.rnum}">
-														<font color="white">삭제</font>
-														</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
+		<c:if test="${cate == 'spot'}">
+			&emsp;&nbsp;
+		<table class="outline" width="80%" height="70%" style="table-layout: fixed;">
+		<colgroup>
+            <col style="width: 10%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+            <col style="width: 30%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
+			<tr>
+				<td colspan="8" align="left">
+				<div>
+				<br>
+				</div>
+					<a href="spotInsert.sp?snum=${spot.snum }&cate=spot&pageNumber=${paging.pageNumber}" class="myButton">장소 추가하기</a>
+				<div>
+				<br>
+				</div>
+				<td>
+			</tr>
+			<tr>
+				<th>번호</th>
+				<th>관광지사진</th>
+				<th>관광지 이름</th>
+				<th>관광지 주소</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			<c:forEach var="spot" items="${lists}">
+				<tr>
+					<td>${spot.snum }</td>
+					<td><a
+						href="spotDetail.sp?snum=${spot.snum }&pageNumber=${paging.pageNumber }">
+							<img
+							src="<%=request.getContextPath()%>/resources/images/${spot.image}"
+							width="50" height="50">
+					</a></td>
+					<td>${spot.name }</td>
+					<td>${spot.address }</td>
 
-</c:if>
-	
+					<td>
+						<div class="buttons-container">
+							<a href="spotUpdate.sp?snum=${spot.snum }&pageNumber=${paging.pageNumber}&cate=spot" class="btn btn-ghost">수정</a>
+						</div>
+					</td>
+
+					<td>
+							<div class="buttons-container">
+							<a href="spotDelete.sp?snum=${spot.snum }&cate=spot&pageNumber=${paging.pageNumber}" class="btn btn-fill">삭제</a>
+					</div>
+					</td>
+				</tr>
+			</c:forEach>
+			<tr>
+			<td colspan="6" align="center">
+			<div class="page">
+				${paging.pagingHtml}
+				</div>
+			</td>
+			</tr> 
+			</table>
+		</c:if>
+
+<!-- 음식점 리스트 -->
+
+		<c:if test="${cate == 'restaurant'}">
+			&emsp;&nbsp;
+		<table class="outline" width="80%" height="70%" style="table-layout: fixed;">
+			<colgroup>
+            <col style="width: 5%;">
+            <col style="width: 10%;">
+            <col style="width: 15%;">
+            <col style="width: 20%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 5%;">
+            <col style="width: 5%;">
+        </colgroup>
+			<tr>
+				<td colspan="8" align="left">
+				<div>
+				<br>
+				</div>
+					<a href="restInsert.re?rnum=${rest.rnum }&cate=restaurant&pageNumber=${paging.pageNumber}" class="myButton">장소 추가하기</a>
+				<div>
+				<br>
+				</div>
+				<td>
+			</tr>
+			<tr>
+				<th>번호</th>
+				<th>음식점사진</th>
+				<th>음식점 이름</th>
+				<th>음식점 주소</th>
+				<th>전화번호</th>
+				<th>영업시간</th>
+				<th>위도</th>
+				<th>경도</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			<c:forEach var="rest" items="${lists}">
+				<tr>
+					<td>${rest.rnum }</td>
+					<td><a
+						href="restDetail.re?rnum=${rest.rnum}&pageNumber=${paging.pageNumber }">
+							<img
+							src="<%=request.getContextPath()%>/resources/images/${rest.image}"
+							width="50" height="50">
+					</a></td>
+					<td>${rest.name }</td>
+					<td>${rest.address }</td>
+					<td>${rest.rtel1 }-${rest.rtel2 }-${rest.rtel3 }</td>
+					<td>${rest.rtime1}  ~ ${rest.rtime2 }</td>
+					<td>${rest.xpos}</td>
+					<td>${rest.ypos}</td>
+
+					<td>
+						<div class="buttons-container">
+							<a href="restUpdate.re?rnum=${rest.rnum}&cate=restaurant&pageNumber=${paging.pageNumber}" class="btn btn-ghost">수정</a>
+						</div>
+					</td>
+					<td>
+							<div class="buttons-container">
+							<a href="restDelete.re?rnum=${rest.rnum}&cate=restaurant&pageNumber=${paging.pageNumber}" class="btn btn-fill">삭제</a>
+					</div>
+					</td>
+				</tr>
+			</c:forEach>
+			<tr>
+			<td colspan="10" align="center">
+				${paging.pagingHtml}
+			</td>
+			</tr> 
+		</table>
+	</c:if>
+
+<!-- 카페리스트 -->
+
 	<c:if test="${cate == 'cafe'}">
-		<c:forEach var="cafe" items="${lists}">
-
-			<div class="col col-4">
-				<a
-					href="hotelDetail.ht?hnum=${cafe.cnum}&pageNumber=${pageInfo.pageNumber}">
-					<img
-					src="<%=request.getContextPath()%>/resources/images/${cafe.image}"
-					alt="" class="rooms-img" width="400" height="350">
-				</a>
-				<h3 class="room-title">${cafe.name }</h3>
-
+			&emsp;&nbsp;
+		<table class="outline" width="80%" height="70%" style="table-layout: fixed;">
+			<colgroup>
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 20%;">
+            <col style="width: 30%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
+	
+			<tr>
+				<td colspan="8" align="left">
 				<div>
-					<div class="details-container">
-						<p class="list-text">${cafe.address }</p>
-					</div>
-					<br> <br>
-					<div class="details-container">
-						<img
-							src="<%=request.getContextPath()%>/resources/images/check-square.svg"
-							alt="tick" class="list-icon">
-						<p class="list-text">${cafe.ctel1}</p>
-						<p class="list-text">${cafe.ctel2}</p>
-						<p class="list-text">${cafe.ctel3}</p>
-					</div>
-				</div>
-
-				<p class="amount-text">${cafe.ctime1} ~ ${cafe.ctime2}</p>
-
-				<div class="buttons-container">
-					<a
-						href="hotelUpdate.ht?hnum=${cafe.cnum}&pageNumber=${pageInfo.pageNumber}"
-						class="btn btn-ghost">수정</a> <a
-cafe						class="btn btn-fill">삭제</a>
-				</div>
-
 				<br>
+				</div>
+						<a href="cafeInsert.cf?cnum=${cafe.cnum}&cate=cafe&pageNumber=${paging.pageNumber}" class="myButton">카페 추가하기</a>
+				<div>
 				<br>
-			</div>
-			<br>
-		</c:forEach>
+				</div>
+				<td>
+			</tr>
+			<tr>
+				<th>번호</th>
+				<th>카페사진</th>
+				<th>카페명</th>
+				<th>주소</th>
+				<th>전화번호</th>
+				<th>영업시간</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			<c:forEach var="cafe" items="${lists}">
+				<tr>
+					<td>${cafe.cnum }</td>
+					<td><a href="cafeDetail.cf?cnum=${cafe.cnum}&pageNumber=${paging.pageNumber}">
+							<img
+							src="<%=request.getContextPath()%>/resources/images/${cafe.image}"
+							width="50" height="50">
+					</a></td>
+					<td>${cafe.name }</td>
+					<td>${cafe.address }</td>
+					<td>${cafe.ctel1}.${cafe.ctel2}.${cafe.ctel3}</td>
+					<td>${cafe.ctime1}~${cafe.ctime2}</td>
 
+					<td>
+						<div class="buttons-container">
+							<a
+								href="cafeUpdate.cf?cnum=${cafe.cnum}&cate=cafe&pageNumber=${paging.pageNumber}"
+								class="btn btn-ghost">수정</a>
+						</div>
+					</td>
+
+					<td><div class="buttons-container">
+							<a
+								href="cafeDelete.cf?cnum=${cafe.cnum}&pageNumber=${paging.pageNumber}&cate=cafe"
+								class="btn btn-fill">삭제</a>
+						</div></td>
+				</tr>
+			</c:forEach>
+			<tr>
+			<td colspan="8" align="center">
+				${paging.pagingHtml}
+			</td>
+			</tr>
+		</table>
 	</c:if>
 	
+	
+<!-- 멤버리스트 -->
+
 	<c:if test="${cate == 'member'}">
-		<c:forEach var="member" items="${lists}">
-
-			<div class="col col-4">
-				<a
-					href="hotelDetail.ht?hnum=${member.num}&pageNumber=${pageInfo.pageNumber}">
-				</a>
-				<p>${member.email }</p>
-				<p>${member.password }</p>
-				<h3 class="room-title">${member.name }</h3>
-
-				<div>
-					<div class="details-container">
-						<p class="list-text">${member.birth }</p>
-					</div>
-					<br> <br>
-					<div class="details-container">
-						<img
-							src="<%=request.getContextPath()%>/resources/images/check-square.svg"
-							alt="tick" class="list-icon">
-						<p class="list-text">${member.address1}/${member.address2}</p>
-					</div>
-				</div>
-
-				<p class="amount-text">￦${member.mtel} ~</p>
-
-				<div class="buttons-container">
-					<a
-						href="hotelUpdate.ht?hnum=${member.num}&pageNumber=${pageInfo.pageNumber}"
-						class="btn btn-ghost">수정</a> <a
-						href="hotelDelete.ht?hnum=${member.num}&pageNumber=${pageInfo.pageNumber}"
-						class="btn btn-fill">삭제</a>
-				</div>
-
-				<br>
-				<br>
-			</div>
-			<br>
-		</c:forEach>
-
-	</c:if>
+			&emsp;&nbsp;
+		<table class="outline" width="80%" height="70%" style="table-layout: fixed;">
+			<colgroup>
+            <col style="width: 5%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 20%;">
+            <col style="width: 15%;">
+        </colgroup>
 	
-	<script src="<%=request.getContextPath()%>/resources/js/switchRooms.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/resources/js/toggleHamburger.js"></script>
-</body>
-
+			<tr>
+				<td colspan="8" align="left">
+				<div>
+				<br>
+				</div>
+				<div>
+				<br>
+				</div>
+				<td>
+			</tr>
+			<tr>
+				<th>번호</th>
+				<th>아이디</th>
+				<th>비밀번호</th>
+				<th>이름</th>
+				<th>생일</th>
+				<th>주소</th>
+				<th>전화번호</th>
+		<!-- 		<th>위도</th>
+				<th>경도</th> -->
+			</tr>
+			<c:forEach var="member" items="${lists}">
+				<tr>
+					<td>${member.num }</td>
+					<td>${member.email }</td>
+					<td>${member.password }</td>
+					<td>${member.name}</td>
+					<td>${member.birth}</td>
+					<td>${member.address1} ${member.address2}</td>
+					<td>${member.mtel}</td>
+				</tr>
+			</c:forEach>
+					<tr>
+			<td colspan="7" align="center">
+				${paging.pagingHtml}
+			</td>
+			</tr>
+		</table>
+	</c:if>
 
 </html>
 

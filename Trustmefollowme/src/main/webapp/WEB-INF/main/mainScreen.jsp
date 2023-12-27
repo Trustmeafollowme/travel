@@ -9,6 +9,40 @@
   <title>Gp Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
+  <link href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+	integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+	crossorigin="anonymous" />
+<link
+	href="<%=request.getContextPath()%>/resources/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/css/style.css"
+	rel="stylesheet" />
+<!-- responsive style -->
+<link href="<%=request.getContextPath()%>/resources/css/responsive.css"
+	rel="stylesheet" />
 
   <!-- Favicons -->
   <link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
@@ -105,7 +139,29 @@ aside{
 article{
 flex-grow: 5;
 }
+#content {
+   text-align: center;
+   height: 100px;
+   width: 100%;
+   overflow: auto;
+   margin: auto;
+}
 </style>
+<script>
+   var displayedItems = 6; // 초기값을 표시된 아이템의 개수로 설정
+
+   $('#load-more-btn').click(function () {
+      var itemsToLoad = 3; // 원하는 개수로 설정
+
+      $('.portfolio-item').slice(displayedItems, displayedItems + itemsToLoad).fadeIn();
+
+      displayedItems += itemsToLoad;
+
+      if (displayedItems >= $('.portfolio-item').length) {
+         $('#load-more-btn').hide();
+      }
+   });
+</script>
 </head>
 
 <body>
@@ -118,46 +174,24 @@ flex-grow: 5;
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto active" href="#hero"></a></li>
+          <li><a class="nav-link scrollto" href="#about"></a></li>
+          <li><a class="nav-link scrollto" href="#services"></a></li>
+          <li><a class="nav-link scrollto " href="#portfolio"></a></li>
+          <li><a class="nav-link scrollto" href="#team"></a></li>
+          
+          <li><a class="nav-link scrollto" href="#contact"></a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-	<%-- <c:if test="${myemail==null}">
-      <a href="login.mb" class="get-started-btn scrollto">로그인</a>
-	</c:if>
-	<c:if test="${myemail!=null}">
-      <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
-	</c:if> --%>
-	
+
 	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
-      <c:if test="${empty myemail}">
+      <c:if test="${empty myname}">
          <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
       </c:if>
       
-      <c:if test="${not empty myemail}">
-         <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
+      <c:if test="${not empty myname}">
+         <a href="myPage.mb" class="get-started-btn scrollto">${myname}님 환영합니다</a>
 	
          <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
       </c:if>
@@ -189,7 +223,7 @@ flex-grow: 5;
 
         <div class="section-title">
           <h2>여정 둘러보기</h2>
-          <p>여정 게시판</p>
+          <p><a href="boardList.bd">여정 게시판</a></p>
         </div>
 
         <div class="row">
@@ -260,158 +294,83 @@ flex-grow: 5;
     </section><!-- End Cta Section -->
 
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-      <div class="container" data-aos="fade-up">
+    <section id="portfolio" class="portfolio" >
+      <div class="content container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Portfolio</h2>
           <p>Check our Portfolio</p>
         </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12 d-flex justify-content-center">
+        
+       <div class="row" data-aos="fade-up" data-aos-delay="100">
+         <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
+              <li data-filter=".filter-web">호텔</li>
+              <li data-filter=".filter-card">음식점</li>
+              <li data-filter=".filter-cafe">카페</li>
+              <li data-filter=".filter-app">관광지</li>
             </ul>
           </div>
         </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+         <div id="additional-items-container" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200"> 
+       	<c:forEach var="list" items="${cafeList}">
+          <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
             <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+            <a href="cafeDetail.cf?cnum=${list.cnum}">
+              <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
+              </div>
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
+                <h4>${list.name}</h4>
+                <p>${list.address}</p>
               </div>
             </div>
-          </div>
-          
-          
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+			</c:forEach>
+			
+       	<c:forEach var="list" items="${restaurantList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+             <a href="restDetail.re?rnum=${list.rnum}">
+              <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
+              </div>
               <div class="portfolio-info">
-                <h4>Card 2</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
+                <h4>${list.name}</h4>
+                <p>${list.address}</p>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 2</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+			</c:forEach>
+			
+       	<c:forEach var="list" items="${spotList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+             <a href="spotDetail.sp?snum=${list.snum}">
+				 <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
+              </div>
               <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
+                <h4>${list.name}</h4>
+                <p>${list.address}</p>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 1</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 3</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+			</c:forEach>
+			
+       	<c:forEach var="list" items="${hotelList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+            <a href="hotelDetail.ht?hnum=${list.hnum}">
+				 <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
+              </div>
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="<%=request.getContextPath()%>/resources/assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
+                <h4>${list.name}</h4>
+                <p>${list.address}</p>
               </div>
             </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Section -->
+			</c:forEach>
+			</div>
+       </div> 
+<div class="text-center mt-4">
+   <button id="load-more-btn" class="cta-btn">더보기</button>
+</div>
+   </section><!-- End Portfolio Section -->
 
        <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials">
@@ -577,6 +536,7 @@ flex-grow: 5;
         </div>
 
       </div>
+      
     </section><!-- End Team Section -->
 
     <!-- ======= Contact Section ======= -->
@@ -666,7 +626,36 @@ flex-grow: 5;
 
   <!-- Template Main JS File -->
   <script src="<%=request.getContextPath()%>/resources/assets/js/main.js"></script>
+<!-- jQery -->
+	<script
+		src="<%=request.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
+	
 
+	<!-- popper js -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+		
+	</script>
+	<!-- bootstrap js -->
+	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.js"></script>
+	<!-- owl slider -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+		
+	</script>
+	<!-- isotope js -->
+	<script
+		src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+	<!-- nice select -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+	<!-- custom js -->
+	<script src="<%=request.getContextPath()%>/resources/js/custom.js"></script>
+	<!-- Google Map -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+		
+	</script>
 </body>
 <div class="modal" id="modal"  role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" style="width:850px;">

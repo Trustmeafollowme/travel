@@ -28,7 +28,7 @@ main {
 
 nav {
 	width: 300px; 
-	background-color: #E8D9FF;
+	background-color: #CEF279;
 	height: 150vh;
 	display: flex;
 }
@@ -106,7 +106,7 @@ li:hover {
 	<main>
 		<nav>
 			<ul>
-				 <li id="logo--li" onclick=""><img alt="" src="" width="250" height="50"></li>
+				 <li id="logo--li" onclick="location.href='admin.mb'"><img alt="" src="<%=request.getContextPath()%>/resources/images/아믿따 로고.png" width="120" height="60"></li>
 				<li id="room--li">
 					<div>
 						<span id="search--hotel--wrap">Hotel</span>
@@ -165,17 +165,17 @@ li:hover {
 					</ul>	
 				</li>
 				
-				<li id="room--li">
+				<!-- <li id="room--li">
 					<div>
 						<span id="search--board--wrap">Board</span>
 					</div>
 					<br>
 					<ul id="board--list">
 						<li id="small" onclick="location.href='admin.mb?cate=board'">게시판 등록</li>
-						<!-- <li id="small" onclick="location.href='/manager/roomStatus'">답변 등록</li>
-						<li id="small" onclick="location.href='/manager/facilities'">게시글 삭제</li> -->
+						<li id="small" onclick="location.href='/manager/roomStatus'">답변 등록</li>
+						<li id="small" onclick="location.href='/manager/facilities'">게시글 삭제</li>
 					</ul>	
-				</li>
+				</li> -->
 				
 				
 			</ul>

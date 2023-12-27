@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import board.model.BoardBean;
 import board.model.BoardDao;
@@ -29,12 +31,17 @@ public class ChatInsertController {
 	private BoardDao boardDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String Reply(HttpServletRequest request, ChatBean cb) {
+	public String Reply(HttpServletRequest request,Model model, ChatBean cb,
+			@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum,
+			@RequestParam("minDate") String minDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(new Date());
 		cb.setReg_date(date);
 		cb.setIp(request.getRemoteAddr());
 		
+		model.addAttribute("jnum", jnum);
+		model.addAttribute("mEmail", mEmail);
+		model.addAttribute("minDate", minDate);
 		boardDao.chatInsert(cb);
 		
 		return viewPage+"?num="+cb.getB_num();
