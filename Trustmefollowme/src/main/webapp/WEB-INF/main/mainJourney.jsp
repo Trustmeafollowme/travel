@@ -46,43 +46,149 @@
 
   <!-- Template Main CSS File -->
   <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
+  <style type="text/css">
+  #nav {
+		-moz-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
+		-webkit-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
+		-ms-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
+		transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
+		background-color: #ffffff;
+		color: #636363;
+		
+		padding: 1em;
+		background-color: #f7f7f7;
+		border-top-left-radius: 0.25em;
+		border-top-right-radius: 0.25em;
+		cursor: default;
+		text-align: center;
+	}
+
+		#nav  #nav select, #nav  {
+			color: #636363;
+		}
+
+		#nav a:hover {
+			color: #636363;
+		}
+
+		#nav strong, #nav b {
+			color: #636363;
+		}
+
+		#nav h1, #nav h2, #nav h3, #nav h4, #nav h5, #nav h6 {
+			color: #636363;
+		}
+
+		#nav blockquote {
+			border-left-color: #dddddd;
+		}
+
+		#nav code {
+			background: rgba(222, 222, 222, 0.25);
+			border-color: #dddddd;
+		}
+
+		#nav hr {
+			border-bottom-color: #dddddd;
+		}
+
+		#nav + #main {
+			padding-top: 4.25em;
+		}
+
+		#nav ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+			#nav ul li {
+				-moz-transition: margin 0.2s ease;
+				-webkit-transition: margin 0.2s ease;
+				-ms-transition: margin 0.2s ease;
+				transition: margin 0.2s ease;
+				display: inline-block;
+				margin: 0 0.35em;
+				padding-bottom: 10px;
+				vertical-align: middle;
+			}
+
+				#nav ul li a {
+					-moz-transition: font-size 0.2s ease;
+					-webkit-transition: font-size 0.2s ease;
+					-ms-transition: font-size 0.2s ease;
+					transition: font-size 0.2s ease;
+					display: inline-block;
+					height: 2.25em;
+					line-height: 2.25em;
+					padding: 0 1.25em;
+					border: 0;
+					border-radius: 8px;
+					box-shadow: inset 0 0 0 1px transparent;
+				}
+
+					#nav ul li a.active {
+						background-color: #ffffff;
+						box-shadow: none;
+					}
+
+		#nav.alt {
+			position: fixed;
+			top: 0;
+			padding: 0.5em 1em;
+			background-color: rgba(247, 247, 247, 0.95);
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			z-index: 10000;
+		}
+
+			#nav.alt ul li {
+				margin: 0 0.175em;
+			}
+
+				#nav.alt ul li a {
+					font-size: 0.9em;
+				}
+
+		@media screen and (max-: 736px) {
+
+			#nav {
+				display: none;
+			}
+
+				#nav + #main {
+					padding-top: 0;
+				}
+
+		}
+		
+		.img {
+   width: 200px;
+   height: 200px;
+   border-radius: 20%;
+   box-shadow: 1px 1px 1px 1px gray;
+}
+  </style>
 </head>
 
   <body onload="initTmap()">
-  <header id="header" class="fixed-top ">
+    <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
       <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-      <a href="" class="get-started-btn scrollto">${myemail}</a>
+
+	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
+      <c:if test="${empty myname}">
+         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
+      </c:if>
+      
+      <c:if test="${not empty myname}">
+         <a href="myPage.mb" class="get-started-btn scrollto">${myname}님 환영합니다</a>
+	
+         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
+      </c:if>
+
     </div>
   </header><!-- End Header -->
     <section id="services" class="services">
@@ -99,46 +205,52 @@
         </div>
 		<c:set var="day" value="1"/>
         <div class="column left-container" align="center" >
-        <div><h3>
-        <c:forEach var="day" items="${daylist}">
-        <a href="mainJourney.m?myjNum=${myjNum}&jdate=${day.jdate}">${day.jdate} |  </a>
-        </c:forEach>
-        </h3></div>
+        <div>
+            <c:set var="count" value="1"/>
+               <nav id="nav" style="width: 100%;  padding-bottom: 5px;">
+                  <ul>
+            <c:forEach var="day" items="${daylist}">
+                     <li><a href="mainJourney.m?myjNum=${myjNum}&jdate=${day.jdate}" class="active">Day${count}  ${day.jdate}</a></li>
+            <c:set var="count" value="${count+1}"/>
+            </c:forEach>
+                  </ul>
+               </nav>
+        </div>
         
         <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="row justify-content-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
           <div class="col-lg-10">
             <div class="accordion accordion-flush" id="faqlist">
  		
- 		<c:set var="i" value="0"/>
-       <c:forEach var="myj"  items="${list}">
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" >
-                    <i class="bi"></i>
-                    <img alt="" src="<%=request.getContextPath()%>/resources/images/${myj.image}" width="150px">
-               		<h4><a href="">${myj.name}</a></h4>
-               		<br>
-               		<h5>${myj.address}</h5>
-                  </button>
-                </h3>
-<%--                 <div id="faq-content-${i}" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                  </div>
-                </div> --%>
-        <p id="result${i}"></p>
-              </div><!-- # Faq item-->
-            <c:set var="i" value="${i+1}"/>
-	</c:forEach> 
+ 	<div>
+               <div id="List">
+       <c:set var="i" value="0"/>
+               <c:forEach var="bd"  items="${list}" varStatus="bdStatus">
+               <div align="left">
+               <div style="display: inline-block; margin-left: 100px;">
+                    <img class="img" src="<%=request.getContextPath()%>/resources/images/${bd.image}" width="300px" height="300px">
+               </div>
+                     <h5 style="display: inline-block; margin-left: 100px; margin-top: 30px;">${bd.name}
+                     <br><br><h7>${bd.address}</h7>
+                     </h5>
+               </div>
+               <c:if test="${not bdStatus.last}">
+               <div style="padding-top: 50px; padding-bottom: 50px; margin-left: 180px;">
+               <img src="<%=request.getContextPath()%>/resources/images/a.png" width="40px" height="50px">
+               <span style="padding-left: 200px;"><p id="result${i}" style="display: inline-block;"></p>
+                  <c:set var="i" value="${i+1}"/></span></div>
+               </c:if>
+                     </c:forEach> 
+               </div>
+    </div>
             </div>
           </div>
         </div>
 
       </div>
 		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=<!-- 77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G -->"></script>
-	 	<script type="text/javascript">
+		<!-- <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G"></script>
+	 	 --><script type="text/javascript">
 				
 			var map;
 			
@@ -158,13 +270,13 @@
 			var trafficInfochk = "N";
 			var headers = {};
 			
-			headers["appKey"] = "/* 77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G */";
+			headers["appKey"] = "7AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
 
 			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
 				$.ajax({
 					type: "POST",
 					headers: headers,
-					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G",
+/* 					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G", */
 					async: false,
 					data: {
 						"startX": "${myjYpos.get(i)}",
@@ -365,82 +477,6 @@
 				   return num.toString().replace(regexp, ',');
 			}
 		</script> 
-<!-- <script type="text/javascript">
-	var map;
-	var markerInfo;
-	// 출발지, 도착지 마커
-	var marker_s, marker_e, marker_p;
-	// 경로그림정보
-	var drawInfoArr = [];
-	var drawInfoArr2 = [];
-
-	var chktraffic = [];
-	var resultdrawArr = [];
-	var resultMarkerArr = [];
-
-	function initTmap() {
-		// 1. 지도 띄우기
-		map = new Tmapv2.Map("map_div", {
-			center: new Tmapv2.LatLng(33.450701, 126.570667),
-			width: "100%",
-			height: "100%",
-			zoom: 11,
-			zoomControl: true,
-			scrollwheel: true
-		});
-
-	/* 	// 3. 경로탐색 API 사용요청
-		$("#btn_select").click(function () {
-			// 기존 맵에 있던 정보들 초기화
-			resettingMap(); */
-
-			var searchOption = "2";
-
-			var trafficInfochk = "N";
-			var headers = {};
-			headers["appKey"] = "77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
-
-			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
-				$.ajax({
-					type: "POST",
-					headers: headers,
-					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G",
-					async: false,
-					data: {
-						"startX": "${myjYpos.get(i)}",
-						"startY": "${myjXpos.get(i)}",
-						"endX": "${myjYpos.get(i+1)}",
-						"endY": "${myjXpos.get(i+1)}",
-						"reqCoordType": "WGS84GEO",
-						"resCoordType": "EPSG3857",
-						"searchOption": searchOption,
-						"trafficInfo": trafficInfochk,
-					},
-					success: function (response) {
-						var resultData = response.features;
-
-						var tDistance = "거리 : " + (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km ";
-						var tTime = " 시간 : " + (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
-
-						$("#result${i}").text(tDistance + tTime);
-
-						// You can also access other information such as route points, etc., if needed.
-						// var routePoints = resultData[0].geometry.coordinates;
-					},
-					error: function (request, status, error) {
-						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					}
-				});
-			</c:forEach>
-		/* }); */
-	}
-
-	function addComma(num) {
-		var regexp = /\B(?=(\d{3})+(?!\d))/g;
-		return num.toString().replace(regexp, ',');
-	}
-
-</script> -->
        </div>
         </div>
         </div> 

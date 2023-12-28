@@ -146,6 +146,12 @@ flex-grow: 5;
    overflow: auto;
    margin: auto;
 }
+#im {
+   width: 300px;
+   height: 200px;
+   border-radius: 10%;
+   box-shadow: 1px 1px 1px 1px gray;
+}
 </style>
 <script>
    var displayedItems = 6; // 초기값을 표시된 아이템의 개수로 설정
@@ -161,7 +167,38 @@ flex-grow: 5;
          $('#load-more-btn').hide();
       }
    });
-</script>
+   </script>
+  <script type="text/javascript">
+  $(function() {
+      $(".showModalBtn").click(function() {
+          var cnum = $(this).data("cnum");
+
+          window.open("cafeDetail.cf?cnum=" + cnum, "CafeDetails", "width=800, height=600");
+
+      });
+      $(function() {
+          $(".showModalBtn2").click(function() {
+              var rnum = $(this).data("rnum");
+
+              window.open("restDetail.re?rnum=" + rnum, "레스토랑", "width=800, height=600");
+
+          });
+
+          $(".showModalBtn3").click(function() {
+              var rnum = $(this).data("snum");
+
+              window.open("spotDetail.re?rnum=" + snum, "관광지", "width=800, height=600");
+
+          });
+          $(".showModalBtn4").click(function() {
+              var hnum = $(this).data("hnum");
+
+              window.open("hotelDetail.ht?hnum=" + hnum, "호텔", "width=800, height=600");
+
+          });
+      });
+  });
+  </script>
 </head>
 
 <body>
@@ -179,10 +216,8 @@ flex-grow: 5;
           <li><a class="nav-link scrollto" href="#services"></a></li>
           <li><a class="nav-link scrollto " href="#portfolio"></a></li>
           <li><a class="nav-link scrollto" href="#team"></a></li>
-          
           <li><a class="nav-link scrollto" href="#contact"></a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
 	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
@@ -207,7 +242,7 @@ flex-grow: 5;
       <div class="row justify-content-center aside" data-aos="fade-up" data-aos-delay="150">
         <h1>나만 믿고 따라와</h1>
         <h3>기존에 경험하지 못한 여행 플래너 </h3>
-       <h4> 고민만 하던 여행 플래너 나만 믿고 따라와 </h4>
+       <h4> 고민만 하던 여행 나만 믿고 따라와 </h4>
       </div>
 	
     </div>
@@ -224,59 +259,35 @@ flex-grow: 5;
         <div class="section-title">
           <h2>여정 둘러보기</h2>
           <p><a href="boardList.bd">여정 게시판</a></p>
-        </div>
-
+         </div>
         <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+<c:forEach var="list" items="${boardlists}">
+          <div class="col-lg-4 col-md-6 align-items-stretch" data-aos="zoom-in" data-aos-delay="100" style="border-bottom: 1px solid #EAEAEA;">
+          	<h3>
+          	<a href="boardDetail.bd?num=${list.num}&jnum=${list.jnum}&mEmail=${list.mEmail}&minDate=${list.minDate}">
+          	<font color="black">${list.title}</font>
+			</a>
+          	</h3>
+            <div>
+            <a href="boardDetail.bd?num=${list.num}&jnum=${list.jnum}&mEmail=${list.mEmail}&minDate=${list.minDate}">
+            	<img id="im" src="<%=request.getContextPath()%>/resources/images/${list.image}" width="200">
+            </a>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-slideshow"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-arch"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-            </div>
-          </div>
-
+              <div align="right" style="margin-right: 50px; padding-top: 20px;">
+              <h6><font color="gray">${list.writer}님의 여행일지</font></h6><br>
+              <div class="content">
+             	${list.content} 
+              </div>
+              <c:if test="${sessionScope.myemail eq list.mEmail || sessionScope.myname eq '어드민'}">
+              <div style="padding-bottom: 50px;">
+              <input id="btn" type="button" value="수정" onclick="boardUpdate(${list.num},'${list.jnum}')">
+              &nbsp;&nbsp;<input id="btn" type="button" value="삭제" onclick="boardDelete(${list.num})">
+              </div>
+              </c:if>
+              </div>
+              </div>
+</c:forEach>
         </div>
-
       </div>
     </section><!-- End Services Section -->
 
@@ -317,8 +328,8 @@ flex-grow: 5;
        	<c:forEach var="list" items="${cafeList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
             <div class="portfolio-wrap">
-            <a href="cafeDetail.cf?cnum=${list.cnum}">
-              <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
+            <a href="#" class="showModalBtn" data-cnum="${list.cnum}">
+              <img  src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
               </div>
               <div class="portfolio-info">
                 <h4>${list.name}</h4>
@@ -330,7 +341,7 @@ flex-grow: 5;
        	<c:forEach var="list" items="${restaurantList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-             <a href="restDetail.re?rnum=${list.rnum}">
+             <a href="#" class="showModalBtn2" data-rnum="${list.rnum}">
               <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
               </div>
               <div class="portfolio-info">
@@ -343,7 +354,7 @@ flex-grow: 5;
        	<c:forEach var="list" items="${spotList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-             <a href="spotDetail.sp?snum=${list.snum}">
+             <a href="#" class="showModalBtn3" data-snum="${list.snum}">
 				 <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
               </div>
               <div class="portfolio-info">
@@ -356,7 +367,7 @@ flex-grow: 5;
        	<c:forEach var="list" items="${hotelList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-            <a href="hotelDetail.ht?hnum=${list.hnum}">
+            <a href="#" class="showModalBtn4" data-hnum="${list.hnum}">
 				 <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt=""></a>
               </div>
               <div class="portfolio-info">
@@ -375,170 +386,31 @@ flex-grow: 5;
        <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="zoom-in">
-
+		
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
-
+          
+<c:forEach var="list" items="${likelists}">
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
+                <img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="testimonial-img" alt="" width="100">
+                <h3>${list.writer}님의 여행일지</h3>
+                <h4>${list.title}</h4>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+					${list.content} 
+				<i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
               </div>
             </div><!-- End testimonial item -->
+</c:forEach>
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-          </div>
+           </div>
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
     </section><!-- End Testimonials Section -->
-
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Team</h2>
-          <p>Check our Team</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="200">
-              <div class="member-img">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="member-img">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="400">
-              <div class="member-img">
-                <img src="<%=request.getContextPath()%>/resources/assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-      
-    </section><!-- End Team Section -->
-
     <!-- ======= Contact Section ======= -->
       </main><!-- End #main -->
 

@@ -27,12 +27,9 @@ public class MainJourneyController {
 		
 		String id=(String)session.getAttribute("myemail");
 		MyJourneyBean mb= new MyJourneyBean();
-		
-		if(myjNum==0) {
-			myjNum=(Integer)session.getAttribute("myjNum");
-		}
-		
+		if(myjNum!=0) {
 		mb.setJnum(myjNum);
+		}
 		mb.setId(id);
 		List<MyJourneyBean> myjDayList=myJourneyDao.myjDateSelect(mb);
 		
@@ -63,7 +60,7 @@ public class MainJourneyController {
 
 		request.setAttribute("myjXpos", myjXpos);
 		request.setAttribute("myjYpos", myjYpos);
-	
+
 		request.setAttribute("myjNum", myjNum);
 		request.setAttribute("myemail", id);
 		request.setAttribute("list", myjList);

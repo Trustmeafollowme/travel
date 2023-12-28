@@ -1,9 +1,11 @@
 package board.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +35,10 @@ public class BoardDetailController {
     MyJourneyDao myJourneyDao;
 
     @RequestMapping(value = command, method = RequestMethod.GET)
-    public String boardDetailForm(HttpSession session, Model model, @RequestParam("num") String num
-    		,@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum,
-    		@RequestParam("minDate") String minDate, LikeBean lb) {
-    	try {
-			
-		
+    public String boardDetailForm(HttpServletRequest request, HttpSession session, Model model, @RequestParam("num") String num
+          ,@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum,
+          @RequestParam("minDate") String minDate, LikeBean lb) {
+
         BoardBean bb = boardDao.boardDetail(num);
         model.addAttribute("bb", bb);
         
@@ -47,17 +47,17 @@ public class BoardDetailController {
 
         String customer = "";
         if(id == null) {
-        	customer += "customer";
-        	map.put("b_num", num);
-        	map.put("m_num", customer);
+           customer += "customer";
+           map.put("b_num", num);
+           map.put("m_num", customer);
         }else {
-        	map.put("b_num", num);
-        	map.put("m_num", id);
+           map.put("b_num", num);
+           map.put("m_num", id);
         }
         
-        int likecount = boardDao.likeCount(num); // ���ƿ� ����
+        int likecount = boardDao.likeCount(num); // 좋아요 갯수
         
-        LikeBean likeInfo = boardDao.findLike(map); // ���ƿ� ��� ����
+        LikeBean likeInfo = boardDao.findLike(map); // 좋아요 기능 시작
         if (likeInfo == null) {
             int cnt = boardDao.likeInsert(map);
             if (cnt != -1) {
@@ -66,17 +66,17 @@ public class BoardDetailController {
             }
         } else {
             model.addAttribute("likeInfo", likeInfo); 
-        }											// ���ƿ� ��� ��
+        }                                 // 좋아요 기능 끝
         
-        model.addAttribute("likecount", likecount); // ���ƿ� ���� �Ӽ�
-        // ����Ʈ �������� ����
+        model.addAttribute("likecount", likecount); // 좋아요 갯수 속성
+        // 리스트 가져오기 시작
         
         List<MyJourneyBean> boardListCount = myJourneyDao.boardListCount(mEmail,jnum);
         int dateCount = myJourneyDao.dateCount(mEmail,jnum);
         String date = "";
         for(int i=0;i<boardListCount.size();i++) {
-        	date += boardListCount.get(i).getJdate()+",";
-        }	
+           date += boardListCount.get(i).getJdate()+",";
+        }   
         
         String minDate2 = myJourneyDao.minDate(jnum, mEmail);
         String maxDate = myJourneyDao.maxDate(jnum, mEmail);
@@ -86,25 +86,43 @@ public class BoardDetailController {
         mb.setJnum(Integer.parseInt(jnum));
         mb.setJdate(minDate);
         
-        List<MyJourneyBean> list = myJourneyDao.myjSelect(mb);
+        List<MyJourneyBean> myjList = myJourneyDao.myjSelect(mb);
         List<ChatBean> lists = boardDao.chatList(num);
-        if(list.isEmpty()) {
-        	model.addAttribute("num", num);
-        	model.addAttribute("jnum", jnum);
-        	
-        	return "redirect:/boardDelete.bd";
+        if(myjList.isEmpty()) {
+           model.addAttribute("num", num);
+           model.addAttribute("jnum", jnum);
+           
+           return "redirect:/boardDelete.bd";
         }
-        model.addAttribute("lists", lists);
-        model.addAttribute("list", list);
-        model.addAttribute("date", date);
-        model.addAttribute("dateCount", dateCount);
-        model.addAttribute("likeInfo", likeInfo);
-        model.addAttribute("minDate", minDate2);
-        model.addAttribute("maxDate", maxDate);
-    	} catch (NumberFormatException e) {
-			// TODO: handle exception
-		}
-       
+
+        List<String> myjXpos = new ArrayList<String>();
+      List<String> myjYpos=new ArrayList<String>() ;
+      
+   for(int i=0 ;i<=myjList.size()-1;i++) {
+      myjXpos.add(myjList.get(i).getXpos());
+      myjYpos.add(myjList.get(i).getYpos());
+      System.out.println(myjList.get(i).getXpos()+"/"+
+      myjList.get(i).getYpos()+" /");
+   }
+      for(int i=0;i<myjXpos.size();i++) {
+         System.out.println("myjXpos.get"+myjXpos.get(i));
+      }
+      request.setAttribute("startXpos", myjXpos.get(0));
+      request.setAttribute("startYpos", myjYpos.get(0));
+
+      request.setAttribute("lastXpos", myjXpos.get(myjList.size()-1));
+      request.setAttribute("lastYpos", myjYpos.get(myjList.size()-1));
+
+      request.setAttribute("myjXpos", myjXpos);
+      request.setAttribute("myjYpos", myjYpos);
+      
+      request.setAttribute("lists", lists);
+      request.setAttribute("list", myjList);
+      request.setAttribute("date", date);
+      request.setAttribute("dateCount", dateCount);
+      request.setAttribute("likeInfo", likeInfo);
+      request.setAttribute("minDate", minDate2);
+      request.setAttribute("maxDate", maxDate);
         
         return viewPage;
         

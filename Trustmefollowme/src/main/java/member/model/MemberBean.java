@@ -10,7 +10,13 @@ public class MemberBean {
 	private String address1;
 	private String address2;
 	private String mtel;
-	private String kakaoId;
+	private String myjNum;
+	public String getMyjNum() {
+		return myjNum;
+	}
+	public void setMyjNum(String myjNum) {
+		this.myjNum = myjNum;
+	}
 	public int getNum() {
 		return num;
 	}

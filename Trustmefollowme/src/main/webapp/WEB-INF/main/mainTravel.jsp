@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-\<script type="text/javascript">
+<script type="text/javascript">
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center : new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
@@ -16,7 +16,38 @@
 	};
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	  
+</script>
+<script type="text/javascript">
+$(function() {
+    $(".showModalBtn").click(function() {
+        var cnum = $(this).data("cnum");
 
+        window.open("cafeDetail.cf?cnum=" + cnum, "CafeDetails", "width=800, height=600");
+
+    });
+    $(function() {
+        $(".showModalBtn2").click(function() {
+            var rnum = $(this).data("rnum");
+
+            window.open("restDetail.re?rnum=" + rnum, "레스토랑", "width=800, height=600");
+
+        });
+
+        $(".showModalBtn3").click(function() {
+            var rnum = $(this).data("snum");
+
+            window.open("spotDetail.re?rnum=" + snum, "관광지", "width=800, height=600");
+
+        });
+        $(".showModalBtn4").click(function() {
+            var hnum = $(this).data("hnum");
+
+            window.open("hotelDetail.ht?hnum=" + hnum, "호텔", "width=800, height=600");
+
+        });
+    });
+});
 </script>
 <style>
 body {
@@ -115,31 +146,48 @@ body {
 			<img src="<%=request.getContextPath()%>/resources/images/travel2.jpg" id="mainimg">
 		</div>
 		<!-- header section strats -->
-<header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-lg-between">
-
-      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> </a>	
-      <c:set var="day" value="1"></c:set>
       <c:forEach var="i" items="${date}">
                               <span>Day${i}</span>
       <c:set var="day" value="${day+1}"></c:set>
                            <br>
                         </c:forEach></h1>
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero"></a></li>
+          <li><a class="nav-link scrollto" href="#about"></a></li>
+          <li><a class="nav-link scrollto" href="#services"></a></li>
+          <li><a class="nav-link scrollto " href="#portfolio"></a></li>
+          <li><a class="nav-link scrollto" href="#team"></a></li>
+          
+          <li><a class="nav-link scrollto" href="#contact"></a></li>
+            <li class="dropdown"><a href="#"><span>여행날짜</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+				<c:forEach var="i" items="${days}" >
+             				 <li> <a>${i}</a></li>
+                        </c:forEach>
+            </ul>
+          </li>
+          </ul>
+      </nav><!-- .navbar -->
 
 	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
-      <c:if test="${empty myemail}">
+      <c:if test="${empty myname}">
          <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
       </c:if>
       
-      <c:if test="${not empty myemail}">
-         <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
+      <c:if test="${not empty myname}">
+         <a href="myPage.mb" class="get-started-btn scrollto">${myname}님 환영합니다</a>
 	
          <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
       </c:if>
-     <!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
 
     </div>
-  </header><!-- End Header -->
+  </header>
 		<!-- end header section -->
 	</div>
 	<section class="food_section layout_padding-bottom" id="left-container">
@@ -151,40 +199,43 @@ body {
 				<li data-filter=".fries" >카페</li>
 				<li data-filter=".pizza" >관광지</li>
 			</ul>
-	<form action="mainJourney.m">
+	<form action="mainJourney.mj">
 			<div class="filters-content">
 				<div class="row grid">
 	<!-- 카테고리 페이지틀  -->
 		<!-- 카테고리 페이지틀  -->	
 		<!-- 카페리스트 -->	
+	
 					<c:forEach var="list" items="${cafeList}">
 						<div class="col-sm-6 col-lg-4 all fries">
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="">
+              								 <a href="#" class="showModalBtn" data-cnum="${list.cnum}">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
 									<div class="detail-box">
-										<h5>${list.name}</h5>
+										<h5>
+										${list.name}
+										</h5>
 										<div class="options">
 											<h6>${list.address}</h6>
-						<input type="checkbox" id="spotcheck" name='cafe' value = "${list.cnum}/${list.xpos}/${list.ypos}" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
+					<input type="checkbox" id="spotcheck"name='restaurant' value = "${list.cnum}/${list.xpos}/${list.ypos}" data-xpos="${list.xpos}" data-ypos="${list.ypos}">
 										
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-<!-- 음식점 리스트 -->
-					</c:forEach>
+				</c:forEach>
+
 					<c:forEach var="list" items="${restaurantList}">
 						<div class="col-sm-6 col-lg-4 all pasta">
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="restDetail.re?rnum=${list.rnum}">
+              								 <a href="#" class="showModalBtn2" data-rnum="${list.rnum}">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
@@ -201,7 +252,7 @@ body {
 								</div>
 							</div>
 						</div>
-						
+
 <!-- 관광지 리스트 -->
 					</c:forEach>
 					<c:forEach var="list" items="${spotList}">
@@ -209,7 +260,7 @@ body {
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="spotDetail.sp?snum=${list.snum}">
+              								 <a href="#" class="showModalBtn3" data-snum="${list.snum}">
 												<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
@@ -224,6 +275,7 @@ body {
 								</div>
 							</div>
 						</div>
+					
 					</c:forEach>
 			
 					<c:forEach var="list" items="${hotelList}">
@@ -231,7 +283,7 @@ body {
 							<div class="box">
 								<div>
 									<div class="img-box">
-              								 <a href="hotelDetail.ht?hnum=${list.hnum}">
+              							<a href="#" class="showModalBtn4" data-hnum="${list.hnum}">
 											<img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
 											</a>
 									</div>
@@ -246,7 +298,6 @@ body {
 								</div>
 							</div>
 						</div>
-
 					</c:forEach>
 				</div>
 				<!-- 카테고리 페이지틀  -->
