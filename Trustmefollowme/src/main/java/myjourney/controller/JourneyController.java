@@ -205,7 +205,7 @@ public class JourneyController {
 					int minIndex =0;
 					System.out.println("Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getXpos())"+Double.parseDouble(startlist.get(startlist.size()-1).getXpos())+"/"+Double.parseDouble(startlist.get(startlist.size()-1).getXpos()));
 					for(int i =0 ; i<cartlist.size();i++) {
-						result[i] = Distance(Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getXpos()), cartlist.get(i).getXpos(), cartlist.get(i).getYpos());
+						result[i] = Distance(Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getYpos()), cartlist.get(i).getXpos(), cartlist.get(i).getYpos());
 						if (result[i] < minDistance) {
 							minDistance = result[i];
 							minIndex = i;
@@ -255,7 +255,7 @@ public class JourneyController {
 							double minDistance1=Double.MAX_VALUE;;
 							int minIndex1 =0;
 							for(int i =0 ; i<cartlist.size();i++) {
-								result1[i] = Distance(Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getXpos()), cartlist.get(i).getXpos(), cartlist.get(i).getYpos());
+								result1[i] = Distance(Double.parseDouble(startlist.get(startlist.size()-1).getXpos()),Double.parseDouble(startlist.get(startlist.size()-1).getYpos()), cartlist.get(i).getXpos(), cartlist.get(i).getYpos());
 								if (result1[i] < minDistance1) {
 									minDistance1 = result1[i];
 									minIndex1 = i;
@@ -303,18 +303,37 @@ public class JourneyController {
 				h++;
 			}
 			mDao.updateMyjNum(myemail);
-			session.setAttribute("myjNum", myjNum);
 			
 		return "redirect:mainScreen.m";
 
 	}
 
+    public static double Distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta, dist;
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        } else {
+            theta = lon1 - lon2;
+            dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1))
+                    * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+            dist = Math.acos(dist);
+            dist = rad2deg(dist);
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344;
+  
+            return dist;
+        }
+    }
 
-	public static double Distance(double lat1, double lon1, double lat2, double lon2) {
+    // This function converts decimal degrees to radians
+    public static double deg2rad(double deg) {
+        return deg * Math.PI / 180;
+    }
 
-		double distance = (lat1-lat2)+(lon1-lon2);
+    // This function converts radians to decimal degrees
+    public static double rad2deg(double rad) {
+        return rad * 180 / Math.PI;
+    }
 
-		return distance;
-	}
 
 }

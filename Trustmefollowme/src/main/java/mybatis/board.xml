@@ -12,6 +12,19 @@
 		<if test="WhatColumn == 'content'">
 			where content like #{keyword}
 		</if>
+	ORDER BY DBMS_RANDOM.VALUE
+	</select>
+	<select id="MboardList" resultType="myBoard">
+	SELECT *
+    FROM board
+    ORDER BY DBMS_RANDOM.VALUE
+    FETCH FIRST 6 ROWS ONLY
+	</select>
+	<select id="LikeboardList" resultType="myBoard">
+	SELECT *
+    FROM board
+    ORDER BY DBMS_RANDOM.VALUE
+    FETCH FIRST 6 ROWS ONLY
 	</select>
 	
 	<insert id="boardInsert">

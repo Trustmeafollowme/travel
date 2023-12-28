@@ -44,7 +44,7 @@ public class MJDeleteController {
       PrintWriter out = response.getWriter();
       if(cnt > 0) {
          memberDao.reduceMyjNum(id);
-         out.println("<script>alert('여정이 삭제되었습니다.');location.href='"+gotoPage+"'</script>");
+         out.println("<script>alert('여정을 삭제하였습니다.');location.href='"+gotoPage+"'</script>");
       }else {
          out.println("<script>alert('여정을 삭제하지 못했습니다.');location.href='"+gotoPage+"'</script>");
       }

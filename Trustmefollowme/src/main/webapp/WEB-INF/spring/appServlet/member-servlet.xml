@@ -15,11 +15,14 @@
 	</bean>
 	
 	<context:component-scan base-package="member" />
-<context:component-scan base-package="main" />
+	<context:component-scan base-package="main" />
 	<context:component-scan base-package="cafe" />
 	<context:component-scan base-package="hotel" />
 	<context:component-scan base-package="spot" />
 	<context:component-scan base-package="restaurant" />
 	<context:component-scan base-package="myjourney" />
 	<context:component-scan base-package="member" />
+	<context:component-scan base-package="board" />
+	
+
 </beans>

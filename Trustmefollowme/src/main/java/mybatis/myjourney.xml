@@ -82,7 +82,7 @@
       FROM
       myjourney m
       LEFT JOIN spot s ON m.ref = s.snum AND m.cate = 'spot'
-      LEFT JOIN rest r ON m.ref = r.rnum AND m.cate = 'rest'
+      LEFT JOIN rest r ON m.ref = r.rnum AND m.cate = 'restaurant'
       LEFT JOIN hotel h ON m.ref = h.hnum AND m.cate = 'hotel'
       LEFT JOIN cafe c ON m.ref = c.cnum AND m.cate = 'cafe'
       WHERE
@@ -182,4 +182,15 @@
         on m.id = #{mEmail} and m.jnum = #{jnum}
         order by jdate
         </select>
+        
+           <select id="getMJNums" resultType="myjourney.model.MyJourneyBean">
+      select DISTINCT jnum from myjourney
+   where id = #{id} 
+   order by jnum
+   </select>
+   
+   <delete id="deleteJnumZero">
+    delete from myjourney
+      where jnum = 0
+   </delete>
 </mapper>

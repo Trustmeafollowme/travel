@@ -1,3 +1,5 @@
+  <!-- myPage.jsp -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -130,9 +132,9 @@
               <h2>${memberBean.name }</h2>
               <h3>${memberBean.email }</h3>
               <div class="social-links mt-2">
-                <a href="https://twitter.com/" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="https://www.facebook.com/" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://twitter.com/" class="twitter" target="_blank"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.facebook.com/" class="facebook" target="_blank"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/" class="instagram" target="_blank"><i class="bi bi-instagram" target="_blank"></i></a>
               </div>
             </div>
           </div>
@@ -172,7 +174,7 @@
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
                   <p class="small">
-                  	이곳은 마이페이지입니다. 그렇습니다.
+                     이곳은 마이페이지입니다. 그렇습니다.
                   </p>
 
                   <h5 class="card-title">Profile Details</h5>
@@ -253,7 +255,8 @@
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">주소</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address1" type="text" class="form-control" id="" value="${memberBean.address1 }">
+                        <input name="address1" type="text" class="form-control" id="address1" value="${memberBean.address1 }" style="width: 400px;"> 
+                        <!-- <input type="button" class="btn btn-primary" id="find--address--btn" onclick="postCode()" value="검색"> -->
                         <form:errors cssClass="err" path="address1"/>
                         <!-- <div class="invalid-feedback"> 주소를 입력하십시오. </div> -->
                       </div>
@@ -285,26 +288,26 @@
                     </div>
 
                     <div class="text-center">
-                      	<button type="button" class="btn btn-primary"
-                      	data-bs-toggle="modal" data-bs-target="#verticalycentered-profile-edit">수정 저장</button>
+                         <button type="button" class="btn btn-primary"
+                         data-bs-toggle="modal" data-bs-target="#verticalycentered-profile-edit">수정 저장</button>
                     </div>
                     <div class="modal fade" id="verticalycentered-profile-edit" tabindex="-1">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">주의</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									입력한 정보로 프로필을 수정하시겠습니까?
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-									<button type="submit" class="btn btn-warning">프로필 수정</button>
-								</div>
-							</div>
-						</div>
-					</div>
+                  <div class="modal-dialog modal-dialog-centered">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title">주의</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           입력한 정보로 프로필을 수정하시겠습니까?
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                           <button type="submit" class="btn btn-warning">프로필 수정</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
                   </form:form><!-- End Profile Edit Form -->
 
                 </div>
@@ -339,85 +342,90 @@
                     </div>
 
                     <div class="text-center">
-						<button type="button" class="btn btn-primary"
-                      	data-bs-toggle="modal" data-bs-target="#verticalycentered-changePw">비밀번호 변경</button>
-                      	<div class="modal fade" id="verticalycentered-changePw" tabindex="-1">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title">주의</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										비밀번호를 변경하시겠습니까?
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-										<button type="submit" class="btn btn-warning" onclick="change()">비밀번호 변경</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                  <button type="button" class="btn btn-primary"
+                         data-bs-toggle="modal" data-bs-target="#verticalycentered-changePw">비밀번호 변경</button>
+                         <div class="modal fade" id="verticalycentered-changePw" tabindex="-1">
+                     <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title">주의</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                           </div>
+                           <div class="modal-body">
+                              비밀번호를 변경하시겠습니까?
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                              <button type="submit" class="btn btn-warning" onclick="change()">비밀번호 변경</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
                   </form><!-- End Change Password Form -->
 
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-settings">
                 <c:choose>
-                <c:when test="${jnum == 0 }">
-                	여정 정보가 없습니다. 여정을 추가해보세요!
+                <%-- <c:when test="${jnum == 0 }"> --%>
+                <c:when test="${empty lists }">
+                   여정 정보가 없습니다. 여정을 추가해보세요!
                 </c:when>
                 <c:otherwise>
-                <c:forEach var="i" begin="0" end="${jnum-1 }">
+                <%-- <c:forEach var="i" begin="1" end="${jnum }"> --%>
+                <%-- <c:forEach var="i" begin="1" end="${fn:length(lists) }"> --%>
+                <c:set var="num" value="1"/>
+                <c:forEach var="mj" items="${lists }">
 
-					<!-- Sales Card -->
-		            <div class="col-xxl-4 col-md-6" style="display: inline-block; margin: 10px;">
-		              <div class="card info-card sales-card">
+               <!-- Sales Card -->
+                  <div class="col-xxl-4 col-md-6" style="display: inline-block; margin: 10px;">
+                    <div class="card info-card sales-card">
 
-		                <div class="filter">
-		                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-		                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-		                    <li class="dropdown-header text-start">
-		                      <h6>메뉴</h6>
-		                    </li>
+                      <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                          <li class="dropdown-header text-start">
+                            <h6>메뉴</h6>
+                          </li>
 
-		                    <li><a class="dropdown-item text-danger" href="#"
-		                    		data-bs-toggle="modal" data-bs-target="#verticalycentered-delMJ">삭제</a></li>
-		                  </ul>
-		                </div>
-			                <!-- Vertically centered Modal -->
-				              <div class="modal fade" id="verticalycentered-delMJ" tabindex="-1">
-				                <div class="modal-dialog modal-dialog-centered">
-				                  <div class="modal-content">
-				                    <div class="modal-header">
-				                      <h5 class="modal-title">경고!</h5>
-				                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				                    </div>
-				                    <div class="modal-body">
-				                      선택한 여정을 삭제하시겠습니까? <br> 
-				                      <font color="red">삭제하시면 되돌릴 수 없습니다!</font>
-				                    </div>
-				                    <div class="modal-footer">
-				                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				                      <button type="button" class="btn btn-danger" onclick="location.href='mjdel.mj?jnum='">여정 삭제</button>
-				                    </div>
-				                  </div>
-				                </div>
-				              </div><!-- End Vertically centered Modal-->
+                          <li><a class="dropdown-item text-danger" href="#"
+                                data-bs-toggle="modal" data-bs-target="#verticalycentered-${num }-delMJ-${mj.jnum }">삭제</a></li>
+                        </ul>
+                      </div>
+                         <!-- Vertically centered Modal -->
+                          <div class="modal fade" id="verticalycentered-${num }-delMJ-${mj.jnum }" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">경고!</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  선택한 ${num }번 여정을 삭제하시겠습니까? <br> 
+                                  <font color="red">삭제하시면 되돌릴 수 없습니다!</font>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                  <button type="button" class="btn btn-danger" onclick="location.href='mjdel.mj?jnum=${mj.jnum }'">여정 삭제</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div><!-- End Vertically centered Modal-->
 
-		                <div class="card-body">
-		                	<a href="mainJourney.m?myjNum=${i+1 }">
-		                 		<h5 class="card-title">${i+1 }번 <span>여정</span></h5>
-		                 	</a>
-			                <div style="display: inline-block; margin: 10px;">
-			                	<img src="<%=request.getContextPath()%>/resources/assets2/img/돌하르방.jpg" width="100%" height="100%">
-			                </div>
-		                </div>
+                      <div class="card-body">
+                         <a href="mainJourney.m?myjNum=${mj.jnum }">
+                             <h5 class="card-title">${num }번 <span>여정</span></h5>
+                          </a>
+                         <div style="display: inline-block; margin: 10px;">
+                            <img src="<%=request.getContextPath()%>/resources/assets2/img/돌하르방.jpg" width="100%" height="100%">
+                         </div>
+                      </div>
 
 
-		              </div>
-		            </div><!-- End Sales Card -->
+                    </div>
+                  </div><!-- End Sales Card -->
+                  <c:set var="num" value="${num+1 }"/>
                 </c:forEach>
                 </c:otherwise>
                 </c:choose>
@@ -447,7 +455,7 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="https://bootstrapmade.com/" target="_blank">BootstrapMade</a>
     </div>
   </footer><!-- End Footer -->
 
@@ -465,23 +473,48 @@
 
   <!-- Template Main JS File -->
   <script src="<%=request.getContextPath()%>/resources/assets2/js/main.js"></script>
+  
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
   <script type="text/javascript" src="<%=request.getContextPath()%>/resources/assets2/js/jquery.js"></script>
   <script type="text/javascript">
-  	function change() {
-		alert(1);
-		document.changepw.submit();
-	}
-  	function repassword_keyup(){
-  		//alert(1);
-  		if($('input[name="renewpassword"]').val() == $('input[name="newpassword"]').val()){
-  			$('#pwmessage').html("<font color=blue>비밀 번호가 일치합니다.</font>");
-  			pwuse = "same";
-  		}else{
-  			$('#pwmessage').html("<font color=red>비밀 번호가 일치하지 않습니다.</font>");
-  			pwuse = "nosame";
-  		}
-  	}//repassword_keyup
+     function change() {
+      alert(1);
+      document.changepw.submit();
+   }
+     function repassword_keyup(){
+        //alert(1);
+        if($('input[name="renewpassword"]').val() == $('input[name="newpassword"]').val()){
+           $('#pwmessage').html("<font color=blue>비밀 번호가 일치합니다.</font>");
+           pwuse = "same";
+        }else{
+           $('#pwmessage').html("<font color=red>비밀 번호가 일치하지 않습니다.</font>");
+           pwuse = "nosame";
+        }
+     }//repassword_keyup
+   
+     /* 우편번호 api 코드*/
+    function postCode() {
+       document.getElementById("address1").value = "";
+        new daum.Postcode({
+            oncomplete: function(data) {
+                let addr = ''; // 주소 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { 
+                   // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("address1").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("address2").focus();
+            }
+        }).open();
+    }
   </script>
 
 </body>

@@ -20,6 +20,18 @@ public class BoardDao {
 
 		return lists;
 	}
+	public List<BoardBean> MboardList(Map<String, String> map) {
+		
+		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".MboardList",map);
+		
+		return lists;
+	}
+	public List<BoardBean> LikeboardList() {
+
+		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".LikeboardList");
+		
+		return lists;
+	}
 
 	public void boardInsert(BoardBean bb) {
 		
@@ -166,5 +178,6 @@ public class BoardDao {
 		
 		return lists;
 	}
+	
 
 }

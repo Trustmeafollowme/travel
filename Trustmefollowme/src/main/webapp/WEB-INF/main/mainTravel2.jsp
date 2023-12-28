@@ -24,7 +24,7 @@
 <script type="text/javascript">
     function insert(cate, num, date) {
         var selectedDate = document.getElementById("jdate").value;
-        alert(selectedDate);
+        //alert(selectedDate);
           location.href = "myjourneyInsert.mj?cate=" + cate + "&num=" + num + "&date=" + date + "&jdate=" + selectedDate;
     }
     
@@ -34,6 +34,11 @@
          location.href="saveMyjourney.mj";
       }
    }
+    function selDay(date,sTravel,day) {
+        var selectedDate = document.getElementById("jdate").value;
+        location.href="myjourneyList.mj?day="+day+"&date="+date+"&jdate="+selectedDate+"&sTravel="+sTravel;
+    }
+    
 </script>
 
 <style>
@@ -42,22 +47,30 @@ body {
    padding: 0;
    box-sizing: border-box;
 }
-/* 왼쪽 영역 스타일 */
 #left-container {
-   width: 50%;
-   height: 100vh; /* 화면 전체 높이로 설정 */
-   background-color: #f0f0f0;
-   float: left; /* 왼쪽으로 플로팅 */
+  width: 50%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  float: left;
+  overflow: auto; /* 세로 스크롤이 필요한 경우 스크롤 표시 */
 }
 
-/* 오른쪽 영역 스타일 */
 #right-container {
-   width: 50%;
-   height: 100vh;
-   background-color: #e0e0e0;
-   float: left;
+  width: 50%;
+  height: 100vh;
+  background-color: #e0e0e0;
+  float: left;
+  overflow: auto; /* 세로 스크롤이 필요한 경우 스크롤 표시 */
 }
-
+.search{
+   width:250px ; 
+   height: 40px;
+   font-size: 20px;
+}
+   width:100px ; 
+   height: 40px;
+   font-size: 20px;
+}
 .page{
    padding-top: 30px;
    padding-left: 450px;
@@ -100,23 +113,23 @@ body {
   <!-- Template Main CSS File -->
   <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
+   href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
 
 <link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+   href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
-	integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
-	crossorigin="anonymous" />
+   href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+   integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+   crossorigin="anonymous" />
 <link
-	href="<%=request.getContextPath()%>/resources/css/font-awesome.min.css"
-	rel="stylesheet" />
+   href="<%=request.getContextPath()%>/resources/css/font-awesome.min.css"
+   rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/style.css"
-	rel="stylesheet" />
+   rel="stylesheet" />
 <!-- responsive style -->
 <link href="<%=request.getContextPath()%>/resources/css/responsive.css"
-	rel="stylesheet" />
-	
+   rel="stylesheet" />
+   
 <link rel="stylesheet" type="text/css"
    href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
 
@@ -143,36 +156,67 @@ body {
             id="mainimg">
       </div>
       <!-- header section strats -->
-      <header id="header" class="fixed-top ">
+        <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero"></a></li>
+          <li><a class="nav-link scrollto" href="#about"></a></li>
+          <li><a class="nav-link scrollto" href="#services"></a></li>
+          <li><a class="nav-link scrollto " href="#portfolio"></a></li>
+          <li><a class="nav-link scrollto" href="#team"></a></li>
+          
+          <li><a class="nav-link scrollto" href="#contact"></a></li>
+          
+      </nav><!-- .navbar -->
+
+          <!-- 민희가 추가한 로그인 로그아웃입니다. -->
+      <c:if test="${empty myname}">
+         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
+      </c:if>
+      
+      <c:if test="${not empty myname}">
+         <a href="myPage.mb" class="get-started-btn scrollto">${myname}님 환영합니다</a>
+   
+         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
+      </c:if>
+     <!-- <!—민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  —> -->
+
+    </div>
+  </header><!-- <!— End Header —> -->
+      <%-- <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
       <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> </a>
-					<c:forEach var="i" begin="0"
-                           end="${fn:length(days)-1 }">
-                           <a class="navbar-brand" href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
-                              <span>Day${i+1 }</span>
-                           </a><br>
-                        </c:forEach>
-                        </h1>
-	       <!-- 민희가 추가한 로그인 로그아웃입니다. -->
+      <c:forEach var="i" begin="0" end="${fn:length(days)-1 }">
+            <a class="navbar-brand" 
+            href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
+               <span>Day${i+1 }</span>
+            </a> 
+        </c:forEach>
+      </h1>
+          <!-- 민희가 추가한 로그인 로그아웃입니다. -->
       <c:if test="${empty myemail}">
          <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
       </c:if>
       
       <c:if test="${not empty myemail}">
          <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
-	
+   
          <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
       </c:if>
      <!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
 
     </div>
-  </header><!-- End Header -->
+  </header> --%><!-- End Header -->
 <%--          <header class="header_section">
             <div class="container">
                <nav class="navbar navbar-expand-lg custom_nav-container ">
                   <a class="navbar-brand" href="mainScreen.m"> <span>
                   <img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png">
-					<c:forEach var="i" begin="0"
+               <c:forEach var="i" begin="0"
                            end="${fn:length(days)-1 }">
                            <a class="navbar-brand" href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
                               <span>Day${i+1 }</span>
@@ -193,116 +237,123 @@ body {
          </header> --%>
          <!-- end header section -->
    </div>
+   
    <section class="food_section layout_padding-bottom" id="left-container">
       <div class="container">
          <ul class="filters_menu">
-            <li data-filter=".buger" class="active">호텔</li>
+            <li class="active" data-filter="*">All</li>
+            <li data-filter=".buger" >호텔</li>
             <li data-filter=".pasta">음식점</li>
-            <li data-filter=".fries">카페</li>
-            <li data-filter=".pizza">관광지</li>
+            <li data-filter=".fries" >카페</li>
+            <li data-filter=".pizza" >관광지</li>
          </ul>
-         <select name="jdate" id="jdate">
-            <c:forEach var="i" begin="0" end="${fn:length(days)-1}">
-               <option value="${days[i]}"
-                  <c:if test="${jdate eq days[i]}">selected</c:if>>Day${i+1}</option>
-            </c:forEach>
-         </select> &nbsp;&nbsp;
-         
+              <select name="jdate" id="jdate" onchange="selDay('${date}', '${sessionScope.sTravel}',this.options[this.selectedIndex].text)">
+             <c:forEach var="i" begin="0" end="${fn:length(days)-1}">
+                 <option value="${days[i]}" <c:if test="${jdate eq days[i]}">selected</c:if>>
+                     Day${i+1}
+                 </option>
+             </c:forEach>
+            </select> &nbsp;&nbsp;
+         <%-- <form  action="mainTravel.m">
+         <input type="hidden" name="date" value="${date}">
+         <input type="hidden" name="sTravel" value="manual">
+         <input type="hidden" name="whatColumn" value="name">
+         <input class="search" type="text" name="keyword" placeholder="이름">
+         <button class="search2" type="submit">검색</button>
+         </form> --%>
          <div class="filters-content">
             <div class="row grid">
-               <!-- 카테고리 페이지틀  -->
-               <!-- 카테고리 페이지틀  -->
-               <!-- 카페리스트 -->
+   <!-- 카테고리 페이지틀  -->
+      <!-- 카테고리 페이지틀  -->   
+      <!-- 카페리스트 -->   
                <c:forEach var="list" items="${cafeList}">
                   <div class="col-sm-6 col-lg-4 all fries">
                      <div class="box">
                         <div>
                            <div class="img-box">
-                              <a href="cafeDetail.cf?cnum=${list.cnum}"> <img
-                                 src="<%=request.getContextPath()%>/resources/images/${list.image}"
-                                 alt="이미지">
-                              </a>
+                                       <a href="#" class="showModalBtn" data-cnum="${list.cnum}">
+                                       <%-- <a href="cafeDetail.cf?cnum=${list.cnum}"> --%>
+                                    <img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+                                 </a>
                            </div>
                            <div class="detail-box">
                               <h5>${list.name}</h5>
                               <div class="options">
                                  <h6>${list.address}</h6>
-                                 <input type="checkbox" id="spotcheck"
-                                    data-xpos="${list.xpos}" data-ypos="${list.ypos}" value="${list.cnum }">&nbsp;
-                                 <input class="btn btn-primary" type="button" value="추가" onclick="insert('cafe',${list.cnum },'${date }')"><br>
+                                 <input class="btn btn-primary" type="button" 
+                                 value="추가" onclick="insert('cafe',${list.cnum },'${date }')"><br>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-                  <!-- 음식점 리스트 -->
+<!-- 음식점 리스트 -->
                </c:forEach>
                <c:forEach var="list" items="${restaurantList}">
                   <div class="col-sm-6 col-lg-4 all pasta">
                      <div class="box">
                         <div>
                            <div class="img-box">
-                              <a href="restDetail.re?rnum=${list.rnum}"> <img
-                                 src="<%=request.getContextPath()%>/resources/images/${list.image}"
-                                 alt="이미지">
-                              </a>
+                                       <a href="#" class="showModalBtn2" data-rnum="${list.rnum}">
+                                       <%-- <a href="restDetail.re?rnum=${list.rnum}"> --%>
+                                    <img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+                                 </a>
                            </div>
                            <div class="detail-box">
-                              <h5>${list.name}</h5>
+                              <h5>
+                              ${list.name}
+                              </h5>
                               <div class="options">
                                  <h6>${list.address}</h6>
-                                 <input type="checkbox" id="spotcheck"
-                                    data-xpos="${list.xpos}" data-ypos="${list.ypos}" value="${list.rnum }">&nbsp;
-                                 <input class="btn btn-primary" type="button" value="추가" onclick="insert('restaurant',${list.rnum },'${date }')"><br>
+                                 <input class="btn btn-primary" type="button" 
+                                 value="추가" onclick="insert('restaurant',${list.rnum },'${date }')"><br>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-
-                  <!-- 관광지 리스트 -->
+                  
+<!-- 관광지 리스트 -->
                </c:forEach>
                <c:forEach var="list" items="${spotList}">
                   <div class="col-sm-6 col-lg-4 all pizza">
                      <div class="box">
                         <div>
                            <div class="img-box">
-                              <a href="spotDetail.sp?snum=${list.snum}"> <img
-                                 src="<%=request.getContextPath()%>/resources/images/${list.image}"
-                                 alt="이미지">
-                              </a>
+                                       <a href="#" class="showModalBtn3" data-snum="${list.snum}">
+                                       <%-- <a href="spotDetail.sp?snum=${list.snum}"> --%>
+                                    <img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+                                 </a>
                            </div>
                            <div class="detail-box">
                               <h5>${list.name}</h5>
                               <div class="options">
                                  <h6>${list.address}</h6>
-                                 <input type="checkbox" id="spotcheck"
-                                    data-xpos="${list.xpos}" data-ypos="${list.ypos}" value="${list.snum }">&nbsp;
-                                 <input class="btn btn-primary" type="button" value="추가" onclick="insert('spot',${list.snum },'${date }')"><br>
+                                 <input class="btn btn-primary" type="button" 
+                                 value="추가" onclick="insert('spot',${list.snum },'${date }')"><br>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
                </c:forEach>
-               ${spotPage.pagingHtml}
+         
                <c:forEach var="list" items="${hotelList}">
                   <div class="col-sm-6 col-lg-4 all buger">
                      <div class="box">
                         <div>
                            <div class="img-box">
-                              <a href="hotelDetail.ht?hnum=${list.hnum}"> <img
-                                 src="<%=request.getContextPath()%>/resources/images/${list.image}"
-                                 alt="이미지">
-                              </a>
+                                       <a href="#" class="showModalBtn4" data-hnum="${list.hnum}">
+                                       <%-- <a href="hotelDetail.ht?hnum=${list.hnum}"> --%>
+                                 <img src="<%=request.getContextPath()%>/resources/images/${list.image}" alt="이미지">
+                                 </a>
                            </div>
                            <div class="detail-box">
                               <h5>${list.name}</h5>
                               <div class="options">
                                  <h6>${list.address}</h6>
-                                 <input type="checkbox" id="spotcheck"
-                                    data-xpos="${list.xpos}" data-ypos="${list.ypos}" value="${list.hnum }">&nbsp;
-                                 <input class="btn btn-primary" type="button" value="추가" onclick="insert('hotel',${list.hnum },'${date }')"><br>
+                                 <input class="btn btn-primary" type="button" 
+                                 value="추가" onclick="insert('hotel',${list.hnum },'${date }')"><br>
                               </div>
                            </div>
                         </div>
@@ -317,6 +368,7 @@ body {
       </div>
       <!-- 카테고리 페이지틀  -->
    </section>
+   
    <!-- 카테고리 페이지틀  -->
    <section id="right-container">
       <div>
@@ -481,6 +533,7 @@ body {
         };
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
+        <c:set var="number" value="1" />
         // Loop through the mlists and add markers for each coordinate
         <c:forEach var="mj" items="${mlists}">
             var xpos = ${mj.xpos};
@@ -489,7 +542,7 @@ body {
             // 위치 배열에 위치 추가합니다.
             var positions = [
                 {
-                    title: '장소',
+                    title: '${mj.name}',
                     latlng: new kakao.maps.LatLng(xpos, ypos)
                 }
             ];
@@ -515,6 +568,19 @@ body {
 
                 // 마커 배열에 마커를 추가합니다
                 markers.push(marker);
+                
+                var iwContent = '<div style="padding:5px;">${number}.${mj.name} <br><a href="https://map.kakao.com/link/map/${mj.name},${mj.xpos},${mj.ypos}" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${mj.name},${mj.xpos},${mj.ypos}" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                iwPosition = new kakao.maps.LatLng(${mj.xpos}, ${mj.ypos}); //인포윈도우 표시 위치입니다
+
+               // 인포윈도우를 생성합니다
+               var infowindow = new kakao.maps.InfoWindow({
+                   position : iwPosition, 
+                   content : iwContent 
+               });
+                 
+               // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+               infowindow.open(map, marker);
+               <c:set var="number" value="${number+1}" />
             }
         </c:forEach>
 
@@ -523,6 +589,38 @@ body {
         
         
     });
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $(".showModalBtn").click(function() {
+        var cnum = $(this).data("cnum");
+
+        window.open("cafeDetail.cf?cnum=" + cnum, "카페", "width=800, height=600");
+
+    });
+    $(function() {
+        $(".showModalBtn2").click(function() {
+            var rnum = $(this).data("rnum");
+
+            window.open("restDetail.re?rnum=" + rnum, "레스토랑", "width=800, height=600");
+
+        });
+
+        $(".showModalBtn3").click(function() {
+            var rnum = $(this).data("snum");
+
+            window.open("spotDetail.re?rnum=" + snum, "관광지", "width=800, height=600");
+
+        });
+        $(".showModalBtn4").click(function() {
+            var hnum = $(this).data("hnum");
+
+            window.open("hotelDetail.ht?hnum=" + hnum, "호텔", "width=800, height=600");
+
+        });
+    });
+});
 </script>
    
 </body>

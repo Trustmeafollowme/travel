@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import cafe.model.CafeBean;
 import cafe.model.CafeDao;
 
@@ -19,10 +19,11 @@ public class CafeDetailController {
 	
 	@RequestMapping(command)
 	public String cafeDetail(@RequestParam("cnum") String cnum, 
-							@RequestParam("pageNumber") String pageNumber, 
+							@RequestParam(value="pageNumber",required = false) String pageNumber, 
 							Model model) {
 		CafeBean cb = cafeDao.getCafeDetailByCnum(cnum);
 		model.addAttribute("cb", cb);
 		return viewPage;
 	}
+	
 }

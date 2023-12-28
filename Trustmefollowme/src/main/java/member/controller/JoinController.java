@@ -25,12 +25,16 @@ public class JoinController {
 
 	@RequestMapping(value = "join.mb", method = RequestMethod.POST)
 	public String join(MemberBean mb,HttpServletResponse response) throws IOException {
-
+		System.out.println("MemberBean"+mb.getName());
+		System.out.println("MemberBean"+mb.getEmail());
+		System.out.println("MemberBean"+mb.getMtel());
+		System.out.println("MemberBean"+mb.getAddress1());
+		System.out.println("MemberBean"+mb.getAddress1());
 		memberDao.insertMember(mb);
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = null;
 		out = response.getWriter();
-		out.print("<script>alert('È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.');</script>");
+		out.print("<script>alert('È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.');</script>");
 		out.flush();
 		
 		return "login";

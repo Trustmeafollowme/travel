@@ -49,12 +49,6 @@ public class MyJourneyDao {
 		return lists;
 	}
 
-	public int deleteMyjourney(Map<String, Object> map) {
-		int cnt = sqlSessionTemplate.delete(namespace+".deleteMyjourney", map);
-		System.out.println("deleteMyjourney cnt:"+cnt);
-		return cnt;
-	}
-
 	public List<MyJourneyBean> getAllMyJourneyByJdate(String jdate) {
 		List<MyJourneyBean> lists = sqlSessionTemplate.selectList(namespace+".getAllMyJourneyByJdate",jdate);
 		System.out.println("lists.size():"+lists.size());
@@ -202,5 +196,21 @@ public class MyJourneyDao {
 	      
 	      return cnt;
 	   }
-	
+
+	   public int deleteMyjourney(Map<String, Object> map) {
+	      int cnt = sqlSessionTemplate.delete(namespace+".deleteMyjourney", map);
+	      System.out.println("deleteMyjourney cnt:"+cnt);
+	      return cnt;
+	   }
+	   public List<MyJourneyBean> getMJNums(String id) {
+		      List<MyJourneyBean> lists = sqlSessionTemplate.selectList(namespace+".getMJNums", id);
+		      System.out.println("lists.size():"+lists.size());
+		      return lists;
+		   }
+
+
+	  public void deleteJnumZero() {
+		  sqlSessionTemplate.selectList(namespace+".deleteJnumZero");
+		
+	}
 }
