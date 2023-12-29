@@ -17,7 +17,7 @@
 		</if>
 </select>
 <insert id="spotInsert">
-    insert into spot values(spot_seq.nextval, #{name}, #{xpos}, #{ypos}, #{address}, #{content}, #{image}, #{image2}, #{image3}, #{image4}, #{image5})
+    insert into spot values(spot_seq.nextval, #{name}, #{xpos}, #{ypos}, #{address}, #{content}, #{image}, #{image2}, #{image3}, #{image4}, #{image5},#{stime})
 </insert>
 
 <select id="spotDetail" resultType="spot.model.SpotBean">
@@ -30,7 +30,7 @@
 
 <update id="spotUpdate">
 	update spot set name=#{name} ,xpos=#{xpos},ypos=#{ypos},address=#{address},content=#{content},
-	image= #{image}, image2=#{image2},image3= #{image3}, image4 = #{image4}, image5=#{image5}
+	image= #{image}, image2=#{image2},image3= #{image3}, image4 = #{image4}, image5=#{image5}, stime = #{stime}
 	where snum = #{snum}
 </update>
 

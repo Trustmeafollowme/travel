@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,22 +28,21 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "join.mb", method = RequestMethod.POST)
-	public String join(MemberBean mb,HttpServletResponse response) throws IOException {
-		System.out.println("MemberBean"+mb.getName());
-		System.out.println("MemberBean"+mb.getEmail());
-		System.out.println("MemberBean"+mb.getMtel());
-		System.out.println("MemberBean"+mb.getAddress1());
-		System.out.println("MemberBean"+mb.getAddress1());
-		memberDao.insertMember(mb);
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = null;
-		out = response.getWriter();
-		out.print("<script>alert('ȸ�������� �Ϸ�Ǿ����ϴ�.');</script>");
-		out.flush();
+	public String join(@Valid MemberBean mb,BindingResult bresult,HttpServletResponse response,
+						Model model) throws IOException {
+
+		if(bresult.hasErrors()) {
+			return "join";  
+		}
 		
-		return "login";
+		memberDao.insertMember(mb);
+		model.addAttribute("redirectUrl", "login.mb");
+	    return "redirect";
 		
 		
 	}
+	
+
+	
 
 }

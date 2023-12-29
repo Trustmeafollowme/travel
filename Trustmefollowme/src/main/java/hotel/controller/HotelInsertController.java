@@ -1,6 +1,7 @@
-  package hotel.controller;
+package hotel.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,37 +21,39 @@ import org.springframework.web.multipart.MultipartFile;
 
 import hotel.model.HotelBean;
 import hotel.model.HotelDao;
+
 @Controller
 public class HotelInsertController {
 	private final String command = "/hotelInsert.ht";
 	private final String viewPage = "hotelInsertForm";
-	private final String gotoPage = "redirect:/hotelList.ht";
-	
+	private final String gotoPage = "redirect:/admin.mb";
+
 	@Autowired
 	@Qualifier("hotelDao")
 	private HotelDao hotelDao;
 
 	@Autowired
 	ServletContext servletContext;
-	
+
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String insertForm() {
 		return viewPage;
 	}
-	
+
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String insert(@ModelAttribute("HotelBean") @Valid HotelBean hb,BindingResult bResult,HttpServletRequest request) throws IllegalStateException, IOException{
-		if(bResult.hasErrors()) {
+	public String insert(@ModelAttribute("HotelBean") @Valid HotelBean hb, BindingResult bResult,
+			HttpServletRequest request, Model model, @RequestParam(value = "cate", required = false) String cate,
+			@RequestParam(value = "pageNumber", required = false) String pageNumber)
+			throws IllegalStateException, IOException {
+
+		if (bResult.hasErrors()) {
 			return viewPage;
 		}
-		 System.out.println("여기까지 넘어옴");
-			hotelDao.insertHotel(hb);
-		
-			
-			String uploadPath = servletContext.getRealPath("/resources/images/");
-			System.out.println("uploadPath:"+uploadPath);
-		
-			
+		hotelDao.insertHotel(hb);
+
+		String uploadPath = servletContext.getRealPath("/resources/images/");
+		System.out.println("uploadPath:" + uploadPath);
+
 //			File destination = new File(uploadPath+File.separator+hb.getImage());
 //			if(!destination.exists())
 //				destination.mkdirs();
@@ -84,7 +87,9 @@ public class HotelInsertController {
 //				MultipartFile multi6 = hb.getUpload6();
 //				multi6.transferTo(destination6);
 //			}
-			return gotoPage;
+		model.addAttribute("cate", "hotel");
+		model.addAttribute("pageNumber", pageNumber);
+		return gotoPage;
 
 	}
 }

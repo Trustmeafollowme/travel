@@ -25,7 +25,7 @@ import hotel.model.HotelDao;
 public class HotelUpdateController {
 	private final String command = "hotelUpdate.ht"; 
 	private final String gotoPage ="hotelUpdateForm";
-	private final String viewPage ="redirect:hotelList.ht";
+	private final String viewPage ="redirect:admin.mb";
 @Autowired
 @Qualifier("hotelDao")
 private HotelDao hotelDao;
@@ -33,7 +33,7 @@ private HotelDao hotelDao;
 ServletContext servletContext;
 
 @RequestMapping(value=command,method=RequestMethod.GET)
-public String updateForm( @RequestParam("hnum")int hnum,@RequestParam("pageNumber")String pageNumber,Model model) {
+public String updateForm( @RequestParam("hnum")int hnum,@RequestParam(value="pageNumber",required = false)String pageNumber,Model model) {
 
 
 		HotelBean hotel = hotelDao.getHotel(hnum);
@@ -47,13 +47,14 @@ public String updateForm( @RequestParam("hnum")int hnum,@RequestParam("pageNumbe
 @RequestMapping(value = command,method = RequestMethod.POST)
 public String update(@ModelAttribute("hotel") @Valid HotelBean hb,BindingResult bresult,
 					@RequestParam(value="pageNumber",required = false)String pageNumber, 
+					@RequestParam(value="cate",required = false)String cate,
 					HttpServletRequest request,Model model) throws IllegalStateException, IOException {
 
-	
-//	if(bresult.hasErrors()) {
-//		model.addAttribute("pageNumber", pageNumber);
-//		return gotoPage;
-//	}
+
+	if(bresult.hasErrors()) {
+		model.addAttribute("pageNumber", pageNumber);
+		return gotoPage;
+	}
 //
 //	if(hb.getUpload() == null) {
 //		hb.setImage(hb.getD_image());
@@ -129,6 +130,7 @@ public String update(@ModelAttribute("hotel") @Valid HotelBean hb,BindingResult 
 //		delImage6.delete();
 //	}
 //	
+	model.addAttribute("cate","hotel");
 	return viewPage+"?pageNumber="+pageNumber;
 	}
 }

@@ -170,6 +170,7 @@ flex-grow: 5;
     background-color: #D5D5D5;
   }
 </style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
    var displayedItems = 6; // 초기값을 표시된 아이템의 개수로 설정
 
@@ -535,12 +536,7 @@ flex-grow: 5;
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
 	<!-- custom js -->
-	<script src="<%=request.getContextPath()%>/resources/js/custom.js"></script>
-	<!-- Google Map -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-		
-	</script>
+<%-- 	<script src="<%=request.getContextPath()%>/resources/js/custom.js"></script> --%>
 </body>
 <div class="modal" id="modal"  role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true" >
 	<div class="modal-dialog" style="width:850px;">

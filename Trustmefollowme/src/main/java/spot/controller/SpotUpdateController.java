@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +23,8 @@ import spot.model.SpotDao;
 public class SpotUpdateController {
 	private final String command = "spotUpdate.sp";
 	private final String viewPage = "spotUpdateForm";
-	private final String gotoPage = "redirect:spotList.sp";
+	private final String gotoPage = "redirect:admin.mb";
+
 	
 	@Autowired
 	SpotDao spotDao;
@@ -31,7 +33,7 @@ public class SpotUpdateController {
 	ServletContext servletContext;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String cafeUpdate(@RequestParam("snum") int snum, 
+	public String spotUpdate(@RequestParam("snum") int snum, 
 							@RequestParam(value="pageNumber",required = false) String pageNumber, 
 							HttpServletRequest request) {
 		SpotBean sb = spotDao.spotDetail(snum);
@@ -41,21 +43,20 @@ public class SpotUpdateController {
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String cafeUpdate(@Valid SpotBean sb, BindingResult cResult,  
+	public String spotUpdate(@Valid SpotBean sb, BindingResult cResult,  
 							@RequestParam(value="pageNumber",required = false) String pageNumber, 
-							HttpServletRequest request) throws IllegalStateException, IOException {
+							HttpServletRequest request,@RequestParam(value="cate",required = false) String cate,Model model) throws IllegalStateException, IOException {
 		if(cResult.hasErrors()) {
 			request.setAttribute("pageNumber", pageNumber);
 			return viewPage;
 		}
-		
-		System.out.println("sb.getImage() :"+sb.getImage());
-		System.out.println("sb.getImage2() :"+sb.getImage2());
-		System.out.println("sb.getImage3() :"+sb.getImage3());
-		System.out.println("sb.getImage4() :"+sb.getImage4());
-		System.out.println("sb.getImage5() :"+sb.getImage5());
+	System.out.println(sb.getSnum());
+	System.out.println(sb.getAddress());
+	System.out.println(sb.getContent());
+	System.out.println(sb.getStime());
+	System.out.println(sb.getXpos());
 		spotDao.updateSpot(sb);
-
+		model.addAttribute("cate","spot");
 		return gotoPage+"?pageNumber="+pageNumber;
 	}
 }

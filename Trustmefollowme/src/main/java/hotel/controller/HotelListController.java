@@ -18,11 +18,14 @@ import hotel.model.HotelBean;
 import hotel.model.HotelDao;
 import utility.Paging;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @Controller
 public class HotelListController {
 
 	private final String command = "/hotelList.ht";
-	private final String viewPage = "hotelListForm";
+	private final String viewPage = "redirect:admin.mb";
 @Autowired
 @Qualifier("hotelDao")
 private HotelDao hotelDao;
@@ -30,26 +33,35 @@ private HotelDao hotelDao;
 
 	@RequestMapping(value = command)
 	public String hotelList(Model model, HttpServletRequest request,
-			@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
+			@RequestParam(value = "whatColumn", required = false) String whatColumn,
 			@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "pageNumber", required = false) String pageNumber) {
+			@RequestParam(value = "pageNumber", required = false) String pageNumber,
+			@RequestParam(value = "cate", required = false) String cate) throws UnsupportedEncodingException {
 		
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("whatColumn", whatColumn);
 		map.put("keyword", "%"+keyword+"%");
-		map.put("WhatColumn", WhatColumn);
+		
+		System.out.println("whatColumn: " + whatColumn);
+		System.out.println("keyword: " + keyword);
 		
 		int totalCount = hotelDao.totalCount(map);
 		String url = request.getContextPath()+command;
-		String pageSize = "6";
+		String pageSize = "10";
 		
-		Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, WhatColumn, keyword);
+		Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, whatColumn, keyword);
+		System.out.println("map: " + map);
+		System.out.println("pageInfo: " + pageInfo);
 		
 		List<HotelBean> list = hotelDao.getAllHotel(map, pageInfo);
 		System.out.println("list.size()"+list.size());
 		
 		model.addAttribute("list", list);
-		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("paging", pageInfo);
+		model.addAttribute("cate", "hotel");
 		
-		return viewPage;
+		String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
+		
+		return "redirect:admin.mb?whatColumn=" + whatColumn + "&keyword=" + encodedKeyword;
 	}
 }

@@ -2,26 +2,28 @@ package member.model;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class MemberBean {
-   private int num;
-   @NotNull(message = "이메일이 누락되었습니다.")
+   private String num;
+   @NotEmpty(message = "이메일이 누락되었습니다.")
    private String email;
-   @NotNull(message = "비밀번호가 누락되었습니다.")
+   @NotEmpty(message = "비밀번호가 누락되었습니다.")
    private String password;
    
-   @NotNull(message = "이름이 누락되었습니다.")
+   @NotEmpty(message = "이름이 누락되었습니다.")
    private String name;
    
-   @NotNull(message = "생년월일이 누락되었습니다.")
+   @NotEmpty(message = "생년월일이 누락되었습니다.")
    private String birth;
    
-   @NotNull(message = "주소가 누락되었습니다.")
+   @NotEmpty(message = "주소가 누락되었습니다.")
    private String address1;
    
-   @NotNull(message = "상세주소가 누락되었습니다.")
+   @NotEmpty(message = "상세주소가 누락되었습니다.")
    private String address2;
    
-   @NotNull(message = "번호가 누락되었습니다.")
+   @NotEmpty(message = "번호가 누락되었습니다.")
    private String mtel;
    private String kakaoId;
    private String myjNum;
@@ -37,10 +39,10 @@ public class MemberBean {
    public void setMyjNum(String myjNum) {
       this.myjNum = myjNum;
    }
-   public int getNum() {
+   public String getNum() {
       return num;
    }
-   public void setNum(int num) {
+   public void setNum(String num) {
       this.num = num;
    }
    public String getEmail() {

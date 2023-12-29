@@ -24,7 +24,7 @@ public class RestaurantUpdateController {
 
 	private final String command = "/restUpdate.re";
 	private final String viewPage = "restaurantUpdateForm";
-	private final String gotoPage = "redirect:/restList.re";
+	private final String gotoPage = "redirect:/admin.mb";
 	
 	@Autowired
 	private RestaurantDao restaurantDao;
@@ -33,18 +33,20 @@ public class RestaurantUpdateController {
 	ServletContext servletContext;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String restUpdateForm(Model model, @RequestParam("rnum") int rnum) {
+	public String restUpdateForm(Model model, @RequestParam("rnum") int rnum,
+			@RequestParam(value="pageNumber",required = false)String pageNumber) {
 		
 		RestaurantBean restaurantBean = restaurantDao.restOneInfo(rnum);
 		
 		model.addAttribute("restaurantBean", restaurantBean);
-		
+		model.addAttribute("pageNumber",pageNumber);
 		return viewPage;
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public String restUpdate(Model model, HttpServletRequest request,
-							@Valid RestaurantBean rb, BindingResult result) {
+							@Valid RestaurantBean rb, BindingResult result,
+							@RequestParam(value="cate",required = false)String cate) {
 		
 		
 		if(result.hasErrors()) {
@@ -94,6 +96,7 @@ public class RestaurantUpdateController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		model.addAttribute("cate", "restaurant");
 		return gotoPage;
 	}
 }

@@ -257,7 +257,6 @@
 
   /**
    * Testimonials slider
-   */
   new Swiper('.testimonials-slider', {
     speed: 600,
     loop: true,
@@ -272,6 +271,8 @@
       clickable: true
     }
   });
+   */
+
 
   /**
    * Animation on scroll

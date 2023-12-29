@@ -23,7 +23,7 @@ import cafe.model.CafeDao;
 public class CafeUpdateController {
 	private final String command = "cafeUpdate.cf";
 	private final String viewPage = "cafeUpdateForm";
-	private final String gotoPage = "redirect:mainCafeList.cf";
+	private final String gotoPage = "redirect:/admin.mb";
 	
 	@Autowired
 	private CafeDao cafeDao;
@@ -44,12 +44,12 @@ public class CafeUpdateController {
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public String cafeUpdate(@Valid CafeBean cb, BindingResult cResult,  
 							@RequestParam("pageNumber") String pageNumber, 
-							Model model, HttpServletRequest request) throws IllegalStateException, IOException {
+							Model model, HttpServletRequest request,@RequestParam(value="cate",required = false) String cate) throws IllegalStateException, IOException {
 		if(cResult.hasErrors()) {
 			model.addAttribute("pageNumber", pageNumber);
 			return viewPage;
 		}
-		String uploadPath = request.getContextPath()+"/resources/images/";
+		String uploadPath = servletContext.getRealPath("/resources/images/");
 		cafeDao.updateCafe(cb);
 		
 		File newImage = new File(uploadPath+File.separator+cb.getImage());
@@ -94,6 +94,7 @@ public class CafeUpdateController {
 			multi5.transferTo(newImage5);
 			delImage5.delete();
 		}
+		model.addAttribute("cate","cafe");
 		return gotoPage+"?pageNumber="+pageNumber;
 	}
 }

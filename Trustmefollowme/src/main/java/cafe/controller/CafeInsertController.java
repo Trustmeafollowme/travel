@@ -9,9 +9,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import cafe.model.CafeBean;
@@ -21,7 +23,7 @@ import cafe.model.CafeDao;
 public class CafeInsertController {
 	private final String command = "cafeInsert.cf";
 	private final String viewPage = "cafeInsertForm";
-	private final String gotoPage = "redirect:/mainCafeList.cf";
+	private final String gotoPage = "redirect:admin.mb";
 	
 	@Autowired
 	private CafeDao cafeDao;
@@ -35,7 +37,7 @@ public class CafeInsertController {
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String cafeInsert(@Valid CafeBean cb, BindingResult cResult, HttpServletRequest request) throws IllegalStateException, IOException {
+	public String cafeInsert(@Valid CafeBean cb, BindingResult cResult, HttpServletRequest request,@RequestParam(value="cate",required = false)String cate,Model model) throws IllegalStateException, IOException {
 		if(cResult.hasErrors()) {
 			return viewPage;
 		}
@@ -75,7 +77,7 @@ public class CafeInsertController {
 		}
 		
 		
-		
+		model.addAttribute("cate","cafe");
 		return gotoPage;
 	}
 }

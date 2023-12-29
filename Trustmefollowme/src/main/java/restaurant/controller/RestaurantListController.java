@@ -1,5 +1,7 @@
 package restaurant.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,7 @@ import utility.Paging;
 @Controller
 public class RestaurantListController {
 
-	private final String command = "/restList.re";
+	private final String command = "/mainRestaurantList.re";
 	private final String viewPage = "restaurantListForm";
 	
 	@Autowired
@@ -29,28 +31,30 @@ public class RestaurantListController {
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String restList(Model model, HttpServletRequest request, HttpServletResponse response,
-						@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
+						@RequestParam(value = "whatColumn", required = false) String whatColumn,
 						@RequestParam(value = "keyword", required = false) String keyword,
-						@RequestParam(value = "pageNumber", required = false) String pageNumber) {
+						@RequestParam(value = "pageNumber", required = false) String pageNumber,
+						@RequestParam(value = "cate", required = false) String cate) throws UnsupportedEncodingException {
 		
 		
 		
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("whatColumn", whatColumn);
 		map.put("keyword", "%"+keyword+"%");
-		map.put("WhatColumn", WhatColumn);
 
 		int totalCount = restaurantDao.totalCount(map);
 		
 		String url = request.getContextPath()+command;
 		
-		Paging pageInfo = new Paging(pageNumber, null, totalCount, url, WhatColumn, keyword);
+		Paging pageInfo = new Paging(pageNumber, null, totalCount, url, whatColumn, keyword);
 		List<RestaurantBean> lists = restaurantDao.restList(map, pageInfo);
 		
-		model.addAttribute("cate", "rest");
+		model.addAttribute("cate", "restaurant");
 		model.addAttribute("detail", "mainRestaurantList.re");
 		model.addAttribute("lists", lists);
 		model.addAttribute("pageInfo", pageInfo);
 		
-		return viewPage;
+		String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
+		return  "redirect:admin.mb?whatColumn=" + whatColumn + "&keyword=" + encodedKeyword;
 	}
 }

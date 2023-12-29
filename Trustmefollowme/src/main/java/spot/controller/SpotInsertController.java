@@ -9,10 +9,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import spot.model.SpotBean;
@@ -23,7 +25,7 @@ public class SpotInsertController {
 
 	private final String command = "/spotInsert.sp";
 	private final String viewPage = "spotInsertForm";
-	private final String gotoPage = "redirect:spotList.sp";
+	private final String gotoPage = "redirect:admin.mb";
 	
 	@Autowired
 	private SpotDao  spotdao;
@@ -36,7 +38,8 @@ public class SpotInsertController {
 		return viewPage;
 	}
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String spotInsert(SpotBean sb, BindingResult result,HttpServletRequest request)throws IllegalStateException, IOException  {
+	public String spotInsert(SpotBean sb, BindingResult result,HttpServletRequest request
+			,Model model,@RequestParam(value="cate",required = false)String cate)throws IllegalStateException, IOException  {
 		
 		System.out.println("sb.getImage():"+sb.getAddress());
 		System.out.println("sb.getImage():"+sb.getName());
@@ -66,7 +69,18 @@ public class SpotInsertController {
 			MultipartFile multi3 = sb.getUpload3();
 			multi3.transferTo(destination3);
 		}
+		if(sb.getImage4() != null) {
+			File destination4 = new File(uploadPath+File.separator+sb.getImage4());
+			MultipartFile multi4 = sb.getUpload4();
+			multi4.transferTo(destination4);
+		}
 		
+		if(sb.getImage5() != null) {
+			File destination5 = new File(uploadPath+File.separator+sb.getImage5());
+			MultipartFile multi5 = sb.getUpload5();
+			multi5.transferTo(destination5);
+		}
+		model.addAttribute("cate","spot");
 		return gotoPage;
 	}
 }

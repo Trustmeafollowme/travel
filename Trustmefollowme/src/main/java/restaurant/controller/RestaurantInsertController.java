@@ -8,9 +8,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import restaurant.model.RestaurantBean;
@@ -22,7 +24,7 @@ public class RestaurantInsertController {
 
 	private final String command = "/restInsert.re";
 	private final String viewPage = "restaurantInsertForm";
-	private final String gotoPage = "restaurantListForm";
+	private final String gotoPage = "redirect:admin.mb";
 	
 	@Autowired
 	private RestaurantDao restaurantDao;
@@ -38,7 +40,9 @@ public class RestaurantInsertController {
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String restInsert(@Valid RestaurantBean rb, BindingResult result) throws IllegalStateException, IOException {
+	public String restInsert(@Valid RestaurantBean rb, BindingResult result,Model model,
+			@RequestParam(value="cate",required = false)String cate,
+			@RequestParam(value="pageNumber", required = false)String pageNumber) throws IllegalStateException, IOException {
 		
 		if(result.hasErrors()) {
 			return viewPage;
@@ -66,6 +70,8 @@ public class RestaurantInsertController {
 			multi4.transferTo(file4);
 			multi5.transferTo(file5);
 			
+			model.addAttribute("cate","restaurant");
+			model.addAttribute("pageNumber", pageNumber);
 		
 		return gotoPage;
 	}

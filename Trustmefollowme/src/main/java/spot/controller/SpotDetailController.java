@@ -21,7 +21,8 @@ public class SpotDetailController {
 	private SpotDao spotDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String restDetail(@RequestParam("snum") int snum,HttpServletRequest request) {
+	public String restDetail(@RequestParam("snum") int snum,HttpServletRequest request,
+			@RequestParam(value="pageNumber",required=false) String pageNumber) {
 		
 		SpotBean sb = spotDao.spotDetail(snum);
 		request.setAttribute("sb", sb);

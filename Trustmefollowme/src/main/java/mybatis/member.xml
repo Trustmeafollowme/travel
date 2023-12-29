@@ -11,9 +11,8 @@
 	</select>
 
 	<insert id="insertMember">
-		insert into member(num,email,password,name,birth,address1,address2,mtel)
-		values(member_seq.nextval,#{email},#{password},#{name},#{birth},#{address1},#{address2},#{mtel})
-
+		insert into member(num,email,password,name ,birth ,address1, address2, mtel)
+	values(member_seq.nextval,#{email},#{password},#{name},#{birth},#{address1},#{address2},#{mtel})
 	</insert>
 	
 	<select id="getMemberInfo" resultType="member.model.MemberBean">
