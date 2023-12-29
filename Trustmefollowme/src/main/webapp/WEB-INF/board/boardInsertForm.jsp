@@ -152,7 +152,7 @@
 .row{
 	text-align: center;
 }
-img{
+#img{
 	border-radius: 30%;
 	box-shadow: 2px 2px 2px gray;	
 }
@@ -162,38 +162,79 @@ img{
 .btn{
 	margin-bottom: 50px;
 }
+li{
+	color: black;
+}
+li:hover{
+	color: orange;
+}
 </style>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets/css/main.css" />
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
+	<link href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-<nav class="navbar navbar-expand-xl nav_area sticky">
-	<div class="container">
-		<div>
-		<ul class="navbar-nav ml-auto navbar-center main_menu onepage_nav">
-		<li>
-			<a href="mainScreen.m">
-			나만 믿고 따라와!</a>
-			</li>
-		</ul>
-		</div>
-		<div class="collapse navbar-collapse " id="navbarNav">
-			<ul class="navbar-nav ml-auto navbar-center main_menu onepage_nav">
-				<li class="nav-item"><a class="nav-link" href="mainScreen.m">메인</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="boardList.bd">목록보기</a>
-				</li>
-				<c:if test="${sessionScope.myname eq '어드민'}">
-				<li class="nav-item"><a class="nav-link" href="#contact">관리자</a>
-				</li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
-</nav>
-<div style="display: inline-block; width: 100%; margin-top: 20px;" align="center">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+	<link href="<%=request.getContextPath()%>/resources/assets/vendor/aos/aos.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+ 	<link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets/css/main.css" />
+	<link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
+
+
+<header id="header" >
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <c:if test="${empty myemail}">
+         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
+      </c:if>
+      
+      <c:if test="${not empty myemail}">
+         <a href="myPage.mb" class="get-started-btn scrollto">${myemail}</a>
+	
+         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
+      </c:if>
+
+    </div>
+  </header>
+
+<div style="display: inline-block; width: 100%; margin-top: 100px;" align="center">
 	<div
 		style="display: inline-block; vertical-align: top;">
 		<h2 style="color: black; padding-top: 15px;">
@@ -202,10 +243,13 @@ img{
 	</div>
 </div>
 <br><br>
+
+<c:set var="count" value="0"/>
 <nav id="nav" style="width: 100%; padding-top: 30px;">
 						<ul>
 					<c:forEach var="bd" items="${fn:split(getJnum,',')}">
-							<li><a href="#${bd}" class="active"><font color="black">${bd+1}번째 여정</font></a></li>
+<c:set var="count" value="${count+1}"/>
+							<li><a href="#${bd}" class="active"><font color="black">${count}번째 여정</font></a></li>
 					</c:forEach>
 						</ul>
 					</nav>
@@ -217,15 +261,17 @@ img{
   <link href="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
     
+<c:set var="count" value="0"/>
      <section id="services" class="services">
       <div class="container" data-aos="fade-up">
         <div class="row">
 		<c:forEach var="bd" items="${fn:split(getJnum,',')}">
+<c:set var="count" value="${count+1}"/>
           <div class="col-lg-4 col-md-6 align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
           <div id="${bd}">
-	${bd+1}번째 여정
+	${count}번째 여정
 	<br><br>
-	<div><img src="<%=request.getContextPath()%>/resources/images/jejuInsert.jpg" width="150px" height="150px"></div>
+	<div><img id="img" alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png" width="150" height="130"></div>
 	<br>
 		<div class="btn"><a id="btn" href="boardInsert2.bd?jnum=${bd}"><font color="black">이동</font></a></div>
 	</div>

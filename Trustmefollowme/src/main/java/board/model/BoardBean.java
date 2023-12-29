@@ -21,6 +21,7 @@ public class BoardBean {
 	private String jnum;
 	private String minDate;
 	private String maxDate;
+	private int likes;
 
 	private MultipartFile imgUpload;
 	
@@ -112,5 +113,11 @@ public class BoardBean {
 	}
 	public void setMaxDate(String maxDate) {
 		this.maxDate = maxDate;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 }

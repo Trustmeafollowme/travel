@@ -30,7 +30,7 @@ public class JourneyController {
 		
 		
 		if(mb.getHotel()==null) {
-			session.setAttribute("date",request.getParameter("date"));
+		
 			return "redirect:mainTravel.m";
 		}
 		
@@ -47,9 +47,11 @@ public class JourneyController {
 			System.out.println("mb.getHotel()" + mb.getHotel());
 			String hotels[] = mb.getHotel().split(",");
 			
+			System.out.println("hotels.length"+hotels.length);
+			System.out.println("date.length"+date.length);
+			
 			if(hotels.length>date.length) {
-				session.setAttribute("date",request.getParameter("date"));
-				System.out.println(""+hotels.length+"/"+date.length);
+			
 				return "redirect:mainTravel.m";
 			}
 

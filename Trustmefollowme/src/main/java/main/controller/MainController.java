@@ -66,6 +66,13 @@ public class MainController {
 			) {
 		String myemail =(String)session.getAttribute("myemail");
 		String myname =(String)session.getAttribute("myname");
+		if(sTravel!=null) {
+			session.setAttribute("sTravel",sTravel);
+		}
+		else {
+			sTravel = (String)session.getAttribute("sTravel");
+		}
+		
 		if(myemail==null) {
 			return "redirect:login.mb";
 		}
@@ -73,16 +80,21 @@ public class MainController {
 			request.setAttribute("myname", myname);
 			request.setAttribute("myemail", myemail);
 		}
+	
+		
+		if(request.getParameter("date")==null) {
+			date = (String)session.getAttribute("date");
+			request.setAttribute("date", date);
+		}
+		else {
+			request.setAttribute("date", request.getParameter("date"));
+		}
+		
+		
 		if(sTravel.equals("auto")) {
-			if(request.getParameter("date")==null) {
-				String date1 = (String)session.getAttribute("date");
-				request.setAttribute("date", date1);
-				}
-				else {
-				request.setAttribute("date", request.getParameter("date"));
-				String[] days = date.split(" ");
-				request.setAttribute("days", days);
-				}
+			request.setAttribute("date", request.getParameter("date"));
+			String[] days = date.split(" ");
+			request.setAttribute("days", days);
 				Map<String, String> map = new HashMap<String, String>();
 				
 				map.put("whatColumn", whatColumn);
@@ -116,11 +128,6 @@ public class MainController {
 				Paging spotPaging = new Paging(pageNumber, String.valueOf(sptTotal), sptTotal, url, whatColumn, keyword);
 				List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
 				
-//				request.setAttribute("spotPage", spotPaging);
-//				request.setAttribute("restaurantPage", restaurantPage);
-//				request.setAttribute("cafePage", cafePage);
-//				request.setAttribute("hotelPage", hotelPage);
-			
 				request.setAttribute("spotList", spotList);
 				request.setAttribute("hotelList", hotelList);
 				request.setAttribute("restaurantList", restaurantList);
@@ -269,9 +276,8 @@ public class MainController {
 			
 
 			List<BoardBean> boardlists = boardDao.MboardList(map);
-			List<BoardBean> likelists = boardDao.LikeboardList();
 			
-			request.setAttribute("likelists", likelists);
+			request.setAttribute("likelists", boardlists);
 			request.setAttribute("boardlists", boardlists);
 			request.setAttribute("spotList", spotList);
 			request.setAttribute("hotelList", hotelList);

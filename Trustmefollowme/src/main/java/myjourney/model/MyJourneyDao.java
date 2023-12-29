@@ -213,4 +213,11 @@ public class MyJourneyDao {
 		  sqlSessionTemplate.selectList(namespace+".deleteJnumZero");
 		
 	}
+
+
+	  public int searchByJateAndJnumZero(Map<String, String> map) {
+	      int count = sqlSessionTemplate.selectOne(namespace+".searchByJateAndJnumZero", map);
+	      return count;
+	   }
+
 }

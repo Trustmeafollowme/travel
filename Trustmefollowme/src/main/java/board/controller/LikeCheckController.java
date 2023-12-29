@@ -25,8 +25,11 @@ public class LikeCheckController {
 	@ResponseBody
 	@RequestMapping(command)
 	public String likeCheck(@RequestParam("m_num") String m_num,
-			@RequestParam("b_num") String b_num) {
-		
+						@RequestParam("b_num") String b_num,
+						@RequestParam("mEmail") String mEmail) {
+		System.out.println(mEmail);
+		System.out.println(b_num);
+		System.out.println(m_num);
 	    
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("m_num", m_num);
@@ -35,10 +38,16 @@ public class LikeCheckController {
 		
 		LikeBean likeInfo = boardDao.findLike(map);
 		if(likeInfo.getLikes() == 0) {
-			boardDao.likeUp(likeInfo);
+			int cnt = boardDao.likeUp(likeInfo);
+			if(cnt != -1) {
+			boardDao.boardLikeUp(b_num, mEmail);
+			}
 			return "YES";
 		}else {
-			boardDao.likeDown(likeInfo);
+			int cnt = boardDao.likeDown(likeInfo);
+			if(cnt != -1) {
+			boardDao.boardLikeDown(b_num, mEmail);
+			}
 			return "NO";
 		}
 	}
