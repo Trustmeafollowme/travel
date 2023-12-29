@@ -399,19 +399,6 @@
 	        		</div>
 	        	</div>
 	        </div>
-	        <div class="product-info-tabs">
-		        <ul class="nav nav-tabs" id="myTab" role="tablist">
-				  	<li class="nav-item">
-				    	<a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">소개</a>
-				  	</li>
-				</ul>
-				<div class="tab-content" id="myTabContent">
-				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-				  		${rb.address}
-				  		
-				  	</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>

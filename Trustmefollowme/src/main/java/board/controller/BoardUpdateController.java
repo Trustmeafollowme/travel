@@ -53,6 +53,7 @@ public class BoardUpdateController {
 		String id=(String)session.getAttribute("myemail");
 		
 		String minDate = myJourneyDao.minDate(jnum,id);
+		String maxDate = myJourneyDao.maxDate(jnum,id);
 		
 		mb.setId(id);
 		
@@ -68,6 +69,7 @@ public class BoardUpdateController {
 		model.addAttribute("list", list);
 		model.addAttribute("myemail", id);
 		model.addAttribute("minDate", minDate);
+		model.addAttribute("maxDate", maxDate);
 		model.addAttribute("date", date);
 		
 		model.addAttribute("bb", bb);

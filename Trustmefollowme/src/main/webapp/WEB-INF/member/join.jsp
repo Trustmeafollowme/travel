@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="../common/common.jsp"%>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="resources/css/myPage.css" />
-<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+
 <style>
 	#change--btn[type=button] {
 		background-color: #BCE55C;
@@ -60,11 +61,17 @@
 	input[type=date] {
 		outline: none;
 	}
+	.err {
+	font-size: 9pt;
+	color: red;
+	font-weight: bold;
+}
 </style>
  <script>
  
+ 
 	 $(document).ready(function() { 
-		//alert('회원가입폼');
+		//alert('회원가입폼');ResponseEntity<String> response = rt
 		var isCheck = false;
 
 		$('#email_check').click(function(){ // 중복체크버튼
@@ -129,11 +136,13 @@
 		}); // keydown
 		
 	}); // ready 
- </script>  
+ </script> 
+  
 <main class="main--container">
 
 	<div class="content--container">
-		<form action="join.mb" method="post" class="form--container">
+		<form action="join.mb" method="post" class="form--container"
+		  onsubmit="return validateForm()">
 		<div>
 			<input type="email" name="email" class="input--box" placeholder="이메일을 입력해 주세요" autocomplete="off" id="email--box">
 			<button type="button" id="email_check" >중복확인</button>
@@ -141,10 +150,10 @@
 			<span id="emailMessage" style="display: none;"></span>		
 		</div>
 		<div id="check--pattern"></div>
-		<input type="password" name="password" class="input--box" placeholder="비밀번호를 입력해 주세요" autocomplete="off" id="password--box"> 
+		<input type="password" name="password" class="input--box" placeholder="비밀번호를 입력해 주세요"   autocomplete="off" id="password--box"> 
 		<input type="password" name="passwordCheck" class="input--box" placeholder="비밀번호 확인" autocomplete="off" id="password--check">
 		<div id="key--check"></div>
-		<input type="text" name="name" class="input--box" placeholder="이름을 입력해 주세요" autocomplete="off" id="name--box">
+		<input type="text" name="name" class="input--box" placeholder="이름을 입력해 주세요"  autocomplete="off" id="name--box">
 		<div id="name--check"></div>
 		<input type="date" name="birth" class="input--box" placeholder="출생년도" autocomplete="off" id="date--box">
 		<div>
@@ -152,7 +161,7 @@
 				<input type="text" class="input--box" id="address1" placeholder="주소" name="address1" readonly="readonly" style="width:300px;" autocomplete="off">
 				<input type="button" class="sub--button" id="find--address--btn" onclick="postCode()" value="검색" style="width:50px; margin: 0; background-color: #BCE55C; border: 1px solid #BCE55C; color: #000;"><br>
 			</div>
-			<input type="text" class="input--box" id="address2" name="address2" placeholder="상세주소" autocomplete="off"><br>
+			<input type="text" class="input--box" id="address2" name="address2"  placeholder="상세주소" autocomplete="off"><br>
 			<div id="detail--address--check"></div>
 		</div>
 		<input type="tel" name="mtel" id="tel--box" class="input--box" placeholder="전화번호를 입력해주세요" autocomplete="off">
@@ -185,8 +194,9 @@
             }
         }).open();
     }
-    
-    /* 유효성 검사 */
+	
+   
+     /* 유효성 검사 */
     let passwordCheck = document.getElementById("password--check");
     let passwordBox = document.getElementById("password--box");
    	let checkKey = document.getElementById("key--check");
@@ -209,7 +219,7 @@
 	let checkBirth = false;
 	let checkAddress = false;
 	let checkDetailAddress = false;
-	let checkTel = false;
+	let checkTel = false; 
 	
 	// 전부 null이 아닌 경우
 	function checkSubmit(checkEmail, checkPassword, checkName, 
@@ -220,7 +230,7 @@
 		} else {
 			submitBtn.type = "button";
 		}
-	}
+	} 
 	
 	/* 비밀번호 확인란 검사 */
     passwordCheck.addEventListener("keyup", function() {
@@ -243,6 +253,8 @@
 	    		checkKey.style.color = "blue";
 	    		checkKey.style.fontSize = "14px";
 	    		checkPassword = true;
+	    		checkSubmit(checkEmail, checkPassword, checkName, 
+    					checkBirth, checkAddress, checkDetailAddress, checkTel)
 	    	}
     	}
     });

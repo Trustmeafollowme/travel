@@ -249,8 +249,8 @@
 
       </div>
 		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<!-- <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G"></script>
-	 	 --><script type="text/javascript">
+		 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G"></script>
+	 	 <script type="text/javascript">
 				
 			var map;
 			
@@ -276,7 +276,7 @@
 				$.ajax({
 					type: "POST",
 					headers: headers,
-/* 					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G", */
+				url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G", 
 					async: false,
 					data: {
 						"startX": "${myjYpos.get(i)}",

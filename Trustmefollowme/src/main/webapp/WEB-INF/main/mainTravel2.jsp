@@ -29,11 +29,11 @@
     }
     
     function save() {
-      var check = confirm("선택한 여정을 저장하시겠습니까?");
-      if(check){
-         location.href="saveMyjourney.mj";
-      }
-   }
+        var check = confirm("선택한 여정을 저장하시겠습니까?");
+        if(check){
+           location.href="saveMyjourney.mj?date=${param.date}";
+        }
+        }
     function selDay(date,sTravel,day) {
         var selectedDate = document.getElementById("jdate").value;
         location.href="myjourneyList.mj?day="+day+"&date="+date+"&jdate="+selectedDate+"&sTravel="+sTravel;

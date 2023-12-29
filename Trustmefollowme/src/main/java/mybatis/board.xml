@@ -5,26 +5,25 @@
 <mapper namespace="board.Board">
 
 	<select id="boardList" resultType="myBoard">
-		select * from board
+		SELECT * FROM board
 		<if test="WhatColumn == 'title'">
 			where title like #{keyword}
 		</if>
 		<if test="WhatColumn == 'content'">
 			where content like #{keyword}
 		</if>
-	ORDER BY DBMS_RANDOM.VALUE
+		ORDER BY DBMS_RANDOM.VALUE
 	</select>
 	<select id="MboardList" resultType="myBoard">
-	SELECT *
-    FROM board
-    ORDER BY DBMS_RANDOM.VALUE
-    FETCH FIRST 6 ROWS ONLY
-	</select>
-	<select id="LikeboardList" resultType="myBoard">
-	SELECT *
-    FROM board
-    ORDER BY DBMS_RANDOM.VALUE
-    FETCH FIRST 6 ROWS ONLY
+		SELECT * FROM board
+		<if test="WhatColumn == 'title'">
+			where title like #{keyword}
+		</if>
+		<if test="WhatColumn == 'content'">
+			where content like #{keyword}
+		</if>
+		ORDER BY DBMS_RANDOM.VALUE
+		FETCH FIRST 9 ROWS ONLY
 	</select>
 	
 	<insert id="boardInsert">
@@ -74,8 +73,16 @@
 		update likes set likes = likes-1 where b_num = #{b_num} and m_num = #{m_num}
 	</update>
 	
+	<update id="boardLikeDown">
+		update board set likes = likes-1 where num = #{b_num} and mEmail = #{mEmail}
+	</update>
+	
 	<update id="likeUp">
 		update likes set likes = likes+1 where b_num = #{b_num} and m_num = #{m_num}
+	</update>
+	
+	<update id="boardLikeUp">
+		update board set likes = likes+1 where num = #{b_num} and mEmail = #{mEmail}
 	</update>
 	
 	<select id="likeCount" resultType="int">
@@ -124,12 +131,15 @@
 	</select>
 	
 	<select id="likesList" resultType="myBoard">
-		select distinct(b.num), l.likes, b.content, b.title, b.image, b.reg_date, b.writer
-		from board b inner join likes l
-		on b.num = l.b_num where likes = 1 order by likes desc
+		select * from board order by likes desc
 	</select>
 
 	<select id="readcountList" resultType="myBoard">
 		select * from board order by readcount desc
+	</select>
+	
+	<select id="numList" resultType="myBoard">
+		select * from board
+		order by num
 	</select>
 </mapper>

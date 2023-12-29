@@ -1,5 +1,6 @@
 package board.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,22 +22,17 @@ public class BoardDao {
 		return lists;
 	}
 	public List<BoardBean> MboardList(Map<String, String> map) {
-		
 		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".MboardList",map);
-		
+
 		return lists;
 	}
-	public List<BoardBean> LikeboardList() {
-
-		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".LikeboardList");
+	public int boardInsert(BoardBean bb) {
 		
-		return lists;
-	}
-
-	public void boardInsert(BoardBean bb) {
+		int cnt = -1;
 		
-		sqlSessionTemplate.insert(namespace+".boardInsert",bb);
+		cnt = sqlSessionTemplate.insert(namespace+".boardInsert",bb);
 		
+		return cnt;
 	}
 
 	public BoardBean boardDetail(String num) {
@@ -65,6 +61,9 @@ public class BoardDao {
 		
 		sqlSessionTemplate.delete(namespace+".boardDelete",num);
 		
+		sqlSessionTemplate.delete(namespace+".likesDelete",num);
+		
+		sqlSessionTemplate.delete(namespace+".chatDelete",num);
 	}
 
 	public LikeBean findLike(Map<String, String> map) {
@@ -83,18 +82,40 @@ public class BoardDao {
 		return cnt;
 	}
 
-	public void likeUp(LikeBean likeInfo) {
+	public int likeUp(LikeBean likeInfo) {
+		int cnt = -1;
 		
-		sqlSessionTemplate.update(namespace+".likeUp",likeInfo);
+		cnt = sqlSessionTemplate.update(namespace+".likeUp",likeInfo);
 		
+		return cnt;
 	}
 
-	public void likeDown(LikeBean likeInfo) {
+	public void boardLikeUp(String b_num, String mEmail) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("b_num", b_num);
+		map.put("mEmail", mEmail);
 		
-		sqlSessionTemplate.update(namespace+".likeDown",likeInfo);
+		sqlSessionTemplate.update(namespace+".boardLikeUp",map);
+
+	}
+	
+	public int likeDown(LikeBean likeInfo) {
 		
+		int cnt = -1;
+		
+		cnt = sqlSessionTemplate.update(namespace+".likeDown",likeInfo);
+		
+		return cnt;
 	}
 
+	public void boardLikeDown(String b_num, String mEmail) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("b_num", b_num);
+		map.put("mEmail", mEmail);
+		
+		sqlSessionTemplate.update(namespace+".boardLikeDown",map);
+		
+	}
 	public int likeCount(String num) {
 		
 		int cnt = sqlSessionTemplate.selectOne(namespace+".likeCount",num);
@@ -178,6 +199,15 @@ public class BoardDao {
 		
 		return lists;
 	}
+
+	public List<BoardBean> numList() {
+		
+		List<BoardBean> lists = sqlSessionTemplate.selectList(namespace+".numList");
+		
+		return lists;
+	}
+
 	
+
 
 }

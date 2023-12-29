@@ -40,7 +40,7 @@
 			<p style="font-size: 30px;">호텔 등록 페이지</p>
 			</div>
 				<div id="myInfoDiv">
-					<form:form class="form--container" action="hotelInsert.ht" method="post" enctype="multipart/form-data" commandName="HotelBean">
+					<form:form class="form--container" action="hotelInsert.ht?pageNumber=${pageNumber }" method="post" enctype="multipart/form-data" commandName="HotelBean">
 						<div>
 							<span>호텔이름</span>
 							<input class="input--box" name="name" type="text" value="${HotelBean.name}">
@@ -91,11 +91,15 @@
 							<input class="input--box" name="htel" type="text" value="${HotelBean.htel}">
 							<form:errors cssClass="err" path="htel" />
 						</div>
-						<div>
+						
+							<div>
 							<span>상세내용</span>
-							<input class="input--box" name="hcontent" type="text" value="${HotelBean.hcontent}">
+							<textarea name="hcontent" type="text" rows="10" cols="40" placeholder="상세내용을 입력하세요">${hotel.hcontent}</textarea>
+							<br>
 							<form:errors cssClass="err" path="hcontent" />
+							<br>
 						</div>
+						
 						<div>
 							<span>룸이름1</span>
 							<input class="input--box" name="rname1" type="text" value="${HotelBean.rname1}">

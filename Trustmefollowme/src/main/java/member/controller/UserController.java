@@ -28,7 +28,6 @@ import member.model.KakaoProfile;
 import member.model.MemberBean;
 import member.model.MemberDao;
 import member.model.OAuthToken;
-
 @Controller
 public class UserController {
    @Autowired
@@ -36,7 +35,8 @@ public class UserController {
 
    @Autowired
    private KakaoAPI kakaoAPI;
-
+   @Autowired
+   private OAuthToken oauthToken;
    
    @RequestMapping(value="/login.mb",method=RequestMethod.GET)
    public String loginForm(){
@@ -46,7 +46,8 @@ public class UserController {
    
    @RequestMapping(value="/login.mb",method=RequestMethod.POST)
    public String login(MemberBean mb,
-                  HttpServletResponse response,HttpServletRequest request,HttpSession session) throws IOException {
+                  HttpServletResponse response,HttpServletRequest request,
+                  HttpSession session,Model model) throws IOException {
       
       
       
@@ -63,17 +64,16 @@ public class UserController {
              * out.print("<script>alert('어드민님 환영합니다. 관리지 페이지로 이동합니다.');</script>");
              * out.flush();
              */
+            model.addAttribute("adminlogin", "admin.mb");
              session.setAttribute("myemail", member.getEmail());
-             //session.setAttribute("mynum", member.getNum());
-            return "adminMainForm";
+             session.setAttribute("myname", member.getName());
+//              session.setAttribute("mynum", member.getNum());
+            return "redirect";
          }else {
-//            out.print("<script>alert("+_name+"'님 나믿따에 오신걸 환영합니다');</script>");
-//            out.flush();
-        	 session.setAttribute("myname", member.getName());
-             session.setAttribute("myemail", member.getEmail());
-             session.setAttribute("myjNum", member.getNum());
-            return "redirect:mainScreen.m";
-         }
+               session.setAttribute("myemail", member.getEmail());
+               session.setAttribute("myname", member.getName());
+               return "redirect:mainScreen.m";
+           }
           
       }else {
       out.print("<script>alert('가입하지 않은 회원입니다.');</script>");
@@ -166,22 +166,25 @@ public class UserController {
 //      UUID garbagePassword = UUID.randomUUID();
 //      System.out.println("웹페이지 서버 패스워드: "+garbagePassword);
       
-      String kakaoEmail = kakaoProfile.getKakao_account().getEmail();
+      String kakaoId = String.valueOf(kakaoProfile.getId());
       
       // 회원 테이블에서 해당 이메일로 검색
-      MemberBean existingMember = memberDao.getMemberByEmail(kakaoEmail);
+      MemberBean existingMember = memberDao.getMemberByEmail(kakaoId);
       
         if (existingMember != null) {
                // 이미 가입된 회원인 경우, 로그인 처리 등을 수행하고 성공 메시지를 반환
-               model.addAttribute("message", "카카오 로그인이 완료되었습니다.");
-               session.setAttribute("myemail", kakaoEmail);
+              // model.addAttribute("message", "카카오 로그인이 완료되었습니다.");
+               session.setAttribute("myemail", kakaoId);
+               session.setAttribute("myname", kakaoId);
                return "redirect:mainScreen.m";
            } else {
                // 가입되지 않은 회원인 경우, 회원가입 폼으로 이동
-               model.addAttribute("myemail", kakaoEmail);
+               model.addAttribute("myemail", kakaoId);
                model.addAttribute("kakaoid",kakaoProfile.getId());
                model.addAttribute("kakaoemail",kakaoProfile.getKakao_account().getEmail());
-               return "redirect:join2.mb";
+               
+               model.addAttribute("msg","회원가입을 위해 추가 정보 입력페이지로 이동합니다.");
+               return "join2";
            }
 }
    
@@ -220,7 +223,7 @@ public class UserController {
                session.removeAttribute("access_Token");
                session.removeAttribute("myemail");
                session.invalidate();
-               
+               model.addAttribute("msg","로그아웃이 완료되었습니다.");
            }else{
                System.out.println("access_Token is null");
                

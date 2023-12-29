@@ -4,6 +4,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class SpotBean {
 	private int snum;
+	private String stime;
+	public String getStime() {
+		return stime;
+	}
+
+	public void setStime(String stime) {
+		this.stime = stime;
+	}
+
 	private String name;
 	private String xpos;
 	private String ypos;

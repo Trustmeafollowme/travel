@@ -49,6 +49,7 @@ font-size: 17px;
 p{
 	text-align: center;
 }
+  
 </style>
 </head>
 
@@ -79,15 +80,16 @@ p{
 				<br>
 				</div> -->
 			<br><br>
-				<form action="hotelList.ht" method="get">
-	
-				<select name="whatColumn">
-					<option value="all">전체검색
-					<option value="name">호텔이름
-					<option value="facility">부대시설
+			
+				<form action="hotelList.ht" method="get" >
+					
+				<select name="whatColumn" style="font-size: 16px; height:30px;">
+					<option value="all" style="font-size: 16px;">전체검색 
+					<option value="name" style="font-size: 16px;">호텔검색
+					<option value="facility" style="font-size: 16px;">부대시설
 				</select>	
-				<input type="text" name="keyword">
-				<input type="submit" name="검색">
+				<input type="text" name="keyword" style="width:300px; height:30px;font-size: 16px;">
+				<input type="submit" value="search" style="width:80px; height:30px;font-size: 16px;">
 				
 				</form>
 				</td>	
@@ -131,8 +133,6 @@ p{
 				</tr>
 			</c:forEach>
 			
-			
-			
 	<tr class="page">
 		<td colspan="8" align="center">
 		${paging.pagingHtml}
@@ -160,9 +160,18 @@ p{
 				<br>
 				</div>
 					<a href="spotInsert.sp?snum=${spot.snum }&cate=spot&pageNumber=${paging.pageNumber}" class="myButton">장소 추가하기</a>
-				<div>
-				<br>
-				</div>
+				<br><br>
+				<form action="spotList.sp" method="get">
+	
+				<select name="whatColumn" style="font-size: 16px; height:30px;">
+					<option value="all" style="font-size: 16px;">전체검색 
+					<option value="name" style="font-size: 16px;">장소검색
+					<option value="address" style="font-size: 16px;">주소검색
+				</select>	
+				<input type="text" name="keyword" style="width:300px; height:30px;font-size: 16px;">
+				<input type="submit" value="search" style="width:80px; height:30px;font-size: 16px;">
+				
+				</form>
 				<td>
 			</tr>
 			<tr>
@@ -231,11 +240,19 @@ p{
 				<br>
 				</div>
 					<a href="restInsert.re?rnum=${rest.rnum }&cate=restaurant&pageNumber=${paging.pageNumber}" class="myButton">장소 추가하기</a>
-				<div>
-				<br>
-				</div>
-				<td>
-			</tr>
+				<br><br>
+				<form action="mainRestaurantList.re" method="get">
+	
+				<select name="whatColumn" style="font-size: 16px; height:30px;">
+					<option value="all" style="font-size: 16px;">전체검색 
+					<option value="name" style="font-size: 16px;">음식점명
+					<option value="address" style="font-size: 16px;">주소
+				</select>	
+				<input type="text" name="keyword" style="width:300px; height:30px;font-size: 16px;">
+				<input type="submit" value="search" style="width:80px; height:30px;font-size: 16px;">
+				
+				</form>
+				</td>
 			<tr>
 				<th>번호</th>
 				<th>음식점사진</th>
@@ -306,10 +323,19 @@ p{
 				<br>
 				</div>
 						<a href="cafeInsert.cf?cnum=${cafe.cnum}&cate=cafe&pageNumber=${paging.pageNumber}" class="myButton">카페 추가하기</a>
-				<div>
-				<br>
-				</div>
-				<td>
+					<br><br>
+				<form action="mainCafeList.cf" method="get">
+	
+					<select name="whatColumn" style="font-size: 16px; height:30px;">
+					<option value="all" style="font-size: 16px;">전체검색 
+					<option value="name" style="font-size: 16px;">카페명
+					<option value="address" style="font-size: 16px;">주소
+				</select>	
+					<input type="text" name="keyword" style="width:300px; height:30px;font-size: 16px;">
+				<input type="submit" value="search" style="width:80px; height:30px;font-size: 16px;">
+				
+				</form>
+				</td>
 			</tr>
 			<tr>
 				<th>번호</th>
@@ -381,7 +407,19 @@ p{
 				<div>
 				<br>
 				</div>
-				<td>
+				<br><br>
+				<form action="memberList.mb" method="get">
+	
+				<select name="whatColumn" style="font-size: 16px; height:30px;">
+					<option value="all" style="font-size: 16px;">전체검색 
+					<option value="name" style="font-size: 16px;">이름
+					<option value="email" style="font-size: 16px;">아이디
+				</select>	
+				<input type="text" name="keyword" style="width:300px; height:30px;font-size: 16px;">
+				<input type="submit" value="search" style="width:80px; height:30px;font-size: 16px;">
+				
+				</form>
+				</td>
 			</tr>
 			<tr>
 				<th>번호</th>

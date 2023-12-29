@@ -152,6 +152,23 @@ flex-grow: 5;
    border-radius: 10%;
    box-shadow: 1px 1px 1px 1px gray;
 }
+.content {
+   text-align:center;
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    margin-left: 25px;
+}
+.content::-webkit-scrollbar {
+    width: 10px;
+  }
+  .content::-webkit-scrollbar-thumb {
+    background-color: black;
+  }
+  .content::-webkit-scrollbar-track {
+    background-color: #D5D5D5;
+  }
 </style>
 <script>
    var displayedItems = 6; // 초기값을 표시된 아이템의 개수로 설정
@@ -306,7 +323,7 @@ flex-grow: 5;
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio" >
-      <div class="content container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Portfolio</h2>
@@ -316,8 +333,8 @@ flex-grow: 5;
        <div class="row" data-aos="fade-up" data-aos-delay="100">
          <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-web">호텔</li>
+             <!--  <li data-filter="*" class="filter-active">All</li> -->
+              <li data-filter=".filter-web" class="filter-active">호텔</li>
               <li data-filter=".filter-card">음식점</li>
               <li data-filter=".filter-cafe">카페</li>
               <li data-filter=".filter-app">관광지</li>
@@ -325,7 +342,7 @@ flex-grow: 5;
           </div>
         </div>
          <div id="additional-items-container" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200"> 
-       	<c:forEach var="list" items="${cafeList}">
+       	<c:forEach var="list" varStatus="a" items="${cafeList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
             <div class="portfolio-wrap">
             <a href="#" class="showModalBtn" data-cnum="${list.cnum}">
@@ -337,7 +354,6 @@ flex-grow: 5;
               </div>
             </div>
 			</c:forEach>
-			
        	<c:forEach var="list" items="${restaurantList}">
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
@@ -378,13 +394,10 @@ flex-grow: 5;
 			</c:forEach>
 			</div>
        </div> 
-<div class="text-center mt-4">
-   <button id="load-more-btn" class="cta-btn">더보기</button>
-</div>
    </section><!-- End Portfolio Section -->
 
        <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials" >
       <div class="container" data-aos="zoom-in">
 		
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">

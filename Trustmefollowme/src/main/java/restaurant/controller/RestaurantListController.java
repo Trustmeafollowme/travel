@@ -21,7 +21,7 @@ import utility.Paging;
 @Controller
 public class RestaurantListController {
 
-	private final String command = "/mainRestaurantList.re";
+	private final String command = "/restList.re";
 	private final String viewPage = "restaurantListForm";
 	
 	@Autowired

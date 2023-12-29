@@ -35,9 +35,9 @@ $(function() {
         });
 
         $(".showModalBtn3").click(function() {
-            var rnum = $(this).data("snum");
+            var snum = $(this).data("snum");
 
-            window.open("spotDetail.re?rnum=" + snum, "관광지", "width=800, height=600");
+            window.open("spotDetail.sp?snum=" + snum, "관광지", "width=800, height=600");
 
         });
         $(".showModalBtn4").click(function() {
@@ -200,6 +200,7 @@ body {
 				<li data-filter=".pizza" >관광지</li>
 			</ul>
 	<form action="mainJourney.mj">
+	<input type="text" name="sTravel" value="${sTravel}"> 
 			<div class="filters-content">
 				<div class="row grid">
 	<!-- 카테고리 페이지틀  -->

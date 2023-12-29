@@ -3,7 +3,6 @@
 <%@include file="../common/common.jsp"%>
 
 <style type="text/css">
-
 .navbar.navbar-expand-xl.nav_area.sticky.scroll-header {
    background-color: #fff;
    z-index: 999999;
@@ -181,10 +180,6 @@ table {
    margin-right: 20%;
 }
 
-.top {
-   background-image:  url("<%=request.getContextPath()%>/resources/images/1.jpg");
-   background-size: cover;
-}
 #btn{
    box-shadow:inset 0px 1px 0px 0px #ffffff;
    background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
@@ -251,8 +246,24 @@ table {
   display: inline-block;
 }
 #chatting{
-   padding-top: 100px;
+   padding-top: 70px;
    margin-bottom: 80px;
+   margin-top: 70px;
+   border-top: 1px solid #EAEAEA;
+}
+.top{
+ display: inline-block;
+ width: 100%;
+ padding-bottom: 20px;
+ padding-top: 20px;
+ margin-bottom: 15px;
+}
+#detailtext{
+	color: black;
+}
+#detailtext:hover{
+	color: orange;
+	text-decoration: none;
 }
 </style>
 
@@ -641,72 +652,81 @@ $(function(){
       alert("로그인 후 작성가능합니다.");
       location.href="login.mb";
    });
-   
-
-   
 
 });
 </script>
-<link href="<%=request.getContextPath()%>/resources/assets/img/logo.png" rel="icon">
-  <link href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="<%=request.getContextPath()%>/resources/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/resources/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/resources/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
  <body onload="initTmap()">
-<nav class="navbar navbar-expand-xl nav_area sticky">
-   <div class="container">
-      <div class="logo">
-         <a href="mainScreen.m" class="logo-light">
-         나만 믿고 따라와!</a>
-      </div>
-      <div class="collapse navbar-collapse " id="navbarNav">
-         <ul class="navbar-nav ml-auto navbar-center main_menu onepage_nav">
-            <li class="nav-item"><a class="nav-link" href="mainScreen.m">메인</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="boardList.bd"><font color="black">목록보기</font></a>
-            </li>
-            <c:if test="${sessionScope.myname eq '어드민'}">
-            <li class="nav-item"><a class="nav-link" href="#contact">관리자</a>
-            </li>
-            </c:if>
-         </ul>
-      </div>
-   </div>
-</nav>
-<div class="top" style="display: inline-block; width: 100%; padding-bottom: 20px; padding-top: 20px;" align="center">
-      <img class="img"
-         src="<%=request.getContextPath()%>/resources/images/${bb.image}" style="height: 270px; width: 270px;">
-   <div
-      style="display: inline-block; vertical-align: top; margin-left: 20px;">
-      <h4 style="color: black; padding-top: 15px;">
-         ${bb.writer}님의 여행일지<br> ${bb.title}<br> 
-         ${dateCount}일 | ${minDate}일 ~ ${maxDate}일
+
+<header id="header" >
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <c:if test="${empty myemail}">
+         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
+      </c:if>
+      
+      <c:if test="${not empty myemail}">
+         <a href="myPage.mb" class="get-started-btn scrollto">${myemail}</a>
+	
+         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
+      </c:if>
+
+    </div>
+  </header>
+
+<div class="top" align="center">
+      <img class="img" src="<%=request.getContextPath()%>/resources/images/${bb.image}" style="height: 270px; width: 270px;">
+   <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+      <h4 style="color: black;">
+         ${bb.writer}님의 여행일지
       </h4>
-      <hr>
+          <h4 style="padding-top: 30px;">${bb.title}</h4>
+         <h5>
+         ${dateCount}일 | ${minDate}일 ~ ${maxDate}일
+         </h5>
+         <hr style="margin: 20px;" color="#EAEAEA">
       <div id="content"
          style="width: 600px; height: 80px;">
          ${bb.content}</div>
          <c:if test="${bb.writer eq sessionScope.myname || sessionScope.myname eq '어드민'}">
          <div align="right" style="padding-top: 20px; padding-bottom: 20px;">
-         <a href="boardUpdate.bd?num=${bb.num}&jnum=${bb.jnum}">수정</a>&nbsp;&nbsp;
-         <a href="boardDelete.bd?num=${bb.num}&jnum=${bb.jnum}">삭제</a>
+         <a id="detailtext" href="boardUpdate.bd?num=${bb.num}&jnum=${bb.jnum}">수정</a>&nbsp;&nbsp;
+         <a id="detailtext" href="boardDelete.bd?num=${bb.num}&jnum=${bb.jnum}">삭제</a>
          </div>
          </c:if>
    </div>
 </div>
-<br><br><br>
 <div class="heart">
    조회수 ${bb.readcount}&nbsp;&nbsp; 좋아요 ${likecount} 
    <img id="heart" width="20px" height="20px">
@@ -714,7 +734,7 @@ $(function(){
 <br><br>
  
    <c:set var="count" value="1"/>
-               <nav id="nav" style="width: 100%; position: sticky; top: 0px; padding-bottom: 5px;">
+               <nav id="nav" style="width: 100%; position: sticky; top: 0px; padding-bottom: 5px; z-index: 10000;">
                   <ul>
             <c:forEach var="date" items="${fn:split(date,',')}">
                      <li><a href="boardDetail.bd?num=${param.num}&jnum=${param.jnum}&mEmail=${param.mEmail}&minDate=${date}" class="active">${count}Day</a></li>
@@ -722,7 +742,7 @@ $(function(){
             </c:forEach>
                   </ul>
                </nav>
-   <div align="right" style="position: sticky; top: 68px; margin-right: 150px;">
+   <div align="right" style="position: sticky; top: 110px; z-index: 10000">
    <a href="#" id="btn2">위로</a>
    <a href="#chatting" id="btn2">댓글</a>
    </div>
@@ -734,9 +754,9 @@ $(function(){
                <div style="display: inline-block; margin-left: 100px;">
                     <img class="img" src="<%=request.getContextPath()%>/resources/images/${bd.image}" width="300px" height="300px">
                </div>
-                     <h4 style="display: inline-block; margin-left: 100px; margin-top: 30px;">${bd.name}
-                     <br><br>${bd.address}
-                     </h4>
+                     <h5 style="display: inline-block; margin-left: 100px; margin-top: 30px;">${bd.name}<br><br>
+                     ${bd.address}
+                     </h5>
                </div>
                <c:if test="${not bdStatus.last}">
                <div style="padding-top: 50px; padding-bottom: 50px; margin-left: 180px;">
@@ -759,7 +779,7 @@ $(function(){
    <div id="chatting">
    <c:if test="${likeInfo.m_num eq 'customer'}">
          <textarea id="chat" rows="1" cols="38" name="noContent"
-            placeholder="글 남기기" style="resize: none;"></textarea>
+            placeholder="글 남기기" style="resize: none;" maxlength="500"></textarea>
          <input id="sub2" type="button" value="확인">
    </c:if>
    <c:if test="${likeInfo.m_num != 'customer'}">
@@ -770,7 +790,7 @@ $(function(){
          <input type="hidden" name="minDate" value="${param.minDate}">
          <input type="hidden" name="writer" value="${sessionScope.myname}">
          <textarea id="chat" rows="1" cols="38" name="content"
-            placeholder="글 남기기" style="resize: none;"></textarea>
+            placeholder="글 남기기" style="resize: none;" maxlength="500"></textarea>
          <input id="sub" type="submit" value="확인">
       </form>
    </c:if>
@@ -872,6 +892,6 @@ $(function(){
   <script src="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="<%=request.getContextPath()%>/resources/assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
+  <!— Template Main JS File —>
   <script src="<%=request.getContextPath()%>/resources/assets/js/main.js"></script>
          

@@ -1,4 +1,4 @@
-  <!-- myPage.jsp -->
+6번 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
@@ -53,7 +53,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="mainScreen.m" class="logo d-flex align-items-center">
         <img src="<%=request.getContextPath()%>/resources/assets2/img/logo.png" alt="">
-        <span class="d-none d-lg-block">나믿따(주)</span>
+        <span class="d-none d-lg-block">나만 믿고 따라와</span>
       </a>
       <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
     </div><!-- End Logo -->
@@ -64,7 +64,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="<%=request.getContextPath()%>/resources/assets2/img/타요.gif" alt="Profile" class="rounded-circle">
+            <img src="<%=request.getContextPath()%>/resources/assets2/img/logo.png" alt="Profile" class="rounded-circle">
             <%-- <img src="<%=request.getContextPath()%>/resources/assets2/img/타요.gif" alt="Profile" class="rounded-circle"> --%>
             <span class="d-none d-md-block dropdown-toggle ps-2">${memberBean.name }</span>
           </a><!-- End Profile Iamge Icon -->
@@ -127,7 +127,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="<%=request.getContextPath()%>/resources/assets2/img/타요.gif" alt="Profile" class="rounded-circle">
+              <img src="<%=request.getContextPath()%>/resources/assets2/img/logo.png" alt="Profile" class="rounded-circle">
 <%--               <img src="<%=request.getContextPath()%>/resources/assets2/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --%>
               <h2>${memberBean.name }</h2>
               <h3>${memberBean.email }</h3>
@@ -201,7 +201,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">전화 번호</div>
-                    <div class="col-lg-9 col-md-8">${mtel }</div>
+                    <div class="col-lg-9 col-md-8">${memberBean.mtel }</div>
                   </div>
 
                   <div class="row">
@@ -231,7 +231,7 @@
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">이름</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="name" type="text" class="form-control" id="" value="${memberBean.name }">
+                        <input name="name" type="text" class="form-control" id="" value="${memberBean.name }" style="width: 408px;">
                         <form:errors cssClass="err" path="name"/>
                         <!-- <div class="invalid-feedback"> 이름을 입력하십시오. </div> -->
                       </div>
@@ -239,7 +239,7 @@
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">생일</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="birth" type="date" class="form-control" id="" value="${memberBean.birth }">
+                        <input name="birth" type="date" class="form-control" id="" value="${memberBean.birth }" style="width: 408px;">
                         <form:errors cssClass="err" path="birth"/>
                         <!-- <div class="invalid-feedback"> 생일을 입력하십시오. </div> -->
                       </div>
@@ -252,27 +252,43 @@
                       </div>
                     </div> -->
 
-                    <div class="row mb-3">
+                    <%-- <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">주소</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="address1" type="text" class="form-control" id="address1" value="${memberBean.address1 }" style="width: 400px;"> 
-                        <!-- <input type="button" class="btn btn-primary" id="find--address--btn" onclick="postCode()" value="검색"> -->
+                        <input type="button" class="btn btn-primary" id="find--address--btn" onclick="postCode()" value="검색" style="display: inline-block;">
                         <form:errors cssClass="err" path="address1"/>
                         <!-- <div class="invalid-feedback"> 주소를 입력하십시오. </div> -->
                       </div>
-                    </div>
+                    </div> --%>
+                    
+                    <div class="row mb-3">
+                   <label for="Address" class="col-md-4 col-lg-3 col-form-label">주소</label>
+                   <div class="col-md-8 col-lg-9">
+                       <div class="row">
+                           <div class="col-md-6">
+                               <input name="address1" type="text" class="form-control" id="address1" value="${memberBean.address1}" style="width: 100%;">
+                               <form:errors cssClass="err" path="address1"/>
+                           </div>
+                           <div class="col-md-6">
+                               <input type="button" class="btn btn-primary" id="find--address--btn" onclick="postCode()" value="검색">
+                           </div>
+                       </div>
+                       <form:errors cssClass="err" path="address1"/>
+                   </div>
+               </div>
 
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">세부 주소</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address2" type="text" class="form-control" id="address2" value="${memberBean.address2 }">
+                        <input name="address2" type="text" class="form-control" id="address2" value="${memberBean.address2 }" style="width: 408px;">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="mtel" type="text" class="form-control" id="" value="${memberBean.mtel }">
+                        <input name="mtel" type="text" class="form-control" id="" value="${memberBean.mtel }" style="width: 408px;">
                         <form:errors cssClass="err" path="mtel"/>
                         <!-- <div class="invalid-feedback"> 전화번호를 입력하십시오. </div> -->
                       </div>
@@ -281,7 +297,7 @@
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="" value="${memberBean.email }">
+                        <input name="email" type="email" class="form-control" id="" value="${memberBean.email }" style="width: 408px;">
                         <form:errors cssClass="err" path="email"/>
                         <!-- <div class="invalid-feedback"> Email을 입력하십시오. </div> -->
                       </div>
@@ -448,7 +464,7 @@
   <!-- ======= Footer ======= -->
   <footer id="" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>나믿따(주)</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>나만 믿고 따라와</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->

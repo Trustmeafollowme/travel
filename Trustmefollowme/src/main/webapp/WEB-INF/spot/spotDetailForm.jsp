@@ -51,7 +51,9 @@
         				<div class="product-info">
 		        			<div class="product-name">${sb.name}</div>
 		        			<div class="reviews-counter">
-		        			<p class="product-price-discount">${sb.address}</p>
+		        			<p class="product-price-discount">주소: ${sb.address}
+		        			<br>
+		        			영업시간: ${sb.stime}</p>
 		        		</div>
 	        			<p>
 	        			${sb.content}

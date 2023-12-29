@@ -1,11 +1,14 @@
 package board.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +39,9 @@ public class BoardDetailController {
 
     @RequestMapping(value = command, method = RequestMethod.GET)
     public String boardDetailForm(HttpServletRequest request, HttpSession session, Model model, @RequestParam("num") String num
-          ,@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum,
-          @RequestParam("minDate") String minDate, LikeBean lb) {
-
+    		,@RequestParam("mEmail") String mEmail, @RequestParam("jnum") String jnum,
+    		@RequestParam("minDate") String minDate, LikeBean lb) {
+    	
         BoardBean bb = boardDao.boardDetail(num);
         model.addAttribute("bb", bb);
         
@@ -47,17 +50,17 @@ public class BoardDetailController {
 
         String customer = "";
         if(id == null) {
-           customer += "customer";
-           map.put("b_num", num);
-           map.put("m_num", customer);
+        	customer += "customer";
+        	map.put("b_num", num);
+        	map.put("m_num", customer);
         }else {
-           map.put("b_num", num);
-           map.put("m_num", id);
+        	map.put("b_num", num);
+        	map.put("m_num", id);
         }
         
-        int likecount = boardDao.likeCount(num); // ì¢‹ì•„ìš” ê°¯ìˆ˜
+        int likecount = boardDao.likeCount(num); // ÁÁ¾Æ¿ä °¹¼ö
         
-        LikeBean likeInfo = boardDao.findLike(map); // ì¢‹ì•„ìš” ê¸°ëŠ¥ ì‹œì‘
+        LikeBean likeInfo = boardDao.findLike(map); // ÁÁ¾Æ¿ä ±â´É ½ÃÀÛ
         if (likeInfo == null) {
             int cnt = boardDao.likeInsert(map);
             if (cnt != -1) {
@@ -66,17 +69,17 @@ public class BoardDetailController {
             }
         } else {
             model.addAttribute("likeInfo", likeInfo); 
-        }                                 // ì¢‹ì•„ìš” ê¸°ëŠ¥ ë
+        }											// ÁÁ¾Æ¿ä ±â´É ³¡
         
-        model.addAttribute("likecount", likecount); // ì¢‹ì•„ìš” ê°¯ìˆ˜ ì†ì„±
-        // ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° ì‹œì‘
+        model.addAttribute("likecount", likecount); // ÁÁ¾Æ¿ä °¹¼ö ¼Ó¼º
+        // ¸®½ºÆ® °¡Á®¿À±â ½ÃÀÛ
         
         List<MyJourneyBean> boardListCount = myJourneyDao.boardListCount(mEmail,jnum);
         int dateCount = myJourneyDao.dateCount(mEmail,jnum);
         String date = "";
         for(int i=0;i<boardListCount.size();i++) {
-           date += boardListCount.get(i).getJdate()+",";
-        }   
+        	date += boardListCount.get(i).getJdate()+",";
+        }	
         
         String minDate2 = myJourneyDao.minDate(jnum, mEmail);
         String maxDate = myJourneyDao.maxDate(jnum, mEmail);
@@ -89,40 +92,39 @@ public class BoardDetailController {
         List<MyJourneyBean> myjList = myJourneyDao.myjSelect(mb);
         List<ChatBean> lists = boardDao.chatList(num);
         if(myjList.isEmpty()) {
-           model.addAttribute("num", num);
-           model.addAttribute("jnum", jnum);
-           
-           return "redirect:/boardDelete.bd";
-        }
+        	model.addAttribute("num", num);
+        	
+        	return "redirect:/boardDelete.bd";
+      }
 
         List<String> myjXpos = new ArrayList<String>();
-      List<String> myjYpos=new ArrayList<String>() ;
-      
-   for(int i=0 ;i<=myjList.size()-1;i++) {
-      myjXpos.add(myjList.get(i).getXpos());
-      myjYpos.add(myjList.get(i).getYpos());
-      System.out.println(myjList.get(i).getXpos()+"/"+
-      myjList.get(i).getYpos()+" /");
-   }
-      for(int i=0;i<myjXpos.size();i++) {
-         System.out.println("myjXpos.get"+myjXpos.get(i));
-      }
-      request.setAttribute("startXpos", myjXpos.get(0));
-      request.setAttribute("startYpos", myjYpos.get(0));
+		List<String> myjYpos=new ArrayList<String>() ;
+		
+	for(int i=0 ;i<=myjList.size()-1;i++) {
+		myjXpos.add(myjList.get(i).getXpos());
+		myjYpos.add(myjList.get(i).getYpos());
+		System.out.println(myjList.get(i).getXpos()+"/"+
+		myjList.get(i).getYpos()+" /");
+	}
+		for(int i=0;i<myjXpos.size();i++) {
+			System.out.println("myjXpos.get"+myjXpos.get(i));
+		}
+		request.setAttribute("startXpos", myjXpos.get(0));
+		request.setAttribute("startYpos", myjYpos.get(0));
 
-      request.setAttribute("lastXpos", myjXpos.get(myjList.size()-1));
-      request.setAttribute("lastYpos", myjYpos.get(myjList.size()-1));
+		request.setAttribute("lastXpos", myjXpos.get(myjList.size()-1));
+		request.setAttribute("lastYpos", myjYpos.get(myjList.size()-1));
 
-      request.setAttribute("myjXpos", myjXpos);
-      request.setAttribute("myjYpos", myjYpos);
-      
-      request.setAttribute("lists", lists);
-      request.setAttribute("list", myjList);
-      request.setAttribute("date", date);
-      request.setAttribute("dateCount", dateCount);
-      request.setAttribute("likeInfo", likeInfo);
-      request.setAttribute("minDate", minDate2);
-      request.setAttribute("maxDate", maxDate);
+		request.setAttribute("myjXpos", myjXpos);
+		request.setAttribute("myjYpos", myjYpos);
+		
+		request.setAttribute("lists", lists);
+		request.setAttribute("list", myjList);
+		request.setAttribute("date", date);
+		request.setAttribute("dateCount", dateCount);
+		request.setAttribute("likeInfo", likeInfo);
+		request.setAttribute("minDate", minDate2);
+		request.setAttribute("maxDate", maxDate);
         
         return viewPage;
         

@@ -114,7 +114,7 @@ public class BoardInsertController {
 		for(int i=0; i<dateCount.size();i++) {
 			date += dateCount.get(i).getJdate()+",";
 		}
-		
+		System.out.println("date : "+date);
 		request.setAttribute("jnum", jnum);
 		request.setAttribute("list", list);
 		request.setAttribute("myemail", id);
@@ -153,10 +153,22 @@ public class BoardInsertController {
 		
 		bb.setReg_date(date2);
 		bb.setIp(request.getRemoteAddr());
+		
+		int cnt = boardDao.boardInsert(bb);
+		if(cnt < 0) {
+			model.addAttribute("jnum", bb.getJnum());
+			model.addAttribute("list", list);
+			model.addAttribute("myemail", bb.getmEmail());
+			model.addAttribute("minDate", bb.getMinDate());
+			model.addAttribute("maxDate", bb.getMaxDate());
+			model.addAttribute("date", date);
+			
+			return viewPage2;
+		}else {
 
 		String upload = servletContext.getRealPath("/resources/images/");
 		
-		boardDao.boardInsert(bb);
+			
 		File file = new File(upload+File.separator+bb.getImage());
 		
 		MultipartFile multi = bb.getImgUpload();
@@ -166,6 +178,7 @@ public class BoardInsertController {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			}
 		}
 		return gotoPage;
 	}
