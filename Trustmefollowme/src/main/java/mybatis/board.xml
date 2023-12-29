@@ -14,6 +14,17 @@
 		</if>
 		ORDER BY DBMS_RANDOM.VALUE
 	</select>
+	<select id="MboardList" resultType="myBoard">
+		SELECT * FROM board
+		<if test="WhatColumn == 'title'">
+			where title like #{keyword}
+		</if>
+		<if test="WhatColumn == 'content'">
+			where content like #{keyword}
+		</if>
+		ORDER BY DBMS_RANDOM.VALUE
+		FETCH FIRST 9 ROWS ONLY
+	</select>
 	
 	<insert id="boardInsert">
 		insert into board(num,writer,title,reg_date,content,image,ip,mEmail,jnum,minDate)

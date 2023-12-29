@@ -193,4 +193,11 @@
     delete from myjourney
       where jnum = 0
    </delete>
+   
+    <select id="searchByJateAndJnumZero" resultType="int">
+      select count(*) from myjourney
+      where id = #{id}
+      and jdate=#{jdate}
+      and jnum = 0
+   </select>
 </mapper>

@@ -7,321 +7,321 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class HotelBean {
-	
-	private int hnum;
-	
-	@NotBlank(message = "È£ÅÚ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String name;
-	
-	@NotBlank(message = "È£ÅÚ °¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String hprice;
-	
-	@NotEmpty(message = "È£ÅÚÀÌ¹ÌÁö¸¦ ³ÖÀ¸¼¼¿ä.")
-	private String image;
-	
-	@NotEmpty(message = "·ëÀÌ¹ÌÁö1À» ³ÖÀ¸¼¼¿ä.")
-	private String image2;
-	
-	@NotEmpty(message = "·ëÀÌ¹ÌÁö2¸¦ ³ÖÀ¸¼¼¿ä.")
-	private String image3;
-	
-	@NotEmpty(message = "·ëÀÌ¹ÌÁö3À» ³ÖÀ¸¼¼¿ä.")
-	private String image4;
-	
-	@NotEmpty(message = "·ëÀÌ¹ÌÁö4¸¦ ³ÖÀ¸¼¼¿ä.")
-	private String image5;
-	
-	@NotEmpty(message = "½Ã¼³ÀÌ¹ÌÁö¸¦ ³ÖÀ¸¼¼¿ä.")
-	private String image6;
-	
-	@NotEmpty(message = "È£ÅÚ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String address;
-	
-	@NotBlank(message = "ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String htel;
-	
-	@NotNull(message = "ºÎ´ë½Ã¼³À» ¼±ÅÃÇÏ¼¼¿ä")
-	private String facility;
-	
-	@NotEmpty(message = "»ó¼¼³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String hcontent;
-	
-	@NotEmpty(message = "·ë1ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rname1;
-	
-	@NotEmpty(message = "·ë2ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rname2;
-	
-	@NotEmpty(message = "·ë3ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rname3;
-	
-	@NotEmpty(message = "·ë4ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rname4;
-	
-	@NotEmpty(message = "·ë1°¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rprice1;
-	
-	@NotEmpty(message = "·ë2°¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rprice2;
-	
-	@NotEmpty(message = "·ë3°¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rprice3;
-	
-	@NotEmpty(message = "·ë4°¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String rprice4;
-	
-	@NotEmpty(message = "À§µµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String xpos;
-	
-	@NotEmpty(message = "°æµµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String ypos;
-	
-	
-	private MultipartFile upload; // »çÁø ¾÷·Îµå
-	private MultipartFile upload2;
-	private MultipartFile upload3;
-	private MultipartFile upload4;
-	private MultipartFile upload5;
-	private MultipartFile upload6;
+   
+   private int hnum;
+   
+   @NotBlank(message = "í˜¸í…” ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String name;
+   
+   @NotBlank(message = "í˜¸í…” ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String hprice;
+   
+   @NotEmpty(message = "í˜¸í…”ì´ë¯¸ì§€ë¥¼ ë„£ìœ¼ì„¸ìš”.")
+   private String image;
+   
+   @NotEmpty(message = "ë£¸ì´ë¯¸ì§€1ì„ ë„£ìœ¼ì„¸ìš”.")
+   private String image2;
+   
+   @NotEmpty(message = "ë£¸ì´ë¯¸ì§€2ë¥¼ ë„£ìœ¼ì„¸ìš”.")
+   private String image3;
+   
+   @NotEmpty(message = "ë£¸ì´ë¯¸ì§€3ì„ ë„£ìœ¼ì„¸ìš”.")
+   private String image4;
+   
+   @NotEmpty(message = "ë£¸ì´ë¯¸ì§€4ë¥¼ ë„£ìœ¼ì„¸ìš”.")
+   private String image5;
+   
+   @NotEmpty(message = "ì‹œì„¤ì´ë¯¸ì§€ë¥¼ ë„£ìœ¼ì„¸ìš”.")
+   private String image6;
+   
+   @NotEmpty(message = "í˜¸í…” ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String address;
+   
+   @NotBlank(message = "ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String htel;
+   
+   @NotNull(message = "ë¶€ëŒ€ì‹œì„¤ì„ ì„ íƒí•˜ì„¸ìš”")
+   private String facility;
+   
+   @NotEmpty(message = "ìƒì„¸ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String hcontent;
+   
+   @NotEmpty(message = "ë£¸1ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rname1;
+   
+   @NotEmpty(message = "ë£¸2ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rname2;
+   
+   @NotEmpty(message = "ë£¸3ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rname3;
+   
+   @NotEmpty(message = "ë£¸4ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rname4;
+   
+   @NotEmpty(message = "ë£¸1ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rprice1;
+   
+   @NotEmpty(message = "ë£¸2ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rprice2;
+   
+   @NotEmpty(message = "ë£¸3ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rprice3;
+   
+   @NotEmpty(message = "ë£¸4ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String rprice4;
+   
+   @NotEmpty(message = "ìœ„ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String xpos;
+   
+   @NotEmpty(message = "ê²½ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String ypos;
+   
+   
+   private MultipartFile upload; // ì‚¬ì§„ ì—…ë¡œë“œ
+   private MultipartFile upload2;
+   private MultipartFile upload3;
+   private MultipartFile upload4;
+   private MultipartFile upload5;
+   private MultipartFile upload6;
 
-	private String d_image; // ¼öÁ¤ ÈÄ Áö¿ï »çÁø
-	private String d_image2; 
-	private String d_image3;
-	private String d_image4; 
-	private String d_image5; 
-	private String d_image6;
-	public int getHnum() {
-		return hnum;
-	}
-	public void setHnum(int hnum) {
-		this.hnum = hnum;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getHprice() {
-		return hprice;
-	}
-	public void setHprice(String hprice) {
-		this.hprice = hprice;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public String getImage2() {
-		return image2;
-	}
-	public void setImage2(String image2) {
-		this.image2 = image2;
-	}
-	public String getImage3() {
-		return image3;
-	}
-	public void setImage3(String image3) {
-		this.image3 = image3;
-	}
-	public String getImage4() {
-		return image4;
-	}
-	public void setImage4(String image4) {
-		this.image4 = image4;
-	}
-	public String getImage5() {
-		return image5;
-	}
-	public void setImage5(String image5) {
-		this.image5 = image5;
-	}
-	public String getImage6() {
-		return image6;
-	}
-	public void setImage6(String image6) {
-		this.image6 = image6;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getHtel() {
-		return htel;
-	}
-	public void setHtel(String htel) {
-		this.htel = htel;
-	}
-	public String getFacility() {
-		return facility;
-	}
-	public void setFacility(String facility) {
-		this.facility = facility;
-	}
-	public String getHcontent() {
-		return hcontent;
-	}
-	public void setHcontent(String hcontent) {
-		this.hcontent = hcontent;
-	}
-	public String getRname1() {
-		return rname1;
-	}
-	public void setRname1(String rname1) {
-		this.rname1 = rname1;
-	}
-	public String getRname2() {
-		return rname2;
-	}
-	public void setRname2(String rname2) {
-		this.rname2 = rname2;
-	}
-	public String getRname3() {
-		return rname3;
-	}
-	public void setRname3(String rname3) {
-		this.rname3 = rname3;
-	}
-	public String getRname4() {
-		return rname4;
-	}
-	public void setRname4(String rname4) {
-		this.rname4 = rname4;
-	}
-	public String getRprice1() {
-		return rprice1;
-	}
-	public void setRprice1(String rprice1) {
-		this.rprice1 = rprice1;
-	}
-	public String getRprice2() {
-		return rprice2;
-	}
-	public void setRprice2(String rprice2) {
-		this.rprice2 = rprice2;
-	}
-	public String getRprice3() {
-		return rprice3;
-	}
-	public void setRprice3(String rprice3) {
-		this.rprice3 = rprice3;
-	}
-	public String getRprice4() {
-		return rprice4;
-	}
-	public void setRprice4(String rprice4) {
-		this.rprice4 = rprice4;
-	}
-	public String getXpos() {
-		return xpos;
-	}
-	public void setXpos(String xpos) {
-		this.xpos = xpos;
-	}
-	public String getYpos() {
-		return ypos;
-	}
-	public void setYpos(String ypos) {
-		this.ypos = ypos;
-	}
-	public MultipartFile getUpload() {
-		return upload;
-		
-	}
-	public void setUpload(MultipartFile upload) {
-		this.upload = upload;
-		if(this.upload != null) {
-			image = upload.getOriginalFilename();
-		}
-	}
-	public MultipartFile getUpload2() {
-		return upload2;
-	}
-	public void setUpload2(MultipartFile upload2) {
-		this.upload2 = upload2;
-		if(this.upload2 != null) {
-			image2 = upload2.getOriginalFilename();
-		}
-	}
-	public MultipartFile getUpload3() {
-		return upload3;
-	}
-	public void setUpload3(MultipartFile upload3) {
-		this.upload3 = upload3;
-		if(this.upload3 != null) {
-			image3 = upload3.getOriginalFilename();
-		}
-	}
-	public MultipartFile getUpload4() {
-		return upload4;
-	}
-	public void setUpload4(MultipartFile upload4) {
-		this.upload4 = upload4;
-		if(this.upload4 != null) {
-			image4 = upload4.getOriginalFilename();
-		}
-	}
-	public MultipartFile getUpload5() {
-		return upload5;
-	}
-	public void setUpload5(MultipartFile upload5) {
-		this.upload5 = upload5;
-		if(this.upload5 != null) {
-			image5 = upload5.getOriginalFilename();
-		}
-	}
-	public MultipartFile getUpload6() {
-		return upload6;
-	}
-	public void setUpload6(MultipartFile upload6) {
-		this.upload6 = upload6;
-		if(this.upload6 != null) {
-			image6 = upload6.getOriginalFilename();
-		}
-	}
-	public String getD_image() {
-		return d_image;
-	}
-	public void setD_image(String d_image) {
-		this.d_image = d_image;
-	}
-	public String getD_image2() {
-		return d_image2;
-	}
-	public void setD_image2(String d_image2) {
-		this.d_image2 = d_image2;
-	}
-	public String getD_image3() {
-		return d_image3;
-	}
-	public void setD_image3(String d_image3) {
-		this.d_image3 = d_image3;
-	}
-	public String getD_image4() {
-		return d_image4;
-	}
-	public void setD_image4(String d_image4) {
-		this.d_image4 = d_image4;
-	}
-	public String getD_image5() {
-		return d_image5;
-	}
-	public void setD_image5(String d_image5) {
-		this.d_image5 = d_image5;
-	}
-	public String getD_image6() {
-		return d_image6;
-	}
-	public void setD_image6(String d_image6) {
-		this.d_image6 = d_image6;
-	} 
-	
-	
-	
-	
-	
+   private String d_image; // ìˆ˜ì • í›„ ì§€ìš¸ ì‚¬ì§„
+   private String d_image2; 
+   private String d_image3;
+   private String d_image4; 
+   private String d_image5; 
+   private String d_image6;
+   public int getHnum() {
+      return hnum;
+   }
+   public void setHnum(int hnum) {
+      this.hnum = hnum;
+   }
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+   public String getHprice() {
+      return hprice;
+   }
+   public void setHprice(String hprice) {
+      this.hprice = hprice;
+   }
+   public String getImage() {
+      return image;
+   }
+   public void setImage(String image) {
+      this.image = image;
+   }
+   public String getImage2() {
+      return image2;
+   }
+   public void setImage2(String image2) {
+      this.image2 = image2;
+   }
+   public String getImage3() {
+      return image3;
+   }
+   public void setImage3(String image3) {
+      this.image3 = image3;
+   }
+   public String getImage4() {
+      return image4;
+   }
+   public void setImage4(String image4) {
+      this.image4 = image4;
+   }
+   public String getImage5() {
+      return image5;
+   }
+   public void setImage5(String image5) {
+      this.image5 = image5;
+   }
+   public String getImage6() {
+      return image6;
+   }
+   public void setImage6(String image6) {
+      this.image6 = image6;
+   }
+   public String getAddress() {
+      return address;
+   }
+   public void setAddress(String address) {
+      this.address = address;
+   }
+   public String getHtel() {
+      return htel;
+   }
+   public void setHtel(String htel) {
+      this.htel = htel;
+   }
+   public String getFacility() {
+      return facility;
+   }
+   public void setFacility(String facility) {
+      this.facility = facility;
+   }
+   public String getHcontent() {
+      return hcontent;
+   }
+   public void setHcontent(String hcontent) {
+      this.hcontent = hcontent;
+   }
+   public String getRname1() {
+      return rname1;
+   }
+   public void setRname1(String rname1) {
+      this.rname1 = rname1;
+   }
+   public String getRname2() {
+      return rname2;
+   }
+   public void setRname2(String rname2) {
+      this.rname2 = rname2;
+   }
+   public String getRname3() {
+      return rname3;
+   }
+   public void setRname3(String rname3) {
+      this.rname3 = rname3;
+   }
+   public String getRname4() {
+      return rname4;
+   }
+   public void setRname4(String rname4) {
+      this.rname4 = rname4;
+   }
+   public String getRprice1() {
+      return rprice1;
+   }
+   public void setRprice1(String rprice1) {
+      this.rprice1 = rprice1;
+   }
+   public String getRprice2() {
+      return rprice2;
+   }
+   public void setRprice2(String rprice2) {
+      this.rprice2 = rprice2;
+   }
+   public String getRprice3() {
+      return rprice3;
+   }
+   public void setRprice3(String rprice3) {
+      this.rprice3 = rprice3;
+   }
+   public String getRprice4() {
+      return rprice4;
+   }
+   public void setRprice4(String rprice4) {
+      this.rprice4 = rprice4;
+   }
+   public String getXpos() {
+      return xpos;
+   }
+   public void setXpos(String xpos) {
+      this.xpos = xpos;
+   }
+   public String getYpos() {
+      return ypos;
+   }
+   public void setYpos(String ypos) {
+      this.ypos = ypos;
+   }
+   public MultipartFile getUpload() {
+      return upload;
+      
+   }
+   public void setUpload(MultipartFile upload) {
+      this.upload = upload;
+      if(this.upload != null) {
+         image = upload.getOriginalFilename();
+      }
+   }
+   public MultipartFile getUpload2() {
+      return upload2;
+   }
+   public void setUpload2(MultipartFile upload2) {
+      this.upload2 = upload2;
+      if(this.upload2 != null) {
+         image2 = upload2.getOriginalFilename();
+      }
+   }
+   public MultipartFile getUpload3() {
+      return upload3;
+   }
+   public void setUpload3(MultipartFile upload3) {
+      this.upload3 = upload3;
+      if(this.upload3 != null) {
+         image3 = upload3.getOriginalFilename();
+      }
+   }
+   public MultipartFile getUpload4() {
+      return upload4;
+   }
+   public void setUpload4(MultipartFile upload4) {
+      this.upload4 = upload4;
+      if(this.upload4 != null) {
+         image4 = upload4.getOriginalFilename();
+      }
+   }
+   public MultipartFile getUpload5() {
+      return upload5;
+   }
+   public void setUpload5(MultipartFile upload5) {
+      this.upload5 = upload5;
+      if(this.upload5 != null) {
+         image5 = upload5.getOriginalFilename();
+      }
+   }
+   public MultipartFile getUpload6() {
+      return upload6;
+   }
+   public void setUpload6(MultipartFile upload6) {
+      this.upload6 = upload6;
+      if(this.upload6 != null) {
+         image6 = upload6.getOriginalFilename();
+      }
+   }
+   public String getD_image() {
+      return d_image;
+   }
+   public void setD_image(String d_image) {
+      this.d_image = d_image;
+   }
+   public String getD_image2() {
+      return d_image2;
+   }
+   public void setD_image2(String d_image2) {
+      this.d_image2 = d_image2;
+   }
+   public String getD_image3() {
+      return d_image3;
+   }
+   public void setD_image3(String d_image3) {
+      this.d_image3 = d_image3;
+   }
+   public String getD_image4() {
+      return d_image4;
+   }
+   public void setD_image4(String d_image4) {
+      this.d_image4 = d_image4;
+   }
+   public String getD_image5() {
+      return d_image5;
+   }
+   public void setD_image5(String d_image5) {
+      this.d_image5 = d_image5;
+   }
+   public String getD_image6() {
+      return d_image6;
+   }
+   public void setD_image6(String d_image6) {
+      this.d_image6 = d_image6;
+   } 
+   
+   
+   
+   
+   
 }

@@ -11,11 +11,7 @@
 	#update--btn[type=submit] {
 		background-color: #000;
 	}
-	#withdraw--btn {
-		background-color: #000;
-		color: #fff;
-		margin-left: 42px;
-	}
+
 		.err{
 		color: #002D93;
 		font-size: 9pt;
@@ -24,16 +20,7 @@
    
 </style>
 	<main class="main--container">
-		<!-- <div class="title--container">
-		<div class="title--logo">
-			<span class="material-symbols-outlined back--icon" onclick="history.back()">arrow_back</span>
-			<img alt="" src="" height="40"onclick="location.href='/'">	
-		</div> 
-		<div class="title--text">
-			<p>내 정보를</p>
-			<p>확인해보세요</p>
-		</div>
-	</div>-->
+
 	<div class="content--container">
 		<div class="info--container">
 			<div class="myinfo--box">
@@ -57,7 +44,7 @@
 						</div>
 						<c:set var="path" value="<%=request.getContextPath() %>"/>
 						<div>
-							<span>호텔이미지1</span><br><br>
+							<span>호텔이미지1</span>
 							<img src="${path }/resources/images/${hotel.image}" width="100" height="100"><br>
 							
 							<input type="file" name="upload" value="${hotel.image }"> 
@@ -65,8 +52,9 @@
 							<br>
 							<form:errors cssClass="err" path="image" />
 						</div>
+						<br><br>
 						<div>
-							<span>룸이미지2</span><br><br>
+							<span>룸이미지2</span>
 							<img src="${path }/resources/images/${hotel.image2}" width="100" height="100"><br>
 							<br>
 							<input type="file" name="upload2" value="${hotel.image2 }"> 
@@ -74,8 +62,9 @@
 							<br>
 							<form:errors cssClass="err" path="image2" />
 						</div>
+						<br><br>
 						<div>
-							<span>룸이미지3</span><br><br>
+							<span>룸이미지3</span>
 							<img src="${path }/resources/images/${hotel.image3}" width="100" height="100"><br>
 							<br>
 							<input type="file" name="upload3" value="${hotel.image3 }"> 
@@ -83,8 +72,9 @@
 							<br>
 							<form:errors cssClass="err" path="image3" />
 						</div>
+						<br><br>
 						<div>
-							<span>룸이미지4</span><br><br>
+							<span>룸이미지4</span>
 							<img src="${path }/resources/images/${hotel.image4}" width="100" height="100"><br>
 							<br>
 							<input type="file" name="upload4" value="${hotel.image4 }"> 
@@ -92,8 +82,9 @@
 							<br>
 							<form:errors cssClass="err" path="image4" />
 						</div>
+						<br><br>
 						<div>
-							<span>룸이미지5</span><br><br>
+							<span>룸이미지5</span>
 							<img src="${path }/resources/images/${hotel.image5}" width="100" height="100"><br>
 							<br>
 							<input type="file" name="upload5" value="${hotel.image5 }"> 
@@ -101,8 +92,9 @@
 							<br>
 							<form:errors cssClass="err" path="image5" />
 						</div>
+						<br><br>
 						<div>
-							<span>시설이미지6</span><br><br>
+							<span>시설이미지6</span>
 							<img src="${path }/resources/images/${hotel.image6}" width="100" height="100"><br>
 							<br>
 							<input type="file" name="upload6" value="${hotel.image6 }"> 
@@ -110,6 +102,7 @@
 							<br>
 							<form:errors cssClass="err" path="image6" />
 						</div>
+						<br><br>
 						<div>
 							<span>주소</span>
 							<input class="input--box" name="address" type="text" id="text" value="${hotel.address}">
@@ -122,9 +115,10 @@
 							<br>
 							<form:errors cssClass="err" path="htel" />
 						</div>
+						<br><br>
 						<div>
 							<span>상세내용</span>
-							<input class="input--box" name="hcontent" type="text" value="${hotel.hcontent}">
+							<textarea name="hcontent" type="text" rows="10" cols="40">${hotel.hcontent}</textarea>
 							<br>
 							<form:errors cssClass="err" path="hcontent" />
 							<br>

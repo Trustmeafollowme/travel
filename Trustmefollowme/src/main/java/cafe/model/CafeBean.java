@@ -5,235 +5,235 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 public class CafeBean {
-	private int cnum; 			// Ä«Æä ¹øÈ£
-	
-	@NotBlank(message = "Ä«Æä ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String name;		// Ä«Æä ÀÌ¸§
-	
-	@NotBlank(message = "Ä«Æä À§Ä¡ À§µµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String xpos;		// Ä«Æä À§Ä¡ À§µµ
-	
-	@NotBlank(message = "Ä«Æä À§Ä¡ °æµµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String ypos;		// Ä«Æä À§Ä¡ °æµµ
-	
-	@NotBlank(message = "Ä«Æä ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String address;	// Ä«Æä ÁÖ¼Ò
-	
-	@NotBlank(message = "Ä«Æä ÀüÈ­ ½ÃÀÛ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String ctel1;		// Ä«Æä ÀüÈ­ ½ÃÀÛ ¹øÈ£
-	
-	@NotBlank(message = "Ä«Æä ÀüÈ­ Áß°£ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String ctel2;		// Ä«Æä ÀüÈ­ Áß°£ ¹øÈ£
-	
-	@NotBlank(message = "Ä«Æä ÀüÈ­ ³¡ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String ctel3;		// Ä«Æä ÀüÈ­ ³¡ ¹øÈ£
-	
-	@NotEmpty(message = "Ä«Æä °³¾÷ ÀÏÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String c_date;		// Ä«Æä °³¾÷ ÀÏÀÚ
-	
-	@NotEmpty(message = "Ä«Æä ¿µ¾÷ ½ÃÀÛ ½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String ctime1;		// Ä«Æä ¿µ¾÷ ½ÃÀÛ ½Ã°£
-	
-	@NotEmpty(message = "Ä«Æä ¿µ¾÷ Á¾·á ½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String ctime2;		// Ä«Æä ¿µ¾÷ Á¾·á ½Ã°£
-	
-	@NotEmpty(message = "Ä«Æä ¸ŞÀÎ »çÁøÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String image;		// Ä«Æä »çÁø(¸ŞÀÎ »çÁø)
-	
-	@NotEmpty(message = "Ä«Æä »çÁø2¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String image2;		// Ä«Æä »çÁø2
-	
-	@NotEmpty(message = "Ä«Æä »çÁø3À» ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String image3;		// Ä«Æä »çÁø3
-	
-	@NotEmpty(message = "Ä«Æä »çÁø4¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String image4;		// Ä«Æä »çÁø4
-	
-	@NotEmpty(message = "Ä«Æä »çÁø5¸¦ ÀÔ·ÂÇÏ¼¼¿ä.")
-	private String image5;		// Ä«Æä »çÁø5
-	
-	private MultipartFile upload; // Ä«Æä ¸ŞÀÎ »çÁø ¾÷·Îµå
-	private MultipartFile upload2; // Ä«Æä »çÁø2 ¾÷·Îµå
-	private MultipartFile upload3; // Ä«Æä »çÁø3 ¾÷·Îµå
-	private MultipartFile upload4; // Ä«Æä »çÁø4 ¾÷·Îµå
-	private MultipartFile upload5; // Ä«Æä »çÁø5 ¾÷·Îµå
-	
-	private String d_image; // ¼öÁ¤ ÈÄ Áö¿ï Ä«Æä ¸ŞÀÎ »çÁø
-	private String d_image2; // ¼öÁ¤ ÈÄ Áö¿ï Ä«Æä »çÁø2
-	private String d_image3; // ¼öÁ¤ ÈÄ Áö¿ï Ä«Æä »çÁø3
-	private String d_image4; // ¼öÁ¤ ÈÄ Áö¿ï Ä«Æä »çÁø4
-	private String d_image5; // ¼öÁ¤ ÈÄ Áö¿ï Ä«Æä »çÁø5
-	
-	public MultipartFile getUpload() {
-		return upload;
-	}
-	public MultipartFile getUpload2() {
-		return upload2;
-	}
-	public MultipartFile getUpload3() {
-		return upload3;
-	}
-	public MultipartFile getUpload4() {
-		return upload4;
-	}
-	public MultipartFile getUpload5() {
-		return upload5;
-	}
-	public String getD_image() {
-		return d_image;
-	}
-	public String getD_image2() {
-		return d_image2;
-	}
-	public String getD_image3() {
-		return d_image3;
-	}
-	public String getD_image4() {
-		return d_image4;
-	}
-	public String getD_image5() {
-		return d_image5;
-	}
-	public void setUpload(MultipartFile upload) {
-		this.upload = upload;
-		if(this.upload != null) {
-			image = upload.getOriginalFilename();
-		}
-	}
-	public void setUpload2(MultipartFile upload2) {
-		this.upload2 = upload2;
-		if(this.upload2 != null) {
-			image2 = upload2.getOriginalFilename();
-		}
-	}
-	public void setUpload3(MultipartFile upload3) {
-		this.upload3 = upload3;
-		if(this.upload3 != null) {
-			image3 = upload3.getOriginalFilename();
-		}
-	}
-	public void setUpload4(MultipartFile upload4) {
-		this.upload4 = upload4;
-		if(this.upload4 != null) {
-			image4 = upload4.getOriginalFilename();
-		}
-	}
-	public void setUpload5(MultipartFile upload5) {
-		this.upload5 = upload5;
-		if(this.upload5 != null) {
-			image5 = upload5.getOriginalFilename();
-		}
-	}
-	public void setD_image(String d_image) {
-		this.d_image = d_image;
-	}
-	public void setD_image2(String d_image2) {
-		this.d_image2 = d_image2;
-	}
-	public void setD_image3(String d_image3) {
-		this.d_image3 = d_image3;
-	}
-	public void setD_image4(String d_image4) {
-		this.d_image4 = d_image4;
-	}
-	public void setD_image5(String d_image5) {
-		this.d_image5 = d_image5;
-	}
-	public int getCnum() {
-		return cnum;
-	}
-	public String getName() {
-		return name;
-	}
-	public String getXpos() {
-		return xpos;
-	}
-	public String getYpos() {
-		return ypos;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public String getCtel1() {
-		return ctel1;
-	}
-	public String getCtel2() {
-		return ctel2;
-	}
-	public String getCtel3() {
-		return ctel3;
-	}
-	public String getC_date() {
-		return c_date;
-	}
-	public String getCtime1() {
-		return ctime1;
-	}
-	public String getCtime2() {
-		return ctime2;
-	}
-	public String getImage() {
-		return image;
-	}
-	public String getImage2() {
-		return image2;
-	}
-	public String getImage3() {
-		return image3;
-	}
-	public String getImage4() {
-		return image4;
-	}
-	public String getImage5() {
-		return image5;
-	}
-	public void setCnum(int cnum) {
-		this.cnum = cnum;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setXpos(String xpos) {
-		this.xpos = xpos;
-	}
-	public void setYpos(String ypos) {
-		this.ypos = ypos;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public void setCtel1(String ctel1) {
-		this.ctel1 = ctel1;
-	}
-	public void setCtel2(String ctel2) {
-		this.ctel2 = ctel2;
-	}
-	public void setCtel3(String ctel3) {
-		this.ctel3 = ctel3;
-	}
-	public void setC_date(String c_date) {
-		this.c_date = c_date;
-	}
-	public void setCtime1(String ctime1) {
-		this.ctime1 = ctime1;
-	}
-	public void setCtime2(String ctime2) {
-		this.ctime2 = ctime2;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public void setImage2(String image2) {
-		this.image2 = image2;
-	}
-	public void setImage3(String image3) {
-		this.image3 = image3;
-	}
-	public void setImage4(String image4) {
-		this.image4 = image4;
-	}
-	public void setImage5(String image5) {
-		this.image5 = image5;
-	}
-	
+   private int cnum;          // ì¹´í˜ ë²ˆí˜¸
+   
+   @NotBlank(message = "ì¹´í˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String name;      // ì¹´í˜ ì´ë¦„
+   
+   @NotBlank(message = "ì¹´í˜ ìœ„ì¹˜ ìœ„ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String xpos;      // ì¹´í˜ ìœ„ì¹˜ ìœ„ë„
+   
+   @NotBlank(message = "ì¹´í˜ ìœ„ì¹˜ ê²½ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String ypos;      // ì¹´í˜ ìœ„ì¹˜ ê²½ë„
+   
+   @NotBlank(message = "ì¹´í˜ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String address;   // ì¹´í˜ ì£¼ì†Œ
+   
+   @NotBlank(message = "ì¹´í˜ ì „í™” ì‹œì‘ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String ctel1;      // ì¹´í˜ ì „í™” ì‹œì‘ ë²ˆí˜¸
+   
+   @NotBlank(message = "ì¹´í˜ ì „í™” ì¤‘ê°„ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String ctel2;      // ì¹´í˜ ì „í™” ì¤‘ê°„ ë²ˆí˜¸
+   
+   @NotBlank(message = "ì¹´í˜ ì „í™” ë ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String ctel3;      // ì¹´í˜ ì „í™” ë ë²ˆí˜¸
+   
+   @NotEmpty(message = "ì¹´í˜ ê°œì—… ì¼ìë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String c_date;      // ì¹´í˜ ê°œì—… ì¼ì
+   
+   @NotEmpty(message = "ì¹´í˜ ì˜ì—… ì‹œì‘ ì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String ctime1;      // ì¹´í˜ ì˜ì—… ì‹œì‘ ì‹œê°„
+   
+   @NotEmpty(message = "ì¹´í˜ ì˜ì—… ì¢…ë£Œ ì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String ctime2;      // ì¹´í˜ ì˜ì—… ì¢…ë£Œ ì‹œê°„
+   
+   @NotEmpty(message = "ì¹´í˜ ë©”ì¸ ì‚¬ì§„ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String image;      // ì¹´í˜ ì‚¬ì§„(ë©”ì¸ ì‚¬ì§„)
+   
+   @NotEmpty(message = "ì¹´í˜ ì‚¬ì§„2ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String image2;      // ì¹´í˜ ì‚¬ì§„2
+   
+   @NotEmpty(message = "ì¹´í˜ ì‚¬ì§„3ì„ ì…ë ¥í•˜ì„¸ìš”.")
+   private String image3;      // ì¹´í˜ ì‚¬ì§„3
+   
+   @NotEmpty(message = "ì¹´í˜ ì‚¬ì§„4ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String image4;      // ì¹´í˜ ì‚¬ì§„4
+   
+   @NotEmpty(message = "ì¹´í˜ ì‚¬ì§„5ë¥¼ ì…ë ¥í•˜ì„¸ìš”.")
+   private String image5;      // ì¹´í˜ ì‚¬ì§„5
+   
+   private MultipartFile upload; // ì¹´í˜ ë©”ì¸ ì‚¬ì§„ ì—…ë¡œë“œ
+   private MultipartFile upload2; // ì¹´í˜ ì‚¬ì§„2 ì—…ë¡œë“œ
+   private MultipartFile upload3; // ì¹´í˜ ì‚¬ì§„3 ì—…ë¡œë“œ
+   private MultipartFile upload4; // ì¹´í˜ ì‚¬ì§„4 ì—…ë¡œë“œ
+   private MultipartFile upload5; // ì¹´í˜ ì‚¬ì§„5 ì—…ë¡œë“œ
+   
+   private String d_image; // ìˆ˜ì • í›„ ì§€ìš¸ ì¹´í˜ ë©”ì¸ ì‚¬ì§„
+   private String d_image2; // ìˆ˜ì • í›„ ì§€ìš¸ ì¹´í˜ ì‚¬ì§„2
+   private String d_image3; // ìˆ˜ì • í›„ ì§€ìš¸ ì¹´í˜ ì‚¬ì§„3
+   private String d_image4; // ìˆ˜ì • í›„ ì§€ìš¸ ì¹´í˜ ì‚¬ì§„4
+   private String d_image5; // ìˆ˜ì • í›„ ì§€ìš¸ ì¹´í˜ ì‚¬ì§„5
+   
+   public MultipartFile getUpload() {
+      return upload;
+   }
+   public MultipartFile getUpload2() {
+      return upload2;
+   }
+   public MultipartFile getUpload3() {
+      return upload3;
+   }
+   public MultipartFile getUpload4() {
+      return upload4;
+   }
+   public MultipartFile getUpload5() {
+      return upload5;
+   }
+   public String getD_image() {
+      return d_image;
+   }
+   public String getD_image2() {
+      return d_image2;
+   }
+   public String getD_image3() {
+      return d_image3;
+   }
+   public String getD_image4() {
+      return d_image4;
+   }
+   public String getD_image5() {
+      return d_image5;
+   }
+   public void setUpload(MultipartFile upload) {
+      this.upload = upload;
+      if(this.upload != null) {
+         image = upload.getOriginalFilename();
+      }
+   }
+   public void setUpload2(MultipartFile upload2) {
+      this.upload2 = upload2;
+      if(this.upload2 != null) {
+         image2 = upload2.getOriginalFilename();
+      }
+   }
+   public void setUpload3(MultipartFile upload3) {
+      this.upload3 = upload3;
+      if(this.upload3 != null) {
+         image3 = upload3.getOriginalFilename();
+      }
+   }
+   public void setUpload4(MultipartFile upload4) {
+      this.upload4 = upload4;
+      if(this.upload4 != null) {
+         image4 = upload4.getOriginalFilename();
+      }
+   }
+   public void setUpload5(MultipartFile upload5) {
+      this.upload5 = upload5;
+      if(this.upload5 != null) {
+         image5 = upload5.getOriginalFilename();
+      }
+   }
+   public void setD_image(String d_image) {
+      this.d_image = d_image;
+   }
+   public void setD_image2(String d_image2) {
+      this.d_image2 = d_image2;
+   }
+   public void setD_image3(String d_image3) {
+      this.d_image3 = d_image3;
+   }
+   public void setD_image4(String d_image4) {
+      this.d_image4 = d_image4;
+   }
+   public void setD_image5(String d_image5) {
+      this.d_image5 = d_image5;
+   }
+   public int getCnum() {
+      return cnum;
+   }
+   public String getName() {
+      return name;
+   }
+   public String getXpos() {
+      return xpos;
+   }
+   public String getYpos() {
+      return ypos;
+   }
+   public String getAddress() {
+      return address;
+   }
+   public String getCtel1() {
+      return ctel1;
+   }
+   public String getCtel2() {
+      return ctel2;
+   }
+   public String getCtel3() {
+      return ctel3;
+   }
+   public String getC_date() {
+      return c_date;
+   }
+   public String getCtime1() {
+      return ctime1;
+   }
+   public String getCtime2() {
+      return ctime2;
+   }
+   public String getImage() {
+      return image;
+   }
+   public String getImage2() {
+      return image2;
+   }
+   public String getImage3() {
+      return image3;
+   }
+   public String getImage4() {
+      return image4;
+   }
+   public String getImage5() {
+      return image5;
+   }
+   public void setCnum(int cnum) {
+      this.cnum = cnum;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+   public void setXpos(String xpos) {
+      this.xpos = xpos;
+   }
+   public void setYpos(String ypos) {
+      this.ypos = ypos;
+   }
+   public void setAddress(String address) {
+      this.address = address;
+   }
+   public void setCtel1(String ctel1) {
+      this.ctel1 = ctel1;
+   }
+   public void setCtel2(String ctel2) {
+      this.ctel2 = ctel2;
+   }
+   public void setCtel3(String ctel3) {
+      this.ctel3 = ctel3;
+   }
+   public void setC_date(String c_date) {
+      this.c_date = c_date;
+   }
+   public void setCtime1(String ctime1) {
+      this.ctime1 = ctime1;
+   }
+   public void setCtime2(String ctime2) {
+      this.ctime2 = ctime2;
+   }
+   public void setImage(String image) {
+      this.image = image;
+   }
+   public void setImage2(String image2) {
+      this.image2 = image2;
+   }
+   public void setImage3(String image3) {
+      this.image3 = image3;
+   }
+   public void setImage4(String image4) {
+      this.image4 = image4;
+   }
+   public void setImage5(String image5) {
+      this.image5 = image5;
+   }
+   
 }

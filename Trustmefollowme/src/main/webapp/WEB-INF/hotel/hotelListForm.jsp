@@ -23,13 +23,6 @@
 						FAT LOGO
 					</a>
 				</div>
-               <ul class="header-nav-lists">
-                    <li class="header-nav-list">
-                        <a class="header-nav-link" href="hotelInsert.ht">Insert</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="header-nav-link" href="join.mb">Join</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="header-nav-link" href="login.mb">Login</a>
-                    </li>
-                  </ul>
                   
                 <div class="header-hamburger-icon">
                     <div class="header-hamburger-line-1"></div>
@@ -57,7 +50,7 @@
                 <div class="row center-lg">
             <c:forEach var="hb" items="${list}">
                     <div class="rooms col col-6" >
-                    	<a href="hotelDetail.ht?hnum=${hb.hnum}&pageNumber=${pageInfo.pageNumber}">
+                    	<a href="hotelDetail.ht?hnum=${hb.hnum}&pageNumber=${paging.pageNumber}">
                         <img src="<%=request.getContextPath()%>/resources/images/${hb.image}"
                             alt="" class="rooms-img" width="400" height="350">
                             </a>
@@ -69,24 +62,26 @@
                             <br>
                             <br>
                             <div class="details-container">
-                                <img src="<%=request.getContextPath()%>/resources/img/check-square.svg" alt="tick" class="list-icon">
+                                <img src="<%=request.getContextPath()%>/resources/images/check-square.svg" alt="tick" class="list-icon">
                                 <p class="list-text">${hb.facility}</p>
                             </div>
                         </div>
                         <p class="amount-text">￦${hb.hprice} ~</p>
-                        <div class="buttons-container">
+                       <%--  <div class="buttons-container">
                             <a href="hotelUpdate.ht?hnum=${hb.hnum}&pageNumber=${pageInfo.pageNumber}" class="btn btn-ghost">수정</a>
                             <a href="hotelDelete.ht?hnum=${hb.hnum}&pageNumber=${pageInfo.pageNumber}" class="btn btn-fill">삭제</a>
                             <br>
-                        </div>
+                        </div> --%>
+                    <br>
                     </div>
                     <br>
                     </c:forEach>
                     </div>
             </section>
-
+ 
         </div>
         </div>
+        
     </main>
 
     <footer class="footer">
@@ -136,7 +131,7 @@
     <script src="<%=request.getContextPath()%>/resources/js/switchRooms.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/toggleHamburger.js"></script>
 <div class="page">
-${pageInfo.pagingHtml}
+${paging.pagingHtml}
 </div>
 </body>
 </html>

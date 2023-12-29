@@ -154,7 +154,7 @@ a:hover {
 				<div id="revenue--chart"></div>
 			</div>
 		</div>
-<%-- 		<div class="center--content">
+ 		<div class="center--content">
 			<div class="content--box" id="event--box" onclick="location.href='/event/notice'">
 				<b class="title--box">이벤트</b>
 				<div class="event--box">
@@ -205,10 +205,10 @@ a:hover {
 									불가</span> ${notAvailableRoom}개
 							</div>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose> 
 				</div>
 
-				<%-- <div class="dining">
+				 <div class="dining">
 					<a href="" class="check--box">레스토랑</a>
 					<c:choose>
 						<c:when test="${restaurant == 0}">
@@ -269,7 +269,7 @@ a:hover {
 				</div>
 			</div>
 		</div>
-	</div> --%>
+	</div> 
 </div>
 </main>
 

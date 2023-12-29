@@ -8,14 +8,14 @@ import myjourney.model.MyJourneyBean;
 public class BoardBean {
 	private int num;
 	private String writer;
-	@NotBlank(message = "Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
+	  @NotBlank(message = "ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”.")
 	private String title;
 	private String reg_date;
 	private int readcount;
-	@NotBlank(message = "³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.")
+	@NotBlank(message = "ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.")	
 	private String content;
 	private String ip;
-	@NotBlank(message = "ÀÌ¹ÌÁö¸¦ ¼±ÅÃÇÏ¼¼¿ä.")
+ @NotBlank(message = "ì´ë¯¸ì§€ë¥¼ ì„ íƒí•˜ì„¸ìš”.")
 	private String image;
 	private String mEmail;
 	private String jnum;

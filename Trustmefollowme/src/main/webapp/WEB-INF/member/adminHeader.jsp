@@ -165,19 +165,11 @@ li:hover {
 					</ul>	
 				</li>
 				
-				<!-- <li id="room--li">
+				<li id="userList--li">
 					<div>
-						<span id="search--board--wrap">Board</span>
+						<span id="search--member--wrap" onClick="location.href='mainScreen.m'">Main</span>
 					</div>
-					<br>
-					<ul id="board--list">
-						<li id="small" onclick="location.href='admin.mb?cate=board'">게시판 등록</li>
-						<li id="small" onclick="location.href='/manager/roomStatus'">답변 등록</li>
-						<li id="small" onclick="location.href='/manager/facilities'">게시글 삭제</li>
-					</ul>	
-				</li> -->
-				
-				
+			
 			</ul>
 		</nav>
 	<script type="text/javascript">

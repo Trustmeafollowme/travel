@@ -16,33 +16,33 @@ import member.model.MemberDao;
 
 @Controller
 public class FindPasswordController {
-	private final String command = "findPassword.mb";
-	private final String viewPage = "findPasswordForm";
-	@Autowired
-	private MemberDao memberDao;
+   private final String command = "findPassword.mb";
+   private final String viewPage = "findPasswordForm";
+   @Autowired
+   private MemberDao memberDao;
 
-	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String findPwForm() {
-		return viewPage;
-	}
+   @RequestMapping(value = command, method = RequestMethod.GET)
+   public String findPwForm() {
+      return viewPage;
+   }
 
-	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String findPW(MemberBean mb, HttpServletResponse response) throws IOException {
-		List<MemberBean>lists = memberDao.findPassword(mb);
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+   @RequestMapping(value = command, method = RequestMethod.POST)
+   public String findPW(MemberBean mb, HttpServletResponse response) throws IOException {
+      List<MemberBean>lists = memberDao.findPassword(mb);
+      response.setContentType("text/html;charset=UTF-8");
+      PrintWriter out = response.getWriter();
 
-		if (!lists.isEmpty()) {
-			String password = lists.get(0).getPassword();
-			out.print("<script>alert('È¸¿ø´ÔÀÇ ºñ¹Ğ¹øÈ£´Â " + password + " ÀÔ´Ï´Ù.');</script>");
-			out.flush();
-			return "login";
+      if (!lists.isEmpty()) {
+         String password = lists.get(0).getPassword();
+         out.print("<script>alert('íšŒì›ë‹˜ì˜ ë¹„ë°€ë²ˆí˜¸ëŠ” " + password + " ì…ë‹ˆë‹¤.');</script>");
+         out.flush();
+         return "login";
 
-		} else {
-			out.print("<script>alert('°¡ÀÔÇÏÁö ¾ÊÀº È¸¿øÀÔ´Ï´Ù.');</script>");
-			out.flush();
-			return "findPasswordForm";
-		}
-	}
+      } else {
+         out.print("<script>alert('ê°€ì…í•˜ì§€ ì•Šì€ íšŒì›ì…ë‹ˆë‹¤.');</script>");
+         out.flush();
+         return "findPasswordForm";
+      }
+   }
 
 }
