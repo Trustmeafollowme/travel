@@ -172,6 +172,7 @@ table {
 .total {
    display: inline-block;
    border-bottom: 1px solid #BDBDBD;
+   padding-bottom: 10px;
 }
 
 
@@ -271,237 +272,8 @@ table {
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets/css/main.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=Y79tUdHoTu9gwSgePsSHS8wkUvaAT9mP7JqMUa2U"></script>
+<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=키넣야함"></script>
 <script type="text/javascript">
-/* 지도 */
-   /* 거리 계산 */
-   
-   var map;
-   
-   var marker_s, marekr_e, waypoint;
-   var resultMarkerArr = [];
-   //경로그림정보
-   var drawInfoArr = [];
-   var resultInfoArr = [];
-   
-   var markerInfo;
-
-   var chktraffic = [];
-   var resultdrawArr = [];
-   var resultMarkerArr = []
-   var searchOption = "2";
-
-   var trafficInfochk = "N";
-   var headers = {};
-   
-   /* headers["appKey"] = "Y79tUdHoTu9gwSgePsSHS8wkUvaAT9mP7JqMUa2U";*/
-
-   <c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
-      $.ajax({
-         type: "POST",
-         headers: headers,
-         url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=Y79tUdHoTu9gwSgePsSHS8wkUvaAT9mP7JqMUa2U",
-         async: false,
-         data: {
-            "startX": "${myjYpos.get(i)}",
-            "startY": "${myjXpos.get(i)}",
-            "endX": "${myjYpos.get(i+1)}",
-            "endY": "${myjXpos.get(i+1)}",
-            "reqCoordType": "WGS84GEO",
-            "resCoordType": "EPSG3857",
-            "searchOption": searchOption,
-            "trafficInfo": trafficInfochk,
-         },
-         success: function (response) {
-            var resultData = response.features;
-
-            var tDistance = "거리 : " + (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km ";
-            var tTime = " 시간 : " + (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
-
-            $("#result${i}").text(tDistance + tTime);
-
-            // You can also access other information such as route points, etc., if needed.
-            // var routePoints = resultData[0].geometry.coordinates;
-         },
-         error: function (request, status, error) {
-            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-         }
-      });
-   </c:forEach>
-
-function initTmap(){
-   resultMarkerArr = [];
-   
-    // 1. 지도 띄우기
-   map = new Tmapv2.Map("map_div", {
-      center: new Tmapv2.LatLng(33.450701, 126.570667),
-      width : "100%",
-      height : "100%",
-      zoom : 10,
-      zoomControl : true,
-      scrollwheel : true
-      
-   });
-   
-   // 2. 시작, 도착 심볼찍기
-   // 시작
-   marker_s = new Tmapv2.Marker({
-      position : new Tmapv2.LatLng(${myjXpos.get(0)}, ${myjYpos.get(0)}),
-      icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
-      iconSize : new Tmapv2.Size(24, 38),
-      map:map
-   });
-   resultMarkerArr.push(marker_s);
-   // 도착
-   marker_e = new Tmapv2.Marker({
-      position : new Tmapv2.LatLng(${lastXpos}, ${lastYpos}),
-      icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
-      iconSize : new Tmapv2.Size(24, 38),
-      map:map
-   });
-   resultMarkerArr.push(marker_e);
-   
-       <c:forEach var="i" begin="1" end="${fn:length(myjXpos)-1}">
-       marker = new Tmapv2.Marker({
-         position : new Tmapv2.LatLng(${myjXpos.get(i)}, ${myjYpos.get(i)}),
-         icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_${i+1}.png",
-         iconSize : new Tmapv2.Size(24, 38),
-         map:map
-      });
-      resultMarkerArr.push(marker);
-      </c:forEach> 
-   
-      // 4. 경로탐색 API 사용요청
-   var routeLayer; 
-
-      var searchOption = $("#selectLevel").val();
-      
-      var headers = {}; 
-      headers["appKey"]="Y79tUdHoTu9gwSgePsSHS8wkUvaAT9mP7JqMUa2U";
-      headers["Content-Type"]="application/json";
-      
-      var param = JSON.stringify({
-         "startName" : "출발지",
-         "startX" : "${myjYpos.get(0)}",
-         "startY" : "${myjXpos.get(0)}",
-         "startTime" : "202312240624",
-         "endName" : "도착지",
-         "endX" : "${lastYpos}",
-         "endY" : "${lastXpos}",
-         "viaPoints" : 
-            [
-             <c:forEach var="i" begin="1" end="${fn:length(myjXpos)-2}">
-             {
-                "viaPointId" : "test01",
-                "viaPointName" : "name01",
-                "viaX" : "${myjYpos.get(i)}" ,
-                "viaY" : "${myjXpos.get(i)}" 
-             } <c:if test="${i ne fn:length(myjXpos)-1}">,</c:if>
-             </c:forEach> 
-      
-            ],
-         "reqCoordType" : "WGS84GEO",
-         "resCoordType" : "EPSG3857",
-         "searchOption": searchOption
-      });
-      
-      
-      $.ajax({
-            method:"POST",
-            url:"https://apis.openapi.sk.com/tmap/routes/routeSequential30?version=1&format=json",//
-            headers : headers,
-            async:false,
-            data:param,
-            success:function(response){
-
-               var resultData = response.properties;
-               var resultFeatures = response.features;
-               
-               // 결과 출력
-               var tDistance = "총 거리 : " + (resultData.totalDistance/1000).toFixed(1) + "km,  ";
-               var tTime = "총 시간 : " + (resultData.totalTime/60).toFixed(0) + "분  ";
-               
-               $("#result").text(tDistance+tTime);
-               
-               //기존  라인 초기화
-               
-               if(resultInfoArr.length>0){
-                  for(var i in resultInfoArr){
-                     resultInfoArr[i].setMap(null);
-                  }
-                  resultInfoArr=[];
-               }
-               
-               for(var i in resultFeatures) {
-                  var geometry = resultFeatures[i].geometry;
-                  var properties = resultFeatures[i].properties;
-                  var polyline_;
-                  
-                  drawInfoArr = [];
-                  
-                  if(geometry.type == "LineString") {
-                     for(var j in geometry.coordinates){
-                        // 경로들의 결과값(구간)들을 포인트 객체로 변환 
-                        var latlng = new Tmapv2.Point(geometry.coordinates[j][0], geometry.coordinates[j][1]);
-                        // 포인트 객체를 받아 좌표값으로 변환
-                        var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlng);
-                        // 포인트객체의 정보로 좌표값 변환 객체로 저장
-                        var convertChange = new Tmapv2.LatLng(convertPoint._lat, convertPoint._lng);
-                        
-                        drawInfoArr.push(convertChange);
-                     }
-
-                     polyline_ = new Tmapv2.Polyline({
-                        path : drawInfoArr,
-                        strokeColor : "#FF0000",
-                        strokeWeight: 6,
-                        map : map
-                     });
-                     resultInfoArr.push(polyline_);
-                     
-                  }else{
-                     var markerImg = "";
-                     var size = "";         //아이콘 크기 설정합니다.
-                     
-                     if(properties.pointType == "S"){   //출발지 마커
-                        markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";   
-                        size = new Tmapv2.Size(24, 38);
-                     }else if(properties.pointType == "E"){   //도착지 마커
-                        markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
-                        size = new Tmapv2.Size(24, 38);
-                     }else{   //각 포인트 마커
-                        markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
-                        size = new Tmapv2.Size(8, 8);
-                     }
-                     
-                     // 경로들의 결과값들을 포인트 객체로 변환 
-                     var latlon = new Tmapv2.Point(geometry.coordinates[0], geometry.coordinates[1]);
-                     // 포인트 객체를 받아 좌표값으로 다시 변환
-                     var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlon);
-                       
-                       marker_p = new Tmapv2.Marker({
-                          position: new Tmapv2.LatLng(convertPoint._lat, convertPoint._lng),
-                          icon : markerImg,
-                          iconSize : size,
-                          map:map
-                       });
-                       
-                       resultMarkerArr.push(marker_p);
-                  }
-               }
-            },
-            error:function(request,status,error){
-               console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
-         });
-}
-
-function addComma(num) {
-     var regexp = /\B(?=(\d{3})+(?!\d))/g;
-      return num.toString().replace(regexp, ',');
-}
-</script>
-<script>
 $(function(){
    var likes = ${likeInfo.likes} /* 좋아요 기능 시작 */
    var bnum = '${likeInfo.b_num}';
@@ -652,72 +424,305 @@ $(function(){
       alert("로그인 후 작성가능합니다.");
       location.href="login.mb";
    });
+   
+   /* 지도 */
+   /* 거리 계산 */
+   var map;
 
+   var marker_s, marekr_e, waypoint;
+   var resultMarkerArr = [];
+   //경로그림정보
+   var drawInfoArr = [];
+   var resultInfoArr = [];
+
+   var markerInfo;
+
+   var chktraffic = [];
+   var resultdrawArr = [];
+   var resultMarkerArr = []
+   var searchOption = "2";
+
+   var trafficInfochk = "N";
+   var headers = {};
+
+    headers["appKey"] = "키넣야함";
+
+   <c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
+      $.ajax({
+         type: "POST",
+         headers: headers,
+         url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=키넣야함",
+         async: false,
+         data: {
+            "startX": "${myjYpos.get(i)}",
+            "startY": "${myjXpos.get(i)}",
+            "endX": "${myjYpos.get(i+1)}",
+            "endY": "${myjXpos.get(i+1)}",
+            "reqCoordType": "WGS84GEO",
+            "resCoordType": "EPSG3857",
+            "searchOption": searchOption,
+            "trafficInfo": trafficInfochk,
+         },
+         success: function (response) {
+            var resultData = response.features;
+
+            var tDistance = "거리 : " + (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km ";
+            var tTime = " 시간 : " + (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
+
+            $("#result${i}").text(tDistance + tTime);
+
+         },
+         error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+         }
+      });
+   </c:forEach>
 });
+var map;
+
+var marker_s, marekr_e, waypoint;
+var resultMarkerArr = [];
+//경로그림정보
+var drawInfoArr = [];
+var resultInfoArr = [];
+
+var markerInfo;
+
+var chktraffic = [];
+var resultdrawArr = [];
+var resultMarkerArr = []
+var searchOption = "2";
+
+var trafficInfochk = "N";
+var headers = {};
+
+function initTmap(){
+   resultMarkerArr = [];
+   
+    // 1. 지도 띄우기
+   map = new Tmapv2.Map("map_div", {
+      center: new Tmapv2.LatLng(33.450701, 126.570667),
+      width : "100%",
+      height : "100%",
+      zoom : 10,
+      zoomControl : true,
+      scrollwheel : true
+      
+   });
+   
+   // 2. 시작, 도착 심볼찍기
+   // 시작
+   marker_s = new Tmapv2.Marker({
+      position : new Tmapv2.LatLng(${myjXpos.get(0)}, ${myjYpos.get(0)}),
+      icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
+      iconSize : new Tmapv2.Size(24, 38),
+      map:map
+   });
+   resultMarkerArr.push(marker_s);
+   // 도착
+   marker_e = new Tmapv2.Marker({
+      position : new Tmapv2.LatLng(${lastXpos}, ${lastYpos}),
+      icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
+      iconSize : new Tmapv2.Size(24, 38),
+      map:map
+   });
+   resultMarkerArr.push(marker_e);
+   
+       <c:forEach var="i" begin="1" end="${fn:length(myjXpos)-1}">
+       marker = new Tmapv2.Marker({
+         position : new Tmapv2.LatLng(${myjXpos.get(i)}, ${myjYpos.get(i)}),
+         icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_${i+1}.png",
+         iconSize : new Tmapv2.Size(24, 38),
+         map:map
+      });
+      resultMarkerArr.push(marker);
+      </c:forEach> 
+   
+      // 4. 경로탐색 API 사용요청
+   var routeLayer; 
+
+      var searchOption = $("#selectLevel").val();
+      
+      var headers = {}; 
+      headers["appKey"]="키넣야함";
+      headers["Content-Type"]="application/json";
+      
+      var param = JSON.stringify({
+         "startName" : "출발지",
+         "startX" : "${myjYpos.get(0)}",
+         "startY" : "${myjXpos.get(0)}",
+         "startTime" : "202312240624",
+         "endName" : "도착지",
+         "endX" : "${lastYpos}",
+         "endY" : "${lastXpos}",
+         "viaPoints" : 
+            [
+             <c:forEach var="i" begin="1" end="${fn:length(myjXpos)-2}">
+             {
+                "viaPointId" : "test01",
+                "viaPointName" : "name01",
+                "viaX" : "${myjYpos.get(i)}" ,
+                "viaY" : "${myjXpos.get(i)}" 
+             } <c:if test="${i ne fn:length(myjXpos)-1}">,</c:if>
+             </c:forEach> 
+      
+            ],
+         "reqCoordType" : "WGS84GEO",
+         "resCoordType" : "EPSG3857",
+         "searchOption": searchOption
+      });
+      
+      
+      $.ajax({
+            method:"POST",
+            url:"https://apis.openapi.sk.com/tmap/routes/routeSequential30?version=1&format=json",
+            headers : headers,
+            async:false,
+            data:param,
+            success:function(response){
+
+               var resultData = response.properties;
+               var resultFeatures = response.features;
+               
+               // 결과 출력
+               var tDistance = "총 거리 : " + (resultData.totalDistance/1000).toFixed(1) + "km,  ";
+               var tTime = "총 시간 : " + (resultData.totalTime/60).toFixed(0) + "분  ";
+               
+               $("#result").text(tDistance+tTime);
+               
+               //기존  라인 초기화
+               
+               if(resultInfoArr.length>0){
+                  for(var i in resultInfoArr){
+                     resultInfoArr[i].setMap(null);
+                  }
+                  resultInfoArr=[];
+               }
+               
+               for(var i in resultFeatures) {
+                  var geometry = resultFeatures[i].geometry;
+                  var properties = resultFeatures[i].properties;
+                  var polyline_;
+                  
+                  drawInfoArr = [];
+                  
+                  if(geometry.type == "LineString") {
+                     for(var j in geometry.coordinates){
+                        // 경로들의 결과값(구간)들을 포인트 객체로 변환 
+                        var latlng = new Tmapv2.Point(geometry.coordinates[j][0], geometry.coordinates[j][1]);
+                        // 포인트 객체를 받아 좌표값으로 변환
+                        var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlng);
+                        // 포인트객체의 정보로 좌표값 변환 객체로 저장
+                        var convertChange = new Tmapv2.LatLng(convertPoint._lat, convertPoint._lng);
+                        
+                        drawInfoArr.push(convertChange);
+                     }
+
+                     polyline_ = new Tmapv2.Polyline({
+                        path : drawInfoArr,
+                        strokeColor : "#FF0000",
+                        strokeWeight: 6,
+                        map : map
+                     });
+                     resultInfoArr.push(polyline_);
+                     
+                  }else{
+                     var markerImg = "";
+                     var size = "";         //아이콘 크기 설정합니다.
+                     
+                     if(properties.pointType == "S"){   //출발지 마커
+                        markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";   
+                        size = new Tmapv2.Size(24, 38);
+                     }else if(properties.pointType == "E"){   //도착지 마커
+                        markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
+                        size = new Tmapv2.Size(24, 38);
+                     }else{   //각 포인트 마커
+                        markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+                        size = new Tmapv2.Size(8, 8);
+                     }
+                     
+                     // 경로들의 결과값들을 포인트 객체로 변환 
+                     var latlon = new Tmapv2.Point(geometry.coordinates[0], geometry.coordinates[1]);
+                     // 포인트 객체를 받아 좌표값으로 다시 변환
+                     var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlon);
+                       
+                       marker_p = new Tmapv2.Marker({
+                          position: new Tmapv2.LatLng(convertPoint._lat, convertPoint._lng),
+                          icon : markerImg,
+                          iconSize : size,
+                          map:map
+                       });
+                       
+                       resultMarkerArr.push(marker_p);
+                  }
+               }
+            },
+            error:function(request,status,error){
+               console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+         });
+}
+
+function addComma(num) {
+     var regexp = /\B(?=(\d{3})+(?!\d))/g;
+      return num.toString().replace(regexp, ',');
+}
+
 </script>
 
   <link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
  <body onload="initTmap()">
 
-<header id="header" >
-    <div class="container d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
+<header id="header" class=" ">
+		<div
+			class="container d-flex align-items-center justify-content-lg-between">
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      <c:if test="${empty myemail}">
-         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
-      </c:if>
-      
-      <c:if test="${not empty myemail}">
-         <a href="myPage.mb" class="get-started-btn scrollto">${myemail}</a>
-	
-         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
-      </c:if>
+			<h1 class="logo me-auto me-lg-0">
+				<a href="mainScreen.m"><img alt=""
+					src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a>
+			</h1>
 
-    </div>
-  </header>
+			<nav id="navbar" class="navbar order-last order-lg-0">
+				<ul>
+					<li><a class="nav-link scrollto active" href="#hero"> </a></li>
+					<li><a class="nav-link scrollto" href="#about"> </a></li>
+					<li><a class="nav-link scrollto" href="#services"> </a></li>
+					<li><a class="nav-link scrollto " href="#portfolio"> </a></li>
+					<li><a class="nav-link scrollto" href="#team"> </a></li>
+					<li><a class="nav-link scrollto" href="#contact"> </a></li>
+				</ul>
+			</nav>
+			<!-- .navbar -->
+
+			<!-- 민희가 추가한 로그인 로그아웃입니다. -->
+			<c:if test="${empty myname}">
+				<a href="login.mb" class="get-started-btn scrollto">로그인</a>
+			</c:if>
+
+			<c:if test="${not empty myname}">
+				<a href="myPage.mb" class="get-started-btn scrollto">${myname}님
+					환영합니다</a>
+
+				<a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>
+			</c:if>
+			<!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
+
+		</div>
+	</header>
 
 <div class="top" align="center">
       <img class="img" src="<%=request.getContextPath()%>/resources/images/${bb.image}" style="height: 270px; width: 270px;">
    <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
-      <h4 style="color: black;">
+      <h2 style="color: black;">
          ${bb.writer}님의 여행일지
-      </h4>
-          <h4 style="padding-top: 30px;">${bb.title}</h4>
-         <h5>
+      </h2>
+          <h2 style="padding-top: 30px;">${bb.title}</h2>
+         <h3>
          ${dateCount}일 | ${minDate}일 ~ ${maxDate}일
-         </h5>
+         </h3>
          <hr style="margin: 20px;" color="#EAEAEA">
-      <div id="content"
-         style="width: 600px; height: 80px;">
+      <div id="content" style="width: 600px; height: 80px;">
          ${bb.content}</div>
          <c:if test="${bb.writer eq sessionScope.myname || sessionScope.myname eq '어드민'}">
          <div align="right" style="padding-top: 20px; padding-bottom: 20px;">
@@ -754,9 +759,9 @@ $(function(){
                <div style="display: inline-block; margin-left: 100px;">
                     <img class="img" src="<%=request.getContextPath()%>/resources/images/${bd.image}" width="300px" height="300px">
                </div>
-                     <h5 style="display: inline-block; margin-left: 100px; margin-top: 30px;">${bd.name}<br><br>
-                     ${bd.address}
-                     </h5>
+                     <h4 style="display: inline-block; margin-left: 100px; margin-top: 30px;">${bd.name}<br><br>
+                     ${bd.address}<br><br><br><br>
+                     </h4>
                </div>
                <c:if test="${not bdStatus.last}">
                <div style="padding-top: 50px; padding-bottom: 50px; margin-left: 180px;">
@@ -817,7 +822,7 @@ $(function(){
                   </div>
                      <div style="display: inline-block;">
                         ${chat.writer}
-                        <div class="content" style="padding-top: 8px;">${chat.content}
+                        <div class="content" style="padding-top: 20px; padding-bottom: 10px;">${chat.content}
                            <div style="padding-bottom: 5px; padding-top: 8px;">
                            <fmt:parseDate var="date" value="${chat.reg_date}"
                            pattern="yyyy-MM-dd" />
@@ -881,6 +886,9 @@ $(function(){
          </c:forEach>
       </table>
    </div>
+   </div>
+   <div style="margin-bottom: 50px;">
+   <a href="boardList.bd">목록으로</a>
    </div>
 </center>
          

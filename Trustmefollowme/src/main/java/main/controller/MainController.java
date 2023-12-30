@@ -1,10 +1,13 @@
 package main.controller;
  
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +65,9 @@ public class MainController {
 			@RequestParam(value = "day", required = false) String day, 
 			@RequestParam(value = "date", required = false) String date, 
 			@RequestParam(value = "jdate", required = false) String jdate,
-			Model model, RedirectAttributes rttr
+			Model model, RedirectAttributes rttr,HttpServletResponse response
 			) {
+		 response.setContentType("text/html;charset=UTF-8");
 		String myemail =(String)session.getAttribute("myemail");
 		String myname =(String)session.getAttribute("myname");
 		if(sTravel!=null) {
@@ -82,14 +86,25 @@ public class MainController {
 		}
 	
 		
-		if(request.getParameter("date")==null) {
+		if(date==null) {
 			date = (String)session.getAttribute("date");
 			request.setAttribute("date", date);
 		}
 		else {
-			request.setAttribute("date", request.getParameter("date"));
+			request.setAttribute("date", date);
+			session.setAttribute("date", date);
 		}
 		
+		if(date.isEmpty()) {
+			 PrintWriter out;
+	         try {
+	            out = response.getWriter();
+	            out.write("<script>alert('날짜를 선택해주세요');history.go(-1);</script>");
+	              out.flush();
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         }
+		}
 		
 		if(sTravel.equals("auto")) {
 			request.setAttribute("date", request.getParameter("date"));

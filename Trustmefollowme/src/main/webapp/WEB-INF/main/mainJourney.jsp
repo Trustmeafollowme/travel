@@ -249,7 +249,7 @@
 
       </div>
 		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G"></script>
+		 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=키넣야함"></script>
 	 	 <script type="text/javascript">
 				
 			var map;
@@ -270,13 +270,13 @@
 			var trafficInfochk = "N";
 			var headers = {};
 			
-			headers["appKey"] = "7AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
+			headers["appKey"] = "키넣야함";
 
 			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
 				$.ajax({
 					type: "POST",
 					headers: headers,
-				url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G", 
+				url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=키넣야함", 
 					async: false,
 					data: {
 						"startX": "${myjYpos.get(i)}",
@@ -353,7 +353,7 @@
 					var searchOption = $("#selectLevel").val();
 					
 					var headers = {}; 
-					headers["appKey"]="77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
+					headers["appKey"]="키넣야함";
 					headers["Content-Type"]="application/json";
 					
 					var param = JSON.stringify({

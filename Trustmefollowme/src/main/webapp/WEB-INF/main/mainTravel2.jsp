@@ -58,9 +58,8 @@ body {
 #right-container {
   width: 50%;
   height: 100vh;
-  background-color: #e0e0e0;
+  background-color:#f0f0f0;
   float: left;
-  overflow: auto; /* 세로 스크롤이 필요한 경우 스크롤 표시 */
 }
 .search{
    width:250px ; 
@@ -187,58 +186,18 @@ body {
 
     </div>
   </header><!-- <!— End Header —> -->
-      <%-- <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-lg-between">
-      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"> </a>
-      <c:forEach var="i" begin="0" end="${fn:length(days)-1 }">
-            <a class="navbar-brand" 
-            href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
-               <span>Day${i+1 }</span>
-            </a> 
-        </c:forEach>
-      </h1>
-          <!-- 민희가 추가한 로그인 로그아웃입니다. -->
-      <c:if test="${empty myemail}">
-         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
-      </c:if>
-      
-      <c:if test="${not empty myemail}">
-         <a href="mainJourney.m?myemail=${myemail}" class="get-started-btn scrollto">${myemail}</a>
-   
-         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
-      </c:if>
-     <!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
 
-    </div>
-  </header> --%><!-- End Header -->
-<%--          <header class="header_section">
-            <div class="container">
-               <nav class="navbar navbar-expand-lg custom_nav-container ">
-                  <a class="navbar-brand" href="mainScreen.m"> <span>
-                  <img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png">
-               <c:forEach var="i" begin="0"
-                           end="${fn:length(days)-1 }">
-                           <a class="navbar-brand" href="myjourneyList.mj?day=${i+1 }&date=${date }&jdate=${days[i] }&sTravel=${sessionScope.sTravel }">
-                              <span>Day${i+1 }</span>
-                           </a><br>
-                        </c:forEach>
-                  </span>
-                  </a> <br>
-
-                  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse"
-                     data-target="#navbarSupportedContent"
-                     aria-controls="navbarSupportedContent" aria-expanded="false"
-                     aria-label="Toggle navigation">
-                     <span class=""> </span>
-                  </button> -->
-
-               </nav>
-            </div>
-         </header> --%>
-         <!-- end header section -->
    </div>
    
    <section class="food_section layout_padding-bottom" id="left-container">
+    <select name="jdate" id="jdate" onchange="selDay('${date}', '${sessionScope.sTravel}',this.options[this.selectedIndex].text)">
+             <c:forEach var="i" begin="0" end="${fn:length(days)-1}">
+                 <option value="${days[i]}" <c:if test="${jdate eq days[i]}">selected</c:if>>
+                     Day${i+1}
+                 </option>
+             </c:forEach>
+            </select>
+   
       <div class="container">
          <ul class="filters_menu">
             <li class="active" data-filter="*">All</li>
@@ -247,13 +206,6 @@ body {
             <li data-filter=".fries" >카페</li>
             <li data-filter=".pizza" >관광지</li>
          </ul>
-              <select name="jdate" id="jdate" onchange="selDay('${date}', '${sessionScope.sTravel}',this.options[this.selectedIndex].text)">
-             <c:forEach var="i" begin="0" end="${fn:length(days)-1}">
-                 <option value="${days[i]}" <c:if test="${jdate eq days[i]}">selected</c:if>>
-                     Day${i+1}
-                 </option>
-             </c:forEach>
-            </select> &nbsp;&nbsp;
          <%-- <form  action="mainTravel.m">
          <input type="hidden" name="date" value="${date}">
          <input type="hidden" name="sTravel" value="manual">
@@ -438,58 +390,46 @@ body {
 
    </section>
 
-   <!-- footer section -->
-   <footer class="footer_section" id=>
-      <div class="container">
-         <div class="row">
-            <div class="col-md-4 footer-col">
-               <div class="footer_contact">
-                  <h4>Contact Us</h4>
-                  <div class="contact_link_box">
-                     <a href=""> <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span> Location </span>
-                     </a> <a href=""> <i class="fa fa-phone" aria-hidden="true"></i> <span>
-                           Call +01 1234567890 </span>
-                     </a> <a href=""> <i class="fa fa-envelope" aria-hidden="true"></i>
-                        <span> demo@gmail.com </span>
-                     </a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4 footer-col">
-               <div class="footer_detail">
-                  <a href="" class="footer-logo"> Feane </a>
-                  <p>Necessary, making this the first true generator on the
-                     Internet. It uses a dictionary of over 200 Latin words, combined
-                     with</p>
-                  <div class="footer_social">
-                     <a href=""> <i class="fa fa-facebook" aria-hidden="true"></i>
-                     </a> <a href=""> <i class="fa fa-twitter" aria-hidden="true"></i>
-                     </a> <a href=""> <i class="fa fa-linkedin" aria-hidden="true"></i>
-                     </a> <a href=""> <i class="fa fa-instagram" aria-hidden="true"></i>
-                     </a> <a href=""> <i class="fa fa-pinterest" aria-hidden="true"></i>
-                     </a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4 footer-col">
-               <h4>Opening Hours</h4>
-               <p>Everyday</p>
-               <p>10.00 Am -10.00 Pm</p>
-            </div>
-         </div>
-         <div class="footer-info">
-            <p>
-               &copy; <span id="displayYear"></span> All Rights Reserved By <a
-                  href="https://html.design/">Free Html Templates</a><br> <br>
-               &copy; <span id="displayYear"></span> Distributed By <a
-                  href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-            </p>
-         </div>
-      </div>
+<footer id="footer"  style="background-color: #000000B3;">
 
-   </footer>
-   <!-- footer section -->
+
+		<div class="container">
+			<div class="footer-info" align="left">
+				<br>
+				<img alt=""
+					src="<%=request.getContextPath()%>/resources/assets/img/logo.png" width="100">
+					<span>나믿따</span>
+		
+
+				<div class=""><h6>
+					&copy; Copyright 나믿지
+				</h6>
+				</div>
+				<div class="">
+					Designed by <a href="#">Trustmeandfollowme</a>
+			</div>
+			</div>
+			<div align="right">
+				<div class="social-links mt-3">
+					<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> <a
+						href="#" class="facebook"><i class="bx bxl-facebook"></i></a> <a
+						href="#" class="instagram"><i class="bx bxl-instagram"></i></a> <a
+						href="#" class="google-plus"><i class="bx bxl-skype"></i></a> <a
+						href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+					<img width="100px"
+							src="https://www.myro.co.kr/assets/images/applestore.png" alt="앱스토어" loading="lazy"
+							class="w-full">
+						<img width="100px"
+							src="https://www.myro.co.kr/assets/images/googlestore.png" alt="플레이스토어" loading="lazy"
+							class="w-full">
+				
+				
+				</div>
+				
+			</div>
+
+		</div>
+	</footer>
 
 
    <!-- jQery -->

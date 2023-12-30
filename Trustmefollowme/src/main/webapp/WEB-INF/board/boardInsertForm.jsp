@@ -188,51 +188,42 @@ li:hover{
 	<link href="<%=request.getContextPath()%>/resources/assets/css/style.css" rel="stylesheet">
 
 
-<header id="header" >
-    <div class="container d-flex align-items-center justify-content-lg-between">
+<header id="header" class=" ">
+		<div
+			class="container d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"><a href="mainScreen.m"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a></h1>
+			<h1 class="logo me-auto me-lg-0">
+				<a href="mainScreen.m"><img alt=""
+					src="<%=request.getContextPath()%>/resources/assets/img/logo.png"></a>
+			</h1>
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      <c:if test="${empty myemail}">
-         <a href="login.mb" class="get-started-btn scrollto">로그인</a>         
-      </c:if>
-      
-      <c:if test="${not empty myemail}">
-         <a href="myPage.mb" class="get-started-btn scrollto">${myemail}</a>
-	
-         <a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>         
-      </c:if>
+			<nav id="navbar" class="navbar order-last order-lg-0">
+				<ul>
+					<li><a class="nav-link scrollto active" href="#hero"> </a></li>
+					<li><a class="nav-link scrollto" href="#about"> </a></li>
+					<li><a class="nav-link scrollto" href="#services"> </a></li>
+					<li><a class="nav-link scrollto " href="#portfolio"> </a></li>
+					<li><a class="nav-link scrollto" href="#team"> </a></li>
+					<li><a class="nav-link scrollto" href="#contact"> </a></li>
+				</ul>
+			</nav>
+			<!-- .navbar -->
 
-    </div>
-  </header>
+			<!-- 민희가 추가한 로그인 로그아웃입니다. -->
+			<c:if test="${empty myname}">
+				<a href="login.mb" class="get-started-btn scrollto">로그인</a>
+			</c:if>
+
+			<c:if test="${not empty myname}">
+				<a href="myPage.mb" class="get-started-btn scrollto">${myname}님
+					환영합니다</a>
+
+				<a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>
+			</c:if>
+			<!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
+
+		</div>
+	</header>
 
 <div style="display: inline-block; width: 100%; margin-top: 100px;" align="center">
 	<div

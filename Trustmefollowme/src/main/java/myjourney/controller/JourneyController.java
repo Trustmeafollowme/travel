@@ -1,9 +1,12 @@
 package myjourney.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +27,24 @@ public class JourneyController {
 	MyJourneyDao myjDao;
 	@Autowired
 	MemberDao mDao;
-	
+	   private final String gotoPage = "mainScreen.m";
 	@RequestMapping("mainJourney.mj")
-	public String journey(HttpServletRequest request,MainBean mb, HttpSession session) {
+	public void journey(HttpServletRequest request,HttpServletResponse response,MainBean mb, HttpSession session) {
 		
-		
+		 response.setContentType("text/html;charset=UTF-8");
+		 
 		if(mb.getHotel()==null) {
-		
-			return "redirect:mainTravel.m";
+//			session.setAttribute("date", session.getAttribute("date"));
+//			session.setAttribute("sTravel", session.getAttribute("sTravel"));
+//			return "redirect:mainTravel.m";
+			  PrintWriter out;
+		         try {
+		            out = response.getWriter();
+		            out.write("<script>alert('출발지(호텔)를 선택하셔야 생성됩니다.');history.go(-1);</script>");
+		              out.flush();
+		         } catch (IOException e) {
+		            e.printStackTrace();
+		         }
 		}
 		
 		String myemail = (String)session.getAttribute("myemail");
@@ -51,8 +64,14 @@ public class JourneyController {
 			System.out.println("date.length"+date.length);
 			
 			if(hotels.length>date.length) {
-			
-				return "redirect:mainTravel.m";
+				  PrintWriter out;
+			         try {
+			            out = response.getWriter();
+			            out.write("<script>alert('출발지(호텔)가 여행 날보다 많습니다');history.go(-1);</script>");
+			              out.flush();
+			         } catch (IOException e) {
+			            e.printStackTrace();
+			         }
 			}
 
 			String[][]  hotel = new String[hotels.length][];
@@ -137,9 +156,15 @@ public class JourneyController {
 			}
 
 			System.out.println("cartlist.size()"+cartlist.size());
-			if(cartlist.size()<date.length) {
-				session.setAttribute("date",request.getParameter("date"));
-				return "redirect:mainTravel.m";
+			if(cartlist.size()<(date.length*3)) {
+				  PrintWriter out;
+			         try {
+			            out = response.getWriter();
+			            out.write("<script>alert('선택한 여정이 적습니다 더 선택해주세요');history.go(-1);</script>");
+			              out.flush();
+			         } catch (IOException e) {
+			            e.printStackTrace();
+			         }
 			}
 			
 			System.out.println("====================================================");
@@ -305,8 +330,16 @@ public class JourneyController {
 				h++;
 			}
 			mDao.updateMyjNum(myemail);
-			
-		return "redirect:mainScreen.m";
+			 PrintWriter out;
+	            try {
+	               mDao.updateMyjNum(id);
+	               out = response.getWriter();
+	               out.write("<script>alert('여정을 생성하였습니다.');location.href='"+gotoPage+"'</script>");
+	               out.flush();
+	            } catch (IOException e) {
+	               e.printStackTrace();
+	            }
+//		return "redirect:mainScreen.m";
 
 	}
 

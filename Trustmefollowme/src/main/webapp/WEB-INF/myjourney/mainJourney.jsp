@@ -137,7 +137,7 @@
 
       </div>
 		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G"></script>
+		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=키넣어야함"></script>
 	 	<script type="text/javascript">
 				
 			var map;
@@ -158,13 +158,13 @@
 			var trafficInfochk = "N";
 			var headers = {};
 			
-			headers["appKey"] = "77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
+			headers["appKey"] = "키넣어야함";
 
 			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
 				$.ajax({
 					type: "POST",
 					headers: headers,
-					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G",
+					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=키넣어야함",
 					async: false,
 					data: {
 						"startX": "${myjYpos.get(i)}",
@@ -241,7 +241,7 @@
 					var searchOption = $("#selectLevel").val();
 					
 					var headers = {}; 
-					headers["appKey"]="77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
+					headers["appKey"]="키넣어야함";
 					headers["Content-Type"]="application/json";
 					
 					var param = JSON.stringify({
@@ -365,82 +365,7 @@
 				   return num.toString().replace(regexp, ',');
 			}
 		</script> 
-<!-- <script type="text/javascript">
-	var map;
-	var markerInfo;
-	// 출발지, 도착지 마커
-	var marker_s, marker_e, marker_p;
-	// 경로그림정보
-	var drawInfoArr = [];
-	var drawInfoArr2 = [];
 
-	var chktraffic = [];
-	var resultdrawArr = [];
-	var resultMarkerArr = [];
-
-	function initTmap() {
-		// 1. 지도 띄우기
-		map = new Tmapv2.Map("map_div", {
-			center: new Tmapv2.LatLng(33.450701, 126.570667),
-			width: "100%",
-			height: "100%",
-			zoom: 11,
-			zoomControl: true,
-			scrollwheel: true
-		});
-
-	/* 	// 3. 경로탐색 API 사용요청
-		$("#btn_select").click(function () {
-			// 기존 맵에 있던 정보들 초기화
-			resettingMap(); */
-
-			var searchOption = "2";
-
-			var trafficInfochk = "N";
-			var headers = {};
-			headers["appKey"] = "77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G";
-
-			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
-				$.ajax({
-					type: "POST",
-					headers: headers,
-					url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=77AdJM4ipn30HAeD0bKbJ8tll2tTdFliacavDs5G",
-					async: false,
-					data: {
-						"startX": "${myjYpos.get(i)}",
-						"startY": "${myjXpos.get(i)}",
-						"endX": "${myjYpos.get(i+1)}",
-						"endY": "${myjXpos.get(i+1)}",
-						"reqCoordType": "WGS84GEO",
-						"resCoordType": "EPSG3857",
-						"searchOption": searchOption,
-						"trafficInfo": trafficInfochk,
-					},
-					success: function (response) {
-						var resultData = response.features;
-
-						var tDistance = "거리 : " + (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km ";
-						var tTime = " 시간 : " + (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
-
-						$("#result${i}").text(tDistance + tTime);
-
-						// You can also access other information such as route points, etc., if needed.
-						// var routePoints = resultData[0].geometry.coordinates;
-					},
-					error: function (request, status, error) {
-						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					}
-				});
-			</c:forEach>
-		/* }); */
-	}
-
-	function addComma(num) {
-		var regexp = /\B(?=(\d{3})+(?!\d))/g;
-		return num.toString().replace(regexp, ',');
-	}
-
-</script> -->
        </div>
         </div>
         </div> 
