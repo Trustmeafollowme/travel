@@ -136,7 +136,6 @@
 		<form action="join.mb" method="post" class="form--container">
 
 		<div>
-
 			<input type="hidden" name="email" value="${kakaoid}" class="input--box" autocomplete="off" id="email--box">
 
 			<br>
@@ -145,7 +144,7 @@
 
 		<div id="check--pattern"></div>
 
-			<input type="hidden" name="password" value="${kakaoemail}" class="input--box" autocomplete="off" id="password--box">
+			<input type="hidden" name="password" value="${kakaoid}" class="input--box" autocomplete="off" id="password--box">
 
 		<div id="key--check"></div>
 

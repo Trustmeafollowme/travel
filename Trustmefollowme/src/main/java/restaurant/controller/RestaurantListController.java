@@ -31,7 +31,7 @@ public class RestaurantListController {
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String restList(Model model, HttpServletRequest request, HttpServletResponse response,
-						@RequestParam(value = "whatColumn", required = false) String whatColumn,
+						@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
 						@RequestParam(value = "keyword", required = false) String keyword,
 						@RequestParam(value = "pageNumber", required = false) String pageNumber,
 						@RequestParam(value = "cate", required = false) String cate) throws UnsupportedEncodingException {
@@ -39,14 +39,14 @@ public class RestaurantListController {
 		
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("whatColumn", whatColumn);
+		map.put("WhatColumn", WhatColumn);
 		map.put("keyword", "%"+keyword+"%");
 
 		int totalCount = restaurantDao.totalCount(map);
 		
 		String url = request.getContextPath()+command;
 		
-		Paging pageInfo = new Paging(pageNumber, null, totalCount, url, whatColumn, keyword);
+		Paging pageInfo = new Paging(pageNumber, null, totalCount, url, WhatColumn, keyword);
 		List<RestaurantBean> lists = restaurantDao.restList(map, pageInfo);
 		
 		model.addAttribute("cate", "restaurant");
@@ -55,6 +55,6 @@ public class RestaurantListController {
 		model.addAttribute("pageInfo", pageInfo);
 		
 		String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
-		return  "redirect:admin.mb?whatColumn=" + whatColumn + "&keyword=" + encodedKeyword;
+		return  "redirect:admin.mb?WhatColumn=" + WhatColumn + "&keyword=" + encodedKeyword;
 	}
 }

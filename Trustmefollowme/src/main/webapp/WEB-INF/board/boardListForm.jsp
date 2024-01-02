@@ -184,12 +184,13 @@
 	</div>
 	<br>
 		<form action="boardList.bd" method="get" align="center">
-				<select name="WhatColumn" class="column">
-						<option value="all">전체 
-						<option value="title">제목
-						<option value="content">내용
+				<select name="WhatColumn" class="">
+						<option value="all" style="color: black">전체 
+						<option value="title" style="color: black">제목
+						<option value="content" style="color: black">내용
 					</select>
-					<input type="text" name="keyword" class="keyword" placeholder="검색" maxlength="2--">
+					<input type="text" name="keyword" class="keyword" placeholder="검색" maxlength="2--"
+					height="50px">
 					<input id="btn" type="submit" value="검색">
 					<c:choose>
 						<c:when test="${empty myname}">

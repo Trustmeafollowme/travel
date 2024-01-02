@@ -31,21 +31,21 @@ public class SpotListController {
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String spotList(Model model, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "whatColumn", required = false) String whatColumn,
+			@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value = "pageNumber", required = false) String pageNumber,
 			@RequestParam(value = "cate", required = false) String cate) throws UnsupportedEncodingException {
 		
 			
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("whatColumn", whatColumn);
+			map.put("WhatColumn", WhatColumn);
 			map.put("keyword", "%"+keyword+"%");
 
 			int totalCount = spotdao.totalCount(map);
 			String pageSize = "6";
 			String url = request.getContextPath()+command;
 			
-			Paging paging = new Paging(pageNumber, pageSize, totalCount, url, whatColumn, keyword);
+			Paging paging = new Paging(pageNumber, pageSize, totalCount, url, WhatColumn, keyword);
 			List<SpotBean> lists = spotdao.spotList(map, paging);
 			
 			model.addAttribute("list", lists);
@@ -54,7 +54,7 @@ public class SpotListController {
 		
 			String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
 			
-			return "redirect:admin.mb?whatColumn=" + whatColumn + "&keyword=" + encodedKeyword;
+			return "redirect:admin.mb?WhatColumn=" + WhatColumn + "&keyword=" + encodedKeyword;
 	}
 	
 

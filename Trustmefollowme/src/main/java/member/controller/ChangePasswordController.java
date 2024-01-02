@@ -20,7 +20,7 @@ import member.model.MemberDao;
 @Controller
 public class ChangePasswordController {
 	private final String command = "changePw.mb";
-	private final String gotoPage = "redirect:myPage.mb";
+	private final String gotoPage = "myPage.mb";
 
 	@Autowired
 	private MemberDao mDao;

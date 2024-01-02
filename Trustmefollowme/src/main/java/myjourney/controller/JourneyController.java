@@ -32,12 +32,11 @@ public class JourneyController {
 	public void journey(HttpServletRequest request,HttpServletResponse response,MainBean mb, HttpSession session) {
 		
 		 response.setContentType("text/html;charset=UTF-8");
-		 
+		 PrintWriter out;
 		if(mb.getHotel()==null) {
 //			session.setAttribute("date", session.getAttribute("date"));
 //			session.setAttribute("sTravel", session.getAttribute("sTravel"));
 //			return "redirect:mainTravel.m";
-			  PrintWriter out;
 		         try {
 		            out = response.getWriter();
 		            out.write("<script>alert('출발지(호텔)를 선택하셔야 생성됩니다.');history.go(-1);</script>");
@@ -64,7 +63,6 @@ public class JourneyController {
 			System.out.println("date.length"+date.length);
 			
 			if(hotels.length>date.length) {
-				  PrintWriter out;
 			         try {
 			            out = response.getWriter();
 			            out.write("<script>alert('출발지(호텔)가 여행 날보다 많습니다');history.go(-1);</script>");
@@ -157,16 +155,16 @@ public class JourneyController {
 
 			System.out.println("cartlist.size()"+cartlist.size());
 			if(cartlist.size()<(date.length*3)) {
-				  PrintWriter out;
 			         try {
 			            out = response.getWriter();
-			            out.write("<script>alert('선택한 여정이 적습니다 더 선택해주세요');history.go(-1);</script>");
+			            out.write("<script>alert('선택한 여정이 적습니다 더 선택해주세요');window.history.back();</script>");
 			              out.flush();
 			         } catch (IOException e) {
 			            e.printStackTrace();
 			         }
+			         
 			}
-			
+			else {
 			System.out.println("====================================================");
 			
 			int turnSize = (int) Math.ceil((double) cartlist.size() / date.length);
@@ -330,7 +328,7 @@ public class JourneyController {
 				h++;
 			}
 			mDao.updateMyjNum(myemail);
-			 PrintWriter out;
+			
 	            try {
 	               mDao.updateMyjNum(id);
 	               out = response.getWriter();
@@ -338,7 +336,7 @@ public class JourneyController {
 	               out.flush();
 	            } catch (IOException e) {
 	               e.printStackTrace();
-	            }
+	            }}
 //		return "redirect:mainScreen.m";
 
 	}

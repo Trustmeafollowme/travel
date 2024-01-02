@@ -56,7 +56,7 @@ public class AdminListController {
 			@RequestParam(value = "pageNumber", required = false) String pageNumber) {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("whatColumn", WhatColumn);
+		map.put("WhatColumn", WhatColumn);
 		map.put("keyword", "%" + keyword + "%");
 
 		String pageSize = "5";
@@ -105,7 +105,6 @@ public class AdminListController {
 			Paging hotelPage = new Paging(pageNumber, pageSize, hoteltotal, url, WhatColumn, keyword);
 
 			List<HotelBean> list = hotelDao.getAllHotel(map, hotelPage);
-			System.out.println("호텔리스트");
 			model.addAttribute("lists", list);
 			model.addAttribute("cate", "hotel");
 			model.addAttribute("paging", hotelPage);

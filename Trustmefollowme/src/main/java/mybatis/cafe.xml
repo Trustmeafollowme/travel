@@ -5,20 +5,20 @@
 <mapper namespace="cafe.Cafe">
 	<select id="getTotalCount" resultType="int">
 		select count(*) from cafe
-		<if test="whatColumn=='name'">
+		<if test="WhatColumn=='name'">
 		where name like #{keyword}
 		</if>
-		<if test="whatColumn=='address'">
+		<if test="WhatColumn=='address'">
 		where address like #{keyword}
 		</if>
 	</select>
 	
 	<select id="getAllCafe" resultType="cafe.model.CafeBean">
 		select * from cafe
-		<if test="whatColumn=='name'">
+		<if test="WhatColumn=='name'">
 		where name like #{keyword}
 		</if>
-		<if test="whatColumn=='address'">
+		<if test="WhatColumn=='address'">
 		where address like #{keyword}
 		</if>
 	</select>

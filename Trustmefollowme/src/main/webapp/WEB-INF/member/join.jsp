@@ -144,35 +144,35 @@
 			<div>
 				<input type="email" name="email" class="input--box" placeholder="이메일을 입력해 주세요" autocomplete="off" id="email--box" value="${memberBean.email }">
 				<button type="button" id="email_check" >중복확인</button>
-				<br><form:errors path="email" />
+				
 				<br>
 				<span id="emailMessage" style="display: none;"></span>		
 			</div>
 			<div id="check--pattern"></div>
 			<input type="password" name="password" class="input--box" placeholder="비밀번호를 입력해 주세요"   autocomplete="off" id="password--box" >
 			<br>
-			<form:errors path="password" />	 
+			
 			<input type="password" name="passwordCheck" class="input--box" placeholder="비밀번호 확인" autocomplete="off" id="password--check">
 			<div id="key--check"></div>
 			<input type="text" name="name" class="input--box" placeholder="이름을 입력해 주세요"  autocomplete="off" id="name--box" value="${memberBean.name }">
-			<br><form:errors path="name" />
+			<br>
 			<div id="name--check"></div>
 			<input type="date" name="birth" class="input--box" placeholder="출생년도" autocomplete="off" id="date--box">
-			<br><form:errors path="birth" />
+			<br>
 			<div>
 				<div>
 					<input type="text" class="input--box" id="address1" placeholder="주소" name="address1" readonly="readonly" style="width:300px;" autocomplete="off">
 					<input type="button" class="sub--button" id="find--address--btn" onclick="postCode()" value="검색" style="width:50px; margin: 0; background-color: #BCE55C; border: 1px solid #BCE55C; color: #000;"><br>
-				<br><form:errors path="address1" />
+				<br>
 				</div>
 				
 				<input type="text" class="input--box" id="address2" name="address2"  placeholder="상세주소" autocomplete="off"><br>
-				<br><form:errors path="address2" />
+				<br>
 				<div id="detail--address--check"></div>
 			</div>
 			<input type="tel" name="mtel" id="tel--box" class="input--box" placeholder="전화번호를 입력해주세요" autocomplete="off">
 			<div id="tel--check"></div>
-		<br><form:errors path="mtel" />
+			<br>
 			<input type="submit" id="change--btn" class="sub--button" value="회원가입" >
 			</form:form>
 	</div>
@@ -204,7 +204,7 @@
 	
    
      /* 유효성 검사 */
-  /*   let passwordCheck = document.getElementById("password--check");
+    let passwordCheck = document.getElementById("password--check");
     let passwordBox = document.getElementById("password--box");
    	let checkKey = document.getElementById("key--check");
 	let submitBtn = document.getElementById("change--btn");
@@ -226,10 +226,10 @@
 	let checkBirth = false;
 	let checkAddress = false;
 	let checkDetailAddress = false;
-	let checkTel = false;  */ 
+	let checkTel = false;  
 	
 	// 전부 null이 아닌 경우
-	function checkSubmit(checkEmail, checkPassword, checkName, 
+/* 	function checkSubmit(checkEmail, checkPassword, checkName, 
 			checkBirth, checkAddress, checkDetailAddress, checkTel) {
 		if(checkEmail && checkPassword && checkName && checkBirth 
 				&& checkAddress && checkDetailAddress && checkTel) {
@@ -237,7 +237,7 @@
 		} else {
 			submitBtn.type = "button";
 		}
-	} 
+	}  */
 	
 	/* 비밀번호 확인란 검사 */
     passwordCheck.addEventListener("keyup", function() {

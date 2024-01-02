@@ -172,12 +172,14 @@ public class UserController {
       MemberBean existingMember = memberDao.getMemberByEmail(kakaoId);
       mb.setEmail(kakaoId);
       mb.setPassword(kakaoProfile.getKakao_account().getEmail());
-      MemberBean member = memberDao.getMemberInfo(mb);
+     
+//      MemberBean member = memberDao.getMemberInfo(mb);
+      
         if (existingMember != null) {
                // 이미 가입된 회원인 경우, 로그인 처리 등을 수행하고 성공 메시지를 반환
               // model.addAttribute("message", "카카오 로그인이 완료되었습니다.");
                session.setAttribute("myemail", kakaoId);
-               session.setAttribute("myname", member.getName());
+               session.setAttribute("myname", existingMember.getName());
                return "redirect:mainScreen.m";
            } else {
                // 가입되지 않은 회원인 경우, 회원가입 폼으로 이동

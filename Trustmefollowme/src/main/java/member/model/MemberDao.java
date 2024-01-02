@@ -89,7 +89,7 @@ public class MemberDao {
 		public List<MemberBean> getAllMember(Map<String, String> map, Paging pageInfo) {
 			
 			RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
-			List<MemberBean> list = sqlSessionTemplate.selectList(namespace+".getAllMember");
+			List<MemberBean> list = sqlSessionTemplate.selectList(namespace+".getAllMember",map,rowBounds);
 			System.out.println("lists.size()"+list.size());
 			return list;
 		}

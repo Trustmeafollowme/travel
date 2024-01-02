@@ -192,6 +192,45 @@ article {
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$(".showModalBtn").click(
+				function() {
+					var cnum = $(this).data("cnum");
+
+					window.open("cafeDetail.cf?cnum=" + cnum, "카페",
+							"width=500, height=600");
+
+				});
+		$(function() {
+			$(".showModalBtn2").click(
+					function() {
+						var rnum = $(this).data("rnum");
+
+						window.open("restDetail.re?rnum=" + rnum, "레스토랑",
+								"width=500, height=600");
+
+					});
+
+			$(".showModalBtn3").click(
+					function() {
+						var snum = $(this).data("snum");
+
+						window.open("spotDetail.sp?snum=" + snum, "관광지",
+								"width=500, height=600");
+
+					});
+			$(".showModalBtn4").click(
+					function() {
+						var hnum = $(this).data("hnum");
+
+						window.open("hotelDetail.ht?hnum=" + hnum, "호텔",
+								"width=800, height=600");
+
+					});
+		});
+	});
+</script>
 <script>
    var displayedItems = 6; // 초기값을 표시된 아이템의 개수로 설정
 
@@ -207,37 +246,7 @@ article {
       }
    });
    </script>
-<script type="text/javascript">
-  $(function() {
-      $(".showModalBtn").click(function() {
-          var cnum = $(this).data("cnum");
 
-          window.open("cafeDetail.cf?cnum=" + cnum, "CafeDetails", "width=800, height=600");
-
-      });
-      $(function() {
-          $(".showModalBtn2").click(function() {
-              var rnum = $(this).data("rnum");
-
-              window.open("restDetail.re?rnum=" + rnum, "레스토랑", "width=800, height=600");
-
-          });
-
-          $(".showModalBtn3").click(function() {
-              var rnum = $(this).data("snum");
-
-              window.open("spotDetail.re?rnum=" + snum, "관광지", "width=800, height=600");
-
-          });
-          $(".showModalBtn4").click(function() {
-              var hnum = $(this).data("hnum");
-
-              window.open("hotelDetail.ht?hnum=" + hnum, "호텔", "width=800, height=600");
-
-          });
-      });
-  });
-  </script>
 </head>
 
 <body>
@@ -272,7 +281,10 @@ article {
 			<c:if test="${not empty myname}">
 				<a href="myPage.mb" class="get-started-btn scrollto">${myname}님
 					환영합니다</a>
-
+				<c:if test="${myname=='어드민' }">
+				
+				<a href="admin.mb" class="get-started-btn scrollto">관리자</a>
+				</c:if>
 				<a href="logout.mb" class="get-started-btn scrollto">로그아웃</a>
 			</c:if>
 			<!--민희가 주석처리 <a href="login.mb" class="get-started-btn scrollto">로그인</a>  -->
@@ -372,15 +384,15 @@ article {
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-title">
-					<h2>Portfolio</h2>
-					<p>Check our Portfolio</p>
+					<h2>카테고리</h2>
+					<p>여정 카테고리</p>
 				</div>
 
 				<div class="row" data-aos="fade-up" data-aos-delay="100">
 					<div class="col-lg-12 d-flex justify-content-center">
 						<ul id="portfolio-flters">
-							<!--  <li data-filter="*" class="filter-active">All</li> -->
-							<li data-filter=".filter-web" class="filter-active">호텔</li>
+						 <li data-filter="*" class="filter-active">All</li>
+							<li data-filter=".filter-web">호텔</li>
 							<li data-filter=".filter-card">음식점</li>
 							<li data-filter=".filter-cafe">카페</li>
 							<li data-filter=".filter-app">관광지</li>
@@ -392,12 +404,12 @@ article {
 					<c:forEach var="list" varStatus="a" items="${cafeList}">
 						<div class="col-lg-4 col-md-6 portfolio-item filter-cafe">
 							<div class="portfolio-wrap">
-								<a href="#" class="showModalBtn" data-cnum="${list.cnum}"> <img
-									src="<%=request.getContextPath()%>/resources/images/${list.image}"
-									class="img-fluid" alt=""></a>
+								<img src="<%=request.getContextPath()%>/resources/images/${list.image}" class="img-fluid" alt="">
 							</div>
 							<div class="portfolio-info">
+								<a class="showModalBtn" data-cnum="${list.cnum}">
 								<h4>${list.name}</h4>
+						</a>
 								<p>${list.address}</p>
 							</div>
 						</div>
@@ -405,14 +417,14 @@ article {
 					<c:forEach var="list" items="${restaurantList}">
 						<div class="col-lg-4 col-md-6 portfolio-item filter-card">
 							<div class="portfolio-wrap">
-								<a href="#" class="showModalBtn2" data-rnum="${list.rnum}">
 									<img
 									src="<%=request.getContextPath()%>/resources/images/${list.image}"
 									class="img-fluid" alt="">
-								</a>
 							</div>
 							<div class="portfolio-info">
+								<a  class="showModalBtn2" data-rnum="${list.rnum}">
 								<h4>${list.name}</h4>
+								</a>
 								<p>${list.address}</p>
 							</div>
 						</div>
@@ -421,14 +433,14 @@ article {
 					<c:forEach var="list" items="${spotList}">
 						<div class="col-lg-4 col-md-6 portfolio-item filter-app">
 							<div class="portfolio-wrap">
-								<a href="#" class="showModalBtn3" data-snum="${list.snum}">
 									<img
 									src="<%=request.getContextPath()%>/resources/images/${list.image}"
 									class="img-fluid" alt="">
-								</a>
 							</div>
 							<div class="portfolio-info">
+								<a  class="showModalBtn3" data-snum="${list.snum}">
 								<h4>${list.name}</h4>
+								</a>
 								<p>${list.address}</p>
 							</div>
 						</div>
@@ -437,14 +449,14 @@ article {
 					<c:forEach var="list" items="${hotelList}">
 						<div class="col-lg-4 col-md-6 portfolio-item filter-web">
 							<div class="portfolio-wrap">
-								<a href="#" class="showModalBtn4" data-hnum="${list.hnum}">
 									<img
 									src="<%=request.getContextPath()%>/resources/images/${list.image}"
 									class="img-fluid" alt="">
-								</a>
 							</div>
 							<div class="portfolio-info">
+								<a  class="showModalBtn4" data-hnum="${list.hnum}">
 								<h4>${list.name}</h4>
+								</a>
 								<p>${list.address}</p>
 							</div>
 						</div>
@@ -462,9 +474,11 @@ article {
 					data-aos-delay="100">
 					<div class="swiper-wrapper">
 
-						<c:forEach var="list" items="${likelists}">
+						<c:forEach var="list" items="${boardlists}">
 							<div class="swiper-slide">
 								<div class="testimonial-item">
+									<a
+									href="boardDetail.bd?num=${list.num}&jnum=${list.jnum}&mEmail=${list.mEmail}&minDate=${list.minDate}">
 									<img
 										src="<%=request.getContextPath()%>/resources/images/${list.image}"
 										class="testimonial-img" alt="" width="100">
@@ -474,7 +488,7 @@ article {
 										<i class="bx bxs-quote-alt-left quote-icon-left"></i>
 										${list.content} <i
 											class="bx bxs-quote-alt-right quote-icon-right"></i>
-									</p>
+									</p></a>
 								</div>
 							</div>
 							<!-- End testimonial item -->
@@ -492,46 +506,39 @@ article {
 	<!-- End #main -->
 
 	<!-- ======= Footer ======= -->
-	<footer id="footer"  style="background-color: #000000B3;">
+	 <footer class="footer_section" id=>
+      <div class="container">
+         <div class="row" style="padding-top: 30px;">
+            <div class="col-md-4 footer-col">
+               
+            </div>
+            <div class="col-md-4 footer-col">
+               <div class="footer_detail">
+                  <a href="" class="footer-logo"> trust me and follow me </a>
+                  <p>나만 믿고 따라와</p>
+                  <div class="footer_social">
+                     <a href=""> <i class="fa fa-facebook" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-twitter" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-linkedin" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-instagram" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-pinterest" aria-hidden="true"></i>
+                     </a>
+                  </div>
+               </div>
+            </div>
+          
+         </div>
+         <div class="footer-info">
+            <p>
+               &copy; <span id="displayYear"></span> All Rights Reserved By <a
+                  href="https://html.design/">NAK</a><br> <br>
+               &copy; <span id="displayYear"></span> Distributed By <a
+                  href="https://themewagon.com/" target="_blank">나믿지</a>
+            </p>
+         </div>
+      </div>
 
-
-		<div class="container">
-			<div class="footer-info" align="left">
-				<br>
-				<img alt=""
-					src="<%=request.getContextPath()%>/resources/assets/img/logo.png" width="100">
-					<span>나믿따</span>
-		
-
-				<div class=""><h6>
-					&copy; Copyright 나믿지
-				</h6>
-				</div>
-				<div class="">
-					Designed by <a href="#">Trustmeandfollowme</a>
-			</div>
-			</div>
-			<div align="right">
-				<div class="social-links mt-3">
-					<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> <a
-						href="#" class="facebook"><i class="bx bxl-facebook"></i></a> <a
-						href="#" class="instagram"><i class="bx bxl-instagram"></i></a> <a
-						href="#" class="google-plus"><i class="bx bxl-skype"></i></a> <a
-						href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-					<img width="100px"
-							src="https://www.myro.co.kr/assets/images/applestore.png" alt="앱스토어" loading="lazy"
-							class="w-full">
-						<img width="100px"
-							src="https://www.myro.co.kr/assets/images/googlestore.png" alt="플레이스토어" loading="lazy"
-							class="w-full">
-				
-				
-				</div>
-				
-			</div>
-
-		</div>
-	</footer>
+   </footer>
 	<!-- End Footer -->
 
 	<div id="preloader"></div>

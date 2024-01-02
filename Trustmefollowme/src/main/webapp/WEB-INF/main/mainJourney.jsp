@@ -249,7 +249,7 @@
 
       </div>
 		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=키넣야함"></script>
+		 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=키넣어야함"></script>
 	 	 <script type="text/javascript">
 				
 			var map;
@@ -270,13 +270,13 @@
 			var trafficInfochk = "N";
 			var headers = {};
 			
-			headers["appKey"] = "키넣야함";
+			headers["appKey"] = "키넣어야함";
 
 			<c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
 				$.ajax({
 					type: "POST",
 					headers: headers,
-				url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=키넣야함", 
+				url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=키넣어야함", 
 					async: false,
 					data: {
 						"startX": "${myjYpos.get(i)}",
@@ -353,7 +353,7 @@
 					var searchOption = $("#selectLevel").val();
 					
 					var headers = {}; 
-					headers["appKey"]="키넣야함";
+					headers["appKey"]="키넣어야함";
 					headers["Content-Type"]="application/json";
 					
 					var param = JSON.stringify({
@@ -486,74 +486,39 @@
 		</div>
 	 </div>
     </section><!-- End Services Section -->
-   <footer id="footer">
-    <div class="footer-top">
+  <footer class="footer_section" id=>
       <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>Gp<span>.</span></h3>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
+         <div class="row" style="padding-top: 30px;">
+            <div class="col-md-4 footer-col">
+               
             </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
-          </div>
-
-        </div>
+            <div class="col-md-4 footer-col">
+               <div class="footer_detail">
+                  <a href="" class="footer-logo"> trust me and follow me </a>
+                  <p>나만 믿고 따라와</p>
+                  <div class="footer_social">
+                     <a href=""> <i class="fa fa-facebook" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-twitter" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-linkedin" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-instagram" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-pinterest" aria-hidden="true"></i>
+                     </a>
+                  </div>
+               </div>
+            </div>
+          
+         </div>
+         <div class="footer-info">
+            <p>
+               &copy; <span id="displayYear"></span> All Rights Reserved By <a
+                  href="https://html.design/">NAK</a><br> <br>
+               &copy; <span id="displayYear"></span> Distributed By <a
+                  href="https://themewagon.com/" target="_blank">나믿지</a>
+            </p>
+         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+   </footer>
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

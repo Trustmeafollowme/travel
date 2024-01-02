@@ -106,7 +106,7 @@ li:hover {
 	<main>
 		<nav>
 			<ul>
-				 <li id="logo--li" onclick="location.href='admin.mb'"><img alt="" src="<%=request.getContextPath()%>/resources/images/아믿따 로고.png" width="120" height="60"></li>
+				 <li id="logo--li" onclick="location.href='admin.mb'"><img alt="" src="<%=request.getContextPath()%>/resources/assets/img/logo.png" width="120" height="60"></li>
 				<li id="room--li">
 					<div>
 						<span id="search--hotel--wrap">Hotel</span>

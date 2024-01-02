@@ -2,3 +2,4 @@
     pageEncoding="UTF-8"%>
 
 <h1>myhotelList.jsp</h1>
+

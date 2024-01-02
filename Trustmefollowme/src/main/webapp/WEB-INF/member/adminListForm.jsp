@@ -51,6 +51,46 @@ p{
 }
   
 </style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$(".showModalBtn").click(
+				function() {
+					var cnum = $(this).data("cnum");
+
+					window.open("cafeDetail.cf?cnum=" + cnum, "CafeDetails",
+							"width=500, height=600");
+
+				});
+		$(function() {
+			$(".showModalBtn2").click(
+					function() {
+						var rnum = $(this).data("rnum");
+
+						window.open("restDetail.re?rnum=" + rnum, "레스토랑",
+								"width=500, height=600");
+
+					});
+
+			$(".showModalBtn3").click(
+					function() {
+						var snum = $(this).data("snum");
+
+						window.open("spotDetail.sp?snum=" + snum, "관광지",
+								"width=500, height=600");
+
+					});
+			$(".showModalBtn4").click(
+					function() {
+						var hnum = $(this).data("hnum");
+
+						window.open("hotelDetail.ht?hnum=" + hnum, "호텔",
+								"width=800, height=600");
+
+					});
+		});
+	});
+</script>
 </head>
 
 <!--  호텔 리스트 -->
@@ -83,7 +123,7 @@ p{
 			
 				<form action="hotelList.ht" method="get" >
 					
-				<select name="whatColumn" style="font-size: 16px; height:30px;">
+				<select name="WhatColumn" style="font-size: 16px; height:30px;">
 					<option value="all" style="font-size: 16px;">전체검색 
 					<option value="name" style="font-size: 16px;">호텔검색
 					<option value="facility" style="font-size: 16px;">부대시설
@@ -107,7 +147,7 @@ p{
 			<c:forEach var="hotel" items="${lists}">
 				<tr>
 					<td>${hotel.hnum }</td>
-					<td><a href="hotelDetail.ht?hnum=${hotel.hnum}&pageNumber=${paging.pageNumber}">
+					<td><a href="#" class="showModalBtn4" data-hnum="${hotel.hnum}">
 							<img
 							src="<%=request.getContextPath()%>/resources/images/${hotel.image}"
 							width="50" height="50">
@@ -163,7 +203,7 @@ p{
 				<br><br>
 				<form action="spotList.sp" method="get">
 	
-				<select name="whatColumn" style="font-size: 16px; height:30px;">
+				<select name="WhatColumn" style="font-size: 16px; height:30px;">
 					<option value="all" style="font-size: 16px;">전체검색 
 					<option value="name" style="font-size: 16px;">장소검색
 					<option value="address" style="font-size: 16px;">주소검색
@@ -186,7 +226,7 @@ p{
 				<tr>
 					<td>${spot.snum }</td>
 					<td><a
-						href="spotDetail.sp?snum=${spot.snum }&pageNumber=${paging.pageNumber }">
+						href="#" class="showModalBtn3" data-snum="${spot.snum}">
 							<img
 							src="<%=request.getContextPath()%>/resources/images/${spot.image}"
 							width="50" height="50">
@@ -243,7 +283,7 @@ p{
 				<br><br>
 				<form action="mainRestaurantList.re" method="get">
 	
-				<select name="whatColumn" style="font-size: 16px; height:30px;">
+				<select name="WhatColumn" style="font-size: 16px; height:30px;">
 					<option value="all" style="font-size: 16px;">전체검색 
 					<option value="name" style="font-size: 16px;">음식점명
 					<option value="address" style="font-size: 16px;">주소
@@ -269,7 +309,7 @@ p{
 				<tr>
 					<td>${rest.rnum }</td>
 					<td><a
-						href="restDetail.re?rnum=${rest.rnum}&pageNumber=${paging.pageNumber }">
+						 href="#" class="showModalBtn2" data-rnum="${rest.rnum}"">
 							<img
 							src="<%=request.getContextPath()%>/resources/images/${rest.image}"
 							width="50" height="50">
@@ -326,7 +366,7 @@ p{
 					<br><br>
 				<form action="mainCafeList.cf" method="get">
 	
-					<select name="whatColumn" style="font-size: 16px; height:30px;">
+					<select name="WhatColumn" style="font-size: 16px; height:30px;">
 					<option value="all" style="font-size: 16px;">전체검색 
 					<option value="name" style="font-size: 16px;">카페명
 					<option value="address" style="font-size: 16px;">주소
@@ -350,7 +390,7 @@ p{
 			<c:forEach var="cafe" items="${lists}">
 				<tr>
 					<td>${cafe.cnum }</td>
-					<td><a href="cafeDetail.cf?cnum=${cafe.cnum}&pageNumber=${paging.pageNumber}">
+					<td><a href="#" class="showModalBtn" data-cnum="${cafe.cnum}">
 							<img
 							src="<%=request.getContextPath()%>/resources/images/${cafe.image}"
 							width="50" height="50">
@@ -410,7 +450,7 @@ p{
 				<br><br>
 				<form action="memberList.mb" method="get">
 	
-				<select name="whatColumn" style="font-size: 16px; height:30px;">
+				<select name="WhatColumn" style="font-size: 16px; height:30px;">
 					<option value="all" style="font-size: 16px;">전체검색 
 					<option value="name" style="font-size: 16px;">이름
 					<option value="email" style="font-size: 16px;">아이디

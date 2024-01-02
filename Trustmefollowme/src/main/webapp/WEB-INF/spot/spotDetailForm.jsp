@@ -6,7 +6,7 @@
 		
 		<div class="container">
 	        <div class="heading-section">
-	            <h2>${cate }</h2>
+	            <h2>${sb.name}</h2>
 	        </div>
 	        <div class="row">
 	        	<div class="col-md-6">
@@ -49,7 +49,6 @@
 	        	<div class="col-md-6">
 	        		<div class="product-dtl">
         				<div class="product-info">
-		        			<div class="product-name">${sb.name}</div>
 		        			<div class="reviews-counter">
 		        			<p class="product-price-discount">주소: ${sb.address}
 		        			<br>

@@ -396,6 +396,7 @@
 	        			<p>위치 : ${rb.address}</p>
 	        			<p>영업시간 : ${rb.rtime1} ~ ${rb.rtime2}</p>
 	        			<p>개업 일자 : ${rb.rdate}</p>
+	        			<p>내용 : ${rb.rcontent}</p>
 	        		</div>
 	        	</div>
 	        </div>

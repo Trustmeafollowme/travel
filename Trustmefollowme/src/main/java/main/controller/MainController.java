@@ -58,7 +58,7 @@ public class MainController {
 	private final String command = "/mainTravel.m";
 	@RequestMapping(value = command)
 	public String hotelList(HttpServletRequest request,HttpSession session,
-			@RequestParam(value ="whatColumn", required = false)String whatColumn,
+			@RequestParam(value ="WhatColumn", required = false)String WhatColumn,
 			@RequestParam(value ="keyword", required = false)String keyword,
 			@RequestParam(value = "pageNumber", required = false) String pageNumber,
 			@RequestParam(value = "sTravel", required = false) String sTravel,
@@ -112,7 +112,7 @@ public class MainController {
 			request.setAttribute("days", days);
 				Map<String, String> map = new HashMap<String, String>();
 				
-				map.put("whatColumn", whatColumn);
+				map.put("WhatColumn", WhatColumn);
 				map.put("keyword", "%"+keyword+"%");
 				
 				String url = request.getContextPath()+command;
@@ -120,27 +120,27 @@ public class MainController {
 				//cafe		
 				int cafeTotal= cafeDao.getTotalCount(map);
 				
-				Paging cafePage = new Paging(pageNumber, String.valueOf(cafeTotal), cafeTotal, url, whatColumn, keyword);
+				Paging cafePage = new Paging(pageNumber, String.valueOf(cafeTotal), cafeTotal, url, WhatColumn, keyword);
 				
 				List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
 				
 				//restaurant
 				int restaurantTotal = restaurantDao.totalCount(map);
 				
-				Paging restaurantPage = new Paging(pageNumber, String.valueOf(restaurantTotal), restaurantTotal, url, whatColumn, keyword);
+				Paging restaurantPage = new Paging(pageNumber, String.valueOf(restaurantTotal), restaurantTotal, url, WhatColumn, keyword);
 				List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
 				System.out.println(restaurantList.get(0).getXpos()+restaurantList.get(0).getYpos());
 				//hotel
 			      int hoteltotal = hotelDao.totalCount(map);
 			      
-			      Paging hotelPage = new Paging(pageNumber, String.valueOf(hoteltotal), hoteltotal, url, whatColumn, keyword);
+			      Paging hotelPage = new Paging(pageNumber, String.valueOf(hoteltotal), hoteltotal, url, WhatColumn, keyword);
 			      
 			      List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
 				
 				//spot
 			  	int sptTotal= spotDao.totalCount(map);
 				
-				Paging spotPaging = new Paging(pageNumber, String.valueOf(sptTotal), sptTotal, url, whatColumn, keyword);
+				Paging spotPaging = new Paging(pageNumber, String.valueOf(sptTotal), sptTotal, url, WhatColumn, keyword);
 				List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
 				
 				request.setAttribute("spotList", spotList);
@@ -167,7 +167,7 @@ public class MainController {
 	               request.setAttribute("date", request.getParameter("date"));
 	            }
 	            Map<String, String> map = new HashMap<String, String>();
-	            map.put("whatColumn", whatColumn);
+	            map.put("WhatColumn", WhatColumn);
 	            map.put("keyword", "%"+keyword+"%");
 
 
@@ -176,27 +176,27 @@ public class MainController {
 	            //cafe      
 	            int cafeTotal= cafeDao.getTotalCount(map);
 
-	            Paging cafePage = new Paging(pageNumber, String.valueOf(cafeTotal), cafeTotal, url, whatColumn, keyword);
+	            Paging cafePage = new Paging(pageNumber, String.valueOf(cafeTotal), cafeTotal, url, WhatColumn, keyword);
 
 	            List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
 
 	            //restaurant
 	            int restaurantTotal = restaurantDao.totalCount(map);
 
-	            Paging restaurantPage = new Paging(pageNumber, String.valueOf(restaurantTotal), restaurantTotal, url, whatColumn, keyword);
+	            Paging restaurantPage = new Paging(pageNumber, String.valueOf(restaurantTotal), restaurantTotal, url, WhatColumn, keyword);
 	            List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
 
 	            //hotel
 	            int hoteltotal = hotelDao.totalCount(map);
 
-	            Paging hotelPage = new Paging(pageNumber, String.valueOf(hoteltotal), hoteltotal, url, whatColumn, keyword);
+	            Paging hotelPage = new Paging(pageNumber, String.valueOf(hoteltotal), hoteltotal, url, WhatColumn, keyword);
 
 	            List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
 
 	            //spot
 	            int sptTotal= spotDao.totalCount(map);
 
-	            Paging spotPaging = new Paging(pageNumber, String.valueOf(sptTotal), sptTotal, url, whatColumn, keyword);
+	            Paging spotPaging = new Paging(pageNumber, String.valueOf(sptTotal), sptTotal, url, WhatColumn, keyword);
 	            List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
 
 	            request.setAttribute("spotPage", spotPaging);
@@ -250,7 +250,7 @@ public class MainController {
 		String myemail =(String)session.getAttribute("myemail");
 		String id =(String)session.getAttribute("myemail");
 		request.setAttribute("myemail", myemail);
-			String whatColumn=null;
+			String WhatColumn=null;
 			String keyword=null;
 			String pageNumber="1";
 		
@@ -258,7 +258,7 @@ public class MainController {
 		          
 		          Map<String, String> map = new HashMap<String, String>();
 			
-			map.put("whatColumn", whatColumn);
+			map.put("WhatColumn", WhatColumn);
 			map.put("keyword", "%"+keyword+"%");
 			
 			String url = request.getContextPath()+command;
@@ -266,27 +266,27 @@ public class MainController {
 			//cafe		
 			int cafeTotal= cafeDao.getTotalCount(map);
 			
-			Paging cafePage = new Paging(pageNumber, String.valueOf(cafeTotal), cafeTotal, url, whatColumn, keyword);
+			Paging cafePage = new Paging(pageNumber, String.valueOf(cafeTotal), cafeTotal, url, WhatColumn, keyword);
 			
 			List<CafeBean> cafeList = cafeDao.getAllCafe(map, cafePage);
 			
 			//restaurant
 			int restaurantTotal = restaurantDao.totalCount(map);
 			
-			Paging restaurantPage = new Paging(pageNumber, String.valueOf(restaurantTotal), restaurantTotal, url, whatColumn, keyword);
+			Paging restaurantPage = new Paging(pageNumber, String.valueOf(restaurantTotal), restaurantTotal, url, WhatColumn, keyword);
 			List<RestaurantBean> restaurantList = restaurantDao.restList(map, restaurantPage);
 			System.out.println(restaurantList.get(0).getXpos()+restaurantList.get(0).getYpos());
 			//hotel
 		      int hoteltotal = hotelDao.totalCount(map);
 		      
-		      Paging hotelPage = new Paging(pageNumber, String.valueOf(hoteltotal), hoteltotal, url, whatColumn, keyword);
+		      Paging hotelPage = new Paging(pageNumber, String.valueOf(hoteltotal), hoteltotal, url, WhatColumn, keyword);
 		      
 		      List<HotelBean> hotelList = hotelDao.getAllHotel(map, hotelPage);
 			
 			//spot
 		  	int sptTotal= spotDao.totalCount(map);
 			
-			Paging spotPaging = new Paging(pageNumber, String.valueOf(sptTotal), sptTotal, url, whatColumn, keyword);
+			Paging spotPaging = new Paging(pageNumber, String.valueOf(sptTotal), sptTotal, url, WhatColumn, keyword);
 			List<SpotBean> spotList = spotDao.spotList(map, spotPaging);
 			
 

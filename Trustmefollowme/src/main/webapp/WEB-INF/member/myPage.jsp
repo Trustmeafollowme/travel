@@ -268,7 +268,6 @@
                        <div class="row">
                            <div class="col-md-6">
                                <input name="address1" type="text" class="form-control" id="address1" value="${memberBean.address1}" style="width: 100%;">
-                               <form:errors cssClass="err" path="address1"/>
                            </div>
                            <div class="col-md-6">
                                <input type="button" class="btn btn-primary" id="find--address--btn" onclick="postCode()" value="검색">
@@ -297,7 +296,8 @@
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="" value="${memberBean.email }" style="width: 408px;">
+                    ${memberBean.email }
+                      <input name="email" type="hidden" class="form-control" id="" value="${memberBean.email }" style="width: 408px;"> 
                         <form:errors cssClass="err" path="email"/>
                         <!-- <div class="invalid-feedback"> Email을 입력하십시오. </div> -->
                       </div>

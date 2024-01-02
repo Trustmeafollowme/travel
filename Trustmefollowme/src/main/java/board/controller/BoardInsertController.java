@@ -66,7 +66,7 @@ public class BoardInsertController {
 		
 		String customer = "";
 		if(myemail == null) {
-			out.write("<script>alert('·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.');"
+			out.write("<script>alert('ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.');"
 					+ "location.href='boardList.bd'</script>");
 			out.flush();
 		}
@@ -80,7 +80,7 @@ public class BoardInsertController {
 		try {
 			out = response.getWriter();
 			if(getJnum == "") {
-				out.write("<script>alert('¸¸µé¾îÁø ¿©Á¤ÀÌ ¾ø½À´Ï´Ù.');"
+				out.write("<script>alert('ê³µìœ ê°€ëŠ¥í•œ ì—¬ì •ì´ ì—†ìŠµë‹ˆë‹¤.');"
 						+ "location.href='boardList.bd'</script>");
 				out.flush();
 			}

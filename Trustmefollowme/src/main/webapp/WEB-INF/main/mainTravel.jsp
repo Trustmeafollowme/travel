@@ -38,8 +38,8 @@
 				function() {
 					var cnum = $(this).data("cnum");
 
-					window.open("cafeDetail.cf?cnum=" + cnum, "CafeDetails",
-							"width=800, height=600");
+					window.open("cafeDetail.cf?cnum=" + cnum, "카페",
+							"width=500, height=600");
 
 				});
 		$(function() {
@@ -48,7 +48,7 @@
 						var rnum = $(this).data("rnum");
 
 						window.open("restDetail.re?rnum=" + rnum, "레스토랑",
-								"width=800, height=600");
+								"width=500, height=600");
 
 					});
 
@@ -57,7 +57,7 @@
 						var snum = $(this).data("snum");
 
 						window.open("spotDetail.sp?snum=" + snum, "관광지",
-								"width=800, height=600");
+								"width=500, height=600");
 
 					});
 			$(".showModalBtn4").click(
@@ -87,6 +87,7 @@ body {
 }
 
 #right-container {
+
 	width: 50%;
 	height: 100%;
 	background-color: #f0f0f0;
@@ -140,6 +141,50 @@ body {
 	href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png"
 	rel="apple-touch-icon">
 
+<!-- Favicons -->
+<link href="<%=request.getContextPath()%>/resources/assets/img/logo.png"
+	rel="icon">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/img/apple-touch-icon.png"
+	rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link
+	href="<%=request.getContextPath()%>/resources/assets/vendor/aos/aos.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/vendor/boxicons/css/boxicons.min.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/vendor/remixicon/remixicon.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link
+	href="<%=request.getContextPath()%>/resources/assets/css/style.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/resources/assets/css/style.scss"
+	rel="stylesheet">
+	
+	
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -273,7 +318,7 @@ body {
 									<div>
 										<div class="img-box">
 											<a href="#" class="showModalBtn" data-cnum="${list.cnum}">
-												<img width="400px"
+												<img width="400px" height="300px"
 												src="<%=request.getContextPath()%>/resources/images/${list.image}"
 												alt="이미지">
 											</a>
@@ -399,46 +444,39 @@ body {
 
 	</section>
 
- <footer id="footer"  style="background-color: #000000B3;">
+ <footer class="footer_section" id=>
+      <div class="container">
+         <div class="row" style="padding-top: 30px;">
+            <div class="col-md-4 footer-col">
+               
+            </div>
+            <div class="col-md-4 footer-col">
+               <div class="footer_detail">
+                  <a href="" class="footer-logo"> trust me and follow me </a>
+                  <p>나만 믿고 따라와</p>
+                  <div class="footer_social">
+                     <a href=""> <i class="fa fa-facebook" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-twitter" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-linkedin" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-instagram" aria-hidden="true"></i>
+                     </a> <a href=""> <i class="fa fa-pinterest" aria-hidden="true"></i>
+                     </a>
+                  </div>
+               </div>
+            </div>
+          
+         </div>
+         <div class="footer-info">
+            <p>
+               &copy; <span id="displayYear"></span> All Rights Reserved By <a
+                  href="https://html.design/">NAK</a><br> <br>
+               &copy; <span id="displayYear"></span> Distributed By <a
+                  href="https://themewagon.com/" target="_blank">나믿지</a>
+            </p>
+         </div>
+      </div>
 
-
-		<div class="container">
-			<div class="footer-info" align="left">
-				<br>
-				<img alt=""
-					src="<%=request.getContextPath()%>/resources/assets/img/logo.png" width="100">
-					<span>나믿따</span>
-		
-
-				<div class=""><h6>
-					&copy; Copyright 나믿지
-				</h6>
-				</div>
-				<div class="">
-					Designed by <a href="#">Trustmeandfollowme</a>
-			</div>
-			</div>
-			<div align="right">
-				<div class="social-links mt-3">
-					<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> <a
-						href="#" class="facebook"><i class="bx bxl-facebook"></i></a> <a
-						href="#" class="instagram"><i class="bx bxl-instagram"></i></a> <a
-						href="#" class="google-plus"><i class="bx bxl-skype"></i></a> <a
-						href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-					<img width="100px"
-							src="https://www.myro.co.kr/assets/images/applestore.png" alt="앱스토어" loading="lazy"
-							class="w-full">
-						<img width="100px"
-							src="https://www.myro.co.kr/assets/images/googlestore.png" alt="플레이스토어" loading="lazy"
-							class="w-full">
-				
-				
-				</div>
-				
-			</div>
-
-		</div>
-	</footer>
+   </footer>
 
 	<!-- jQery -->
 	<script

@@ -33,23 +33,23 @@ private HotelDao hotelDao;
 
 	@RequestMapping(value = command)
 	public String hotelList(Model model, HttpServletRequest request,
-			@RequestParam(value = "whatColumn", required = false) String whatColumn,
+			@RequestParam(value = "WhatColumn", required = false) String WhatColumn,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value = "pageNumber", required = false) String pageNumber,
 			@RequestParam(value = "cate", required = false) String cate) throws UnsupportedEncodingException {
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("whatColumn", whatColumn);
+		map.put("WhatColumn", WhatColumn);
 		map.put("keyword", "%"+keyword+"%");
 		
-		System.out.println("whatColumn: " + whatColumn);
+		System.out.println("WhatColumn: " + WhatColumn);
 		System.out.println("keyword: " + keyword);
 		
 		int totalCount = hotelDao.totalCount(map);
 		String url = request.getContextPath()+command;
 		String pageSize = "10";
 		
-		Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, whatColumn, keyword);
+		Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, WhatColumn, keyword);
 		System.out.println("map: " + map);
 		System.out.println("pageInfo: " + pageInfo);
 		
@@ -62,6 +62,6 @@ private HotelDao hotelDao;
 		
 		String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
 		
-		return "redirect:admin.mb?whatColumn=" + whatColumn + "&keyword=" + encodedKeyword;
+		return "redirect:admin.mb?WhatColumn=" + WhatColumn + "&keyword=" + encodedKeyword;
 	}
 }

@@ -170,10 +170,8 @@
    </select>
    
    <select id="boardListCount" resultType="myjourney.model.MyJourneyBean">
-      select distinct(m.jdate)
-        from board b inner join  myjourney m
-        on m.id = #{mEmail} and m.jnum = #{jnum}
-        order by jdate
+     select distinct(jdate) from myjourney
+           where jnum = #{jnum} and id = #{mEmail} order by jdate
    </select>
    
    <select id="dateCount" resultType="int">

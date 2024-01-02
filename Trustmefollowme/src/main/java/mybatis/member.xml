@@ -31,6 +31,12 @@
     
     <select id="getAllMember" resultType="member.model.MemberBean">
     select * from member
+    <if test="WhatColumn == 'name'">
+			where name like #{keyword}
+		</if>
+		<if test="WhatColumn == 'id'">
+			where id like #{keyword}
+		</if>
     order by num
     </select>
     

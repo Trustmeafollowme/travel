@@ -121,7 +121,7 @@
 		<form:errors cssClass="err" path="image5" />
 	</p>
 
-	<input type="submit" value="추가하기">
+	<input type="submit" class="sub--button" id="update--btn"  value="추가하기">
 </form:form>
 								</div>
 			</div>

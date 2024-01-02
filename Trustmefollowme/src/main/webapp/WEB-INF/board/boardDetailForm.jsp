@@ -272,7 +272,7 @@ table {
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/assets/css/main.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=키넣야함"></script>
+<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=키넣어야함"></script>
 <script type="text/javascript">
 $(function(){
    var likes = ${likeInfo.likes} /* 좋아요 기능 시작 */
@@ -445,13 +445,13 @@ $(function(){
    var trafficInfochk = "N";
    var headers = {};
 
-    headers["appKey"] = "키넣야함";
+    headers["appKey"] = "키넣어야함";
 
    <c:forEach var="i" begin="0" end="${fn:length(myjXpos)-2}">
       $.ajax({
          type: "POST",
          headers: headers,
-         url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=키넣야함",
+         url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result&appKey=키넣어야함",
          async: false,
          data: {
             "startX": "${myjYpos.get(i)}",
@@ -544,7 +544,7 @@ function initTmap(){
       var searchOption = $("#selectLevel").val();
       
       var headers = {}; 
-      headers["appKey"]="키넣야함";
+      headers["appKey"]="키넣어야함";
       headers["Content-Type"]="application/json";
       
       var param = JSON.stringify({

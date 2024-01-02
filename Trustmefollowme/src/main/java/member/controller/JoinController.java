@@ -30,8 +30,17 @@ public class JoinController {
 	@RequestMapping(value = "join.mb", method = RequestMethod.POST)
 	public String join(@Valid MemberBean mb,BindingResult bresult,HttpServletResponse response,
 						Model model) throws IOException {
-
+		 response.setContentType("text/html;charset=UTF-8");
+		 
 		if(bresult.hasErrors()) {
+			 PrintWriter out;
+	         try {
+	            out = response.getWriter();
+	            out.write("<script>alert('누락되었습니다.');</script>");
+	              out.flush();
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         }
 			return "join";  
 		}
 		
